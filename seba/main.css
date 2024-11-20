@@ -21,10 +21,11 @@ div#leftHeader {
 }
 
 div#leftHeader > a {
-    box-sizing: border-box;
     padding: 0 20px;
     align-content: center;
     height: 50px;
+    text-decoration: none;
+    color: white;
 }
 
 div#leftHeader > a:hover {
