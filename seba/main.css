@@ -1,10 +1,10 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
     margin: 0;
 }
 
 header {
+    color: white;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -40,9 +40,40 @@ div#leftHeader > a:hover {
 main {
     height: calc(100vh - 50px);
     overflow-y: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .hidden {
     visibility: hidden;
+}
+
+.mainContainer {
+    min-width: 200px;
+    width: 1000px;
+    margin: 20px;
+}
+
+#functionBar{
+    display: flex;
+    height: 30px;
+    width: 100%;
+}
+
+#searchBar, #filterButton, #sortButton, #addSidang, #view {
+    margin: 0 2px;
+    padding: 0 10px;
+    border: 1px solid #868686;
+    border-radius: 12px;
+}
+
+#searchBar{
+    align-content: center;
+    width: 100%;
+}
+
+#addSidang {
+    width: 100px;
+    margin-left: 20px;
 }
 
