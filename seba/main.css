@@ -77,3 +77,18 @@ main {
     margin-left: 20px;
 }
 
+.sidang {
+    border: 1px solid #868686;
+    border-radius: 12px;
+    margin: 20px 2px;
+    height: 100px;
+}
+
+.headerSidang {
+    align-content: center;
+    text-indent: 10px;
+    background-color: #D5FFA3;
+    height: 35px;
+    border-radius: 12px 12px 0 0;
+}
+
