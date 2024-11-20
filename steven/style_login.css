@@ -1,0 +1,97 @@
+/*style.css*/
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    background: #f3f3f3;
+    flex-direction: column;
+    margin: 0;
+}
+
+.main {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 500px;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+}
+
+label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #555;
+    font-weight: bold;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #388087;
+    width: 100%;
+    font-size: 20px;
+}
+
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_header {
+    text-align: center;
+    font-size: 40px;
+    padding: 0;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
+.login_container {
+    height: 400px;
+    width: 430px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+}
+
+.form_container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 60px;
+}
+
+input , button {
+    width: 350px;
+    height: 48px;
+}
+
+input {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
