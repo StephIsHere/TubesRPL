@@ -6,7 +6,7 @@ body {
     font-family: sans-serif;
     line-height: 1.5;
     min-height: 100vh;
-    background: #f3f3f3;
+    background: #ffffff;
     flex-direction: column;
     margin: 0;
 }
@@ -35,16 +35,6 @@ label {
     font-weight: bold;
 }
 
-input {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
 button {
     padding: 15px;
     border-radius: 10px;
@@ -58,6 +48,10 @@ button {
     font-size: 20px;
 }
 
+button:hover {
+    background-color: #64c0ac;
+}
+ 
 .wrap {
     display: flex;
     justify-content: center;
@@ -86,12 +80,35 @@ button {
     padding-top: 60px;
 }
 
-input , button {
-    width: 350px;
-    height: 48px;
+img {
+    width: 20px;
+    height: 20px;
 }
 
 input {
-    border: none;
+    display: block;
+    width: 350px;
+    height: 48px;
+    margin-bottom: 15px;
+    padding: 10px 40px 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-image: url('./assets/user.svg');
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+input[type="password"] {
+    background-image: url('./assets/lock.svg');
+}
+
+input:focus {
+    background-image: none;  /* Menghapus gambar latar belakang saat input fokus */
+}
+
+input:not(:placeholder-shown) {
+    background-image: none;  /* Menghapus gambar latar belakang jika ada teks */
 }
