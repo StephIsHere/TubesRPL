@@ -9,6 +9,73 @@
             background-color: #479097;
             border-bottom: 2px solid #E3F1F0;
         }
+        h3{
+            grid-area: h;
+            text-align: center;
+            background-color: #E3F1F0;
+            margin: 0px;
+            border-top-left-radius: 9px;
+            border-top-right-radius: 9px;
+            padding: 18px;
+        }
+        button{
+            grid-area: h;
+            position: relative;
+            left:1000px;
+            width: 50px;
+            height: 50px;
+            border: 0px;
+            top: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: grey;
+            cursor: pointer;
+        }
+        .card {
+            background-color: white;
+            margin-top: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 531.5px 531.5px;
+            grid-template-rows: 60px 327px 327px;
+            grid-template-areas: 
+            "h h"
+            "main1 main2"
+            "main3 main4";
+            width: 1063px;
+            height: 714px;
+
+        }
+        .item1{
+            grid-area: main1;
+        }
+        .item2{
+            grid-area: main2;
+        }
+        .item3{
+            grid-area: main3;
+        }
+        .form-group {
+            display: flex;
+            margin: 10px 0;
+            justify-content: center;
+        }
+        .form-group label {
+            flex: 0.5;
+        }
+        .form-group input {
+            border-radius: 8px;
+            border: 0.1px solid grey;
+            width: 60px;
+            height: 25px;
+            color: grey;
+        }
+        h4{
+            display: flex;
+            justify-content: center;
+        }
     </style>
     <title></title>
 </head>
@@ -24,7 +91,74 @@
         </div>
     </header>
     <main>
-        
+        <div class="card">
+            <h3>Komponen Nilai
+            </h3>
+            <button onclick="window.location.href='mainPage.html'">
+                <img src="assets/edit.svg" >
+            </button>
+            <div class="item1">
+                <h4>Bobot Nilai Penguji</h4>
+                <div class="form-group">
+                    <label>Tata tulis Laporan</label>
+                    <input type="number" value="15" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Kelengkapan Materi</label>
+                    <input type="number" value="20" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Pencapaian Tujuan</label>
+                    <input type="number" value="25" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Penguasaan Materi</label>
+                    <input type="number" value="30" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Presentasi</label>
+                    <input type="number" value="10" readonly> %
+                </div>
+            </div>
+            <div class="item2">
+                <h4>Bobot Nilai</h4>
+                <div class="form-group">
+                    <label>Ketua Tim Penguji</label>
+                    <input type="number" value="35" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Anggota Tim Penguji</label>
+                    <input type="number" value="35" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Pembimbing</label>
+                    <input type="number" value="20" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Koordinator</label>
+                    <input type="number" value="10" readonly> %
+                </div>
+            </div>
+            <div class="item3">
+                <h4>Nilai Pembimbing</h4>
+                <div class="form-group">
+                    <label>Tata tulis Laporan</label>
+                    <input type="number" value="15" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Kelengkapan Materi</label>
+                    <input type="number" value="20" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Proses Bimbingan</label>
+                    <input type="number" value="25" readonly> %
+                </div>
+                <div class="form-group">
+                    <label>Penguasaan Materi</label>
+                    <input type="number" value="30" readonly> %
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 </html>
