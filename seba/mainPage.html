@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <script src="main.js" defer></script>
     <style>
         #linkMainPage {
             background-color: #479097;
-            border-bottom: 2px solid #E3F1F0;
+            border: 2px solid #479097 !important;
+            border-bottom: 2px solid #E3F1F0 !important;
         }
     </style>
     <title></title>
@@ -26,16 +28,50 @@
     <main>
         <div class="mainContainer">
             <div id="functionBar">
-                <div id="searchBar">
-                    search...
-                </div>
+                <input id="searchBar" type="text" placeholder="search...">
                 <button id="filterButton">Filter</button>
                 <button id="sortButton">Sort</button>
                 <button id="view">▤</button>
-                <button id="addSidang">+</button>
+                <button id="addSidangButton">+</button>
             </div>
             <div class="sidangContainer">
+                <div class="sidang">
+                    <div class="headerSidang">
+                        sidang 1
+                    </div>
+                </div>
+            </div>
+            <div class="addSidangContainer hidden"> 
+                <div class="addSidang">
+                    <div class="headerAddSidang">
+                        Tambah Sidang
+                    </div>
+                    <div class="formContainer">
+                        <form action="">
+                            <label for="judulTa">Judul:</label>
+                            <input id="judulTa" type="text">
+                            <br>
+                            <label for="mahasiswa">Mahasiswa:</label>
+                            <input id="mahasiswa" type="text">
+                            <br>
+                            <label for="pembimbing">pembimbing:</label>
+                            <input id="pembimbing" type="text">
+                            <br>
+                            <label for="pembimbing 2">pembimbing 2:</label>
+                            <input id="pembimbing 2" type="text">
+                            <br>
+                            <label for="penguji">penguji:</label>
+                            <input id="penguji" type="text">
+                            <br>
+                            <label for="penguji 2">penguji 2:</label>
+                            <input id="penguji 2" type="text">
+                            <br>
 
+
+                            <button type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
