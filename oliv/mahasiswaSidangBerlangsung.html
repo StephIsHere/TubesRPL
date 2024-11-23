@@ -41,36 +41,6 @@
             padding: 20px;
         }
         
-        #controls {
-            display: flex;
-            justify-content: center ;
-            margin-bottom: 20px;
-        
-        }
-        
-        #controls input {
-            margin-right: 10px;
-            padding: 10px;
-            padding-right: 230px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        
-        #controls button {
-            padding: 10px 20px;
-            background-color:white;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 3px;
-        }
-        
-        #controls button:hover {
-            background-color: #388087;
-            color: white;
-        }
-        
         .card-container {
             display: flex;
             flex-direction: column;
@@ -87,7 +57,22 @@
             border: 1px solid #ddd;
             position: relative;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            grid:
+                'judulCard judulCard'
+                'tabel1 tabel3'
+                'tabel2 tabel4'
+            ;
+            column-gap: 60px;
         }
+
+        .judulCard { grid-area: judulCard; z-index: 2; text-align: center; padding-top: 10px;}
+        .tabel1{ grid-area: tabel1 ;}
+        .tabel2{ grid-area: tabel2 ;}
+        .tabel3{ grid-area: tabel3 ;}
+        .tabel4{ grid-area: tabel4 ;}
         
         table{
             padding: 10px;
@@ -112,29 +97,7 @@
         .green_box{
             background-color: #D5FFA3;
             display: flex;
-            width: 635px;
-            height: 37px;
-            position: absolute;
-            z-index: 1;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        
-        .yellow_box{
-            background-color: #FFFEA6;
-            display: flex;
-            width: 635px;
-            height: 37px;
-            position: absolute;
-            z-index: 1;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        
-        .gray_box{
-            background-color: #EBEBEB;
-            display: flex;
-            width: 635px;
+            width: 596px;
             height: 37px;
             position: absolute;
             z-index: 1;
@@ -143,7 +106,7 @@
         }
         
         .bold{
-            font-weight: bold;
+            font-weight:bold;
         }
         
         .no_bold{
@@ -153,144 +116,136 @@
         .jam{
             padding-left: 13px;
         }
+        .judul {
+            text-align: center;
+            padding-top: 16px;
+            padding-bottom: 18px;
+            z-index: 2;
+        }
+        a{
+            position: absolute;
+            cursor: pointer;
+            z-index: 3;
+            left: 20px;
+            top: 10px;
+        }
+        
+        img {
+            height: 20px;
+            width: 20px;
+            position: relative;
+        }
+
     </style>
 </head>
 <body>
     <header>
         <div id="leftHeader">
-            <span id="judul">Sidang Tugas Akhir</span>
+            <span id="judulSidang">Sidang Tugas Akhir</span>
         </div>
         <div id="rightHeader">
             Nama, Mahasiswa
         </div>
     </header>
     <main>
-        <div id="controls">
-            <input type="text" placeholder="Search">
-            <button>Filter</button>
-            <button>Sort by</button>
-        </div>
         <div class="card-container">
             <div class="card">
+                <a href="mahasiswaMain.html"><img src="arrow.png" alt="back_to_main"></a>
                 <div class="green_box"></div>
-                <table>
+                <span class="judulCard bold">Sidang 1</span>
+                <table class="table1">
                     <tr>
-                        <th>Sidang 1</th>
-                        <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                        <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                        <th></th>
-                        <th>(Ongoing)</th>
+                        <td colspan="2" class="bold judul">Informasi Sidang</td>
                     </tr>
                     <tr>
-                        <td class="bold">Topik </td>
-                        <td colspan="2">: Implementasi IoT</td>
-                        <td class="bold">Pembimbing 1</td>
-                        <td>: Raymond Chandra</td>
+                        <td class="bold">Topik</td><td>: Implementasi IoT</td>
                     </tr>
                     <tr>
-                        <td class="bold">Tempat</td>
-                        <td>: 10.03.00.23</td>
-                        <td></td>
-                        <td class="bold">Pembimbing 2</td>
-                        <td>: Meow</td>
+                        <td class="bold">Mahasiswa</td><td>: Steven Febrian</td>
                     </tr>
                     <tr>
-                        <td class="bold">Nilai</td>
-                        <td>: -</td>
-                        <td></td>
-                        <td class="bold">Penguji 1</td>
-                        <td>: Gede Karya</td>
+                        <td class="bold">Pembimbing 1</td><td>: Raymond Chandra</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="bold">Penguji 2</td>
-                        <td>: Keenan</td>
+                        <td class="bold">Pembimbing 2</td><td>: -</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguji 1</td><td>: Gede Karya</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguji 2</td><td>: Keenan</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tanggal</td><td>: 14/10/2024</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Jam</td><td>: 13:00-15:00</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tempat</td><td>: 10.03.00.23</td>
                     </tr>
                 </table>
-            </div>
 
-            <div class="card">
-                <div class="yellow_box"></div>
-                <table>
+                <table class="table3">
                     <tr>
-                        <th>Sidang 1</th>
-                        <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                        <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                        <th></th>
-                        <th>(Upcoming)</th>
+                        <td class="bold judul" colspan="2">Bobot Penilaian Penguji</td>
                     </tr>
                     <tr>
-                        <td class="bold">Topik </td>
-                        <td colspan="2">: Mesin Otomatisasi Pencarian</td>
-                        <td class="bold">Pembimbing 1</td>
-                        <td>: Raymond Chandra</td>
+                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
                     </tr>
                     <tr>
-                        <td class="bold">Tempat</td>
-                        <td>: 10.03.00.23</td>
-                        <td></td>
-                        <td class="bold">Pembimbing 2</td>
-                        <td>: Meow</td>
+                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
                     </tr>
                     <tr>
-                        <td class="bold">Nilai</td>
-                        <td>: -</td>
-                        <td></td>
-                        <td class="bold">Penguji 1</td>
-                        <td>: Gede Karya</td>
+                        <td class="bold">Pencapaian Tujuan</td><td>: 25%</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="bold">Penguji 2</td>
-                        <td>: Keenan</td>
+                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Presentasi</td><td>: 10%</td>
                     </tr>
                 </table>
-            </div>
-            
-            <div class="card">
-                <div class="gray_box"></div>
-                <table>
-                    <tr>
-                        <th>Sidang 1</th>
-                        <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                        <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                        <th></th>
-                        <th>(Finished)</th>
-                    </tr>
-                    <tr>
-                        <td class="bold">Topik </td>
-                        <td colspan="2">: Jaringan Keamanan Internet</td>
-                        <td class="bold">Pembimbing 1</td>
-                        <td>: Raymond Chandra</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Tempat</td>
-                        <td>: 10.03.00.23</td>
-                        <td></td>
-                        <td class="bold">Pembimbing 2</td>
-                        <td>: Meow</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Nilai</td>
-                        <td>: -</td>
-                        <td></td>
-                        <td class="bold">Penguji 1</td>
-                        <td>: Gede Karya</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="bold">Penguji 2</td>
-                        <td>: Keenan</td>
-                    </tr>
-                </table>
-            </div>
 
+                <table class="table2">
+                    <tr>
+                        <td class="bold judul" colspan="2">Persentase Nilai</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Ketua Tim Penguji</td><td>: 35%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Anggota Tim Penguji</td><td>: 35%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pembimbing</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Koordinator</td><td>: 10%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Nilai Akhir</td><td class="bold">: 100%</td>
+                    </tr>
+                </table>
+
+                <table class="table4">
+                    <tr>
+                        <td class="bold judul" colspan="2">Bobot Penilaian Pembimbing</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Proses bimbingan</td><td>: 25%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </main>
 </body>
