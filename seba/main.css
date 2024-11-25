@@ -107,13 +107,6 @@ main {
     margin-left: 20px;
 }
 
-.sidang {
-    border: 1px solid #868686;
-    border-radius: 12px;
-    margin: 20px 2px;
-    height: 100px;
-}
-
 .sidang, .addSidang {
     border: 1px solid #acacac;
     border-radius: 12px;
