@@ -61,9 +61,9 @@ CREATE TABLE "komponenNilaiSidang" (
 
 INSERT INTO "user" ("email", "password", "nama", "peran", "npm")
 VALUES 
-('admin@unpar', 'admin', 'admin1', 'admin', NULL),
-('koord@unpar', 'koord', 'koord1', 'koordinator', NULL),
+('admin@unpar', 'admin', 'admin', 'admin', NULL),
+('koord@unpar', 'koord', 'koord', 'koordinator', NULL),
 ('dosen@unpar', 'dosen', 'gede', 'dosen', NULL),
-('steven@unpar', '123', 'steven', 'mahasiswa', '84');
+('steven@unpar', 'steven', 'steven', 'mahasiswa', '84');
 
 
