@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>adminDetail</title>
+    <style>
+        main{
+            display: grid;
+            grid-template-columns: 531.5px 531.5px;
+            grid-template-rows: 150px 600px;
+            grid-template-areas: 
+            "h h"
+            "main main";
+            margin-top: 30px;
+        }
+        .attribute{
+            grid-area: h;
+            display: flex;
+            gap: 10px;
+            justify-content:center;
+            text-align: center;
+            width: 1063px;
+            height: 30px;
+        }
+        .attribute input[value="search"]{
+            border-radius: 9px;
+            border: 0.2px solid black;
+            width: 690px;
+        }
+        .attribute input[value="Filter"]{
+            border-radius: 9px;
+            background-color: white;
+            border: 0.2px solid black;
+            width: 131px;
+        }
+        .attribute input[value="Sort By"]{
+            border-radius: 9px;
+            background-color: white;
+            border: 0.2px solid black;
+            width: 131px;
+        }
+        .attribute button{
+            border-radius: 9px;
+            background-color: white;
+            border: 0.2px solid black;
+            width: 159px;
+            margin-left: 300px;
+        }
+        .isi{
+            grid-area: main;
+            margin: 10px 0px;
+            margin-top: -80px ;
+            border: 1px solid black;
+            border-radius: 9px;
+            padding: 30px;
+        }
+        .group{
+            display: flex;
+        }
+        .detail{
+            border: 1px solid black;
+            height: 300px;
+            border-radius: 9px;
+            margin: 0px;
+        }
+        .detail .group{
+            padding: 20px;
+            background-color: #E3F1F0;
+            border-top-left-radius: 9px;
+            border-top-right-radius: 9px;
+        }
+        .detail .group button{
+            background-color: #E3F1F0;
+        }
+        .detail .group label{
+            padding: 10px;
+        }
+        .group2{
+            display: flex;
+            padding: 9px;
+            width: 300px;
+        }
+        .group2 label{
+            flex:1;
+        }
+        .group2 input{
+            flex:0.1;
+            border: 0.1px solid black;
+            border-radius: 7px;
+            height: 20px;
+        }
+        .isi button{
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 0px;
+        }
+        .isi label{
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="leftHeader">
+            <span id="judul">Sidang Tugas Akhir</span>
+        </div>
+        <div id="rightHeader">
+            Nama, Admin
+        </div>
+    </header>
+    <main>
+        <div class="attribute">
+            <input type="text" name="search" id="search" value="search">
+            <input type="submit" name="" id="filter" value="Filter">
+            <input type="submit" name="" id="sort" value="Sort By">
+            <button>+</button>
+        </div>
+        <div class="isi">
+            <div class="group">
+                <label for="">Admin 1</label>
+                <button><img src="assets/edit.svg"></button>
+                <button><img src="assets/delete.svg" alt=""></button>
+            </div>
+            <hr>
+            <div class="group">
+                <label for="">Mahasiswa 1</label>
+                <button><img src="assets/edit.svg" alt=""></button>
+                <button><img src="assets/delete.svg" alt=""></button>
+            </div>
+            <hr>
+            <div class="group">
+                <label for="">Dosen 1</label>
+                <button><img src="assets/edit.svg" alt=""></button>
+                <button><img src="assets/delete.svg" alt=""></button>
+            </div>
+            <hr>
+            <div class="group">
+                <label for="">Dosen 2</label>
+                <button><img src="assets/edit.svg" alt=""></button>
+                <button><img src="assets/delete.svg" alt=""></button>
+            </div>
+            <hr>
+            <div class="group">
+                <label for="">Mahasiswa 2</label>
+                <button><img src="assets/edit.svg" alt=""></button>
+                <button><img src="assets/delete.svg" alt=""></button>
+            </div>
+            <hr>
+            <div class="detail">
+                <div class="group">
+                    <label for="">Steven Febrian</label>
+                    <button onclick="window.location.href='adminPage.html'"><img src="assets/edit.svg" alt=""></button>
+                    <button onclick="window.location.href='adminPesertaDeleted.html'"><img src="assets/delete.svg" alt=""></button>
+                </div>
+                <div class="detailAtt">
+                    <div class="group2">
+                        <label for="">Nama:</label>
+                        <input type="text" name="" id="" value="Steven Febrian">
+                    </div>
+                    <div class="group2">
+                        <label for="">Email:</label>
+                        <input type="text" name="" id="" value="stevenfebrian@student.ac.id">
+                    </div>
+                    <div class="group2">
+                        <label for="">Password:</label>
+                        <input type="text" name="" id="" value="618084EZ">
+                    </div>
+                    <div class="group2">
+                        <label for="">Role:</label>
+                        <input type="text" name="" id="" value="Mahasiswa">
+                    </div>
+                    <div class="group2">
+                        <label for="">NPM/NIK:</label>
+                        <input type="text" name="" id="" value="6182201084">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
