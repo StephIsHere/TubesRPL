@@ -65,13 +65,14 @@ main {
     overflow-y: auto;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .hidden {
     display: none;
 }
 
-.mainContainer {
+.mainContainer, .card {
     width: 1000px;
     margin: 20px;
 }
@@ -143,7 +144,7 @@ form > input {
     min-width: 50px;
 }
 
-label {
+label.labelAddSidang {
     display: inline-block;
     width: 120px;
     margin: 10px;
@@ -151,6 +152,89 @@ label {
 }
 
 .formContainer {
-    padding: 20px;
+    padding: 30px 60px;
 }
 
+br {
+    margin: 10px;
+}
+
+input.inputSidang {
+    border: 1px solid #acacac;
+    border-radius: 5px;
+    height: 25px;
+    text-indent: 4px;
+    outline: none;
+}
+
+.card {
+    border: 1px solid #acacac;
+    border-radius: 12px;
+}
+
+form#komponenNilai {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px 50px;
+}
+
+.item1, .item2, .item3 {
+    height: auto;
+    margin: 10px;
+}
+
+div#judulKompNilai {
+    margin: 0;
+    background-color: #E3F1F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-radius: 11px 11px 0 0;
+
+}
+
+input[type="number"] {
+    text-indent: 3px;
+    width: 40px;
+    border: 1px solid #acacac;
+    border-radius: 5px;
+    height: 20px;
+    outline: none;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+label {
+    width: 160px;
+}
+
+.percent{
+    margin: 0 5px;
+}
+
+button[form="komponenNilai"], button#buttonAddSidang{
+    background-color: #E3F1F0;
+    border: none;
+    align-content: center;
+    height: 35px;
+    float: right;
+    width: 230px;
+    margin: 20px 65px 50px;
+    border-radius: 8px;
+}
+
+button[form="komponenNilai"]:hover{
+    background-color: #d7e6e5;
+    cursor: pointer;
+}
+
+div.bagianNilai {
+    font-weight: bold;
+}
