@@ -1,20 +1,18 @@
 /*style.css*/
 body {
     display: flex;
-    align-items: center;
     justify-content: center;
     font-family: sans-serif;
     line-height: 1.5;
     min-height: 100vh;
     background: #ffffff;
-    flex-direction: column;
     margin: 0;
+    padding-top: 20vh;
 }
 
 .main {
     background-color: #fff;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     padding: 10px 20px;
     transition: transform 0.2s;
     width: 500px;
@@ -69,7 +67,7 @@ button:hover {
 .login_container {
     height: 400px;
     width: 430px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;
 }
 
@@ -94,7 +92,7 @@ input {
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px lightgray solid;
     background-image: url('./assets/user.svg');
     background-size: 20px 20px;
     background-repeat: no-repeat;
