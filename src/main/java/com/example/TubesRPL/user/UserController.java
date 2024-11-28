@@ -83,4 +83,40 @@ public class UserController {
             return "redirect:/";
         }
     }
+
+    @GetMapping("/home/deleted")
+    public String delete (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("admin")) {
+            return "admin/adminPesertaDeleted";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/add")
+    public String add (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("admin")) {
+            return "admin/adminTambahPeserta";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/edit")
+    public String edit (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("admin")) {
+            return "admin/adminDetail";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/komponen-nilai")
+    public String komponenNilai (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("koordinator")) {
+            return "koordinator/komponenNilai";
+        } else {
+            return "redirect:/";
+        }
+    }
 }
