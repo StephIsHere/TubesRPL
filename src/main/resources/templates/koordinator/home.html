@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="main.js" defer></script>
+    <style>
+        #linkMainPage {
+            background-color: #479097;
+            border: 2px solid #479097 !important;
+            border-bottom: 2px solid #E3F1F0 !important;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+    <header>
+        <div id="leftHeader">
+            <span id="judul">Sidang Tugas Akhir</span>
+            <a id="linkMainPage" href="mainPage.html">Sidang</a>
+            <a id="linkKomponenNilai" href="komponenNilai.html">Komponen nilai</a>
+        </div>
+        <div id="rightHeader">
+            Nama, Peran
+        </div>
+    </header>
+    <main>
+        <div class="mainContainer">
+            <div id="functionBar">
+                <input id="searchBar" type="text" placeholder="search...">
+                <button id="filterButton">Filter</button>
+                <button id="sortButton">Sort</button>
+                <button id="view">▤</button>
+                <button id="addSidangButton">+</button>
+            </div>
+            <div class="sidangContainer">
+                <div class="sidang">
+                    <div class="headerSidang">
+                        sidang 1
+                    </div>
+                </div>
+            </div>
+            <div class="addSidangContainer hidden"> 
+                <div class="addSidang">
+                    <div class="headerAddSidang">
+                        Tambah Sidang
+                    </div>
+                    <div class="formContainer">
+                        <form action="">
+                            <label for="judulTa" class="labelAddSidang">Judul:</label>
+                            <input id="judulTa" type="text" class="inputSidang">
+                            <br>
+                            <label for="mahasiswa"class="labelAddSidang">Mahasiswa:</label>
+                            <input id="mahasiswa" type="text" class="inputSidang">
+                            <br>
+                            <label for="pembimbing" class="labelAddSidang">pembimbing:</label>
+                            <input id="pembimbing" type="text" class="inputSidang">
+                            <br>
+                            <label for="pembimbing 2" class="labelAddSidang">pembimbing 2:</label>
+                            <input id="pembimbing 2" type="text" class="inputSidang">
+                            <br>
+                            <label for="penguji" class="labelAddSidang">penguji:</label>
+                            <input id="penguji" type="text" class="inputSidang">
+                            <br>
+                            <label for="penguji 2" class="labelAddSidang">penguji 2:</label>
+                            <input id="penguji 2" type="text" class="inputSidang">
+                            <br>
+
+
+                            <button type="submit" id="buttonAddSidang">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

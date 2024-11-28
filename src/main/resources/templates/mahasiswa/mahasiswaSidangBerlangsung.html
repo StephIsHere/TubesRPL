@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidang Tugas Akhir</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            color: white;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #388087;
+            width: 100%;
+            height: 50px;
+            padding: 0 20px;
+        }
+        
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 5px 10px;
+        }
+        
+        header a.active {
+            background-color: #E3F1F0;
+            color: #388087;
+            border-radius: 5px;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 700px;
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            grid:
+                'judulCard judulCard'
+                'tabel1 tabel3'
+                'tabel2 tabel4'
+            ;
+            column-gap: 60px;
+        }
+
+        .judulCard { grid-area: judulCard; z-index: 2; text-align: center; padding-top: 10px;}
+        .tabel1{ grid-area: tabel1 ;}
+        .tabel2{ grid-area: tabel2 ;}
+        .tabel3{ grid-area: tabel3 ;}
+        .tabel4{ grid-area: tabel4 ;}
+        
+        table{
+            padding: 10px;
+        }
+        
+        table, th, td, tr{
+            font-size: 13px;
+            z-index: 2;
+            position: relative;
+            padding-bottom: 10px;
+            padding-right: 10px;
+        }
+        
+        th{
+            padding-bottom: 15px;
+        }
+        td{
+            padding-right: 30px;
+        }
+        
+        
+        .green_box{
+            background-color: #D5FFA3;
+            display: flex;
+            width: 596px;
+            height: 37px;
+            position: absolute;
+            z-index: 1;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .bold{
+            font-weight:bold;
+        }
+        
+        .no_bold{
+            font-weight: normal;
+        }
+        
+        .jam{
+            padding-left: 13px;
+        }
+        .judul {
+            text-align: center;
+            padding-top: 16px;
+            padding-bottom: 18px;
+            z-index: 2;
+        }
+        a{
+            position: absolute;
+            cursor: pointer;
+            z-index: 3;
+            left: 20px;
+            top: 10px;
+        }
+        
+        img {
+            height: 20px;
+            width: 20px;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div id="leftHeader">
+            <span id="judulSidang">Sidang Tugas Akhir</span>
+        </div>
+        <div id="rightHeader">
+            Nama, Mahasiswa
+        </div>
+    </header>
+    <main>
+        <div class="card-container">
+            <div class="card">
+                <a href="/home"><img src="../assets/arrow.png" alt="back_to_main"></a>
+                <div class="green_box"></div>
+                <span class="judulCard bold">Sidang 1</span>
+                <table class="table1">
+                    <tr>
+                        <td colspan="2" class="bold judul">Informasi Sidang</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Topik</td><td>: Implementasi IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Mahasiswa</td><td>: Steven Febrian</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pembimbing 1</td><td>: Raymond Chandra</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pembimbing 2</td><td>: -</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguji 1</td><td>: Gede Karya</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguji 2</td><td>: Keenan</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tanggal</td><td>: 14/10/2024</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Jam</td><td>: 13:00-15:00</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tempat</td><td>: 10.03.00.23</td>
+                    </tr>
+                </table>
+
+                <table class="table3">
+                    <tr>
+                        <td class="bold judul" colspan="2">Bobot Penilaian Penguji</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pencapaian Tujuan</td><td>: 25%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Presentasi</td><td>: 10%</td>
+                    </tr>
+                </table>
+
+                <table class="table2">
+                    <tr>
+                        <td class="bold judul" colspan="2">Persentase Nilai</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Ketua Tim Penguji</td><td>: 35%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Anggota Tim Penguji</td><td>: 35%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pembimbing</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Koordinator</td><td>: 10%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Nilai Akhir</td><td class="bold">: 100%</td>
+                    </tr>
+                </table>
+
+                <table class="table4">
+                    <tr>
+                        <td class="bold judul" colspan="2">Bobot Penilaian Pembimbing</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Proses bimbingan</td><td>: 25%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
