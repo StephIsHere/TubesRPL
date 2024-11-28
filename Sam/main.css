@@ -5,14 +5,21 @@ body {
 
 header {
     color: white;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #388087;
-    width: 100%;
+    width: 100vw;
     height: 50px;
     padding: 0 20px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+div#rightHeader {
+    white-space: wrap;
+    margin-left: 15px;
 }
 
 div#leftHeader {
@@ -21,6 +28,8 @@ div#leftHeader {
 }
 
 div#leftHeader > a {
+    box-sizing: border-box;
+    border: #388087 solid 2px;
     padding: 0 20px;
     align-content: center;
     height: 50px;
@@ -29,12 +38,26 @@ div#leftHeader > a {
 }
 
 div#leftHeader > a:hover {
+    border-color: #479097;
     background-color: #479097;
     cursor: pointer;
 }
 
 #judul {
     margin-right: 100px;
+    font-weight: bold;
+}
+
+@media (max-width: 800px) {
+    #judul {
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 570px) {
+    #judul {
+        display: none;
+    }
 }
 
 main {
@@ -42,14 +65,14 @@ main {
     overflow-y: auto;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
-.mainContainer {
-    min-width: 200px;
+.mainContainer, .card {
     width: 1000px;
     margin: 20px;
 }
@@ -60,20 +83,158 @@ main {
     width: 100%;
 }
 
-#searchBar, #filterButton, #sortButton, #addSidang, #view {
+#searchBar, #filterButton, #sortButton, #addSidangButton, #view {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0 2px;
     padding: 0 10px;
-    border: 1px solid #868686;
+    border: 1px solid #acacac;
     border-radius: 12px;
+}
+
+#filterButton:hover, #sortButton:hover, #addSidangButton:hover, #view:hover {
+    background-color: #eaf7f5;
+    cursor: pointer;
 }
 
 #searchBar{
     align-content: center;
     width: 100%;
+    outline: none;
 }
 
-#addSidang {
+#addSidangButton {
     width: 100px;
     margin-left: 20px;
 }
 
+.sidang, .addSidang {
+    border: 1px solid #acacac;
+    border-radius: 12px;
+    margin: 20px 2px;
+}
+
+.sidang {
+    height: 200px;
+}
+
+.headerSidang{
+    box-sizing: border-box;
+    align-content: center;
+    text-indent: 10px;
+    background-color: #D5FFA3;
+    height: 35px;
+    border-radius: 12px 12px 0 0;
+}
+
+.headerAddSidang {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-indent: 10px;
+    background-color: #E3F1F0;
+    height: 50px;
+    border-radius: 12px 12px 0 0;
+}
+
+form > input {
+    height: 100%;
+    width: 50%;
+    min-width: 50px;
+}
+
+label.labelAddSidang {
+    display: inline-block;
+    width: 120px;
+    margin: 10px;
+    margin-left: 0;
+}
+
+.formContainer {
+    padding: 30px 60px;
+}
+
+br {
+    margin: 10px;
+}
+
+input.inputSidang {
+    border: 1px solid #acacac;
+    border-radius: 5px;
+    height: 25px;
+    text-indent: 4px;
+    outline: none;
+}
+
+.card {
+    border: 1px solid #acacac;
+    border-radius: 12px;
+}
+
+form#komponenNilai {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px 50px;
+}
+
+.item1, .item2, .item3 {
+    height: auto;
+    margin: 10px;
+}
+
+div#judulKompNilai {
+    margin: 0;
+    background-color: #E3F1F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-radius: 11px 11px 0 0;
+
+}
+
+input[type="number"] {
+    text-indent: 3px;
+    width: 40px;
+    border: 1px solid #acacac;
+    border-radius: 5px;
+    height: 20px;
+    outline: none;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+label {
+    width: 160px;
+}
+
+.percent{
+    margin: 0 5px;
+}
+
+button[form="komponenNilai"], button#buttonAddSidang{
+    background-color: #E3F1F0;
+    border: none;
+    align-content: center;
+    height: 35px;
+    float: right;
+    width: 230px;
+    margin: 20px 65px 50px;
+    border-radius: 8px;
+}
+
+button[form="komponenNilai"]:hover{
+    background-color: #d7e6e5;
+    cursor: pointer;
+}
+
+div.bagianNilai {
+    font-weight: bold;
+}
