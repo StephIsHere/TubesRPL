@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>adminDetail</title>
+    <style>
+    </style>
+</head>
+<body>
+    <header>
+        <div id="leftHeader">
+            <span id="judul">Sidang Tugas Akhir</span>
+        </div>
+        <div id="rightHeader">
+            Nama, Admin
+        </div>
+    </header>
+    <main>
+        <div class="mainContainer">
+            <div id="functionBar">
+                <input id="searchBar" type="text" placeholder="search...">
+                <button id="filterButton">Filter</button>
+                <button id="sortButton">Sort</button>
+                <button id="view">▤</button>
+                <button id="addSidangButton" onclick="window.location.href='adminTambahPeserta.html'">+</button>
+            </div>
+            <div class="card">
+                <div class="formContainer">
+                    <div class="form-group">
+                        <label form="adminPage">Admin 1</label>
+                        <button form="adminPage"><img src="assets/edit.svg"></button>
+                        <button form="adminPage"><img src="assets/delete.svg" ></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Mahasiswa 1</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt="" ></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Dosen 1</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt=""></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Dosen 2</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt=""></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Mahasiswa 2</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt=""></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="detailAdmin">
+                        <div class="form-group">
+                            <label form="adminPage">Steven Febrian</label>
+                            <button onclick="window.location.href='adminPage.html'" form="adminPage"><img src="assets/edit.svg" alt=""></button>
+                            <button onclick="window.location.href='adminPesertaDeleted.html'" form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                        </div>
+                        <div class="detailAttAdmin">
+                            <div class="form-groupAdmin">
+                                <label for="">Nama:</label>
+                                <input type="text" name="" id="" value="Steven Febrian">
+                            </div>
+                            <div class="form-groupAdmin">
+                                <label for="">Email:</label>
+                                <input type="text" name="" id="" value="stevenfebrian@student.ac.id">
+                            </div>
+                            <div class="form-groupAdmin">
+                                <label for="">Password:</label>
+                                <input type="text" name="" id="" value="618084EZ">
+                            </div>
+                            <div class="form-groupAdmin">
+                                <label for="">Role:</label>
+                                <input type="text" name="" id="" value="Mahasiswa">
+                            </div>
+                            <div class="form-groupAdmin">
+                                <label for="">NPM/NIK:</label>
+                                <input type="text" name="" id="" value="6182201084">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+</html>
