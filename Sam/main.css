@@ -170,6 +170,8 @@ input.inputSidang {
 .card {
     border: 1px solid #acacac;
     border-radius: 12px;
+    margin: 0px;
+    margin-top: 20px;
 }
 
 form#komponenNilai {
@@ -237,4 +239,94 @@ button[form="komponenNilai"]:hover{
 
 div.bagianNilai {
     font-weight: bold;
+}
+button[form="adminPage"]{
+    width: 50px;
+    height: 40px;
+    background-color: white;
+    border: 0px;
+    justify-content: center;
+}
+button[form="adminPage"]:hover{
+    background-color: #d7e6e5;
+    cursor: pointer;
+}
+label[form="adminPage"]{
+    flex: 1;
+}
+button[form="adminPageDel"]{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 0px;
+}
+label[form="adminPageDel"]{
+    flex: 0.95;
+}
+.headAdmin{
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    background-color: #E3F1F0;
+    margin: 0px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    padding: 10px;
+}
+.headAdmin label{
+    flex: 1;
+}
+.footerAdmin{
+    text-align: right;
+}
+.footerAdmin button{
+    width: 151px;
+    height: 50px;
+    border-radius: 12px;
+    border: 0.1px;
+    margin-right: 20px;
+    margin-top: 120px;
+}
+.footerAdmin button:hover{
+    cursor: pointer;
+    background-color: #d7e6e5;
+}
+.detailAdmin{
+    border: 1px solid black;
+    height: 300px;
+    border-radius: 9px;
+    margin: 0px;
+    padding: 0px;
+}
+.detailAdmin .form-group{
+    padding: 10px;
+    margin: 0px;
+    background-color: #E3F1F0;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+.detailAdmin .form-group button{
+    background-color: #E3F1F0;
+}
+.detailAdmin .form-group label{
+    padding: 10px;
+}
+.detailAttAdmin{
+    padding: 20px 60px;
+}
+.detailAttAdmin .form-groupAdmin{
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+button[form="adminTambahPeserta"]{
+    width: 50px;
+    height: 40px;
+    background-color: #E3F1F0;
+    border: 0px;
+    justify-content: center;
+}
+button[form="adminTambahPeserta"]:hover{
+    background-color: #d7e6e5;
+    cursor: pointer;
 }

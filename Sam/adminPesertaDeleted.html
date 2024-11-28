@@ -4,74 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>adminPesertaDeleted</title>
-    <style>
-        main{
-            display: grid;
-            grid-template-columns: 531.5px 531.5px;
-            grid-template-rows: 150px 564px;
-            grid-template-areas: 
-            "h h"
-            "main main";
-            margin-top: 30px;
-        }
-        .attribute{
-            grid-area: h;
-            display: flex;
-            gap: 10px;
-            justify-content:center;
-            text-align: center;
-            width: 1063px;
-            height: 30px;
-        }
-        .attribute input[value="search"]{
-            border-radius: 9px;
-            border: 0.2px solid black;
-            width: 690px;
-        }
-        .attribute input[value="Filter"]{
-            border-radius: 9px;
-            background-color: white;
-            border: 0.2px solid black;
-            width: 131px;
-        }
-        .attribute input[value="Sort By"]{
-            border-radius: 9px;
-            background-color: white;
-            border: 0.2px solid black;
-            width: 131px;
-        }
-        .attribute button{
-            border-radius: 9px;
-            background-color: #E3F1F0;
-            border: 0.2px solid black;
-            width: 159px;
-            margin-left: 300px;
-        }
-        .isi{
-            grid-area: main;
-            margin: 10px 0px;
-            margin-top: -80px ;
-            border: 1px solid black;
-            border-radius: 9px;
-            padding: 30px;
-        }
-        .group{
-            display: flex;
-        }
-        .isi button{
-            width: 40px;
-            height: 40px;
-            background-color: white;
-            border: 0px;
-        }
-        .isi label{
-            flex: 1;
-        }
-        .isi button[value="inactive"]{
-            flex: 0.07;
-        }
-    </style>
+    <title>adminPage</title>
 </head>
 <body>
     <header>
@@ -83,48 +16,53 @@
         </div>
     </header>
     <main>
-        <div class="attribute">
-            <input type="text" name="search" id="search" value="search">
-            <input type="submit" name="" id="filter" value="Filter">
-            <input type="submit" name="" id="sort" value="Sort By">
-            <button>+</button>
-        </div>
-        <div class="isi">
-            <div class="group">
-                <label for="">Admin 1</label>
-                <button><img src="assets/edit.svg"></button>
-                <button><img src="assets/delete.svg" alt=""></button>
+        <div class="mainContainer">
+            <div id="functionBar">
+                <input id="searchBar" type="text" placeholder="search...">
+                <button id="filterButton">Filter</button>
+                <button id="sortButton">Sort</button>
+                <button id="view">▤</button>
+                <button id="addSidangButton">+</button>
             </div>
-            <hr>
-            <div class="group">
-                <label for="">Mahasiswa 1</label>
-                <button><img src="assets/edit.svg" alt=""></button>
-                <button><img src="assets/delete.svg" alt=""></button>
+            <div class="card">
+                <div class="formContainer">
+                    <div class="form-group">
+                        <label form="adminPage">Admin 1</label>
+                        <button form="adminPage"><img src="assets/edit.svg"></button>
+                        <button form="adminPage"><img src="assets/delete.svg" ></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Mahasiswa 1</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt="" ></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Dosen 1</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt=""></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Dosen 2</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt=""></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPage">Mahasiswa 2</label>
+                        <button form="adminPage"><img src="assets/edit.svg" alt=""></button>
+                        <button form="adminPage"><img src="assets/delete.svg" alt=""></button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label form="adminPageDel">Steven Febrian</label>
+                        <button form="adminPageDel"><img src="assets/inactive.svg" alt=""></button>
+                    </div>
+                    <hr>
+                </div>
             </div>
-            <hr>
-            <div class="group">
-                <label for="">Dosen 1</label>
-                <button><img src="assets/edit.svg" alt=""></button>
-                <button><img src="assets/delete.svg" alt=""></button>
-            </div>
-            <hr>
-            <div class="group">
-                <label for="">Dosen 2</label>
-                <button><img src="assets/edit.svg" alt=""></button>
-                <button><img src="assets/delete.svg" alt=""></button>
-            </div>
-            <hr>
-            <div class="group">
-                <label for="">Mahasiswa 2</label>
-                <button><img src="assets/edit.svg" alt=""></button>
-                <button><img src="assets/delete.svg" alt=""></button>
-            </div>
-            <hr>
-            <div class="group">
-                <label for="">Steven Febrian</label>
-                <button value="inactive"><img src="assets/inactive.svg" alt=""></button>
-            </div>
-            <hr>
         </div>
     </main>
 </body>
