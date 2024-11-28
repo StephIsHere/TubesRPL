@@ -64,8 +64,11 @@
                 'judulCard judulCard'
                 'tabel1 tabel3'
                 'tabel2 tabel4'
+                'bapPDF .'
+                'buttonBAP .'
+                'note note'
             ;
-            column-gap: 60px;
+            column-gap: 30px;
         }
 
         .judulCard { grid-area: judulCard; z-index: 2; text-align: center; padding-top: 10px;}
@@ -94,10 +97,10 @@
         }
         
         
-        .green_box{
-            background-color: #D5FFA3;
+        .gray_box{
+            background-color: #EBEBEB;
             display: flex;
-            width: 596px;
+            width: 698px;
             height: 37px;
             position: absolute;
             z-index: 1;
@@ -122,7 +125,7 @@
             padding-bottom: 18px;
             z-index: 2;
         }
-        a{
+        .arrow{
             position: absolute;
             cursor: pointer;
             z-index: 3;
@@ -136,9 +139,63 @@
             position: relative;
         }
 
+        .bap{
+            grid-area: bapPDF;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .bap_link{
+            margin-right: 10px;
+        }
+        .bap img{
+            position: absolute;
+        }
+
+        #setuju_bap{
+            background-color: #E3F1F0;
+            border-radius: 10px;
+            padding: 15px;
+            grid-area: buttonBAP;
+            margin-top: 15px;
+            width: 90px;
+            margin-left: 20px;
+        }
+        #setuju_bap:hover{
+            background-color: #388087;
+            color: white;
+        }
+
+        .catatanSidang {
+            grid-area: note;
+            margin-left: 20px;
+            margin-top: 30px;
+            margin-right: 20px;
+        }
+        .boxNote{
+            border: 1px solid gray;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            text-align: justify;
+        }
+
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const crossImg = document.getElementById("belumSetuju"); // Cross image
+            const checkImg = document.getElementById("sudahSetuju"); // Check image
+            const setujuiBAPBtn = document.getElementById("setuju_bap"); // Button
+    
+            checkImg.style.display = "none";
+    
+            setujuiBAPBtn.addEventListener("click", function() {
+                crossImg.style.display = "none";
+                checkImg.style.display = "inline";
+            });
+        });
+    </script>
     <header>
         <div id="leftHeader">
             <span id="judulSidang">Sidang Tugas Akhir</span>
@@ -150,15 +207,15 @@
     <main>
         <div class="card-container">
             <div class="card">
-                <a href="mahasiswaMain.html"><img src="arrow.png" alt="back_to_main"></a>
-                <div class="green_box"></div>
-                <span class="judulCard bold">Sidang 1</span>
+                <a href="/home" class="arrow"><img src="../assets/arrow.png" alt="back_to_main"></a>
+                <div class="gray_box"></div>
+                <span class="judulCard bold">Sidang 3</span>
                 <table class="table1">
                     <tr>
                         <td colspan="2" class="bold judul">Informasi Sidang</td>
                     </tr>
                     <tr>
-                        <td class="bold">Topik</td><td>: Implementasi IoT</td>
+                        <td class="bold">Topik</td><td>: Jaringan Keamanan Internet	</td>
                     </tr>
                     <tr>
                         <td class="bold">Mahasiswa</td><td>: Steven Febrian</td>
@@ -245,6 +302,21 @@
                         <td class="bold">Penguasaan Materi</td><td>: 30%</td>
                     </tr>
                 </table>
+
+                <div class="bap"> 
+                    <a href="" class="bap_link">Berita_Acara_Pelaksana.pdf</a>
+                    <img src="../assets/cross.png" alt="belum disetujui" id="belumSetuju">
+                    <img src="../assets/check.png" alt="disetujui" id="sudahSetuju">
+                </div>
+
+                <a id="setuju_bap">Setujui BAP</a>
+
+                <div class="catatanSidang">
+                    <p>Catatan Sidang:</p>
+                    <p class="boxNote">
+                        Mahasiswa diharapkan memperdalam pembahasan mengenai pengelolaan risiko keamanan pada jaringan internet, terutama terkait mitigasi serangan siber seperti DDoS, ransomware, dan phishing. Fokuskan penelitian pada implementasi protokol keamanan terkini, seperti TLS 1.3 atau Zero Trust Architecture, serta relevansi metode enkripsi dalam melindungi data sensitif.
+                    </p>
+                </div>
             </div>
         </div>
     </main>

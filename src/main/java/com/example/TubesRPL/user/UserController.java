@@ -32,8 +32,10 @@ public class UserController {
                 return "koordinator/home";
             } else if (session.getAttribute("peran").equals("dosen")) {
                 return "dosen/home";
+            } else if (session.getAttribute("peran").equals("mahasiswa")) {
+                return "mahasiswa/mahasiswaMain";
             } else {
-                return "mahasiswa/home";
+                return "redirect:/";
             }
         } else {
             return "redirect:/";
@@ -52,6 +54,33 @@ public class UserController {
             model.addAttribute("email", email);
             model.addAttribute("password", password);
             return "index";
+        }
+    }
+
+    @GetMapping("/home/sidang1")
+    public String showSidang1 (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("mahasiswa")) {
+            return "mahasiswa/mahasiswaSidangBerlangsung";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/sidang2")
+    public String showSidang2 (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("mahasiswa")) {
+            return "mahasiswa/mahasiswaDetailSidangUpcoming";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/sidang3")
+    public String showSidang3 (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("mahasiswa")) {
+            return "mahasiswa/mahasiswaDetailSidangFinished";
+        } else {
+            return "redirect:/";
         }
     }
 }
