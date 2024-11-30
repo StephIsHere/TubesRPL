@@ -19,7 +19,7 @@ CREATE TABLE "komponenNilai" (
     "idKomponen" SERIAL PRIMARY KEY,
     "namaKomponen" VARCHAR(100) NOT NULL,
     "bobotKomponen" DECIMAL(5,2) NOT NULL,
-    "tahunAkademik" VARCHAR(20) NOT NULL,
+    "tahunAkademik" INT NOT NULL,
     "tipe" VARCHAR(50), -- type = bobotPenguji, bobotPembimbing, main(nilai presentasi dll)
 	"idKoordinator" INT NOT NULL,
     FOREIGN KEY ("idKoordinator") REFERENCES "user"("idUser")
@@ -31,9 +31,9 @@ CREATE TABLE "sidang" (
     "topik" VARCHAR(100),
     "judul" VARCHAR(200),
     "tempat" VARCHAR(100),
-    "waktu" TIME,
     "tanggal" DATE,
-	"catatan" VARCHAR(8000),
+    "waktu" TIME,
+	"catatan" VARCHAR(10000),
     "status" VARCHAR(50),
     "bap" BYTEA,
     "ttdKetuaPenguji" BYTEA,
