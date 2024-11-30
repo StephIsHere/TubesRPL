@@ -28,15 +28,21 @@ public class UserController {
     }
 
     @GetMapping("/home")
-    public String showHome (HttpSession session) {
+    public String showHome (HttpSession session, Model model) {
         if (session.getAttribute("idUser") != null) {
-            if (session.getAttribute("peran").equals("admin")) {
+            String nama = (String)session.getAttribute("nama");
+            String peran = (String)session.getAttribute("peran");
+            model.addAttribute("nama", nama);
+            model.addAttribute("peran", peran);
+            System.out.println(session.getAttribute("nama"));
+            System.out.println(session.getAttribute("peran"));
+            if (session.getAttribute("peran").equals("Admin")) {
                 return "admin/adminPage";
-            } else if (session.getAttribute("peran").equals("koordinator")) {
+            } else if (session.getAttribute("peran").equals("Koordinator")) {
                 return "koordinator/home";
-            } else if (session.getAttribute("peran").equals("dosen")) {
+            } else if (session.getAttribute("peran").equals("Dosen")) {
                 return "dosen/home";
-            } else if (session.getAttribute("peran").equals("mahasiswa")) {
+            } else if (session.getAttribute("peran").equals("Mahasiswa")) {
                 return "mahasiswa/mahasiswaMain";
             } else {
                 return "redirect:/";
@@ -58,7 +64,7 @@ public class UserController {
             User user = users.get(0);
             session.setAttribute("idUser", user.getIdUser());
             session.setAttribute("peran", user.getPeran());
-            return "redirect:/home";
+            session.setAttribute("nama", user.getNama());            return "redirect:/home";
         } else {
             model.addAttribute("error", "email atau password salah");
             model.addAttribute("email", email);

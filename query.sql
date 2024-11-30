@@ -68,7 +68,20 @@ CREATE TABLE "komponenNilaiSidang" (
 
 INSERT INTO "user" ("email", "password", "nama", "peran", "npm")
 VALUES 
-('admin@unpar', 'admin', 'admin', 'admin', NULL),
-('koord@unpar', 'koord', 'koord', 'koordinator', NULL),
-('dosen@unpar', 'dosen', 'gede', 'dosen', NULL),
-('steven@unpar', 'steven', 'steven', 'mahasiswa', '84');
+('adul@unpar', 'admin', 'Adul', 'Admin', NULL),
+('agus@unpar', 'admin', 'Agus', 'Admin', NULL),
+
+('budi@unpar', 'koord', 'Budi', 'Koordinator', NULL),
+('barak@unpar', 'koord', 'Barak', 'Koordinator', NULL),
+
+('gede@unpar', 'dosen', 'Gede', 'Dosen', NULL),
+('vania@unpar', 'dosen', 'Vania', 'Dosen', NULL),
+('raymond@unpar', 'dosen', 'Raymond', 'Dosen', NULL),
+('keenan@unpar', 'dosen', 'Keenan', 'Dosen', NULL),
+('lionov@unpar', 'dosen', 'Lionov', 'Dosen', NULL),
+
+('steven@unpar', 'steven', 'Steven', 'Mahasiswa', '84'),
+('sebastian@unpar', 'sebastian', 'Sebastian', 'Mahasiswa', '88'),
+('olivia@unpar', 'olivia', 'Olivia', 'Mahasiswa', '93'),
+('samuel@unpar', 'samuel', 'Samuel', 'Mahasiswa', '95'),
+('eugene@unpar', 'eugene', 'Eugene', 'Mahasiswa', '90');
