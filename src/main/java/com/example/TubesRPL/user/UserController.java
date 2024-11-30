@@ -19,7 +19,11 @@ public class UserController {
     private UserRepository userRepo;
 
     @GetMapping("/")
-    public String showLogin (){
+    public String showLogin (Model model){
+        if (!model.containsAttribute("error")) {
+            model.addAttribute("error", null);
+        }
+        model.addAttribute("email", "");
         return "index";
     }
 
@@ -43,7 +47,12 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public String login (@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
+    public String login (
+        @RequestParam("email") String email, 
+        @RequestParam("password") String password, 
+        Model model, 
+        HttpSession session) {
+            
         List<User> users = userRepo.findUser(email, password);
         if (users.size() == 1) {
             User user = users.get(0);
@@ -51,8 +60,8 @@ public class UserController {
             session.setAttribute("peran", user.getPeran());
             return "redirect:/home";
         } else {
+            model.addAttribute("error", "email atau password salah");
             model.addAttribute("email", email);
-            model.addAttribute("password", password);
             return "index";
         }
     }

@@ -110,3 +110,12 @@ input:focus {
 input:not(:placeholder-shown) {
     background-image: none;  /* Menghapus gambar latar belakang jika ada teks */
 }
+
+.error_message {
+    color: red;
+    margin-left: 40px;
+}
+
+.error_message p {
+    margin: 0px;
+}
