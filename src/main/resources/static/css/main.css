@@ -221,6 +221,11 @@ label {
     width: 160px;
 }
 
+select#role{
+    width: 168px;
+    height: 22px;
+}
+
 .percent{
     margin: 0 5px;
 }
