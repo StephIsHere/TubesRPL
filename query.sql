@@ -35,6 +35,13 @@ CREATE TABLE "sidang" (
     "tanggal" DATE,
 	"catatan" VARCHAR(8000),
     "status" VARCHAR(50),
+    "bap" BYTEA,
+    "ttdKetuaPenguji" BYTEA,
+    "ttdTimPenguji" BYTEA,
+    "ttdPembimbing1" BYTEA,
+    "ttdPembimbing2" BYTEA,
+    "ttdMahasiswa" BYTEA,
+    "ttdKoordinator" BYTEA,
     "idKoordinator" INT NOT NULL,
 	"idMahasiswa" INT NOT NULL,
     FOREIGN KEY ("idKoordinator") REFERENCES "user"("idUser"),
@@ -65,5 +72,3 @@ VALUES
 ('koord@unpar', 'koord', 'koord', 'koordinator', NULL),
 ('dosen@unpar', 'dosen', 'gede', 'dosen', NULL),
 ('steven@unpar', 'steven', 'steven', 'mahasiswa', '84');
-
-

@@ -32,8 +32,10 @@ public class UserController {
                 return "koordinator/home";
             } else if (session.getAttribute("peran").equals("dosen")) {
                 return "dosen/home";
+            } else if (session.getAttribute("peran").equals("mahasiswa")) {
+                return "mahasiswa/mahasiswaMain";
             } else {
-                return "mahasiswa/home";
+                return "redirect:/";
             }
         } else {
             return "redirect:/";
@@ -52,6 +54,69 @@ public class UserController {
             model.addAttribute("email", email);
             model.addAttribute("password", password);
             return "index";
+        }
+    }
+
+    @GetMapping("/home/sidang1")
+    public String showSidang1 (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("mahasiswa")) {
+            return "mahasiswa/mahasiswaSidangBerlangsung";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/sidang2")
+    public String showSidang2 (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("mahasiswa")) {
+            return "mahasiswa/mahasiswaDetailSidangUpcoming";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/sidang3")
+    public String showSidang3 (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("mahasiswa")) {
+            return "mahasiswa/mahasiswaDetailSidangFinished";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/deleted")
+    public String delete (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("admin")) {
+            return "admin/adminPesertaDeleted";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/add")
+    public String add (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("admin")) {
+            return "admin/adminTambahPeserta";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/edit")
+    public String edit (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("admin")) {
+            return "admin/adminDetail";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/home/komponen-nilai")
+    public String komponenNilai (HttpSession session){
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("koordinator")) {
+            return "koordinator/komponenNilai";
+        } else {
+            return "redirect:/";
         }
     }
 }
