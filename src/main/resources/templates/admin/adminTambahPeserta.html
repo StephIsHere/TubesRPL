@@ -33,35 +33,37 @@
                     <label for="" value="head">Tambah Peserta</label>
                 </div>
                 <div class="formContainer">
-                    <div class="form-group">
-                        <label for="">Nama:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Email:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Password:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role:</label>
-                        <select name="role" id="role">
-                            <option value="">--Pilih Peran--</option>
-                            <option value="admin">Admin</option>
-                            <option value="koord">Koordinator</option>
-                            <option value="dosen">Dosen</option>
-                            <option value="mahasiswa">Mahasiswa</option>
-                          </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">NPM/NIK:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="footerAdmin">
-                        <button>save</button>
-                    </div>
+                    <form action="/home/addUser" method="post">
+                        <div class="form-group">
+                            <label for="">Nama:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Password:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role:</label>
+                            <select name="role" id="role">
+                                <option value="">--Pilih Peran--</option>
+                                <option value="admin">Admin</option>
+                                <option value="koord">Koordinator</option>
+                                <option value="dosen">Dosen</option>
+                                <option value="mahasiswa">Mahasiswa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">NPM/NIK:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="footerAdmin">
+                            <button type="submit">save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
