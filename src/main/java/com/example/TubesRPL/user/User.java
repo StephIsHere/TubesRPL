@@ -6,11 +6,12 @@ import lombok.AllArgsConstructor;
 @Data
 @AllArgsConstructor
 public class User {
-    private int idUser;
+    private Long idUser;
+    private String nama;
     private String email;
     private String password;
-    private String nama;
     private String peran;
     private String npm;
+
+    public User() {}
 }
- 

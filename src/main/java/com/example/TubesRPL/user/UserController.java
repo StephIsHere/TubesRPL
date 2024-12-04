@@ -19,16 +19,16 @@ public class UserController {
     private UserRepository userRepo;
 
     @GetMapping("/")
-    public String showLogin (Model model){
+    public String showLogin(Model model){
         if (!model.containsAttribute("error")) {
             model.addAttribute("error", null);
         }
         model.addAttribute("email", "");
-        return "index"; //halaman login
+        return "index"; 
     }
 
     @PostMapping("/")
-    public String login (
+    public String login(
         @RequestParam("email") String email, 
         @RequestParam("password") String password, 
         Model model, 
@@ -40,16 +40,16 @@ public class UserController {
             session.setAttribute("idUser", user.getIdUser());
             session.setAttribute("peran", user.getPeran());
             session.setAttribute("nama", user.getNama());            
-            return "redirect:/home"; //menuju halaman home
+            return "redirect:/home"; 
         } else {
             model.addAttribute("error", "email atau password salah");
             model.addAttribute("email", email);
-            return "index"; //stay di halam login
+            return "index"; 
         }
     }
 
     @GetMapping("/home")
-    public String showHome (HttpSession session, Model model) {
+    public String showHome(HttpSession session, Model model) {
         if (session.getAttribute("idUser") != null) {
 
             String nama = (String)session.getAttribute("nama");
@@ -57,8 +57,9 @@ public class UserController {
             model.addAttribute("nama", nama);
             model.addAttribute("peran", peran);
             
-            //menuju halaman home masing-masing peran
             if (session.getAttribute("peran").equals("Admin")) {
+                List<User> allUsers = userRepo.findAll();
+                model.addAttribute("users", allUsers); // Add to model
                 return "admin/adminPage";
             } else if (session.getAttribute("peran").equals("Koordinator")) {
                 return "koordinator/home";
@@ -111,21 +112,27 @@ public class UserController {
     }
 
     @GetMapping("/home/add")
-    public String add (HttpSession session){
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Admin")) {
-            return "admin/adminTambahPeserta";
-        } else {
-            return "redirect:/";
-        }
+    public String showAddUserForm(Model model) {
+        model.addAttribute("user", new User());
+        return "admin/adminTambahPeserta";
     }
 
-    @GetMapping("/home/edit")
-    public String edit (HttpSession session){
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Admin")) {
-            return "admin/adminDetail";
-        } else {
-            return "redirect:/";
-        }
+    @PostMapping("/home/add")
+    public String addUser(@RequestParam String nama,
+                          @RequestParam String email,
+                          @RequestParam String password,
+                          @RequestParam String role,
+                          @RequestParam(required = false) String npm) {
+        User user = new User();
+        user.setNama(nama);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPeran(role);
+        user.setNpm(npm);
+
+        userRepo.addUser(user);
+
+        return "redirect:/home";
     }
 
     @GetMapping("/home/komponen-nilai")
