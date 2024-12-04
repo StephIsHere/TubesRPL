@@ -6,4 +6,5 @@ public interface UserRepository {
     List<User> findUser(String email, String password);
     void addUser(User user);
     List<User> findAll();
+    List<User> findUserByName(String name);
 }
