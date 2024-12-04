@@ -18,10 +18,12 @@
     <main>
         <div class="mainContainer">
             <div id="functionBar">
-                <input id="searchBar" type="text" placeholder="search...">
+                <form action="/home" method="get">
+                    <input th:value="${query}" type="text" name="name" placeholder="search...">
+                    <button id="view" type="submit">Search</button>
+                </form>
                 <button id="filterButton">Filter</button>
                 <button id="sortButton">Sort</button>
-                <button id="view">▤</button>
                 <a href="/home/add">
                     <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
                 </a>
@@ -29,8 +31,6 @@
             <div class="card">
                 <div class="formContainer">
                     <div class="container_header_form">
-                        <!-- <div><h3></h3></div>
-                        <div>role</div> -->
                         <h3>Nama</h3>
                         <h3>Role</h3>
                         <h3>Edit</h3>

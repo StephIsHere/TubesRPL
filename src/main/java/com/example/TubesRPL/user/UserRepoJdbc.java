@@ -20,6 +20,12 @@ public class UserRepoJdbc implements UserRepository {
     }
 
     @Override
+    public List<User> findUserByName(String name) {
+        String sql = "SELECT * FROM \"user\" WHERE LOWER(nama) LIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + name.toLowerCase() + "%");
+    }
+
+    @Override
     public void addUser(User user) {
         String sql = "INSERT INTO \"user\" (nama, email, password, peran, npm) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
