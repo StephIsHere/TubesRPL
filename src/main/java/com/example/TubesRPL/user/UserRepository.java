@@ -7,4 +7,5 @@ public interface UserRepository {
     void addUser(User user);
     List<User> findAll();
     List<User> findUserByName(String name);
+    List<User> findAllDesc();
 }
