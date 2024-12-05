@@ -31,9 +31,13 @@
                 </div>
                 <div>
                     <form action="/home" method="get">
-                        <button value="true" id="sortButton" type="submit" name="sort">Sort</button>
+                        <select id="sortButton" name="sort" onchange="this.form.submit()">
+                            <option id="sortButton" value="" disabled selected>Pilih Sorting</option>
+                            <option id="sortButton" value="true">Naik</option>
+                            <option id="sortButton" value="false">Turun</option>
+                        </select>
                     </form>
-                </div>
+                </div>                
                 <a href="/home/add">
                     <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
                 </a>
@@ -70,5 +74,17 @@
             </div>
         </div>
     </main> 
+    <script>
+        document.getElementById("sortButton").addEventListener("click", function () {
+            // Ambil input tersembunyi
+            const hiddenInput = document.getElementById("sortValue");
+    
+            // Toggle nilai "true" dan "false"
+            hiddenInput.value = hiddenInput.value === "true" ? "false" : "true";
+    
+            // Submit form
+            hiddenInput.form.submit();
+        });
+    </script>
 </body>
 </html>

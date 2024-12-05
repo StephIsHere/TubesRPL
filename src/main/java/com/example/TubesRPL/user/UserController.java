@@ -67,7 +67,7 @@ public class UserController {
                 if (sort.equals("true")) {
                     allUsers = this.userRepo.findAllDesc();
                 } else if(sort.equals("false")){
-                    allUsers = this.userRepo.findUserByName(name);
+                    allUsers = this.userRepo.findAll();
                 }
                 model.addAttribute("users", allUsers);
                 return "admin/adminPage";
