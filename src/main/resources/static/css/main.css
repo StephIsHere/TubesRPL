@@ -79,8 +79,7 @@ main {
 
 #functionBar{
     display: flex;
-    /* height: 30px;
-    width: 100%; */
+    justify-content: space-between;
 }
 
 #searchBar, #filterButton, #sortButton, #addSidangButton, #view {
@@ -90,6 +89,8 @@ main {
     padding: 0 10px;
     border: 1px solid #acacac;
     border-radius: 12px;
+    height: 30px;
+    width: 70px;
 }
 
 #filterButton:hover, #sortButton:hover, #addSidangButton:hover, #view:hover {
@@ -99,8 +100,9 @@ main {
 
 #searchBar{
     align-content: center;
-    width: 100%;
+    width:400px;
     outline: none;
+    margin-right: 30px;
 }
 
 #addSidangButton {

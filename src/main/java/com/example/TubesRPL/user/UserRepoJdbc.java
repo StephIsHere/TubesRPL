@@ -42,6 +42,12 @@ public class UserRepoJdbc implements UserRepository {
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
+    @Override
+    public List<User> findAllDesc() {
+        String sql = "SELECT * FROM \"user\" ORDER BY nama DESC"; // Ordering by name for better readability
+        return jdbcTemplate.query(sql, this::mapRowToUser);
+    }
+
     private User mapRowToUser(ResultSet resultSet, int rowNum) throws SQLException {
         return new User(
                 resultSet.getLong("idUser"),

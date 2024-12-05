@@ -18,12 +18,22 @@
     <main>
         <div class="mainContainer">
             <div id="functionBar">
-                <form action="/home" method="get">
-                    <input th:value="${query}" type="text" name="name" placeholder="search...">
-                    <button id="view" type="submit">Search</button>
-                </form>
-                <button id="filterButton">Filter</button>
-                <button id="sortButton">Sort</button>
+                <div>
+                    <form action="/home" method="get">
+                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="search...">
+                        <button id="view" type="submit">Search</button>
+                    </form>
+                </div>
+                <div>
+                    <form action="/home" method="get">
+                        <button value="true" id="filterButton" type="submit" name="filter">Filter</button>
+                    </form>
+                </div>
+                <div>
+                    <form action="/home" method="get">
+                        <button value="true" id="sortButton" type="submit" name="sort">Sort</button>
+                    </form>
+                </div>
                 <a href="/home/add">
                     <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
                 </a>
@@ -59,6 +69,6 @@
                 </div>
             </div>
         </div>
-    </main>
+    </main> 
 </body>
 </html>
