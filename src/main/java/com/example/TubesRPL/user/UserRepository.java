@@ -8,4 +8,5 @@ public interface UserRepository {
     List<User> findAll();
     List<User> findUserByName(String name);
     List<User> findAllDesc();
+    List<User> findUserByRole(String role);
 }

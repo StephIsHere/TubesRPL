@@ -26,13 +26,19 @@
                 </div>
                 <div>
                     <form action="/home" method="get">
-                        <button value="true" id="filterButton" type="submit" name="filter">Filter</button>
+                        <select name="filter" id="filterButton" onchange="this.form.submit()" >
+                            <option id="filterButton" value="">Filter</option>
+                            <option id="filterButton" value="Admin">Admin</option>
+                            <option id="filterButton" value="Koordinator">Koordinator</option>
+                            <option id="filterButton" value="Mahasiswa">Mahasiswa</option>
+                            <option id="filterButton" value="Dosen">Dosen</option>
+                        </select>
                     </form>
                 </div>
                 <div>
                     <form action="/home" method="get">
                         <select id="sortButton" name="sort" onchange="this.form.submit()">
-                            <option id="sortButton" value="" disabled selected>Pilih Sorting</option>
+                            <option id="sortButton" value="" disabled selected>Sort</option>
                             <option id="sortButton" value="true">Naik</option>
                             <option id="sortButton" value="false">Turun</option>
                         </select>
