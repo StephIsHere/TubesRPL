@@ -69,6 +69,9 @@ public class UserController {
                 } else if(sort.equals("false")){
                     allUsers = this.userRepo.findAll();
                 }
+                if (!filter.equals("")) {
+                    allUsers = this.userRepo.findUserByRole(filter);
+                }
                 model.addAttribute("users", allUsers);
                 return "admin/adminPage";
             } else if (session.getAttribute("peran").equals("Koordinator")) {
