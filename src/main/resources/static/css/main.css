@@ -355,3 +355,12 @@ button[form="adminTambahPeserta"]:hover{
 .label_nama, .label_role{
     width: 50px;
 }
+#rightHeader{
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+#rightHeader img{
+    width: 40px;
+    height: 40px;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,7 @@
         </div>
         <div id="rightHeader">
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+            <img th:src="@{assets/userwhite.svg}" alt="" onclick="">
         </div>
     </header>
     <main>
