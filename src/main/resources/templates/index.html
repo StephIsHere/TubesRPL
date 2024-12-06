@@ -12,6 +12,10 @@
         
         <div class="form_container">
             <form action="/" method="post">
+                <div class="image_container">
+                    <img src="../assets/userIcon.png" id="gambar_user">
+                    <img src="../assets/lock.png" id="gambar_lock">
+                </div>
                 <input type="text" id="email" name="email" placeholder="Input email Anda" required th:value="${email}">
                 <input type="password" id="password" name="password" placeholder="Input password Anda" required th:value="${password}">
                 <div class="wrap">
