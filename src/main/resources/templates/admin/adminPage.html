@@ -13,25 +13,54 @@
         </div>
         <div id="rightHeader">
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+            <img th:src="@{assets/userwhite.svg}" alt="" onclick="">
         </div>
     </header>
     <main>
         <div class="mainContainer">
             <div id="functionBar">
-                <input id="searchBar" type="text" placeholder="search...">
-                <button id="filterButton">Filter</button>
-                <button id="sortButton">Sort</button>
-                <button id="view">▤</button>
+                <div>
+                    <form action="/home" method="get">
+                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="search...">
+                        <button id="view" type="submit">Search</button>
+                    </form>
+                </div>
+                <div>
+                    <form action="/home" method="get">
+                        <select name="filter" id="filterButton" onchange="this.form.submit()" >
+                            <option id="filterButton" value="">Filter</option>
+                            <option id="filterButton" value="Admin">Admin</option>
+                            <option id="filterButton" value="Koordinator">Koordinator</option>
+                            <option id="filterButton" value="Mahasiswa">Mahasiswa</option>
+                            <option id="filterButton" value="Dosen">Dosen</option>
+                        </select>
+                    </form>
+                </div>
+                <div>
+                    <form action="/home" method="get">
+                        <select id="sortButton" name="sort" onchange="this.form.submit()">
+                            <option id="sortButton" value="" disabled selected>Sort</option>
+                            <option id="sortButton" value="true">Naik</option>
+                            <option id="sortButton" value="false">Turun</option>
+                        </select>
+                    </form>
+                </div>                
                 <a href="/home/add">
                     <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
                 </a>
             </div>
             <div class="card">
                 <div class="formContainer">
+                    <div class="container_header_form">
+                        <h3>Nama</h3>
+                        <h3>Role</h3>
+                        <h3>Edit</h3>
+                        <h3>Delete</h3>
+                    </div>
                     <div th:each="user : ${users}">
                         <div class="form-group">
-                            <label th:text="${user.nama}">Nama</label>
-                            <span th:text="${user.peran}">Peran</span>
+                            <label class="label_nama" th:text="${user.nama}">Nama</label>
+                            <span class="label_role" th:text="${user.peran}">Peran</span>
                             <a th:href="@{/home/edit(userId=${user.idUser})}">
                                 <button type="button">
                                     <img th:src="@{/assets/edit.svg}" alt="Edit">
@@ -51,6 +80,18 @@
                 </div>
             </div>
         </div>
-    </main>
+    </main> 
+    <script>
+        document.getElementById("sortButton").addEventListener("click", function () {
+            // Ambil input tersembunyi
+            const hiddenInput = document.getElementById("sortValue");
+    
+            // Toggle nilai "true" dan "false"
+            hiddenInput.value = hiddenInput.value === "true" ? "false" : "true";
+    
+            // Submit form
+            hiddenInput.form.submit();
+        });
+    </script>
 </body>
 </html>

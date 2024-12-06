@@ -49,17 +49,30 @@ public class UserController {
     }
 
     @GetMapping("/home")
-    public String showHome(HttpSession session, Model model) {
+    public String showHome(@RequestParam(defaultValue = "") String name,
+                           @RequestParam(defaultValue = "") String filter,
+                           @RequestParam(defaultValue = "") String sort, HttpSession session, Model model) {
         if (session.getAttribute("idUser") != null) {
 
             String nama = (String)session.getAttribute("nama");
             String peran = (String)session.getAttribute("peran");
             model.addAttribute("nama", nama);
             model.addAttribute("peran", peran);
+            model.addAttribute("query", name);
+            model.addAttribute("filter", filter);
+            model.addAttribute("sort", sort);
             
             if (session.getAttribute("peran").equals("Admin")) {
-                List<User> allUsers = userRepo.findAll();
-                model.addAttribute("users", allUsers); // Add to model
+                List<User> allUsers = this.userRepo.findUserByName(name);
+                if (sort.equals("true")) {
+                    allUsers = this.userRepo.findAllDesc();
+                } else if(sort.equals("false")){
+                    allUsers = this.userRepo.findAll();
+                }
+                if (!filter.equals("")) {
+                    allUsers = this.userRepo.findUserByRole(filter);
+                }
+                model.addAttribute("users", allUsers);
                 return "admin/adminPage";
             } else if (session.getAttribute("peran").equals("Koordinator")) {
                 return "koordinator/home";

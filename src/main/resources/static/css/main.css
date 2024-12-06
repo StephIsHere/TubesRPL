@@ -79,8 +79,7 @@ main {
 
 #functionBar{
     display: flex;
-    height: 30px;
-    width: 100%;
+    justify-content: space-between;
 }
 
 #searchBar, #filterButton, #sortButton, #addSidangButton, #view {
@@ -90,6 +89,9 @@ main {
     padding: 0 10px;
     border: 1px solid #acacac;
     border-radius: 12px;
+    height: 30px;
+    width: 70px;
+    font-size: 12px;
 }
 
 #filterButton:hover, #sortButton:hover, #addSidangButton:hover, #view:hover {
@@ -99,8 +101,9 @@ main {
 
 #searchBar{
     align-content: center;
-    width: 100%;
+    width:400px;
     outline: none;
+    margin-right: 30px;
 }
 
 #addSidangButton {
@@ -213,8 +216,10 @@ input[type="number"] {
 
 .form-group {
     display: flex;
-    align-items: center;
+    align-items: end;
     margin: 15px 0;
+    padding: 0;
+    justify-content: space-between;
 }
 
 label {
@@ -339,4 +344,23 @@ button[form="adminTambahPeserta"]{
 button[form="adminTambahPeserta"]:hover{
     background-color: #d7e6e5;
     cursor: pointer;
+}
+
+.container_header_form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.label_nama, .label_role{
+    width: 50px;
+}
+#rightHeader{
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+#rightHeader img{
+    width: 40px;
+    height: 40px;
 }

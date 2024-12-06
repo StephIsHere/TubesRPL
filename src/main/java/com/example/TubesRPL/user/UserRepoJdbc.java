@@ -20,6 +20,19 @@ public class UserRepoJdbc implements UserRepository {
     }
 
     @Override
+    public List<User> findUserByName(String name) {
+        String sql = "SELECT * FROM \"user\" WHERE LOWER(nama) LIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + name.toLowerCase() + "%");
+    }
+
+    @Override
+    public List<User> findUserByRole(String role) {
+        String sql = "SELECT * FROM \"user\" WHERE peran LIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, role);
+    }
+
+
+    @Override
     public void addUser(User user) {
         String sql = "INSERT INTO \"user\" (nama, email, password, peran, npm) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
@@ -33,6 +46,12 @@ public class UserRepoJdbc implements UserRepository {
     @Override
     public List<User> findAll() {
         String sql = "SELECT * FROM \"user\" ORDER BY nama ASC"; // Ordering by name for better readability
+        return jdbcTemplate.query(sql, this::mapRowToUser);
+    }
+
+    @Override
+    public List<User> findAllDesc() {
+        String sql = "SELECT * FROM \"user\" ORDER BY nama DESC"; // Ordering by name for better readability
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
