@@ -23,7 +23,7 @@
             <div id="functionBar">
                 <div>
                     <form action="/home" method="get">
-                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="search...">
+                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="Search...">
                         <button id="view" type="submit">Search</button>
                     </form>
                 </div>
@@ -64,12 +64,12 @@
                             <label class="label_nama" th:text="${user.nama}">Nama</label>
                             <span class="label_role" th:text="${user.peran}">Peran</span>
                             <a th:href="@{/home/edit(userId=${user.idUser})}">
-                                <button type="button">
+                                <button type="button" class="img-edit">
                                     <img th:src="@{/assets/edit.svg}" alt="Edit">
                                 </button>
                             </a>
                             <a th:href="@{/home/deleted(userId=${user.idUser})}">
-                                <button type="button">
+                                <button type="button" class="img-delete">
                                     <img th:src="@{/assets/delete.svg}" alt="Delete">
                                 </button>
                             </a>

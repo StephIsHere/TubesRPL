@@ -366,3 +366,14 @@ button[form="adminTambahPeserta"]:hover{
     top: 10px;
     right: 10px;
 }
+
+button.img-edit {
+    cursor: pointer;
+    background-color: white;
+    border: 0px;
+}
+button.img-delete {
+    cursor: pointer;
+    background-color: white;
+    border: 0px;
+}

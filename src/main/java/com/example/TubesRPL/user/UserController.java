@@ -42,7 +42,7 @@ public class UserController {
             session.setAttribute("nama", user.getNama());            
             return "redirect:/home"; 
         } else {
-            model.addAttribute("error", "email atau password salah");
+            model.addAttribute("error", "Email atau password salah");
             model.addAttribute("email", email);
             return "index"; 
         }
