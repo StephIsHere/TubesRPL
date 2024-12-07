@@ -12,7 +12,8 @@ CREATE TABLE "user" (
     "password" VARCHAR(255) NOT NULL,
     "nama" VARCHAR(100) NOT NULL,
     "peran" VARCHAR(20) NOT NULL, -- admin, koord, dosen, mahasiswa
-    "npm" VARCHAR(20)
+    "npm" VARCHAR(20),
+    "status" BOOLEAN
 );
 
 CREATE TABLE "komponenNilai" (
@@ -66,22 +67,23 @@ CREATE TABLE "komponenNilaiSidang" (
     FOREIGN KEY ("idKomponen") REFERENCES "komponenNilai"("idKomponen") ON DELETE CASCADE
 );
 
-INSERT INTO "user" ("email", "password", "nama", "peran", "npm")
+INSERT INTO "user" ("email", "password", "nama", "peran", "npm", "status")
 VALUES 
-('adul@unpar', 'admin', 'Adul', 'Admin', NULL),
-('agus@unpar', 'admin', 'Agus', 'Admin', NULL),
+('adul@unpar', 'admin', 'Adul', 'Admin', NULL,true),
+('agus@unpar', 'admin', 'Agus', 'Admin', NULL,true),
 
-('budi@unpar', 'koord', 'Budi', 'Koordinator', NULL),
-('barak@unpar', 'koord', 'Barak', 'Koordinator', NULL),
+('budi@unpar', 'koord', 'Budi', 'Koordinator', NULL,true),
+('barak@unpar', 'koord', 'Barak', 'Koordinator', NULL,true),
 
-('gede@unpar', 'dosen', 'Gede', 'Dosen', NULL),
-('vania@unpar', 'dosen', 'Vania', 'Dosen', NULL),
-('raymond@unpar', 'dosen', 'Raymond', 'Dosen', NULL),
-('keenan@unpar', 'dosen', 'Keenan', 'Dosen', NULL),
-('lionov@unpar', 'dosen', 'Lionov', 'Dosen', NULL),
+('gede@unpar', 'dosen', 'Gede', 'Dosen', NULL,true),
+('vania@unpar', 'dosen', 'Vania', 'Dosen', NULL,true),
+('raymond@unpar', 'dosen', 'Raymond', 'Dosen', NULL,true),
+('keenan@unpar', 'dosen', 'Keenan', 'Dosen', NULL,true),
+('lionov@unpar', 'dosen', 'Lionov', 'Dosen', NULL,true),
 
-('steven@unpar', 'steven', 'Steven', 'Mahasiswa', '84'),
-('sebastian@unpar', 'sebastian', 'Sebastian', 'Mahasiswa', '88'),
-('olivia@unpar', 'olivia', 'Olivia', 'Mahasiswa', '93'),
-('samuel@unpar', 'samuel', 'Samuel', 'Mahasiswa', '95'),
-('eugene@unpar', 'eugene', 'Eugene', 'Mahasiswa', '90');
+('steven@unpar', 'steven', 'Steven', 'Mahasiswa', '80',true),
+('sebastian@unpar', 'sebastian', 'Sebastian', 'Mahasiswa', '82',true),
+('olivia@unpar', 'olivia', 'Olivia', 'Mahasiswa', '84',true),
+('samuel@unpar', 'samuel', 'Samuel', 'Mahasiswa', '86',true),
+('eugene@unpar', 'eugene', 'Eugene', 'Mahasiswa', '88',true),
+('bombom@unpar', 'bombom', 'Bombom', 'Mahasiswa', '90', true);

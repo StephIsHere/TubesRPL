@@ -30,11 +30,6 @@ header a.active {
     border-radius: 5px;
 }
 
-#rightHeader {
-    position: absolute;
-    right: 55px;
-}
-
 main {
     padding: 20px;
 }
@@ -155,6 +150,10 @@ a{
     z-index: 3;
     text-decoration: none;
     color: black;
+}
+#rightHeader {
+    position: absolute;
+    right: 55px;
 }
 .userProfile img{
     height: 30px;

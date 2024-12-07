@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script src="../js/Overlay.js" defer></script>
     <title>Admin Page</title>
 </head>
 <body>
@@ -13,15 +14,30 @@
         </div>
         <div id="rightHeader">
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
-            <img th:src="@{assets/userwhite.svg}" alt="" onclick="">
+        </div>
+        <div class="userProfile">
+            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()" >
         </div>
     </header>
-    <main>
+    <div id="OverlayIconUser">
+        <div class="UserIcon">
+            <img th:src="@{../assets/userWhite.png}">
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+        </div>
+        <div class="Sign">
+            <input type="file">
+            <button type="submit">Upload Tanda Tangan</button>
+        </div>
+        <div class="Logout">
+            <button type="button">Logout</button>
+        </div>
+    </div>
+    <main onclick="hideElement()">
         <div class="mainContainer">
             <div id="functionBar">
                 <div>
                     <form action="/home" method="get">
-                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="search...">
+                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="Search...">
                         <button id="view" type="submit">Search</button>
                     </form>
                 </div>
@@ -31,8 +47,8 @@
                             <option id="filterButton" value="">Filter</option>
                             <option id="filterButton" value="Admin">Admin</option>
                             <option id="filterButton" value="Koordinator">Koordinator</option>
-                            <option id="filterButton" value="Mahasiswa">Mahasiswa</option>
                             <option id="filterButton" value="Dosen">Dosen</option>
+                            <option id="filterButton" value="Mahasiswa">Mahasiswa</option>
                         </select>
                     </form>
                 </div>
@@ -62,12 +78,12 @@
                             <label class="label_nama" th:text="${user.nama}">Nama</label>
                             <span class="label_role" th:text="${user.peran}">Peran</span>
                             <a th:href="@{/home/edit(userId=${user.idUser})}">
-                                <button type="button">
+                                <button type="button" class="img-edit">
                                     <img th:src="@{/assets/edit.svg}" alt="Edit">
                                 </button>
                             </a>
-                            <a th:href="@{/home/deleted(userId=${user.idUser})}">
-                                <button type="button">
+                            <a th:href="@{/home/deleted/{userId}(userId=${user.idUser})}">
+                                <button type="button" class="img-delete">
                                     <img th:src="@{/assets/delete.svg}" alt="Delete">
                                 </button>
                             </a>

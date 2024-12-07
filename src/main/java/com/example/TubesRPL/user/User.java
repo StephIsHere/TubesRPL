@@ -12,6 +12,7 @@ public class User {
     private String password;
     private String peran;
     private String npm;
+    private Boolean status;
 
     public User() {}
 }

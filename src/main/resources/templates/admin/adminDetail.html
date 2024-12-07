@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/Overlay.js" defer></script>
     <title>adminDetail</title>
     <style>
     </style>
@@ -15,10 +16,25 @@
         </div>
         <div id="rightHeader">
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
-            <img th:src="@{assets/userwhite.svg}" alt="" onclick="">
+        </div>
+        <div class="userProfile">
+            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
         </div>
     </header>
-    <main>
+    <div id="OverlayIconUser">
+        <div class="UserIcon">
+            <img th:src="@{../assets/userWhite.png}">
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+        </div>
+        <div class="Sign">
+            <input type="file">
+            <button type="submit">Upload Tanda Tangan</button>
+        </div>
+        <div class="Logout">
+            <button type="button">Logout</button>
+        </div>
+    </div>
+    <main onclick="hideElement()">
         <div class="mainContainer">
             <div id="functionBar">
                 <input id="searchBar" type="text" placeholder="search...">
