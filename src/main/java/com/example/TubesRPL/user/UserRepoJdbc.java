@@ -13,6 +13,7 @@ public class UserRepoJdbc implements UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // Mencari user berdasarkan email dan passsword
     @Override
     public List<User> findUser(String email, String password) {
         String sql = "SELECT * FROM \"user\" WHERE email = ? AND password = ?";
@@ -34,13 +35,14 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO \"user\" (nama, email, password, peran, npm) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO \"user\" (nama, email, password, peran, npm, status) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
                 user.getNama(),
                 user.getEmail(),
                 user.getPassword(),
                 user.getPeran(),
-                user.getNpm());
+                user.getNpm(),
+                user.getStatus());
     }
 
     @Override
@@ -55,6 +57,13 @@ public class UserRepoJdbc implements UserRepository {
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
+    @Override
+    public void setUserInactive(Long idUser) {
+        String sql = "UPDATE \"user\" SET status = false WHERE \"idUser\" = ?";
+        jdbcTemplate.update(sql, idUser);
+    }
+
+
     private User mapRowToUser(ResultSet resultSet, int rowNum) throws SQLException {
         return new User(
                 resultSet.getLong("idUser"),
@@ -62,7 +71,8 @@ public class UserRepoJdbc implements UserRepository {
                 resultSet.getString("email"),
                 resultSet.getString("password"),
                 resultSet.getString("peran"),
-                resultSet.getString("npm")
+                resultSet.getString("npm"),
+                resultSet.getBoolean("status")
         );
     }
 }

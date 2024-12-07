@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
+    // Membuka halaman root --> login 
+    // Handler jika ada salah email / password
     @GetMapping("/")
     public String showLogin(Model model){
         if (!model.containsAttribute("error")) {
@@ -26,36 +29,42 @@ public class UserController {
         model.addAttribute("email", "");
         return "index"; 
     }
-
     @PostMapping("/")
     public String login(
         @RequestParam("email") String email, 
         @RequestParam("password") String password, 
         Model model, 
         HttpSession session) {
-            
+        
+        //findUser dengan email dan password yang ditulis user
         List<User> users = userRepo.findUser(email, password);
         if (users.size() == 1) {
             User user = users.get(0);
+            //Ambil atribut dari user
             session.setAttribute("idUser", user.getIdUser());
+            session.setAttribute("nama", user.getNama());  
+            session.setAttribute("email", user.getEmail());          
             session.setAttribute("peran", user.getPeran());
-            session.setAttribute("nama", user.getNama());            
+            session.setAttribute("npm", user.getNpm());
+            session.setAttribute("status", user.getStatus());
             return "redirect:/home"; 
-        } else {
+        } else { //Jika email / password salah
             model.addAttribute("error", "Email atau password salah");
             model.addAttribute("email", email);
             return "index"; 
         }
     }
 
+    // Home page
     @GetMapping("/home")
     public String showHome(@RequestParam(defaultValue = "") String name,
                            @RequestParam(defaultValue = "") String filter,
                            @RequestParam(defaultValue = "") String sort, HttpSession session, Model model) {
         if (session.getAttribute("idUser") != null) {
-
+            // Simpan nama dan peran untuk html
             String nama = (String)session.getAttribute("nama");
             String peran = (String)session.getAttribute("peran");
+            
             model.addAttribute("nama", nama);
             model.addAttribute("peran", peran);
             model.addAttribute("query", name);
@@ -88,15 +97,29 @@ public class UserController {
         }
     }
 
-    @GetMapping("/home/sidang1")
-    public String showSidang1 (HttpSession session){
+    //MAHASISWA--- SALAH SEMUA
+    // mahasiswa :
+    // mahasiswa hanya ada 1 topik TA
+    // Mahasiswa punya 1 / 2 box:
+    //      1 box --> jika TA 1
+    //      2 box --> jika TA 2 --> ada history TA 1 
+    //      Keterangan box hanya Finished / Upcoming saja
+    // Harus ambil ke database dahulu, mahasiswa ini lg TA 1 / TA 2
+    // gausa nge serach, filter, sort --> karena hanya ada 2 box saja
+    @GetMapping("/home/sidangTA1")
+    public String showSidang1 (HttpSession session, Model model){
+        //Menampilkan nama dan peran
+        String nama = (String)session.getAttribute("nama");
+        String peran = (String)session.getAttribute("peran");
+        model.addAttribute("nama", nama);
+        model.addAttribute("peran", peran);
+
         if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Mahasiswa")) {
             return "mahasiswa/mahasiswaSidangBerlangsung";
         } else {
             return "redirect:/";
         }
     }
-
     @GetMapping("/home/sidang2")
     public String showSidang2 (HttpSession session){
         if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Mahasiswa")) {
@@ -105,7 +128,6 @@ public class UserController {
             return "redirect:/";
         }
     }
-
     @GetMapping("/home/sidang3")
     public String showSidang3 (HttpSession session){
         if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Mahasiswa")) {
@@ -115,21 +137,30 @@ public class UserController {
         }
     }
 
-    @GetMapping("/home/deleted")
-    public String delete (HttpSession session){
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Admin")) {
-            return "admin/adminPesertaDeleted";
-        } else {
-            return "redirect:/";
-        }
-    }
+    // ADMIN ---------------------------------------
 
+    // input nama, email lgsg default buatkan --> nama@unpar
+    //      jadi email tidak perlu diisi manual
+    // Password default: --> otomatis 
+    //      admin = admin
+    //      koordinator = koord
+    //      mahasiswa = nama
+    //      dosen = dosen
+    //Kalau non-mahasiswa --> npm tidak bisa diisi
+
+    //************KALAU UDA SUBMIT HARUS ADA OVERLAY "USER BERHASIL DITAMBAHKAN" *****************
+
+    // Page menambahkan user
     @GetMapping("/home/add")
-    public String showAddUserForm(Model model) {
+    public String showAddUserForm(Model model, HttpSession session) {
+        //Menampilkan nama dan peran
+        String nama = (String)session.getAttribute("nama");
+        String peran = (String)session.getAttribute("peran");
+        model.addAttribute("nama", nama);
+        model.addAttribute("peran", peran);
         model.addAttribute("user", new User());
         return "admin/adminTambahPeserta";
     }
-
     @PostMapping("/home/add")
     public String addUser(@RequestParam String nama,
                           @RequestParam String email,
@@ -142,11 +173,28 @@ public class UserController {
         user.setPassword(password);
         user.setPeran(role);
         user.setNpm(npm);
+        user.setStatus(true);
 
         userRepo.addUser(user);
 
         return "redirect:/home";
     }
+
+    //ADA OVERLAY --> APAKAH ANDA YAKIN INGIN MENONAKTIFKAN "nama"
+    //
+
+    // Jadikan user tidak aktif
+    @GetMapping("/home/deleted/{userId}")
+    public String setUserInactive(@PathVariable Long userId, HttpSession session) {
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Admin")) {
+            userRepo.setUserInactive(userId);
+            return "redirect:/home";
+        } else {
+            return "redirect:/";
+        }
+    }
+    
+
 
     @GetMapping("/home/komponen-nilai")
     public String komponenNilai (HttpSession session){
@@ -156,4 +204,5 @@ public class UserController {
             return "redirect:/";
         }
     }
+
 }
