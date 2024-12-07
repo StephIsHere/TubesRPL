@@ -1,11 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/main.css}">
     <title>Admin Page</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .messageBox {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Additional styling for inactive users */
+        .inactive {
+            color: gray;
+        }
+
+        .inactive img {
+            filter: grayscale(100%);
+        }
+
+        .inactive .img-delete img {
+            opacity: 0.5;
+        }
+
+        /* Make edit icons black */
+        .img-edit img {
+            filter: brightness(0);
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <div id="leftHeader">
@@ -15,7 +61,7 @@
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
-            <img th:src="@{../assets/userWhite.png}" alt="" onclick="">
+            <img th:src="@{/assets/userWhite.png}" alt="" onclick="">
         </div>
     </header>
     <main>
@@ -29,7 +75,7 @@
                 </div>
                 <div>
                     <form action="/home" method="get">
-                        <select name="filter" id="filterButton" onchange="this.form.submit()" >
+                        <select name="filter" id="filterButton" onchange="this.form.submit()">
                             <option id="filterButton" value="">Filter</option>
                             <option id="filterButton" value="Admin">Admin</option>
                             <option id="filterButton" value="Koordinator">Koordinator</option>
@@ -46,7 +92,7 @@
                             <option id="sortButton" value="false">Turun</option>
                         </select>
                     </form>
-                </div>                
+                </div>
                 <a href="/home/add">
                     <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
                 </a>
@@ -60,7 +106,7 @@
                         <h3>Delete</h3>
                     </div>
                     <div th:each="user : ${users}">
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${user.status} == false ? ' inactive' : ''">
                             <label class="label_nama" th:text="${user.nama}">Nama</label>
                             <span class="label_role" th:text="${user.peran}">Peran</span>
                             <a th:href="@{/home/edit(userId=${user.idUser})}">
@@ -68,11 +114,10 @@
                                     <img th:src="@{/assets/edit.svg}" alt="Edit">
                                 </button>
                             </a>
-                            <a th:href="@{/home/deleted/{userId}(userId=${user.idUser})}">
-                                <button type="button" class="img-delete">
-                                    <img th:src="@{/assets/delete.svg}" alt="Delete">
-                                </button>
-                            </a>
+                            <button type="button" class="img-delete"
+                                th:onclick="'showDeleteOverlay(' + ${user.idUser} + ')'">
+                                <img th:src="@{/assets/delete.svg}" alt="Delete">
+                            </button>
                         </div>
                         <hr>
                     </div>
@@ -82,18 +127,49 @@
                 </div>
             </div>
         </div>
-    </main> 
+    </main>
+
+    <div id="deleteOverlay" class="overlay hidden">
+        <div class="messageBox">
+            <p>Are you sure you want to delete this user?</p>
+            <button id="confirmDeleteButton">Yes</button>
+            <button onclick="hideDeleteOverlay()">No</button>
+        </div>
+    </div>
+
     <script>
-        document.getElementById("sortButton").addEventListener("click", function () {
-            // Ambil input tersembunyi
-            const hiddenInput = document.getElementById("sortValue");
-    
-            // Toggle nilai "true" dan "false"
-            hiddenInput.value = hiddenInput.value === "true" ? "false" : "true";
-    
-            // Submit form
-            hiddenInput.form.submit();
+        let selectedUserId = null;
+
+        function showDeleteOverlay(userId) {
+            selectedUserId = userId;
+            const overlay = document.getElementById('deleteOverlay');
+            overlay.classList.remove('hidden');
+        }
+
+        function hideDeleteOverlay() {
+            selectedUserId = null;
+            const overlay = document.getElementById('deleteOverlay');
+            overlay.classList.add('hidden');
+        }
+
+        document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+            if (selectedUserId !== null) {
+                window.location.href = '/home/deleted/' + selectedUserId;
+            }
         });
+
+        // Existing sort logic
+        const sortButton = document.getElementById("sortButton");
+        if (sortButton) {
+            sortButton.addEventListener("click", function () {
+                const hiddenInput = document.getElementById("sortValue");
+                if (hiddenInput) {
+                    hiddenInput.value = hiddenInput.value === "true" ? "false" : "true";
+                    hiddenInput.form.submit();
+                }
+            });
+        }
     </script>
 </body>
+
 </html>
