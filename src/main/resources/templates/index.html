@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="css/login.css"> 
-</head>
+    <script src="js/login.js" defer></script>
 <body>
     <div class="login_container">
         <h2 class="login_header"><strong>LOGIN</strong></h2>
@@ -15,6 +15,8 @@
                 <div class="image_container">
                     <img src="../assets/userIcon.png" id="gambar_user">
                     <img src="../assets/lock.png" id="gambar_lock">
+                    <img src="../assets/password_not_see.png" id="gambar_eye_not" title="hide password">
+                    <img src="../assets/password_see.png" id="gambar_eye_see" title="show password">
                 </div>
                 <input type="text" id="email" name="email" placeholder="Input email Anda" required th:value="${email}">
                 <input type="password" id="password" name="password" placeholder="Input password Anda" required th:value="${password}">

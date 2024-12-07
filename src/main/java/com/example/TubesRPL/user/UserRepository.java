@@ -9,4 +9,5 @@ public interface UserRepository {
     List<User> findUserByName(String name);
     List<User> findAllDesc();
     List<User> findUserByRole(String role);
+    void setUserInactive(Long idUser);
 }
