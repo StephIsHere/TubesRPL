@@ -42,7 +42,7 @@ button {
     color: white;
     cursor: pointer;
     background-color: #388087;
-    width: 100%;
+    width: 90%;
     font-size: 20px;
 }
 
@@ -52,7 +52,7 @@ button:hover {
  
 .wrap {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
@@ -74,8 +74,9 @@ button:hover {
 .form_container {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    padding-left: 40px;
     padding-top: 60px;
+    flex-direction: column;
 }
 
 img {
@@ -88,7 +89,7 @@ input {
     width: 350px;
     height: 48px;
     margin-bottom: 15px;
-    padding: 10px 40px 10px 20px;
+    padding: 10px 40px 10px 50px;
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -97,6 +98,7 @@ input {
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: 10px center;
+    position: relative;
 }
 
 input[type="password"] {
@@ -109,4 +111,38 @@ input:focus {
 
 input:not(:placeholder-shown) {
     background-image: none;  /* Menghapus gambar latar belakang jika ada teks */
+}
+
+.error_message {
+    color: red;
+    margin-left: 40px;
+}
+
+.error_message p {
+    margin: 0px;
+}
+
+.image_container {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    position: absolute;
+}
+
+#gambar_user{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 10px;
+    z-index: 2;
+    margin-left: 10px;
+}
+
+#gambar_lock{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 75px;
+    z-index: 2;
+    margin-left: 10px;
 }

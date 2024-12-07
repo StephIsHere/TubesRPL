@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <style>
         #linkKomponenNilai {
             background-color: #479097;
@@ -17,16 +17,17 @@
     <header>
         <div id="leftHeader">
             <span id="judul">Sidang Tugas Akhir</span>
-            <a id="linkMainPage" href="mainPage.html">Sidang</a>
-            <a id="linkKomponenNilai" href="komponenNilai.html">Komponen nilai</a>
+            <a id="linkMainPage" href="/home">Sidang</a>
+            <a id="linkKomponenNilai" href="/home/komponen-nilai">Komponen nilai</a>
         </div>
         <div id="rightHeader">
-            Nama, Peran
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+            <img th:src="@{assets/userwhite.svg}" alt="" onclick="">
         </div>
     </header>
     <main>
         <div class="card">
-            <div id="judulKompNilai">Komponen Nilai</div id="judulKompNilai">
+            <div id="judulKompNilai">Komponen Nilai</div>
             <form id="komponenNilai">
 
                 <div class="item1">

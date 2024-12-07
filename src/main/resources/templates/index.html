@@ -9,15 +9,24 @@
 <body>
     <div class="login_container">
         <h2 class="login_header"><strong>LOGIN</strong></h2>
+        
         <div class="form_container">
             <form action="/" method="post">
-                <input type="text" id="email" name="email" placeholder="      email" required th:value="${email}">
-                <input type="password" id="password" name="password" placeholder="      password" required th:value="${password}">
+                <div class="image_container">
+                    <img src="../assets/userIcon.png" id="gambar_user">
+                    <img src="../assets/lock.png" id="gambar_lock">
+                </div>
+                <input type="text" id="email" name="email" placeholder="Input email Anda" required th:value="${email}">
+                <input type="password" id="password" name="password" placeholder="Input password Anda" required th:value="${password}">
                 <div class="wrap">
                     <button type="submit">Login</button>
                 </div>
             </form>
         </div>
+
+        <div th:if="${error}" class="error_message">
+            <p th:text="${error}"></p>
+        </div>        
     </div>
 </body>
 </html>
