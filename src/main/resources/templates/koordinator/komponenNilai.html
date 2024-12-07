@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/Overlay.js" defer></script>
     <style>
         #linkKomponenNilai {
             background-color: #479097;
@@ -24,9 +25,24 @@
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
-            <img th:src="@{../assets/userWhite.png}" alt="" onclick="">
+            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
         </div>
     </header>
+    <div id="OverlayIconUser">
+        <div class="UserIcon">
+            <img th:src="@{../assets/userWhite.png}">
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+        </div>
+        <div class="Sign">
+            <input type="file">
+            <button type="submit">Upload Tanda Tangan</button>
+        </div>
+        <div class="Logout">
+            <a href="/">
+                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
+            </a>
+        </div>
+    </div>
     <main>
         <div class="card">
             <div id="judulKompNilai">Komponen Nilai</div>

@@ -6,6 +6,7 @@
     <title>Sidang Tugas Akhir</title>
     <link rel="stylesheet" href="@{/css/main.css}">
     <link rel="stylesheet" href="/css/dosen/home.css">
+    <script src="../js/Overlay.js" defer></script>
 </head>
 <body>
     <header>
@@ -16,10 +17,25 @@
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
-            <img th:src="@{../assets/userWhite.png}" alt="" onclick="">
+            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
         </div>
     </header>
-    <main>
+    <div id="OverlayIconUser">
+        <div class="UserIcon">
+            <img th:src="@{../assets/userWhite.png}">
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+        </div>
+        <div class="Sign">
+            <input type="file">
+            <button type="submit">Upload Tanda Tangan</button>
+        </div>
+        <div class="Logout">
+            <a href="/">
+                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
+            </a>
+        </div>
+    </div>
+    <main onclick="hideElement()">
         <div id="controls">
             <input type="text" placeholder="Search">
             <button>Filter</button>
