@@ -1,6 +1,8 @@
 package com.example.TubesRPL.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.TubesRPL.sidang.Sidang;
+
 import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpSession;
@@ -156,6 +162,81 @@ public class UserController {
     }
 
 
+    //KOORDINATOR----------------------------------------------
+    //Bentuk BAP --> page html 
+    // Komponen Nilai
+    @GetMapping("/home/komponen-nilai")
+    public String komponenNilai (HttpSession session, Model model){
+        //Menampilkan nama dan peran
+        String nama = (String)session.getAttribute("nama");
+        String peran = (String)session.getAttribute("peran");
+        model.addAttribute("nama", nama);
+        model.addAttribute("peran", peran);
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/komponenNilai";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    //Tambah Sidang
+    @GetMapping ("/home/addSidang")
+    public String tambahSidangGet (HttpSession session, Model model){
+        //Menampilkan nama dan peran
+        String nama = (String)session.getAttribute("nama");
+        String peran = (String)session.getAttribute("peran");
+        model.addAttribute("namaKoor", nama);
+        model.addAttribute("peran", peran);
+        model.addAttribute("sidang", new Sidang());
+        return "koordinator/AddSidang";
+    }
+    @GetMapping("/home/addSidang/getMahasiswaByNpm")
+    @ResponseBody
+    public Map<String, String> getMahasiswaByNpm(@RequestParam("npm") String npm) {
+        Map<String, String> response = new HashMap<>();
+        System.out.println("npm adalah" + npm);
+        List<User> mahasiswa = this.userRepo.findByNpm(npm); 
+        if (mahasiswa.isEmpty()) {
+            response.put("nama", "Nama tidak ditemukan");
+        }
+        else{
+            response.put("nama", mahasiswa.get(0).getNama());
+        }
+        return response;
+    }
+    @PostMapping ("/home/addSidang")
+    public String tambahSidangPost(
+        @RequestParam String npm,
+        @RequestParam String namaMahasiswa,
+        @RequestParam String judul,
+        @RequestParam String pembimbingUtama,
+        @RequestParam(required = false) String pembimbingPendamping,
+        @RequestParam(required = false) String pengujiKetua,
+        @RequestParam(required = false) String pengujiAnggota1,
+        @RequestParam(required = false) String pengujiAnggota2,
+        @RequestParam(required = false) String pengujiAnggota3
+    ) {
+        Sidang sidang = new Sidang();
+        List<User> users = userRepo.findByNpm(npm);
+        User mahasiswa = users.get(0);
+        Long id = mahasiswa.getIdUser();
+        sidang.setIdMahasiswa(id);
+        sidang.setJudul(judul);
+
+        // sidang.setNpm(npm);
+        // sidang.setNamaMahasiswa(namaMahasiswa);
+        // sidang.setJudul(judul);
+        // sidang.setPembimbingUtama(pembimbingUtama);
+        // sidang.setPembimbingPendamping(pembimbingPendamping);
+        // sidang.setPengujiKetua(pengujiKetua);
+        // sidang.setPengujiAnggota1(pengujiAnggota1);
+        // sidang.setPengujiAnggota2(pengujiAnggota2);
+        // sidang.setPengujiAnggota3(pengujiAnggota3);
+
+        return "redirect:/home";
+    }
+
+
 
     //MAHASISWA--- SALAH SEMUA
     // mahasiswa :
@@ -196,16 +277,4 @@ public class UserController {
             return "redirect:/";
         }
     }
-    
-
-
-    @GetMapping("/home/komponen-nilai")
-    public String komponenNilai (HttpSession session){
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Koordinator")) {
-            return "koordinator/komponenNilai";
-        } else {
-            return "redirect:/";
-        }
-    }
-
 }
