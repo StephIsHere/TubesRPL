@@ -105,7 +105,7 @@
         <div class="messageBox">
             <p>Are you sure you want to delete this user?</p>
             <button id="confirmDeleteButton">Yes</button>
-            <button onclick="hideDeleteOverlay()">No</button>
+            <button onclick="hideDeleteOverlay()" id="denyDeleteButton">No</button>
         </div>
     </div>
 
@@ -115,13 +115,13 @@
         function showDeleteOverlay(userId) {
             selectedUserId = userId;
             const overlay = document.getElementById('deleteOverlay');
-            overlay.classList.remove('hidden');
+            overlay.style.visibility='visible';
         }
 
         function hideDeleteOverlay() {
             selectedUserId = null;
             const overlay = document.getElementById('deleteOverlay');
-            overlay.classList.add('hidden');
+            overlay.style.visibility='hidden';
         }
 
         document.getElementById('confirmDeleteButton').addEventListener('click', function () {
@@ -129,7 +129,7 @@
                 window.location.href = '/home/deleted/' + selectedUserId;
             }
         });
-
+        document.getElementById('denyDeleteButton').addEventListener('click',hideDeleteOverlay)
         // Existing sort logic
         const sortButton = document.getElementById("sortButton");
         if (sortButton) {

@@ -441,3 +441,35 @@ button.img-delete {
     height: 30px;
     width: 70px;
 }
+#deleteOverlay{
+    border: 1px solid black;
+    background-color: white;
+    position: absolute;
+    border-radius: 15px;
+    width: 350px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 40%;
+    right: 42%;
+    visibility: hidden;
+}
+#deleteOverlay button{
+    width: 60px;
+    height: 40px;
+    border: 0px;
+    border-radius: 15px;
+    color: white;
+
+}
+#confirmDeleteButton{
+    background-color: #388087;
+}
+#denyDeleteButton{
+    background-color: red;
+}
+#deleteOverlay button:hover{
+    cursor: pointer;
+}
