@@ -97,6 +97,66 @@ public class UserController {
         }
     }
 
+
+    // ADMIN --------------------------------------- (-): edit user
+
+    // input nama, email lgsg default buatkan --> nama@unpar
+    //      jadi email tidak perlu diisi manual
+    // Password default: --> otomatis 
+    //      admin = admin
+    //      koordinator = koord
+    //      mahasiswa = nama
+    //      dosen = dosen
+    //Kalau non-mahasiswa --> npm tidak bisa diisi
+    //USER BISA GANTI PASS ??
+
+    //************KALAU UDA SUBMIT HARUS ADA OVERLAY "USER BERHASIL DITAMBAHKAN" *****************
+
+    // Page menambahkan user
+    @GetMapping("/home/add")
+    public String showAddUserForm(Model model, HttpSession session) {
+        //Menampilkan nama dan peran
+        String nama = (String)session.getAttribute("nama");
+        String peran = (String)session.getAttribute("peran");
+        model.addAttribute("nama", nama);
+        model.addAttribute("peran", peran);
+        model.addAttribute("user", new User());
+        return "admin/adminTambahPeserta";
+    }
+    @PostMapping("/home/add")
+    public String addUser(@RequestParam String nama,
+                          @RequestParam String email,
+                          @RequestParam String password,
+                          @RequestParam String role,
+                          @RequestParam(required = false) String npm) {
+        System.out.println("Peran: " + role);
+        User user = new User();
+        user.setNama(nama);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPeran(role);
+        user.setNpm(npm);
+        user.setStatus(true);
+
+        userRepo.addUser(user);
+
+        return "redirect:/home";
+    }
+
+    //ADA OVERLAY --> APAKAH ANDA YAKIN INGIN MENONAKTIFKAN "nama"
+    // Jadikan user tidak aktif
+    @GetMapping("/home/deleted/{userId}")
+    public String setUserInactive(@PathVariable Long userId, HttpSession session) {
+        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Admin")) {
+            userRepo.setUserInactive(userId);
+            return "redirect:/home";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+
+
     //MAHASISWA--- SALAH SEMUA
     // mahasiswa :
     // mahasiswa hanya ada 1 topik TA
@@ -132,63 +192,6 @@ public class UserController {
     public String showSidang3 (HttpSession session){
         if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Mahasiswa")) {
             return "mahasiswa/mahasiswaDetailSidangFinished";
-        } else {
-            return "redirect:/";
-        }
-    }
-
-    // ADMIN ---------------------------------------
-
-    // input nama, email lgsg default buatkan --> nama@unpar
-    //      jadi email tidak perlu diisi manual
-    // Password default: --> otomatis 
-    //      admin = admin
-    //      koordinator = koord
-    //      mahasiswa = nama
-    //      dosen = dosen
-    //Kalau non-mahasiswa --> npm tidak bisa diisi
-
-    //************KALAU UDA SUBMIT HARUS ADA OVERLAY "USER BERHASIL DITAMBAHKAN" *****************
-
-    // Page menambahkan user
-    @GetMapping("/home/add")
-    public String showAddUserForm(Model model, HttpSession session) {
-        //Menampilkan nama dan peran
-        String nama = (String)session.getAttribute("nama");
-        String peran = (String)session.getAttribute("peran");
-        model.addAttribute("nama", nama);
-        model.addAttribute("peran", peran);
-        model.addAttribute("user", new User());
-        return "admin/adminTambahPeserta";
-    }
-    @PostMapping("/home/add")
-    public String addUser(@RequestParam String nama,
-                          @RequestParam String email,
-                          @RequestParam String password,
-                          @RequestParam String role,
-                          @RequestParam(required = false) String npm) {
-        User user = new User();
-        user.setNama(nama);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setPeran(role);
-        user.setNpm(npm);
-        user.setStatus(true);
-
-        userRepo.addUser(user);
-
-        return "redirect:/home";
-    }
-
-    //ADA OVERLAY --> APAKAH ANDA YAKIN INGIN MENONAKTIFKAN "nama"
-    //
-
-    // Jadikan user tidak aktif
-    @GetMapping("/home/deleted/{userId}")
-    public String setUserInactive(@PathVariable Long userId, HttpSession session) {
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Admin")) {
-            userRepo.setUserInactive(userId);
-            return "redirect:/home";
         } else {
             return "redirect:/";
         }

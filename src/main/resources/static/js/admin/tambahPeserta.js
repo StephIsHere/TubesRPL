@@ -7,19 +7,19 @@ function generate(event) {
 
     email.value = nama + "@unpar";
 
-    if (peran.value == "admin") {
+    if (peran.value == "Admin") {
         password.value = "admin";
         npm.value = "-";
         npm.disabled = true;
-    } else if (peran.value == "koord") {
+    } else if (peran.value == "Koordinator") {
         password.value = "koord";
         npm.value = "-";
         npm.disabled = true;
-    } else if (peran.value == "dosen") {
+    } else if (peran.value == "Dosen") {
         password.value = "dosen";
         npm.value = "-";
         npm.disabled = true;
-    } else if (peran.value == "mahasiswa") {
+    } else if (peran.value == "Mahasiswa") {
         password.value = nama;
         npm.value = "";
         npm.disabled = false;
