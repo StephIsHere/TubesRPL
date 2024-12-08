@@ -9,6 +9,7 @@
     <script src="../js/Overlay.js" defer></script>
 </head>
 <body>
+
     <header>
         <div id="leftHeader">
             <span id="judul">Sidang Tugas Akhir</span>
@@ -36,10 +37,36 @@
         </div>
     </div>
     <main onclick="hideElement()">
-        <div id="controls">
-            <input type="text" placeholder="Search">
-            <button>Filter</button>
-            <button>Sort by</button>
+        <div id="functionBar">
+            <div>
+                <form action="/home" method="get">
+                    <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="Search...">
+                    <button id="view" type="submit">Search</button>
+                </form>
+            </div>
+            <div>
+                <form action="/home" method="get">
+                    <select name="filter" id="filterButton" onchange="this.form.submit()">
+                        <option id="filterButton" value="">Filter</option>
+                        <option id="filterButton" value="Admin">Admin</option>
+                        <option id="filterButton" value="Koordinator">Koordinator</option>
+                        <option id="filterButton" value="Dosen">Dosen</option>
+                        <option id="filterButton" value="Mahasiswa">Mahasiswa</option>
+                    </select>
+                </form>
+            </div>
+            <div>
+                <form action="/home" method="get">
+                    <select id="sortButton" name="sort" onchange="this.form.submit()">
+                        <option id="sortButton" value="" disabled selected>Sort</option>
+                        <option id="sortButton" value="true">Naik</option>
+                        <option id="sortButton" value="false">Turun</option>
+                    </select>
+                </form>
+            </div>
+            <a href="/home/add">
+                <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
+            </a>
         </div>
         <div class="card-container">
             <a href="">
