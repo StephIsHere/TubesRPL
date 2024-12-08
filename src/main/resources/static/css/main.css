@@ -118,7 +118,7 @@ main {
 }
 
 .addSidang {
-    height: 400px;
+    width: 800px;
 }
 
 .sidang {
@@ -153,13 +153,14 @@ form > input {
 
 label.labelAddSidang {
     display: inline-block;
-    width: 120px;
+    width: 300px;
     margin: 10px;
     margin-left: 0;
 }
 
 .formContainer {
-    padding: 30px 60px;
+    padding: 10px 30px;
+    width: 800px;
 }
 
 br {
@@ -237,13 +238,17 @@ select#role{
 
 button[form="komponenNilai"], button#buttonAddSidang{
     background-color: #E3F1F0;
-    border: none;
+    border: 1px solid #388087;
     align-content: center;
     height: 35px;
     float: right;
     width: 230px;
-    margin: 20px 65px 50px;
+    margin: 20px 81px 50px;
     border-radius: 8px;
+}
+button#buttonAddSidang:hover{
+    background-color: #388087;
+    color: white;
 }
 
 button[form="komponenNilai"]:hover{
@@ -472,4 +477,17 @@ button.img-delete {
 }
 #deleteOverlay button:hover{
     cursor: pointer;
+}
+textArea{
+    resize: none;
+    border-radius: 5px;
+    border-color: #acacac;
+    width: 393px;
+    height: 70px;
+    font-family: Arial;
+    padding: 5px;
+    margin-top: 5px;
+}
+label[for="judulTa"]{
+    margin-bottom: 0px;
 }

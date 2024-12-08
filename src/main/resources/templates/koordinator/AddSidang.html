@@ -13,6 +13,30 @@
         }
     </style>
     <title></title>
+    <script>
+        function ambilNamaMahasiswa() {
+            let npm = document.getElementById("npm").value;
+        
+            if (npm.length > 0) {
+                fetch(`/home/addSidang/getMahasiswaByNpm?npm=${npm}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.nama) {
+                            document.getElementById("mahasiswa").value = data.nama;
+                        } else {
+                            document.getElementById("mahasiswa").value = "Nama tidak ditemukan";
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById("mahasiswa").value = "Error fetching data";
+                    });
+            } else {
+                document.getElementById("mahasiswa").value = "";
+            }
+        }
+    </script>
 </head>
 <body> 
     <header>
@@ -22,7 +46,7 @@
             <a id="linkKomponenNilai" href="/home/komponen-nilai">Komponen nilai</a>
         </div>
         <div id="rightHeader">
-            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+            <span th:text="${namaKoor}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
             <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
@@ -31,7 +55,7 @@
     <div id="OverlayIconUser">
         <div class="UserIcon">
             <img th:src="@{../assets/userWhite.png}">
-            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+            <span th:text="${namaKoor}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="Sign">
             <input type="file">
@@ -43,46 +67,37 @@
             </a>
         </div>
     </div>
-    <main onclick="hideElement()">
-        <div class="mainContainer">
-            <div id="functionBar">
-                <input id="searchBar" type="text" placeholder="search...">
-                <button id="filterButton">Filter</button>
-                <button id="sortButton">Sort</button>
-                <button id="view">▤</button>
-                <button id="addSidangButton">+</button>
+
+    <main>
+        <div class="addSidang">
+            <div class="headerAddSidang">
+                Tambah Sidang
             </div>
-            <div class="addSidangContainer hidden"> 
-                <div class="addSidang">
-                    <div class="headerAddSidang">
-                        Tambah Sidang
-                    </div>
-                    <div class="formContainer">
-                        <form action="">
-                            <label for="judulTa" class="labelAddSidang">Judul:</label>
-                            <input id="judulTa" type="text" class="inputSidang">
-                            <br>
-                            <label for="mahasiswa"class="labelAddSidang">Mahasiswa:</label>
-                            <input id="mahasiswa" type="text" class="inputSidang">
-                            <br>
-                            <label for="pembimbing" class="labelAddSidang">pembimbing:</label>
-                            <input id="pembimbing" type="text" class="inputSidang">
-                            <br>
-                            <label for="pembimbing 2" class="labelAddSidang">pembimbing 2:</label>
-                            <input id="pembimbing 2" type="text" class="inputSidang">
-                            <br>
-                            <label for="penguji" class="labelAddSidang">penguji:</label>
-                            <input id="penguji" type="text" class="inputSidang">
-                            <br>
-                            <label for="penguji 2" class="labelAddSidang">penguji 2:</label>
-                            <input id="penguji 2" type="text" class="inputSidang">
-                            <br>
-
-
-                            <button type="submit" id="buttonAddSidang">Save</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="formContainer">
+                <form action="/home/addSidang" method="post" onsubmit="handleSubmit(event)">
+                    <label for="npm"class="labelAddSidang">NPM:</label>
+                    <input id="npm" type="text" class="inputSidang" name="npm" required th:value="${npm}" oninput="ambilNamaMahasiswa()" placeholder="NPM mahasiswa">
+                    <br>
+                    <label for="mahasiswa"class="labelAddSidang">Mahasiswa:</label>
+                    <input id="mahasiswa" type="text" class="inputSidang" name="namaMahasiswa" th:text="${nama}" placeholder="Nama mahasiswa">
+                    <br>
+                    <label for="judulTa" class="labelAddSidang">Judul TA:</label>
+                    <textArea id="judulTa" type="text" class="inputSidang" name="judul" required placeholder="Judul Tugas Akhir"></textArea>
+                    <br>
+                    <label for="pembimbing" class="labelAddSidang">Pembimbing utama:</label>
+                    <input id="pembimbing" type="text" class="inputSidang" name="pembimbingUtama" required placeholder="Nama pembimbing utama">
+                    <br>
+                    <label for="pembimbingPendamping" class="labelAddSidang">Pembimbing pendamping:</label>
+                    <input id="pembimbingPendamping" type="text" class="inputSidang" name="pembimbingPendamping" placeholder="Nama pembimbing pendamping (jika ada)">
+                    <br>
+                    <label for="pengujiKetua" class="labelAddSidang">Ketua penguji:</label>
+                    <input id="pengujiKetua" type="text" class="inputSidang" name="pengujiKetua" placeholder="Nama ketua penguji">
+                    <br>
+                    <label for="pengujiAnggota1" class="labelAddSidang">Anggota penguji:</label>
+                    <input id="pengujiAnggota1" type="text" class="inputSidang" name="pengujiAnggota1" placeholder="Nama anggota penguji">
+                    <br>
+                    <button type="submit" id="buttonAddSidang">Save</button>
+                </form>
             </div>
         </div>
     </main>

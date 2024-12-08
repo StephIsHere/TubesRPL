@@ -27,6 +27,12 @@ public class UserRepoJdbc implements UserRepository {
     }
 
     @Override
+    public List<User> findByNpm(String npm){
+        String sql = "SELECT * FROM \"user\" WHERE npm LIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + npm + "%");
+    }
+
+    @Override
     public List<User> findUserByRole(String role) {
         String sql = "SELECT * FROM \"user\" WHERE peran LIKE ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, role);
@@ -53,7 +59,7 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override
     public List<User> findAllDesc() {
-        String sql = "SELECT * FROM \"user\" ORDER BY nama DESC"; // Ordering by name for better readability
+        String sql = "SELECT * FROM \"user\" ORDER BY nama DESC";
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
@@ -63,7 +69,7 @@ public class UserRepoJdbc implements UserRepository {
         jdbcTemplate.update(sql, idUser);
     }
 
-
+    
     private User mapRowToUser(ResultSet resultSet, int rowNum) throws SQLException {
         return new User(
                 resultSet.getLong("idUser"),
