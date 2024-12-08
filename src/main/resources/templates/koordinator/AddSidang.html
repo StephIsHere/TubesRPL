@@ -50,16 +50,40 @@
                 <button id="filterButton">Filter</button>
                 <button id="sortButton">Sort</button>
                 <button id="view">▤</button>
-                <a href="src\main\resources\templates\koordinator\AddSidang.html"><button id="addSidangButton">+</button></a>
+                <button id="addSidangButton">+</button>
             </div>
-            <div class="sidangContainer">
-                <div class="sidang">
-                    <div class="headerSidang">
-                        Sidang Tugas Akhir idSidang
+            <div class="addSidangContainer hidden"> 
+                <div class="addSidang">
+                    <div class="headerAddSidang">
+                        Tambah Sidang
+                    </div>
+                    <div class="formContainer">
+                        <form action="">
+                            <label for="judulTa" class="labelAddSidang">Judul:</label>
+                            <input id="judulTa" type="text" class="inputSidang">
+                            <br>
+                            <label for="mahasiswa"class="labelAddSidang">Mahasiswa:</label>
+                            <input id="mahasiswa" type="text" class="inputSidang">
+                            <br>
+                            <label for="pembimbing" class="labelAddSidang">pembimbing:</label>
+                            <input id="pembimbing" type="text" class="inputSidang">
+                            <br>
+                            <label for="pembimbing 2" class="labelAddSidang">pembimbing 2:</label>
+                            <input id="pembimbing 2" type="text" class="inputSidang">
+                            <br>
+                            <label for="penguji" class="labelAddSidang">penguji:</label>
+                            <input id="penguji" type="text" class="inputSidang">
+                            <br>
+                            <label for="penguji 2" class="labelAddSidang">penguji 2:</label>
+                            <input id="penguji 2" type="text" class="inputSidang">
+                            <br>
+
+
+                            <button type="submit" id="buttonAddSidang">Save</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            
         </div>
     </main>
 </body>

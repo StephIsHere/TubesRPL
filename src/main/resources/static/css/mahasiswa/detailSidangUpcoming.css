@@ -120,7 +120,7 @@ td{
     padding-bottom: 18px;
     z-index: 2;
 }
-a{
+#backtomain{
     position: absolute;
     cursor: pointer;
     z-index: 3;
@@ -139,4 +139,79 @@ img {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+button.img-edit {
+    cursor: pointer;
+    background-color: white;
+    border: 0px;
+}
+button.img-delete {
+    cursor: pointer;
+    background-color: white;
+    border: 0px;
+}
+.userProfile:hover{
+    cursor: pointer;
+}
+#OverlayIconUser{
+    width: 350px;
+    height: 150px;
+    border: 1px solid black;
+    position: absolute;
+    right: 1%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    border-radius: 15px;
+    margin-top: 10px;
+    visibility: hidden;
+}
+#OverlayIconUser button:hover{
+    cursor: pointer;
+}
+.UserIcon{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.UserIcon img{
+    width: 40px;
+    height: 40px;
+    background-color: #388087;
+    margin-right: 20px;
+    margin-top:0px;
+}
+.Sign{
+    flex: 0.7;
+}
+.Sign input{
+    width: 200px;
+}
+.Sign input::-webkit-file-upload-button{
+    border: 0px;
+    background-color: #388087;
+    border-radius: 15px;
+    color: white;
+    height: 30px;
+}
+.Sign input::-webkit-file-upload-button:hover{
+    cursor: pointer;
+}
+.Sign button{
+    border: 0px;
+    background-color: #388087;
+    border-radius: 15px;
+    color: white;
+    height: 30px;
+}
+.Logout button{
+    border: 0px;
+    background-color: #388087;
+    border-radius: 15px;
+    color: white;
+    height: 30px;
+    width: 70px;
 }

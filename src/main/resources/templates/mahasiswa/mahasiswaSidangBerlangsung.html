@@ -5,23 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidang Tugas Akhir</title>
     <link rel="stylesheet" href="/css/mahasiswa/mahasiswaSidangBerlangsung.css"> 
+    <script src="../js/Overlay.js" defer></script>
 </head>
 <body>
     <header>
         <div id="leftHeader">
-            <span id="judulSidang">Sidang Tugas Akhir</span>
+            <span id="judul">Sidang Tugas Akhir</span>
         </div>
         <div id="rightHeader">
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
-            <img src="../assets/userWhite.png"></img>
-         </div>
+            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()" >
+        </div>
     </header>
+    <div id="OverlayIconUser">
+        <div class="UserIcon">
+            <img th:src="@{../assets/userWhite.png}">
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+        </div>
+        <div class="Sign">
+            <input type="file">
+            <button type="submit">Upload Tanda Tangan</button>
+        </div>
+        <div class="Logout">
+            <a href="/">
+                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
+            </a>
+        </div>
+    </div>
     <main>
         <div class="card-container">
             <div class="card">
-                <a href="/home"><img src="../assets/arrow.png" alt="back_to_main"></a>
+                <a href="/home" id="backtomain"><img src="../assets/arrow.png" alt="back_to_main"></a>
                 <div class="green_box"></div>
                 <span class="judulCard bold">Sidang 1</span>
                 <table class="table1">
