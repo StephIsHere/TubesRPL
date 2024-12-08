@@ -1,4 +1,5 @@
 const overlay = document.getElementById('OverlayIconUser')
+const iconUser = document.getElementsByClassName('userProfile')
 function showElement(){
     if(overlay.style.visibility == 'hidden'){
         overlay.style.visibility = 'visible';
@@ -10,4 +11,4 @@ function showElement(){
 function hideElement(){
     overlay.style.visibility = 'hidden';
 }
-overlay.addEventListener('click', showElement)
+iconUser.addEventListener('click', showElement)
