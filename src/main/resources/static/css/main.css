@@ -486,6 +486,9 @@ textArea{
     height: 70px;
     font-family: Arial;
     padding: 5px;
+    margin-top: -5px;
+}
+textarea#topikTA{
     margin-top: 5px;
 }
 label[for="judulTa"]{

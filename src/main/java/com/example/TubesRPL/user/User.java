@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String password;
     private String peran;
-    private String npm;
+    private String nik;
     private Boolean status;
 
     public User() {}
