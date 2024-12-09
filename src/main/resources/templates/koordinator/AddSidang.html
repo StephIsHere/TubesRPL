@@ -59,6 +59,18 @@
                     <label class="labelAddSidang"></label>
                     <input id="namaMahasiswa" type="text" class="inputSidang" name="namaMahasiswa" th:text="${nama}" placeholder="Nama mahasiswa">
                     <br><br>
+                    <!-- jenis sidang -->
+                    <label for="jenisSidang"class="labelAddSidang">Mahasiswa:</label>
+                    <div class="checkbox">
+                        <input id="jenisSidang" type="checkbox" class="inputSidang" name="jenisSidang" value="TA1" required>
+                        <label for="jenisSidang"class="labelAddSidang">TA 1</label>
+                        <input id="jenisSidang" type="checkbox" class="inputSidang" name="jenisSidang" value="TA2" required>
+                        <label for="jenisSidang"class="labelAddSidang">TA 2</label>
+                    </div>
+                    <br><br>
+                    <label class="labelAddSidang"></label>
+                    <input id="namaMahasiswa" type="text" class="inputSidang" name="namaMahasiswa" th:text="${nama}" placeholder="Nama mahasiswa">
+                    <br><br>
                     <!-- topik & judul TA -->
                     <label for="topikTA" class="labelAddSidang">Topik TA:</label>
                     <textArea id="topikTA" type="text" class="inputSidang" name="topik" required placeholder="Topik Tugas Akhir"></textArea>
