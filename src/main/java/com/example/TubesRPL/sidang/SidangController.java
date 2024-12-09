@@ -102,8 +102,8 @@ public class SidangController {
             sidang.setTtdMahasiswa(null);
             sidang.setTtdKoordinator(null);
             sidang.setIdKoordinator((Long)session.getAttribute("idUser"));
-            System.out.println("SEMUT");
-            
+            System.out.println("GAJAH=" + (Long) session.getAttribute("idUser"));
+
             // Simpan sidang ke database
             sidangRepo.addSidang(sidang);
 

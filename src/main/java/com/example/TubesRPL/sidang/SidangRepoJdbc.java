@@ -22,7 +22,7 @@ public class SidangRepoJdbc implements SidangRepository {
 
     @Override
     public void addSidang(Sidang sidang) {
-        String sql = "INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator,idKoordinator, idMahasiswa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO \"sidang\" (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator,idKoordinator, idMahasiswa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql, 
                 sidang.getJenisTA(), 
@@ -40,8 +40,7 @@ public class SidangRepoJdbc implements SidangRepository {
                 sidang.getTtdMahasiswa(), 
                 sidang.getTtdKoordinator(), 
                 sidang.getIdKoordinator(), 
-                sidang.getIdMahasiswa()
-        );
+                sidang.getIdMahasiswa());
     }
 
     @Override
