@@ -27,9 +27,9 @@ public class UserRepoJdbc implements UserRepository {
     }
 
     @Override
-    public List<User> findByNpm(String npm){
-        String sql = "SELECT * FROM \"user\" WHERE npm LIKE ?";
-        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + npm + "%");
+    public List<User> findByNik(String nik){
+        String sql = "SELECT * FROM \"user\" WHERE nik LIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + nik + "%");
     }
 
     @Override
@@ -41,13 +41,13 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO \"user\" (nama, email, password, peran, npm, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO \"user\" (nama, email, password, peran, nik, status) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
                 user.getNama(),
                 user.getEmail(),
                 user.getPassword(),
                 user.getPeran(),
-                user.getNpm(),
+                user.getNik(),
                 user.getStatus());
     }
 
@@ -77,7 +77,7 @@ public class UserRepoJdbc implements UserRepository {
                 resultSet.getString("email"),
                 resultSet.getString("password"),
                 resultSet.getString("peran"),
-                resultSet.getString("npm"),
+                resultSet.getString("nik"),
                 resultSet.getBoolean("status")
         );
     }

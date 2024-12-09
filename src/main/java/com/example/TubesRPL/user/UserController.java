@@ -51,7 +51,7 @@ public class UserController {
             session.setAttribute("nama", user.getNama());  
             session.setAttribute("email", user.getEmail());          
             session.setAttribute("peran", user.getPeran());
-            session.setAttribute("npm", user.getNpm());
+            session.setAttribute("nik", user.getNik());
             session.setAttribute("status", user.getStatus());
             return "redirect:/home"; 
         } else { //Jika email / password salah
@@ -113,7 +113,6 @@ public class UserController {
     //      koordinator = koord
     //      mahasiswa = nama
     //      dosen = dosen
-    //Kalau non-mahasiswa --> npm tidak bisa diisi
     //USER BISA GANTI PASS ??
 
     //************KALAU UDA SUBMIT HARUS ADA OVERLAY "USER BERHASIL DITAMBAHKAN" *****************
@@ -134,14 +133,14 @@ public class UserController {
                           @RequestParam String email,
                           @RequestParam String password,
                           @RequestParam String role,
-                          @RequestParam(required = false) String npm) {
+                          @RequestParam(required = false) String nik) {
         System.out.println("Peran: " + role);
         User user = new User();
         user.setNama(nama);
         user.setEmail(email);
         user.setPassword(password);
         user.setPeran(role);
-        user.setNpm(npm);
+        user.setNik(nik);
         user.setStatus(true);
 
         userRepo.addUser(user);
@@ -190,23 +189,22 @@ public class UserController {
         model.addAttribute("sidang", new Sidang());
         return "koordinator/AddSidang";
     }
-    @GetMapping("/home/addSidang/getMahasiswaByNpm")
+    @GetMapping("/home/addSidang/getUserByNik")
     @ResponseBody
-    public Map<String, String> getMahasiswaByNpm(@RequestParam("npm") String npm) {
+    public Map<String, String> getMahasiswaByNik(@RequestParam("nik") String nik) {
         Map<String, String> response = new HashMap<>();
-        System.out.println("npm adalah" + npm);
-        List<User> mahasiswa = this.userRepo.findByNpm(npm); 
-        if (mahasiswa.isEmpty()) {
+        List<User> user = this.userRepo.findByNik(nik); 
+        if (user.isEmpty()) {
             response.put("nama", "Nama tidak ditemukan");
         }
         else{
-            response.put("nama", mahasiswa.get(0).getNama());
+            response.put("nama", user.get(0).getNama());
         }
         return response;
     }
     @PostMapping ("/home/addSidang")
     public String tambahSidangPost(
-        @RequestParam String npm,
+        @RequestParam String nik,
         @RequestParam String namaMahasiswa,
         @RequestParam String judul,
         @RequestParam String pembimbingUtama,
@@ -217,7 +215,7 @@ public class UserController {
         @RequestParam(required = false) String pengujiAnggota3
     ) {
         Sidang sidang = new Sidang();
-        List<User> users = userRepo.findByNpm(npm);
+        List<User> users = userRepo.findByNik(nik);
         User mahasiswa = users.get(0);
         Long id = mahasiswa.getIdUser();
         sidang.setIdMahasiswa(id);
