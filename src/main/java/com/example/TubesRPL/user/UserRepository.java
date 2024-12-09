@@ -10,5 +10,5 @@ public interface UserRepository {
     List<User> findAllDesc();
     List<User> findUserByRole(String role);
     void setUserInactive(Long idUser);
-    List<User> findByNpm(String npm);
+    List<User> findByNik(String nik);
 }
