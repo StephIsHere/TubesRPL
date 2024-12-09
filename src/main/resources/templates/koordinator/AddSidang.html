@@ -52,46 +52,49 @@
             </div>
             <div class="formContainer">
                 <form action="/home/addSidang" method="post" onsubmit="handleSubmit(event)">
+                    <!-- mahasiswa -->
                     <label for="nik"class="labelAddSidang">Mahasiswa:</label>
                     <input id="nik" type="text" class="inputSidang" name="nik" required th:value="${nik}" oninput="ambilNamaMahasiswa()" placeholder="NIK mahasiswa">
                     <br>
                     <label class="labelAddSidang"></label>
                     <input id="namaMahasiswa" type="text" class="inputSidang" name="namaMahasiswa" th:text="${nama}" placeholder="Nama mahasiswa">
                     <br><br>
-
+                    <!-- topik & judul TA -->
                     <label for="topikTA" class="labelAddSidang">Topik TA:</label>
                     <textArea id="topikTA" type="text" class="inputSidang" name="topik" required placeholder="Topik Tugas Akhir"></textArea>
                     <br>
                     <label for="judulTa" class="labelAddSidang">Judul TA:</label>
                     <textArea id="judulTa" type="text" class="inputSidang" name="judul" required placeholder="Judul Tugas Akhir"></textArea>
                     <br><br>
-
+                    <!-- pembimbing utama -->
                     <label for="nikPembimbingUtama"class="labelAddSidang">Pembimbing utama:</label>
                     <input id="nikPembimbingUtama" type="text" class="inputSidang" name="nikPembimbingUtama" required th:value="${nikPembimbingUtama}" oninput="ambilNamaPembimbingUtama()" placeholder="NIK pembimbing">
                     <br>
                     <label class="labelAddSidang"></label>
                     <input id="namaPembimbingUtama" type="text" class="inputSidang" name="namaPembimbingUtama" th:text="${nama}" placeholder="Nama pembimbing">
                     <br><br>
-                    
-
-
-                    <label for="nikPembimbingUtama" class="labelAddSidang">Pembimbing utama:</label>
-                    <input id="nikPembimbingUtama" type="text" class="inputSidang" name="nikPembimbingUtama" required placeholder="Nama pembimbing utama">
+                    <!-- pembimbing pendamping -->
+                    <label for="nikPembimbingPendamping"class="labelAddSidang">Pembimbing pendamping:</label>
+                    <input id="nikPembimbingPendamping" type="text" class="inputSidang" name="nikPembimbingPendamping" th:value="${nikPembimbingPendamping}" oninput="ambilNamaPembimbingPendamping()" placeholder="NIK pembimbing">
                     <br>
-                    <input id="pembimbing" type="text" class="inputSidang" name="pembimbingUtama" required placeholder="Nama pembimbing utama">
+                    <label class="labelAddSidang"></label>
+                    <input id="namaPembimbingPendamping" type="text" class="inputSidang" name="namaPembimbingPendamping" th:text="${nama}" placeholder="Nama pembimbing">
+                    <br><br>
+                    <!-- ketua penguji -->
+                    <label for="nikKetuaPenguji"class="labelAddSidang">Ketua penguji:</label>
+                    <input id="nikKetuaPenguji" type="text" class="inputSidang" name="nikKetuaPenguji" th:value="${nikKetuaPenguji}" oninput="ambilNamaKetuaPenguji()" placeholder="NIK penguji">
                     <br>
-                    <label for="pembimbing" class="labelAddSidang">Pembimbing utama:</label>
-                    <input id="pembimbing" type="text" class="inputSidang" name="pembimbingUtama" required placeholder="Nama pembimbing utama">
+                    <label class="labelAddSidang"></label>
+                    <input id="namaKetuaPenguji" type="text" class="inputSidang" name="namaKetuaPenguji" th:text="${nama}" placeholder="Nama penguji">
+                    <br><br>
+                    <!-- anggota penguji -->
+                    <label for="nikAnggotaPenguji"class="labelAddSidang">Anggota penguji:</label>
+                    <input id="nikAnggotaPenguji" type="text" class="inputSidang" name="nikAnggotaPenguji" th:value="${nikAnggotaPenguji}" oninput="ambilNamaAnggotaPenguji()" placeholder="NIK penguji">
                     <br>
-                    <label for="pembimbingPendamping" class="labelAddSidang">Pembimbing pendamping:</label>
-                    <input id="pembimbingPendamping" type="text" class="inputSidang" name="pembimbingPendamping" placeholder="Nama pembimbing pendamping (jika ada)">
-                    <br>
-                    <label for="pengujiKetua" class="labelAddSidang">Ketua penguji:</label>
-                    <input id="pengujiKetua" type="text" class="inputSidang" name="pengujiKetua" placeholder="Nama ketua penguji">
-                    <br>
-                    <label for="pengujiAnggota1" class="labelAddSidang">Anggota penguji:</label>
-                    <input id="pengujiAnggota1" type="text" class="inputSidang" name="pengujiAnggota1" placeholder="Nama anggota penguji">
-                    <br>
+                    <label class="labelAddSidang"></label>
+                    <input id="namaAnggotaPenguji" type="text" class="inputSidang" name="namaAnggotaPenguji" th:text="${nama}" placeholder="Nama penguji">
+                    <br><br>
+                    <!-- button -->
                     <button type="submit" id="buttonAddSidang">Save</button>
                 </form>
             </div>
