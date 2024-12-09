@@ -51,7 +51,7 @@
                 Tambah Sidang
             </div>
             <div class="formContainer">
-                <form action="/home/addSidang" method="post" onsubmit="handleSubmit(event)">
+                <form action="/sidang/AddSidang" method="post" onsubmit="handleSubmit(event)">
                     <!-- mahasiswa -->
                     <label for="nik"class="labelAddSidang">Mahasiswa:</label>
                     <input id="nik" type="text" class="inputSidang" name="nik" required th:value="${nik}" oninput="ambilNamaMahasiswa()" placeholder="NIK mahasiswa">
@@ -62,9 +62,9 @@
                     <!-- jenis sidang -->
                     <label for="jenisSidang"class="labelAddSidang">Jenis Sidang:</label>
                     <div class="checkbox">
-                        <input id="jenisSidang" type="checkbox" class="inputSidang" name="jenisSidang" value="TA1" required>
+                        <input id="jenisSidang" type="checkbox" class="inputSidang" name="jenisSidang" value="TA1">
                         <label for="jenisSidang"class="labelAddSidang">TA 1</label>
-                        <input id="jenisSidang" type="checkbox" class="inputSidang" name="jenisSidang" value="TA2" required>
+                        <input id="jenisSidang" type="checkbox" class="inputSidang" name="jenisSidang" value="TA2">
                         <label for="jenisSidang"class="labelAddSidang">TA 2</label>
                     </div>
                     <br><br>

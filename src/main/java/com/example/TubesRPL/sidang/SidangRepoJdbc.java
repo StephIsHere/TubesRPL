@@ -22,9 +22,7 @@ public class SidangRepoJdbc implements SidangRepository {
 
     @Override
     public void addSidang(Sidang sidang) {
-        String sql = "INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, bap, " +
-                     "ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator, " +
-                     "idKoordinator, idMahasiswa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator,idKoordinator, idMahasiswa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql, 
                 sidang.getJenisTA(), 
@@ -35,7 +33,6 @@ public class SidangRepoJdbc implements SidangRepository {
                 sidang.getWaktu(), 
                 sidang.getCatatan(), 
                 sidang.getStatus(), 
-                sidang.getBap(), 
                 sidang.getTtdKetuaPenguji(), 
                 sidang.getTtdTimPenguji(), 
                 sidang.getTtdPembimbing1(), 
@@ -66,7 +63,6 @@ public class SidangRepoJdbc implements SidangRepository {
             sidang.setWaktu(rs.getTime("waktu").toLocalTime());
             sidang.setCatatan(rs.getString("catatan"));
             sidang.setStatus(rs.getString("status"));
-            sidang.setBap(rs.getBytes("bap"));
             sidang.setTtdKetuaPenguji(rs.getBytes("ttdKetuaPenguji"));
             sidang.setTtdTimPenguji(rs.getBytes("ttdTimPenguji"));
             sidang.setTtdPembimbing1(rs.getBytes("ttdPembimbing1"));

@@ -18,15 +18,14 @@ public class Sidang {
     private LocalTime waktu;
     private String catatan;
     private String status;
-    private byte[] bap;
     private byte[] ttdKetuaPenguji;
     private byte[] ttdTimPenguji;
     private byte[] ttdPembimbing1;
     private byte[] ttdPembimbing2;
     private byte[] ttdMahasiswa;
     private byte[] ttdKoordinator;
-    private long idKoordinator;
-    private long idMahasiswa;
+    private Long idKoordinator;
+    private Long idMahasiswa;
 
     public Sidang() {}
 }

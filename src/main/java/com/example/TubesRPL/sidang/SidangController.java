@@ -17,6 +17,8 @@ import com.example.TubesRPL.user.User;
 
 import com.example.TubesRPL.user.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/sidang")
 public class SidangController {
@@ -26,54 +28,82 @@ public class SidangController {
     @Autowired
     private UserRepository userRepo;
 
-    @PostMapping("/add")
+    @PostMapping("/AddSidang")
     public String tambahSidangPost(
         @RequestParam String nik,
-        @RequestParam String jenisTA,
+        @RequestParam String jenisSidang,
         @RequestParam String topik,
         @RequestParam String judul,
         @RequestParam String tempat,
         @RequestParam String tanggal,
         @RequestParam String waktu,
-        @RequestParam(required = false) String catatan,
-        @RequestParam(required = false) String status,
-        @RequestParam(required = false) byte[] bap,
-        @RequestParam(required = false) byte[] ttdKetuaPenguji,
-        @RequestParam(required = false) byte[] ttdTimPenguji,
-        @RequestParam(required = false) byte[] ttdPembimbing1,
-        @RequestParam(required = false) byte[] ttdPembimbing2,
-        @RequestParam(required = false) byte[] ttdMahasiswa,
-        @RequestParam(required = false) byte[] ttdKoordinator,
-        @RequestParam(required = false) Long idKoordinator
+        @RequestParam String nikPembimbingUtama,
+        @RequestParam(required = false) String nikPembimbingPendamping,
+        @RequestParam(required = false) String nikKetuaPenguji,
+        @RequestParam(required = false) String nikAnggotaPenguji,
+        HttpSession session
     ) {
         try {
-            // Cari user berdasarkan NIK mahasiswa
-            List<User> users = userRepo.findByNik(nik);
-            if (users.isEmpty()) {
+            // Cari mahasiswa berdasarkan NIK
+            List<User> mahasiswaList = userRepo.findByNik(nik);
+            if (mahasiswaList.isEmpty()) {
                 throw new RuntimeException("Mahasiswa dengan NIK " + nik + " tidak ditemukan.");
             }
-            User mahasiswa = users.get(0);
+            User mahasiswa = mahasiswaList.get(0);
 
+            // // Cari pembimbing utama
+            // List<User> pembimbingUtamaList = userRepo.findByNik(nikPembimbingUtama);
+            // if (!pembimbingUtamaList.isEmpty()) {
+            //     throw new RuntimeException("Pembimbing utama dengan NIK " + nik + " tidak ditemukan.");
+            // }
+            // User pembimbingUtama = pembimbingUtamaList.get(0);
+
+            // // Cari pembimbing pendamping
+            // User pembimbingPendamping = null;
+            // if (nikPembimbingPendamping != null) {
+            //     List<User> pembimbingPendampingList = userRepo.findByNik(nikPembimbingPendamping);
+            //     if (!pembimbingPendampingList.isEmpty()) {
+            //         pembimbingPendamping = pembimbingPendampingList.get(0);
+            //     }
+            // }
+
+            // // Cari ketua penguji
+            // User ketuaPenguji = null;
+            // if (nikKetuaPenguji != null) {
+            //     List<User> ketuaPengujiList = userRepo.findByNik(nikKetuaPenguji);
+            //     if (!ketuaPengujiList.isEmpty()) {
+            //         ketuaPenguji = ketuaPengujiList.get(0);
+            //     }
+            // }
+
+            // // Cari anggota penguji
+            // User anggotaPenguji = null;
+            // if (nikAnggotaPenguji != null) {
+            //     List<User> anggotaPengujiList = userRepo.findByNik(nikAnggotaPenguji);
+            //     if (!anggotaPengujiList.isEmpty()) {
+            //         anggotaPenguji = anggotaPengujiList.get(0);
+            //     }
+            // }
             // Buat instance Sidang
             Sidang sidang = new Sidang();
             sidang.setIdMahasiswa(mahasiswa.getIdUser());
-            sidang.setJenisTA(jenisTA);
+            sidang.setJenisTA(jenisSidang);
             sidang.setTopik(topik);
             sidang.setJudul(judul);
             sidang.setTempat(tempat);
             sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
-            sidang.setWaktu(LocalTime.parse(waktu));     // Format harus HH:mm
-            sidang.setCatatan(catatan);
-            sidang.setStatus(status);
-            sidang.setBap(bap);
-            sidang.setTtdKetuaPenguji(ttdKetuaPenguji);
-            sidang.setTtdTimPenguji(ttdTimPenguji);
-            sidang.setTtdPembimbing1(ttdPembimbing1);
-            sidang.setTtdPembimbing2(ttdPembimbing2);
-            sidang.setTtdMahasiswa(ttdMahasiswa);
-            sidang.setTtdKoordinator(ttdKoordinator);
-            sidang.setIdKoordinator(idKoordinator);
-
+            sidang.setWaktu(LocalTime.parse(waktu)); // Format harus HH:mm
+            sidang.setCatatan(null);  
+            sidang.setStatus("Upcoming");  
+            sidang.setTtdPembimbing1(null);
+            sidang.setTtdPembimbing2(null);
+            sidang.setTtdKetuaPenguji(null);
+            sidang.setTtdTimPenguji(null);
+            sidang.setTtdMahasiswa(null);
+            sidang.setTtdKoordinator(null);
+            sidang.setIdKoordinator((Long)session.getAttribute("idUser"));
+            System.out.println("SEMUT");
+            
             // Simpan sidang ke database
             sidangRepo.addSidang(sidang);
 

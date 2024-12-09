@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.TubesRPL.sidang.SidangRepository;
+
 import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +26,8 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private SidangRepository sidangRepo;
 
     // Membuka halaman root --> login 
     // Handler jika ada salah email / password
