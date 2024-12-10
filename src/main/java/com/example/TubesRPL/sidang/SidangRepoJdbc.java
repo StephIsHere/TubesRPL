@@ -22,26 +22,20 @@ public class SidangRepoJdbc implements SidangRepository {
 
     @Override
     public void addSidang(Sidang sidang) {
-        String sql = "INSERT INTO \"sidang\" (\"jenisTA\", \"topik\", \"judul\", \"tempat\", \"tanggal\", \"waktu\", \"catatan\", \"status\", \"ttdKetuaPenguji\", \"ttdTimPenguji\", \"ttdPembimbing1\", \"ttdPembimbing2\", \"ttdMahasiswa\", \"ttdKoordinator\", \"idKoordinator\", \"idMahasiswa\") " +
-         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO sidang (\"jenisTA\", topik, judul, tempat, tanggal, waktu, status, \"idKoordinator\", \"idMahasiswa\") " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-         jdbcTemplate.update(sql, 
-                sidang.getJenisTA(), 
-                sidang.getTopik(), 
-                sidang.getJudul(), 
-                sidang.getTempat(), 
-                sidang.getTanggal(), 
-                sidang.getWaktu(), 
-                sidang.getCatatan(), 
-                sidang.getStatus(), 
-                sidang.getTtdKetuaPenguji(), 
-                sidang.getTtdTimPenguji(), 
-                sidang.getTtdPembimbing1(), 
-                sidang.getTtdPembimbing2(), 
-                sidang.getTtdMahasiswa(), 
-                sidang.getTtdKoordinator(), 
-                sidang.getIdKoordinator(), 
-                sidang.getIdMahasiswa());
+        jdbcTemplate.update(sql,
+        sidang.getJenisTA(),
+        sidang.getTopik(),
+        sidang.getJudul(),
+        sidang.getTempat(),
+        sidang.getTanggal(),
+        sidang.getWaktu(),
+        sidang.getStatus(),
+        sidang.getIdKoordinator(),
+        sidang.getIdMahasiswa()
+        );
     }
      
 

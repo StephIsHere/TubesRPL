@@ -9,6 +9,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 
 public class Sidang {
+    
     private int idSidang;
     private String jenisTA;
     private String topik;

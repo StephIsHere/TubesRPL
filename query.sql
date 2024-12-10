@@ -28,7 +28,7 @@ CREATE TABLE "komponenNilai" (
 
 CREATE TABLE "sidang" (
     "idSidang" SERIAL PRIMARY KEY,
-    "jenisTA" INT NOT NULL,
+    "jenisTA" VARCHAR(10) NOT NULL,
     "topik" VARCHAR(100),
     "judul" VARCHAR(200),
     "tempat" VARCHAR(100),
