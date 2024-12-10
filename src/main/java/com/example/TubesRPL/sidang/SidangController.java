@@ -50,6 +50,39 @@ public class SidangController {
         }
         User mahasiswa = mahasiswaList.get(0);
 
+        // // Cari pembimbing utama
+        // List<User> pembimbingUtamaList = userRepo.findByNik(nikPembimbingUtama);
+        // if (!pembimbingUtamaList.isEmpty()) {
+        //     throw new RuntimeException("Pembimbing utama dengan NIK " + nik + " tidak ditemukan.");
+        // }
+        // User pembimbingUtama = pembimbingUtamaList.get(0);
+
+        // // Cari pembimbing pendamping
+        // User pembimbingPendamping = null;
+        // if (nikPembimbingPendamping != null) {
+        //     List<User> pembimbingPendampingList = userRepo.findByNik(nikPembimbingPendamping);
+        //     if (!pembimbingPendampingList.isEmpty()) {
+        //         pembimbingPendamping = pembimbingPendampingList.get(0);
+        //     }
+        // }
+
+        // // Cari ketua penguji
+        // User ketuaPenguji = null;
+        // if (nikKetuaPenguji != null) {
+        //     List<User> ketuaPengujiList = userRepo.findByNik(nikKetuaPenguji);
+        //     if (!ketuaPengujiList.isEmpty()) {
+        //         ketuaPenguji = ketuaPengujiList.get(0);
+        //     }
+        // }
+
+        // // Cari anggota penguji
+        // User anggotaPenguji = null;
+        // if (nikAnggotaPenguji != null) {
+        //     List<User> anggotaPengujiList = userRepo.findByNik(nikAnggotaPenguji);
+        //     if (!anggotaPengujiList.isEmpty()) {
+        //         anggotaPenguji = anggotaPengujiList.get(0);
+        //     }
+        // }
         // Buat instance Sidang
         Sidang sidang = new Sidang();
         sidang.setIdMahasiswa(mahasiswa.getIdUser());
@@ -68,6 +101,7 @@ public class SidangController {
         sidang.setTtdMahasiswa(null);
         sidang.setTtdKoordinator(null);
         sidang.setIdKoordinator((long)session.getAttribute("idUser"));
+        System.out.println("GAJAH=" + (long) session.getAttribute("idUser"));
 
         // Simpan sidang ke database
         sidangRepo.addSidang(sidang);

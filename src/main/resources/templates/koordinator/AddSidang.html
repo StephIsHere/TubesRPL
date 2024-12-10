@@ -60,7 +60,7 @@
                     <input id="namaMahasiswa" type="text" class="inputSidang" name="namaMahasiswa" th:text="${nama}" placeholder="Nama mahasiswa">
                     <br><br>
                     <!-- jenis sidang -->
-                    <label for="jenisSidang"class="labelAddSidang">Jenis Sidang:</label>
+                    <label for="jenisSidang" class="labelAddSidang">Jenis Sidang:</label>
                     <div class="checkbox">
                         <input id="jenisSidang1" type="radio" class="inputSidang" name="jenisSidang" value="1">
                         <label for="jenisSidang1"class="labelAddSidang">TA 1</label>
@@ -117,7 +117,9 @@
                     <br><br>
 
                     <!-- button -->
-                    <button type="submit" id="buttonAddSidang">Save</button>
+                    <form action="/sidang/AddSidang" method="post">
+                        <button type="submit">Save</button>
+                    </form>
                 </form>
             </div>
         </div>
