@@ -335,10 +335,19 @@ label[form="adminPageDel"]{
 .detailAdmin .form-group label{
     padding: 10px;
 }
-.detailAttAdmin{
+#detailAttAdmin{
     padding: 20px 60px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 400px;
+    height: 300px;
+    visibility: hidden;
+    position: absolute;
+    top: 40%;
+    right: 34%;
+    background-color: white;
 }
-.detailAttAdmin .form-groupAdmin{
+#detailAttAdmin .form-groupAdmin{
     display: flex;
     align-items: center;
     margin: 15px 0;

@@ -1,6 +1,6 @@
 package com.example.TubesRPL.user;
 
-import java.util.List;
+import java.util.*;
 
 public interface UserRepository {
     List<User> findUser(String email, String password);
@@ -11,4 +11,6 @@ public interface UserRepository {
     List<User> findUserByRole(String role);
     void setUserInactive(Long idUser);
     List<User> findByNpm(String npm);
+    List<User> findById(Long id);
+    void save(User user);
 }
