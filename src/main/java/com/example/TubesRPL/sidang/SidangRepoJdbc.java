@@ -22,8 +22,8 @@ public class SidangRepoJdbc implements SidangRepository {
 
     @Override
     public void addSidang(Sidang sidang) {
-        String sql = "INSERT INTO sidang (\"jenisTA\", topik, judul, tempat, tanggal, waktu, status, \"idKoordinator\", \"idMahasiswa\", \"idPembimbing1\",\"idPembimbing2\", \"idPenguji1\", \"idPenguji2\") " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, status, idKoordinator, idMahasiswa) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
         sidang.getJenisTA(),

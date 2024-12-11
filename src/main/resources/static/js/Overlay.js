@@ -11,4 +11,17 @@ function showElement(){
 function hideElement(){
     overlay.style.visibility = 'hidden';
 }
-iconUser.addEventListener('click', showElement)
+iconUser.addEventListener('click', showElement);
+
+
+const editOverlay = document.getElementsById('detailAttAdmin');
+const editimg = document.getElementsByClassName('img-edit');
+function showDetail(){
+    if(editOverlay.style.visibility == 'hidden'){
+        editOverlay.style.visibility = 'visible';
+    }
+    else{
+        editOverlay.style.visibility = 'hidden';
+    }
+}
+editimg.addEventListener('click', showDetail);

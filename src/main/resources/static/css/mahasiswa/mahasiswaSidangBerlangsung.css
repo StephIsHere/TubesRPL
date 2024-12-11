@@ -64,6 +64,7 @@ main {
         'tabel2 tabel4'
     ;
     column-gap: 60px;
+    width: 635px;
 }
 
 .judulCard { grid-area: judulCard; z-index: 2; text-align: center; padding-top: 10px;}
@@ -95,7 +96,7 @@ td{
 .green_box{
     background-color: #D5FFA3;
     display: flex;
-    width: 596px;
+    width: 635px;
     height: 37px;
     position: absolute;
     z-index: 1;
