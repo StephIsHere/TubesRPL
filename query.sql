@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS sidangDosen CASCADE;
 DROP TABLE IF EXISTS sidang CASCADE;
 DROP TABLE IF EXISTS komponenNilai CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS gambarTTD CASCADE;
 
 CREATE TABLE users (
     idUser SERIAL PRIMARY KEY,
@@ -66,6 +67,7 @@ CREATE TABLE komponenNilaiSidang (
     FOREIGN KEY (idKomponen) REFERENCES komponenNilai(idKomponen) ON DELETE CASCADE
 );
 
+
 INSERT INTO users (email, password, nama, peran, nik, status)
 VALUES 
 ('adul@unpar', 'admin', 'Adul', 'Admin', '10',true),
@@ -90,5 +92,3 @@ VALUES
 INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator, idKoordinator, idMahasiswa)
 VALUES
 (1, 'Mesin Cerdas', 'Implementasi AI pada Perangkat Lunak', 'Gedung Informatika Lt. 2', '2024-12-15', '08:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 1);
-
-SELECT * FROM users;

@@ -22,7 +22,7 @@
             <a id="linkKomponenNilai" href="/home/komponen-nilai">Komponen nilai</a>
         </div>
         <div id="rightHeader">
-            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span> -->
         </div>
         <div class="userProfile">
             <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
@@ -31,7 +31,7 @@
     <div id="OverlayIconUser">
         <div class="UserIcon">
             <img th:src="@{../assets/userWhite.png}">
-            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
+            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>  -->
         </div>
         <div class="Sign">
             <input type="file">
@@ -54,7 +54,7 @@
             </div>
             <!-- -->
             <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
-            <p th:if="${sidangs != null}">Jumlah data sidangs: <span th:text="${#lists.size(sidangs)}"></span></p>
+            <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
             <div th:each="sidang : ${sidangs}">
                 <div class="sidangContainer">
                     <div class="sidang">
@@ -85,44 +85,11 @@
                             <strong style="grid-area: labelWaktu">Waktu:</strong>
                             <span style="grid-area: waktu"class="label_waktu" th:text="${#temporals.format(sidang.waktu, 'HH:mm')}">Waktu</span>
                             
-                            <strong style="grid-area: labelPembimbing1">Pembimbing utama:</strong>
-                            <span style="grid-area: pembimbing1" class="label_namaPembimbing1" th:text="${sidang.idPembimbing1}">Loading...</span>
-
-                            <strong style="grid-area: labelPembimbing2">Pembimbing pendamping:</strong>
-                            <span style="grid-area: pembimbing2" class="label_namaPembimbing2" th:text="${sidang.idPembimbing2}">Loading...</span>
-                            
-                            <strong style="grid-area: labelPenguji1">Ketua penguji:</strong>
-                            <span style="grid-area: penguji1" class="label_namaPenguji1" th:text="${sidang.idPenguji1}">Loading...</span>
-                            
-                            <strong style="grid-area: labelPenguji2">Anggota penguji:</strong>
-                            <span style="grid-area: penguji2" class="label_namaPenguji2" th:text="${sidang.idPenguji2}">Loading...</span>
-
                             <span style="grid-area: kosong"></span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--<div class="form-group" th:classappend="${sidang.status} == 'Upcoming' ? ' upcoming' : ''">
-                    <span class="label_tanggal" th:if="${sidang.tanggal != null}" th:text="${#dates.format(sidang.tanggal, 'yyyy-MM-dd')}">Tanggal</span>
-                        <span th:if="${sidang.tanggal == null}">Tanggal tidak tersedia</span>
-                    <span class="label_waktu" th:if="${sidang.waktu != null}" th:text="${#dates.format(sidang.waktu, 'HH:mm')}">Waktu</span>
-                        <span th:if="${sidang.waktu == null}">Waktu tidak tersedia</span>
-                    <span class="label_tempat" th:text="${sidang.tempat}">Tempat</span>
-                    <span class="label_status" th:text="${sidang.status}">Status</span>
-                    <a th:if="${sidang.idSidang != null}" th:href="@{/sidang/edit(sidangId=${sidang.idSidang})}">
-                        <button type="button" class="img-edit">
-                            <img th:src="@{/assets/edit.svg}" alt="Edit">
-                        </button>
-                    </a>
-    
-                    <button type="button" class="img-delete" 
-                        th:onclick="'showDeleteOverlay(' + ${sidang.idSidang} + ')'">
-                        <img th:src="@{/assets/delete.svg}" alt="Delete">
-                    </button>
-                </div> -->
-                <hr>
-            </div>
-            
+            </div>            
         </div>
     </main>
     <script th:inline="javascript" defer>

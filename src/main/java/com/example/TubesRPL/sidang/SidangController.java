@@ -77,10 +77,6 @@ public class SidangController {
         sidang.setTtdKoordinator(null);
         sidang.setIdMahasiswa(mahasiswa.getIdUser());
         sidang.setIdKoordinator((long)session.getAttribute("idUser"));
-        sidang.setIdPembimbing1(pembimbingUtama.getIdUser());
-        sidang.setIdPembimbing2(pembimbingPendamping.getIdUser());
-        sidang.setIdPenguji1(ketuaPenguji.getIdUser());
-        sidang.setIdPenguji2(anggotaPenguji.getIdUser());
 
         // Simpan sidang ke database
         sidangRepo.addSidang(sidang);

@@ -1,10 +1,8 @@
 package com.example.TubesRPL.user;
 
-import java.lang.foreign.Linker.Option;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -49,13 +47,13 @@ public class UserRepoJdbc implements UserRepository {
     public void save(User user) {
         if (user.getIdUser() == null) {
             // Jika idUser null, lakukan INSERT
-            String sql = "INSERT INTO \"user\" (nama, email, password, peran, npm, status) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO \"user\" (nama, email, password, peran, nik, status) VALUES (?, ?, ?, ?, ?, ?)";
             jdbcTemplate.update(sql,
                     user.getNama(),
                     user.getEmail(),
                     user.getPassword(),
                     user.getPeran(),
-                    user.getNpm(),
+                    user.getNik(),
                     user.getStatus());
         } else {
             // Jika idUser ada, lakukan UPDATE
@@ -65,7 +63,7 @@ public class UserRepoJdbc implements UserRepository {
                     user.getEmail(),
                     user.getPassword(),
                     user.getPeran(),
-                    user.getNpm(),
+                    user.getNik(),
                     user.getStatus(),
                     user.getIdUser());
         }
