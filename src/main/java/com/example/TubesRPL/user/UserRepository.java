@@ -10,12 +10,7 @@ public interface UserRepository {
     List<User> findAllDesc();
     List<User> findUserByRole(String role);
     void setUserInactive(Long idUser);
-<<<<<<< HEAD
-    List<User> findByNpm(String npm);
-    List<User> findById(Long id);
-    void save(User user);
-=======
     List<User> findByNik(String nik);
     List<User> findByID (Long idUser);
->>>>>>> 1515fc8e896a6df47e8d0321e2f8edfb98e6162b
+    void updateUser(User user);
 }
