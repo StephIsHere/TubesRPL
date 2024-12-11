@@ -92,7 +92,7 @@ public class UserController {
 
             } else if (session.getAttribute("peran").equals("Koordinator")) {
                 // Ambil data sidang dari repository
-                List<Sidang> sidangs = sidangRepo.findAll(); 
+                List<Sidang> sidangs = sidangRepo.findAllSidangWithPenulis(); 
                 List<User> userList = userRepo.findAll();
 
                 model.addAttribute("allUser", userList);

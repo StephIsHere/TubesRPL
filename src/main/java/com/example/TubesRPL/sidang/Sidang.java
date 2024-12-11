@@ -12,6 +12,7 @@ public class Sidang {
     
     private int idSidang;
     private String jenisTA;
+    private String namaPenulis;
     private String topik;
     private String judul;
     private String tempat;

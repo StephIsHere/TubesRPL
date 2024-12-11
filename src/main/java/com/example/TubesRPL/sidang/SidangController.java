@@ -16,6 +16,7 @@ import com.example.TubesRPL.user.User;
 
 
 import com.example.TubesRPL.user.UserRepository;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -84,5 +85,10 @@ public class SidangController {
         return "redirect:/home";
     }
 
-    
+    @PostMapping("/searchSidang")
+    public String searchSidang(@RequestParam String judul, Model model, HttpSession session){
+        List<Sidang> listSidang = this.sidangRepo.findSidangByJudul(judul);
+        model.addAttribute("sidangs", listSidang);
+        return "koordinator/home";
+    }
 }
