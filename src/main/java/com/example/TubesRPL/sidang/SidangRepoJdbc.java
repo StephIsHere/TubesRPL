@@ -34,7 +34,11 @@ public class SidangRepoJdbc implements SidangRepository {
         sidang.getWaktu(),
         sidang.getStatus(),
         sidang.getIdKoordinator(),
-        sidang.getIdMahasiswa()
+        sidang.getIdMahasiswa(),
+        sidang.getIdPembimbing1(),
+        sidang.getIdPembimbing2(),
+        sidang.getIdPenguji1(),
+        sidang.getIdPenguji2()
         );
     }
      
@@ -66,6 +70,11 @@ public class SidangRepoJdbc implements SidangRepository {
             sidang.setTtdKoordinator(rs.getBytes("ttdKoordinator"));
             sidang.setIdKoordinator(rs.getLong("idKoordinator"));
             sidang.setIdMahasiswa(rs.getLong("idMahasiswa"));
+            sidang.setIdPembimbing1(rs.getLong("idPembimbing1"));
+            sidang.setIdPembimbing2(rs.getLong("idPembimbing2"));
+            sidang.setIdPenguji1(rs.getLong("idPenguji1"));
+            sidang.setIdPenguji2(rs.getLong("idPenguji2"));
+
             return sidang;
         }
     };

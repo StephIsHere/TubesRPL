@@ -122,7 +122,7 @@ main {
 }
 
 .sidang {
-    height: 200px;
+    height: 210px;
 }
 
 .headerSidang{
@@ -132,6 +132,8 @@ main {
     background-color: #D5FFA3;
     height: 35px;
     border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
 }
 
 .headerAddSidang {
@@ -160,7 +162,11 @@ label.labelAddSidang {
 
 .formContainer {
     padding: 10px 30px;
-    width: 800px;
+    width: 930px;
+
+}
+.formContainer form input{
+    width: 400px;
 }
 
 br {
@@ -224,7 +230,7 @@ input[type="number"] {
 }
 
 label {
-    width: 160px;
+    width: 200px;
 }
 
 select#role{
@@ -331,10 +337,19 @@ label[form="adminPageDel"]{
 .detailAdmin .form-group label{
     padding: 10px;
 }
-.detailAttAdmin{
+#detailAttAdmin{
     padding: 20px 60px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 400px;
+    height: 300px;
+    visibility: hidden;
+    position: absolute;
+    top: 40%;
+    right: 34%;
+    background-color: white;
 }
-.detailAttAdmin .form-groupAdmin{
+#detailAttAdmin .form-groupAdmin{
     display: flex;
     align-items: center;
     margin: 15px 0;
@@ -458,7 +473,7 @@ button.img-delete {
     align-items: center;
     text-align: center;
     top: 40%;
-    right: 42%;
+    right: 40%;
     visibility: hidden;
 }
 #deleteOverlay button{
@@ -493,4 +508,20 @@ textarea#topikTA{
 }
 label[for="judulTa"]{
     margin-bottom: 0px;
+}
+
+.komponen-sidang-box{
+    display: grid;
+    margin: 10px;
+    grid-template-columns: 200px 350px 250px 100px;
+    grid-template-areas: 
+        'labelNIKmahasiswa isiNIKmahasiswa labelPembimbing1 pembimbing1'
+        'labelNamaMahasiswa isiNamaMahasiswa labelPembimbing2 pembimbing2'
+        'labelTopik topik labelPenguji1 penguji1'
+        'labelJudul judul labelPenguji2 penguji2'
+        'labelTempat tempat kosong kosong'
+        'labelTanggal tanggal kosong kosong'
+        'labelWaktu waktu kosong kosong'
+    ;
+    gap: 5px;
 }

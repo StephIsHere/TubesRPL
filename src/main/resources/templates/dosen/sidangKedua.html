@@ -4,24 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidang Tugas Akhir</title>
-    <link rel="stylesheet" href="/css/mahasiswa/detailSidangFinished.css">
-    <script src="../js/Overlay.js" defer></script>
+    <link rel="stylesheet" href="/css/mahasiswa/detailSidangUpcoming.css">
+    <script src="../js/Overlay.js" defer></script> 
 </head>
 <body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const crossImg = document.getElementById("belumSetuju"); // Cross image
-            const checkImg = document.getElementById("sudahSetuju"); // Check image
-            const setujuiBAPBtn = document.getElementById("setuju_bap"); // Button
-    
-            checkImg.style.display = "none";
-    
-            setujuiBAPBtn.addEventListener("click", function() {
-                crossImg.style.display = "none";
-                checkImg.style.display = "inline";
-            });
-        });
-    </script>
     <header>
         <div id="leftHeader">
             <span id="judul">Sidang Tugas Akhir</span>
@@ -51,15 +37,15 @@
     <main onclick="hideElement()">
         <div class="card-container">
             <div class="card">
-                <a href="/home" class="arrow"><img src="../assets/arrow.png" alt="back_to_main"></a>
-                <div class="gray_box"></div>
-                <span class="judulCard bold">Sidang 3</span>
+                <a href="/home" id="backtomain"><img src="../assets/arrow.png" alt="back_to_main"></a>
+                <div class="yellow_box"></div>
+                <span class="judulCard bold">Sidang 2</span>
                 <table class="table1">
                     <tr>
                         <td colspan="2" class="bold judul">Informasi Sidang</td>
                     </tr>
                     <tr>
-                        <td class="bold">Topik</td><td>: Jaringan Keamanan Internet	</td>
+                        <td class="bold">Topik</td><td>: Implementasi IoT</td>
                     </tr>
                     <tr>
                         <td class="bold">Mahasiswa</td><td>: Steven Febrian</td>
@@ -146,21 +132,6 @@
                         <td class="bold">Penguasaan Materi</td><td>: 30%</td>
                     </tr>
                 </table>
-
-                <div class="bap"> 
-                    <a href="" class="bap_link">Berita_Acara_Pelaksana.pdf</a>
-                    <img src="../assets/cross.png" alt="belum disetujui" id="belumSetuju">
-                    <img src="../assets/check.png" alt="disetujui" id="sudahSetuju">
-                </div>
-
-                <a id="setuju_bap">Setujui BAP</a>
-
-                <div class="catatanSidang">
-                    <p>Catatan Sidang:</p>
-                    <p class="boxNote">
-                        Mahasiswa diharapkan memperdalam pembahasan mengenai pengelolaan risiko keamanan pada jaringan internet, terutama terkait mitigasi serangan siber seperti DDoS, ransomware, dan phishing. Fokuskan penelitian pada implementasi protokol keamanan terkini, seperti TLS 1.3 atau Zero Trust Architecture, serta relevansi metode enkripsi dalam melindungi data sensitif.
-                    </p>
-                </div>
             </div>
         </div>
     </main>

@@ -81,11 +81,11 @@
                         <div class="form-group" th:classappend="${user.status} == false ? ' inactive' : ''">
                             <label class="label_nama" th:text="${user.nama}">Nama</label>
                             <span class="label_role" th:text="${user.peran}">Peran</span>
-                            <a th:href="@{/home/edit(userId=${user.idUser})}">
-                                <button type="button" class="img-edit">
-                                    <img th:src="@{/assets/edit.svg}" alt="Edit">
-                                </button>
-                            </a>
+                            <!-- <a th:href="@{/home/edit(userId=${user.idUser})}">
+                            </a> -->
+                            <button type="button" class="img-edit" onclick="'showDetail(${user.idUser})'">
+                                <img th:src="@{/assets/edit.svg}" alt="Edit">
+                            </button>
                             <button type="button" class="img-delete"
                                 th:onclick="'showDeleteOverlay(' + ${user.idUser} + ')'">
                                 <img th:src="@{/assets/delete.svg}" alt="Delete">
@@ -100,7 +100,39 @@
             </div>
         </div>
     </main>
-
+    <form action="@{home/edit}" method="post" th:object="${user}">
+        <div id="detailAttAdmin" th:each="user : ${users}">
+            <div class="form-groupAdmin" th:classappend="${user.status} == false ? ' inactive' : ''">
+                <label for="">Nama:</label>
+                <input type="text" name="" id="" th:value="${user.nama}">
+            </div>
+            <div class="form-groupAdmin" th:classappend="${user.status} == false ? ' inactive' : ''">
+                <label for="">Email:</label>
+                <input type="text" name="" id="" th:value="${user.email}">
+            </div>
+            <div class="form-groupAdmin" th:classappend="${user.status} == false ? ' inactive' : ''">
+                <label for="">Password:</label>
+                <input type="text" name="" id="" th:value="${user.password}">
+            </div>
+            <div class="form-groupAdmin" th:classappend="${user.status} == false ? ' inactive' : ''">
+                <label for="role">Role:</label>
+                <select name="role" id="role">
+                    <option value=""></option>
+                    <option value="admin">Admin</option>
+                    <option value="koord">Koordinator</option>
+                    <option value="dosen">Dosen</option>
+                    <option value="mahasiswa">Mahasiswa</option>
+                </select>
+            </div>
+            <div class="form-groupAdmin" th:classappend="${user.status} == false ? ' inactive' : ''">
+                <label for="">NPM/NIK:</label>
+                <input type="text" name="" id="" th:value="${user.npm}">
+            </div>
+            <div class="form-groupAdmin" th:classappend="${user.status} == false ? ' inactive' : ''">
+                <button type="submit">Save</button>
+            </div>
+        </div>
+    </form>
     <div id="deleteOverlay" class="overlay hidden">
         <div class="messageBox">
             <p>Are you sure you want to delete this user?</p>
@@ -108,7 +140,31 @@
             <button onclick="hideDeleteOverlay()" id="denyDeleteButton">No</button>
         </div>
     </div>
+    <script>
+        function showDetail(userId) {
+    // Ambil elemen overlay edit
+    const editOverlay = document.getElementById('detailAttAdmin');
 
+    // Tampilkan overlay edit
+    editOverlay.style.visibility = 'visible';
+
+    // Kirim request ke server untuk mengambil data pengguna berdasarkan userId
+    fetch(`/home/edit/${userId}`)
+        .then(response => response.json()) // Asumsikan server merespons dalam format JSON
+        .then(user => {
+            // Isi formulir dengan data pengguna
+            document.querySelector('#detailAttAdmin input[name="nama"]').value = user.nama;
+            document.querySelector('#detailAttAdmin input[name="email"]').value = user.email;
+            document.querySelector('#detailAttAdmin input[name="password"]').value = user.password;
+            document.querySelector('#detailAttAdmin select[name="role"]').value = user.peran;
+            document.querySelector('#detailAttAdmin input[name="npm"]').value = user.npm || '';
+        })
+        .catch(error => {
+            console.error('Error fetching user details:', error);
+        });
+}
+
+    </script>
     <script>
         let selectedUserId = null;
 
@@ -126,6 +182,7 @@
 
         document.getElementById('confirmDeleteButton').addEventListener('click', function () {
             if (selectedUserId !== null) {
+                
                 window.location.href = '/home/deleted/' + selectedUserId;
             }
         });
