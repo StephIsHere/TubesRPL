@@ -64,6 +64,7 @@ public class SidangController {
         Sidang sidang = new Sidang();
         sidang.setJenisTA(jenisSidang);
         sidang.setTopik(topik);
+        sidang.setNamaPenulis("");
         sidang.setJudul(judul);
         sidang.setTempat(tempat);
         sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
