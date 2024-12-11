@@ -1,13 +1,13 @@
 package com.example.TubesRPL.sidang;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,7 +19,7 @@ import com.example.TubesRPL.user.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping("/sidang")
 public class SidangController {
     @Autowired
@@ -38,54 +38,29 @@ public class SidangController {
         @RequestParam String tanggal,
         @RequestParam String waktu,
         @RequestParam String nikPembimbingUtama,
-        @RequestParam(required = false) String nikPembimbingPendamping,
-        @RequestParam(required = false) String nikKetuaPenguji,
-        @RequestParam(required = false) String nikAnggotaPenguji,
+        @RequestParam String nikPembimbingPendamping,
+        @RequestParam String nikKetuaPenguji,
+        @RequestParam String nikAnggotaPenguji,
         HttpSession session
     ) {
         // Cari mahasiswa berdasarkan NIK
         List<User> mahasiswaList = userRepo.findByNik(nik);
-        if (mahasiswaList.isEmpty()) {
-            throw new RuntimeException("Mahasiswa dengan NIK " + nik + " tidak ditemukan.");
-        }
         User mahasiswa = mahasiswaList.get(0);
 
-        // // Cari pembimbing utama
-        // List<User> pembimbingUtamaList = userRepo.findByNik(nikPembimbingUtama);
-        // if (!pembimbingUtamaList.isEmpty()) {
-        //     throw new RuntimeException("Pembimbing utama dengan NIK " + nik + " tidak ditemukan.");
-        // }
-        // User pembimbingUtama = pembimbingUtamaList.get(0);
+        List<User> pembimbing1 = userRepo.findByNik(nikPembimbingUtama);
+        User pembimbingUtama = pembimbing1.get(0);
 
-        // // Cari pembimbing pendamping
-        // User pembimbingPendamping = null;
-        // if (nikPembimbingPendamping != null) {
-        //     List<User> pembimbingPendampingList = userRepo.findByNik(nikPembimbingPendamping);
-        //     if (!pembimbingPendampingList.isEmpty()) {
-        //         pembimbingPendamping = pembimbingPendampingList.get(0);
-        //     }
-        // }
+        List<User> pembimbing2 = userRepo.findByNik(nikPembimbingPendamping);
+        User pembimbingPendamping = pembimbing2.get(0);
 
-        // // Cari ketua penguji
-        // User ketuaPenguji = null;
-        // if (nikKetuaPenguji != null) {
-        //     List<User> ketuaPengujiList = userRepo.findByNik(nikKetuaPenguji);
-        //     if (!ketuaPengujiList.isEmpty()) {
-        //         ketuaPenguji = ketuaPengujiList.get(0);
-        //     }
-        // }
+        List<User> penguji1 = userRepo.findByNik(nikPembimbingUtama);
+        User ketuaPenguji = penguji1.get(0);
 
-        // // Cari anggota penguji
-        // User anggotaPenguji = null;
-        // if (nikAnggotaPenguji != null) {
-        //     List<User> anggotaPengujiList = userRepo.findByNik(nikAnggotaPenguji);
-        //     if (!anggotaPengujiList.isEmpty()) {
-        //         anggotaPenguji = anggotaPengujiList.get(0);
-        //     }
-        // }
+        List<User> penguji2 = userRepo.findByNik(nikPembimbingPendamping);
+        User anggotaPenguji = penguji2.get(0);
+
         // Buat instance Sidang
         Sidang sidang = new Sidang();
-        sidang.setIdMahasiswa(mahasiswa.getIdUser());
         sidang.setJenisTA(jenisSidang);
         sidang.setTopik(topik);
         sidang.setJudul(judul);
@@ -100,12 +75,18 @@ public class SidangController {
         sidang.setTtdTimPenguji(null);
         sidang.setTtdMahasiswa(null);
         sidang.setTtdKoordinator(null);
+        sidang.setIdMahasiswa(mahasiswa.getIdUser());
         sidang.setIdKoordinator((long)session.getAttribute("idUser"));
-        System.out.println("GAJAH=" + (long) session.getAttribute("idUser"));
+        sidang.setIdPembimbing1(pembimbingUtama.getIdUser());
+        sidang.setIdPembimbing2(pembimbingPendamping.getIdUser());
+        sidang.setIdPenguji1(ketuaPenguji.getIdUser());
+        sidang.setIdPenguji2(anggotaPenguji.getIdUser());
 
         // Simpan sidang ke database
         sidangRepo.addSidang(sidang);
 
         return "redirect:/home";
     }
+
+    
 }
