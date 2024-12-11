@@ -18,19 +18,19 @@ public class UserRepoJdbc implements UserRepository {
     // Mencari user berdasarkan email dan passsword
     @Override
     public List<User> findUser(String email, String password) {
-        String sql = "SELECT * FROM \"user\" WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, email, password);
     }
 
     @Override
     public List<User> findUserByName(String name) {
-        String sql = "SELECT * FROM \"user\" WHERE LOWER(nama) LIKE ?";
+        String sql = "SELECT * FROM users WHERE LOWER(nama) LIKE ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, "%" + name.toLowerCase() + "%");
     }
 
     @Override
     public List<User> findByNik(String nik){
-        String sql = "SELECT * FROM \"user\" WHERE nik LIKE ?";
+        String sql = "SELECT * FROM users WHERE nik LIKE ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, "%" + nik + "%");
     }
     @Override
@@ -41,7 +41,7 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override
     public List<User> findUserByRole(String role) {
-        String sql = "SELECT * FROM \"user\" WHERE peran LIKE ?";
+        String sql = "SELECT * FROM users WHERE peran LIKE ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, role);
     }
 
@@ -73,7 +73,7 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO \"user\" (nama, email, password, peran, nik, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (nama, email, password, peran, nik, status) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
                 user.getNama(),
                 user.getEmail(),
@@ -85,19 +85,19 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        String sql = "SELECT * FROM \"user\" ORDER BY nama ASC"; // Ordering by name for better readability
+        String sql = "SELECT * FROM users ORDER BY nama ASC"; // Ordering by name for better readability
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
     @Override
     public List<User> findAllDesc() {
-        String sql = "SELECT * FROM \"user\" ORDER BY nama DESC";
+        String sql = "SELECT * FROM users ORDER BY nama DESC";
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
     @Override
     public void setUserInactive(Long idUser) {
-        String sql = "UPDATE \"user\" SET status = false WHERE \"idUser\" = ?";
+        String sql = "UPDATE users SET status = false WHERE idUser = ?";
         jdbcTemplate.update(sql, idUser);
     }
 

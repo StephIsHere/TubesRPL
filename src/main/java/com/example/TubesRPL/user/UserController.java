@@ -27,7 +27,6 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserRepository userRepo;
-
     @Autowired
     private SidangRepository sidangRepo;
 
