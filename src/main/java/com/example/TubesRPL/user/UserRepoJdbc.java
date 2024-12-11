@@ -81,4 +81,10 @@ public class UserRepoJdbc implements UserRepository {
                 resultSet.getBoolean("status")
         );
     }
+
+    @Override 
+    public List<User> findByID (Long idUser){
+        String sql = "SELECT * FROM \"user\"  WHERE \"idUser\" = ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, idUser);
+    }
 }

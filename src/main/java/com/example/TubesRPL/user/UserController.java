@@ -1,7 +1,6 @@
 package com.example.TubesRPL.user;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.TubesRPL.sidang.Sidang;
 import com.example.TubesRPL.sidang.SidangRepository;
 
 import org.springframework.ui.Model;
@@ -26,6 +26,7 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserRepository userRepo;
+
     @Autowired
     private SidangRepository sidangRepo;
 
@@ -93,8 +94,17 @@ public class UserController {
                 }
                 model.addAttribute("users", allUsers);
                 return "admin/adminPage";
+
             } else if (session.getAttribute("peran").equals("Koordinator")) {
+                // Ambil data sidang dari repository
+                List<Sidang> sidangs = sidangRepo.findAll(); 
+                List<User> userList = userRepo.findAll();
+
+                model.addAttribute("allUser", userList);
+                model.addAttribute("sidangs", sidangs);
+
                 return "koordinator/home";
+
             } else if (session.getAttribute("peran").equals("Dosen")) {
                 return "dosen/home";
             } else if (session.getAttribute("peran").equals("Mahasiswa")) {
