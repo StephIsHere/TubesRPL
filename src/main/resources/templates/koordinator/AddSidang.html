@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
     <style>
         #linkMainPage {
             background-color: #479097;
@@ -12,26 +12,26 @@
         }
     </style>
     <title></title>
-    <script src="../js/Overlay.js" defer></script>
-    <script src="../js/koordinator/addSidang.js" defer></script>
+    <script th:src="@{/js/Overlay.js}" defer></script>
+    <script th:src="@{/js/koordinator/addSidang.js}" defer></script>
 </head>
 <body> 
     <header>
         <div id="leftHeader">
             <span id="judul">Sidang Tugas Akhir</span>
-            <a id="linkMainPage" href="/home">Sidang</a>
-            <a id="linkKomponenNilai" href="/home/komponen-nilai">Komponen nilai</a>
+            <a id="linkMainPage" th:href="@{/home}">Sidang</a>
+            <a id="linkKomponenNilai" th:href="@{/home/komponen-nilai}">Komponen nilai</a>
         </div>
         <div id="rightHeader">
             <span th:text="${namaKoor}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
-            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
+            <img th:src="@{/assets/userWhite.png}" alt="" onclick="showElement()">
         </div>
     </header>
     <div id="OverlayIconUser">
         <div class="UserIcon">
-            <img th:src="@{../assets/userWhite.png}">
+            <img th:src="@{/assets/userWhite.png}">
             <span th:text="${namaKoor}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="Sign">
@@ -39,7 +39,7 @@
             <button type="submit">Upload Tanda Tangan</button>
         </div>
         <div class="Logout">
-            <a href="/">
+            <a th:href="@{/}">
                 <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
             </a>
         </div>
@@ -51,21 +51,21 @@
                 Tambah Sidang
             </div>
             <div class="formContainer">
-                <form action="/sidang/AddSidang" method="post" onsubmit="handleSubmit(event)">
+                <form th:action="@{/sidang/AddSidang}" method="post" onsubmit="handleSubmit(event)">
                     <!-- mahasiswa -->
-                    <label for="nik"class="labelAddSidang">Mahasiswa:</label>
+                    <label for="nik" class="labelAddSidang">Mahasiswa:</label>
                     <input id="nik" type="text" class="inputSidang" name="nik" required th:value="${nik}" oninput="ambilNamaMahasiswa()" placeholder="NIK mahasiswa">
                     <br>
                     <label class="labelAddSidang"></label>
-                    <input id="namaMahasiswa" type="text" class="inputSidang" name="namaMahasiswa" th:text="${nama}" placeholder="Nama mahasiswa">
+                    <input id="namaMahasiswa" type="text" class="inputSidang" name="namaMahasiswa" th:value="${nama}" placeholder="Nama mahasiswa">
                     <br><br>
                     <!-- jenis sidang -->
                     <label for="jenisSidang" class="labelAddSidang">Jenis Sidang:</label>
                     <div class="checkbox">
                         <input id="jenisSidang1" type="radio" class="inputSidang" name="jenisSidang" value="1">
-                        <label for="jenisSidang1"class="labelAddSidang">TA 1</label>
+                        <label for="jenisSidang1" class="labelAddSidang">TA 1</label>
                         <input id="jenisSidang2" type="radio" class="inputSidang" name="jenisSidang" value="2">
-                        <label for="jenisSidang2"class="labelAddSidang">TA 2</label>
+                        <label for="jenisSidang2" class="labelAddSidang">TA 2</label>
                     </div>
                     <br><br>
                     <!-- topik & judul TA -->
@@ -76,50 +76,48 @@
                     <textArea id="judulTa" type="text" class="inputSidang" name="judul" required placeholder="Judul Tugas Akhir"></textArea>
                     <br><br>
                     <!-- lokasi -->
-                    <label for="tempat"class="labelAddSidang">Lokasi sidang:</label>
+                    <label for="tempat" class="labelAddSidang">Lokasi sidang:</label>
                     <input id="tempat" type="text" class="inputSidang" name="tempat" th:value="${tempat}" placeholder="Lokasi sidang">
                     <br><br>
                     <!-- tanggal -->
-                    <label for="tanggal"class="labelAddSidang">Jadwal sidang:</label>
+                    <label for="tanggal" class="labelAddSidang">Jadwal sidang:</label>
                     <input id="tanggal" type="date" class="inputSidang" name="tanggal" th:value="${tanggal}">
                     <br><br>
                     <!-- waktu -->
-                    <label for="waktu"class="labelAddSidang">Waktu sidang:</label>
+                    <label for="waktu" class="labelAddSidang">Waktu sidang:</label>
                     <input id="waktu" type="time" class="inputSidang" name="waktu" th:value="${waktu}">
                     <br><br>
                     <!-- pembimbing utama -->
-                    <label for="nikPembimbingUtama"class="labelAddSidang">Pembimbing utama:</label>
+                    <label for="nikPembimbingUtama" class="labelAddSidang">Pembimbing utama:</label>
                     <input id="nikPembimbingUtama" type="text" class="inputSidang" name="nikPembimbingUtama" required th:value="${nikPembimbingUtama}" oninput="ambilNamaPembimbingUtama()" placeholder="NIK pembimbing">
                     <br>
                     <label class="labelAddSidang"></label>
-                    <input id="namaPembimbingUtama" type="text" class="inputSidang" name="namaPembimbingUtama" th:text="${nama}" placeholder="Nama pembimbing">
+                    <input id="namaPembimbingUtama" type="text" class="inputSidang" name="namaPembimbingUtama" th:value="${nama}" placeholder="Nama pembimbing">
                     <br><br>
                     <!-- pembimbing pendamping -->
-                    <label for="nikPembimbingPendamping"class="labelAddSidang">Pembimbing pendamping:</label>
+                    <label for="nikPembimbingPendamping" class="labelAddSidang">Pembimbing pendamping:</label>
                     <input id="nikPembimbingPendamping" type="text" class="inputSidang" name="nikPembimbingPendamping" th:value="${nikPembimbingPendamping}" oninput="ambilNamaPembimbingPendamping()" placeholder="NIK pembimbing">
                     <br>
                     <label class="labelAddSidang"></label>
-                    <input id="namaPembimbingPendamping" type="text" class="inputSidang" name="namaPembimbingPendamping" th:text="${nama}" placeholder="Nama pembimbing">
+                    <input id="namaPembimbingPendamping" type="text" class="inputSidang" name="namaPembimbingPendamping" th:value="${nama}" placeholder="Nama pembimbing">
                     <br><br>
                     <!-- ketua penguji -->
-                    <label for="nikKetuaPenguji"class="labelAddSidang">Ketua penguji:</label>
+                    <label for="nikKetuaPenguji" class="labelAddSidang">Ketua penguji:</label>
                     <input id="nikKetuaPenguji" type="text" class="inputSidang" name="nikKetuaPenguji" th:value="${nikKetuaPenguji}" oninput="ambilNamaKetuaPenguji()" placeholder="NIK penguji">
                     <br>
                     <label class="labelAddSidang"></label>
-                    <input id="namaKetuaPenguji" type="text" class="inputSidang" name="namaKetuaPenguji" th:text="${nama}" placeholder="Nama penguji">
+                    <input id="namaKetuaPenguji" type="text" class="inputSidang" name="namaKetuaPenguji" th:value="${nama}" placeholder="Nama penguji">
                     <br><br>
                     <!-- anggota penguji -->
-                    <label for="nikAnggotaPenguji"class="labelAddSidang">Anggota penguji:</label>
+                    <label for="nikAnggotaPenguji" class="labelAddSidang">Anggota penguji:</label>
                     <input id="nikAnggotaPenguji" type="text" class="inputSidang" name="nikAnggotaPenguji" th:value="${nikAnggotaPenguji}" oninput="ambilNamaAnggotaPenguji()" placeholder="NIK penguji">
                     <br>
                     <label class="labelAddSidang"></label>
-                    <input id="namaAnggotaPenguji" type="text" class="inputSidang" name="namaAnggotaPenguji" th:text="${nama}" placeholder="Nama penguji">
+                    <input id="namaAnggotaPenguji" type="text" class="inputSidang" name="namaAnggotaPenguji" th:value="${nama}" placeholder="Nama penguji">
                     <br><br>
 
                     <!-- button -->
-                    <form action="/sidang/AddSidang" method="post">
-                        <button type="submit">Save</button>
-                    </form>
+                    <button type="submit">Save</button>
                 </form>
             </div>
         </div>
