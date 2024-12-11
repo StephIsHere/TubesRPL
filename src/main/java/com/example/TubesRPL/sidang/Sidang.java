@@ -9,6 +9,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 
 public class Sidang {
+    
     private int idSidang;
     private String jenisTA;
     private String topik;
@@ -18,15 +19,21 @@ public class Sidang {
     private LocalTime waktu;
     private String catatan;
     private String status;
-    private byte[] bap;
     private byte[] ttdKetuaPenguji;
     private byte[] ttdTimPenguji;
     private byte[] ttdPembimbing1;
     private byte[] ttdPembimbing2;
     private byte[] ttdMahasiswa;
     private byte[] ttdKoordinator;
-    private long idKoordinator;
-    private long idMahasiswa;
+    private Long idKoordinator;
+    private Long idMahasiswa;
+    private Long idPembimbing1;
+    private Long idPembimbing2;
+    private Long idPenguji1;
+    private Long idPenguji2;
+
 
     public Sidang() {}
+
+    
 }

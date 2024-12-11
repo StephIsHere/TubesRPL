@@ -12,7 +12,7 @@ CREATE TABLE "user" (
     "password" VARCHAR(255) NOT NULL,
     "nama" VARCHAR(100) NOT NULL,
     "peran" VARCHAR(20) NOT NULL, -- admin, koord, dosen, mahasiswa
-    "npm" VARCHAR(20),
+    "nik" VARCHAR(20),
     "status" BOOLEAN
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE "komponenNilai" (
 
 CREATE TABLE "sidang" (
     "idSidang" SERIAL PRIMARY KEY,
-    "jenisTA" VARCHAR(20) NOT NULL,
+    "jenisTA" VARCHAR(10) NOT NULL,
     "topik" VARCHAR(100),
     "judul" VARCHAR(200),
     "tempat" VARCHAR(100),
@@ -36,7 +36,6 @@ CREATE TABLE "sidang" (
     "waktu" TIME,
 	"catatan" VARCHAR(10000),
     "status" VARCHAR(50),
-    "bap" BYTEA,
     "ttdKetuaPenguji" BYTEA,
     "ttdTimPenguji" BYTEA,
     "ttdPembimbing1" BYTEA,
@@ -67,19 +66,19 @@ CREATE TABLE "komponenNilaiSidang" (
     FOREIGN KEY ("idKomponen") REFERENCES "komponenNilai"("idKomponen") ON DELETE CASCADE
 );
 
-INSERT INTO "user" ("email", "password", "nama", "peran", "npm", "status")
+INSERT INTO "user" ("email", "password", "nama", "peran", "nik", "status")
 VALUES 
-('adul@unpar', 'admin', 'Adul', 'Admin', NULL,true),
-('agus@unpar', 'admin', 'Agus', 'Admin', NULL,true),
+('adul@unpar', 'admin', 'Adul', 'Admin', '10',true),
+('agus@unpar', 'admin', 'Agus', 'Admin', '12',true),
 
-('budi@unpar', 'koord', 'Budi', 'Koordinator', NULL,true),
-('barak@unpar', 'koord', 'Barak', 'Koordinator', NULL,true),
+('budi@unpar', 'koord', 'Budi', 'Koordinator', '20',true),
+('barak@unpar', 'koord', 'Barak', 'Koordinator', '22',true),
 
-('gede@unpar', 'dosen', 'Gede', 'Dosen', NULL,true),
-('vania@unpar', 'dosen', 'Vania', 'Dosen', NULL,true),
-('raymond@unpar', 'dosen', 'Raymond', 'Dosen', NULL,true),
-('keenan@unpar', 'dosen', 'Keenan', 'Dosen', NULL,true),
-('lionov@unpar', 'dosen', 'Lionov', 'Dosen', NULL,true),
+('gede@unpar', 'dosen', 'Gede', 'Dosen', '30',true),
+('vania@unpar', 'dosen', 'Vania', 'Dosen', '32',true),
+('raymond@unpar', 'dosen', 'Raymond', 'Dosen', '34',true),
+('keenan@unpar', 'dosen', 'Keenan', 'Dosen', '36',true),
+('lionov@unpar', 'dosen', 'Lionov', 'Dosen', '38',true),
 
 ('steven@unpar', 'steven', 'Steven', 'Mahasiswa', '80',true),
 ('sebastian@unpar', 'sebastian', 'Sebastian', 'Mahasiswa', '82',true),
@@ -87,3 +86,9 @@ VALUES
 ('samuel@unpar', 'samuel', 'Samuel', 'Mahasiswa', '86',true),
 ('eugene@unpar', 'eugene', 'Eugene', 'Mahasiswa', '88',true),
 ('bombom@unpar', 'bombom', 'Bombom', 'Mahasiswa', '90', true);
+
+INSERT INTO "sidang" ("jenisTA", "topik", "judul", "tempat", "tanggal", "waktu", "catatan", "status", "ttdKetuaPenguji", "ttdTimPenguji", "ttdPembimbing1", "ttdPembimbing2", "ttdMahasiswa", "ttdKoordinator", "idKoordinator", "idMahasiswa")
+VALUES 
+(1, 'Mesin Cerdas', 'Implementasi AI pada Perangkat Lunak', 'Gedung Informatika Lt. 2', '2024-12-15', '08:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 1);
+
+SELECT * FROM "user";

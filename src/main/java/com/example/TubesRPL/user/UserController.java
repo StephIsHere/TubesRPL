@@ -1,5 +1,6 @@
 package com.example.TubesRPL.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.TubesRPL.sidang.Sidang;
+import com.example.TubesRPL.sidang.SidangRepository;
 
 import org.springframework.ui.Model;
 
@@ -25,6 +27,9 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private SidangRepository sidangRepo;
 
     // Membuka halaman root --> login 
     // Handler jika ada salah email / password
@@ -52,7 +57,7 @@ public class UserController {
             session.setAttribute("nama", user.getNama());  
             session.setAttribute("email", user.getEmail());          
             session.setAttribute("peran", user.getPeran());
-            session.setAttribute("npm", user.getNpm());
+            session.setAttribute("nik", user.getNik());
             session.setAttribute("status", user.getStatus());
             return "redirect:/home"; 
         } else { //Jika email / password salah
@@ -90,8 +95,17 @@ public class UserController {
                 }
                 model.addAttribute("users", allUsers);
                 return "admin/adminPage";
+
             } else if (session.getAttribute("peran").equals("Koordinator")) {
+                // Ambil data sidang dari repository
+                List<Sidang> sidangs = sidangRepo.findAll(); 
+                List<User> userList = userRepo.findAll();
+
+                model.addAttribute("allUser", userList);
+                model.addAttribute("sidangs", sidangs);
+
                 return "koordinator/home";
+
             } else if (session.getAttribute("peran").equals("Dosen")) {
                 return "dosen/home";
             } else if (session.getAttribute("peran").equals("Mahasiswa")) {
@@ -114,7 +128,6 @@ public class UserController {
     //      koordinator = koord
     //      mahasiswa = nama
     //      dosen = dosen
-    //Kalau non-mahasiswa --> npm tidak bisa diisi
     //USER BISA GANTI PASS ??
 
     //************KALAU UDA SUBMIT HARUS ADA OVERLAY "USER BERHASIL DITAMBAHKAN" *****************
@@ -135,14 +148,14 @@ public class UserController {
                           @RequestParam String email,
                           @RequestParam String password,
                           @RequestParam String role,
-                          @RequestParam(required = false) String npm) {
+                          @RequestParam(required = false) String nik) {
         System.out.println("Peran: " + role);
         User user = new User();
         user.setNama(nama);
         user.setEmail(email);
         user.setPassword(password);
         user.setPeran(role);
-        user.setNpm(npm);
+        user.setNik(nik);
         user.setStatus(true);
 
         userRepo.addUser(user);
@@ -212,54 +225,78 @@ public class UserController {
         String peran = (String)session.getAttribute("peran");
         model.addAttribute("namaKoor", nama);
         model.addAttribute("peran", peran);
-        model.addAttribute("sidang", new Sidang());
         return "koordinator/AddSidang";
     }
-    @GetMapping("/home/addSidang/getMahasiswaByNpm")
+    @GetMapping("/home/addSidang/getUserByNik")
     @ResponseBody
-    public Map<String, String> getMahasiswaByNpm(@RequestParam("npm") String npm) {
+    public Map<String, String> getMahasiswaByNik(@RequestParam("nik") String nik) {
         Map<String, String> response = new HashMap<>();
-        System.out.println("npm adalah" + npm);
-        List<User> mahasiswa = this.userRepo.findByNpm(npm); 
-        if (mahasiswa.isEmpty()) {
+        List<User> user = this.userRepo.findByNik(nik); 
+        if (user.isEmpty()) {
             response.put("nama", "Nama tidak ditemukan");
         }
         else{
-            response.put("nama", mahasiswa.get(0).getNama());
+            response.put("nama", user.get(0).getNama());
         }
         return response;
     }
-    @PostMapping ("/home/addSidang")
-    public String tambahSidangPost(
-        @RequestParam String npm,
-        @RequestParam String namaMahasiswa,
-        @RequestParam String judul,
-        @RequestParam String pembimbingUtama,
-        @RequestParam(required = false) String pembimbingPendamping,
-        @RequestParam(required = false) String pengujiKetua,
-        @RequestParam(required = false) String pengujiAnggota1,
-        @RequestParam(required = false) String pengujiAnggota2,
-        @RequestParam(required = false) String pengujiAnggota3
-    ) {
-        Sidang sidang = new Sidang();
-        List<User> users = userRepo.findByNpm(npm);
-        User mahasiswa = users.get(0);
-        Long id = mahasiswa.getIdUser();
-        sidang.setIdMahasiswa(id);
-        sidang.setJudul(judul);
+    // @PostMapping("/home/addSidang")
+    // public String tambahSidangPost(
+    //     @RequestParam String nik,
+    //     @RequestParam String jenisTA,
+    //     @RequestParam String topik,
+    //     @RequestParam String judul,
+    //     @RequestParam String tempat,
+    //     @RequestParam String tanggal,
+    //     @RequestParam String waktu,
+    //     @RequestParam(required = false) String catatan,
+    //     @RequestParam(required = false) String status,
+    //     @RequestParam(required = false) byte[] bap,
+    //     @RequestParam(required = false) byte[] ttdKetuaPenguji,
+    //     @RequestParam(required = false) byte[] ttdTimPenguji,
+    //     @RequestParam(required = false) byte[] ttdPembimbing1,
+    //     @RequestParam(required = false) byte[] ttdPembimbing2,
+    //     @RequestParam(required = false) byte[] ttdMahasiswa,
+    //     @RequestParam(required = false) byte[] ttdKoordinator,
+    //     @RequestParam(required = false) Long idKoordinator
+    // ) {
+    //     try {
+    //         // Cari user berdasarkan NIK mahasiswa
+    //         List<User> users = userRepo.findByNik(nik);
+    //         if (users.isEmpty()) {
+    //             throw new RuntimeException("Mahasiswa dengan NIK " + nik + " tidak ditemukan.");
+    //         }
+    //         User mahasiswa = users.get(0);
 
-        // sidang.setNpm(npm);
-        // sidang.setNamaMahasiswa(namaMahasiswa);
-        // sidang.setJudul(judul);
-        // sidang.setPembimbingUtama(pembimbingUtama);
-        // sidang.setPembimbingPendamping(pembimbingPendamping);
-        // sidang.setPengujiKetua(pengujiKetua);
-        // sidang.setPengujiAnggota1(pengujiAnggota1);
-        // sidang.setPengujiAnggota2(pengujiAnggota2);
-        // sidang.setPengujiAnggota3(pengujiAnggota3);
+    //         // Buat instance Sidang
+    //         Sidang sidang = new Sidang();
+    //         sidang.setIdMahasiswa(mahasiswa.getIdUser());
+    //         sidang.setJenisTA(jenisTA);
+    //         sidang.setTopik(topik);
+    //         sidang.setJudul(judul);
+    //         sidang.setTempat(tempat);
+    //         sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
+    //         sidang.setWaktu(LocalTime.parse(waktu));     // Format harus HH:mm
+    //         sidang.setCatatan(catatan);
+    //         sidang.setStatus(status);
+    //         sidang.setBap(bap);
+    //         sidang.setTtdKetuaPenguji(ttdKetuaPenguji);
+    //         sidang.setTtdTimPenguji(ttdTimPenguji);
+    //         sidang.setTtdPembimbing1(ttdPembimbing1);
+    //         sidang.setTtdPembimbing2(ttdPembimbing2);
+    //         sidang.setTtdMahasiswa(ttdMahasiswa);
+    //         sidang.setTtdKoordinator(ttdKoordinator);
+    //         sidang.setIdKoordinator(idKoordinator);
 
-        return "redirect:/home";
-    }
+    //         // Simpan sidang ke database
+    //         sidangRepo.save(sidang);
+
+    //         return "redirect:/home";
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return "error";
+    //     }
+    // }
 
 
 
