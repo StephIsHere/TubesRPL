@@ -46,79 +46,79 @@
     <main onclick="hideElement()">
         <div class="card">
             <div id="judulKompNilai">Komponen Nilai</div>
-            <form id="komponenNilai">
-
-                <div class="item1">
-                    <div class="bagianNilai">Bobot Nilai Penguji</div>
-                    <div class="form-group">
-                        <label>Tata tulis Laporan</label>
-                        <input type="number">
-                        <span class="percent">%</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Kelengkapan Materi</label>
-                        <input type="number">
-                        <span class="percent">%</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Pencapaian Tujuan</label>
-                        <input type="number">
-                        <span class="percent">%</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Penguasaan Materi</label>
-                        <input type="number">
-                        <span class="percent">%</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Presentasi</label>
-                        <input type="number" >
-                        <span class="percent">%</span>
-                    </div>
-                </div>
+            <form id="komponenNilai" method="post" action="saveKomponen">
                 <div class="item2">
                     <div class="bagianNilai">Bobot Nilai</div>
                     <div class="form-group">
                         <label>Ketua Tim Penguji</label>
-                        <input type="number">
+                        <input type="number" name="bobotNilaiKetuaTimPenguji">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Anggota Tim Penguji</label>
-                        <input type="number">
+                        <input type="number" name="bobotNilaiAnggotaTimPenguji">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Pembimbing</label>
-                        <input type="number">
+                        <input type="number" name="bobotNilaiPembimbing">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Koordinator</label>
-                        <input type="number">
+                        <input type="number" name="bobotNialiKoordinator">
                         <span class="percent">%</span>
                     </div>
                 </div>
-                <div class="item3">
-                    <div class="bagianNilai">Nilai Pembimbing</div>
+                <div class="item1">
+                    <div class="bagianNilai">Bobot Nilai Penguji</div>
                     <div class="form-group">
                         <label>Tata tulis Laporan</label>
-                        <input type="number">
+                        <input type="number" name="tataTulisLaporanPenguji">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Kelengkapan Materi</label>
-                        <input type="number">
+                        <input type="number" name="kelengkapanMateriPenguji">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
-                        <label>Proses Bimbingan</label>
-                        <input type="number">
+                        <label>Pencapaian Tujuan</label>
+                        <input type="number" name="pencapaianTujuanPenguji">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Penguasaan Materi</label>
-                        <input type="number"> 
+                        <input type="number" name="penguasaanMateriPenguji">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Presentasi</label>
+                        <input type="number" name="presentasiPenguji">
+                        <span class="percent">%</span>
+                    </div>
+                </div>
+                
+                <div class="item3">
+                    <div class="bagianNilai">Nilai Pembimbing</div>
+                    <div class="form-group">
+                        <label>Tata tulis Laporan</label>
+                        <input type="number" name="tataTulisLaporanPembimbing">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Kelengkapan Materi</label>
+                        <input type="number" name="kelengkapanMateriPembimbing">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Proses Bimbingan</label>
+                        <input type="number" name="prosesBimbingan">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Penguasaan Materi</label>
+                        <input type="number" name="penguasaanMateriPembimbing"> 
                         <span class="percent">%</span>
                     </div>
                 </div>
