@@ -92,3 +92,10 @@ VALUES
 INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator, idKoordinator, idMahasiswa)
 VALUES
 (1, 'Mesin Cerdas', 'Implementasi AI pada Perangkat Lunak', 'Gedung Informatika Lt. 2', '2024-12-15', '08:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 1);
+
+CREATE TABLE gambarTTD (
+    idGambar SERIAL PRIMARY KEY,
+    ttd BYTEA,
+    idUser INT NOT NULL,
+    FOREIGN KEY (idUser) REFERENCES users(idUser)
+);
