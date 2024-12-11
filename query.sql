@@ -21,7 +21,7 @@ CREATE TABLE komponenNilai (
     idKomponen SERIAL PRIMARY KEY,
     namaKomponen VARCHAR(100) NOT NULL,
     bobotKomponen DECIMAL(5,2) NOT NULL,
-    tahunAkademik INT NOT NULL,
+    -- tahunAkademik INT NOT NULL, diilangin sementara gr2 cuma ada di sini, sidang dll ga ada jd ga kepake
     tipe VARCHAR(50), -- type = bobotPenguji, bobotPembimbing, main(nilai presentasi dll)
     idKoordinator INT NOT NULL,
     FOREIGN KEY (idKoordinator) REFERENCES users(idUser)
