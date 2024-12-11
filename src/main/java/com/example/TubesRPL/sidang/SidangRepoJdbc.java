@@ -22,7 +22,7 @@ public class SidangRepoJdbc implements SidangRepository {
 
     @Override
     public void addSidang(Sidang sidang) {
-        String sql = "INSERT INTO sidang (\"jenisTA\", topik, judul, tempat, tanggal, waktu, status, \"idKoordinator\", \"idMahasiswa\") " +
+        String sql = "INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, status, idKoordinator, idMahasiswa) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
