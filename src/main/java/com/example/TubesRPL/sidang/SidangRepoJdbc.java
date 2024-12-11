@@ -16,15 +16,21 @@ public class SidangRepoJdbc implements SidangRepository {
 
     @Override
     public List<Sidang> findSidang(int idSidang) {
-        String sql = "SELECT * FROM sidang WHERE idSidang = ?";
+        String sql = "SELECT s.*, u.nama AS penulis " +
+                     "FROM sidang s " +
+                     "JOIN users u ON s.idMahasiswa = u.idUser " +
+                     "WHERE s.idSidang = ?";
         return jdbcTemplate.query(sql, sidangRowMapper, idSidang);
     }
-
+    
     @Override
     public List<Sidang> findSidangByJudul(String judul) {
-        String sql = "SELECT * FROM sidang WHERE LOWER(judul) LIKE LOWER(?)";
+        String sql = "SELECT s.*, u.nama AS penulis " +
+                     "FROM sidang s " +
+                     "JOIN users u ON s.idMahasiswa = u.idUser " +
+                     "WHERE LOWER(s.judul) LIKE LOWER(?)";
         return jdbcTemplate.query(sql, sidangRowMapper, "%" + judul + "%");
-    }
+    }    
 
     @Override
     public List<Sidang> findAllSidangWithPenulis() {
@@ -63,7 +69,7 @@ public class SidangRepoJdbc implements SidangRepository {
         public Sidang mapRow(ResultSet rs, int rowNum) throws SQLException {
             Sidang sidang = new Sidang();
             sidang.setIdSidang(rs.getInt("idSidang"));
-            sidang.setNamaPenulis(rs.getString("penulis")); // Mengambil nilai nama dari hasil join
+            sidang.setNamaPenulis(rs.getString("penulis"));
             sidang.setJenisTA(rs.getString("jenisTA"));
             sidang.setTopik(rs.getString("topik"));
             sidang.setJudul(rs.getString("judul"));

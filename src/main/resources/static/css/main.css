@@ -525,3 +525,28 @@ label[for="judulTa"]{
     ;
     gap: 5px;
 }
+
+.saveButton {
+    background-color: #388087; /* Warna dasar tombol */
+    color: #ffffff; /* Teks putih agar kontras */
+    font-size: 16px; /* Ukuran teks */
+    padding: 10px 20px; /* Ruang dalam tombol */
+    border: none; /* Hilangkan border */
+    border-radius: 8px; /* Sudut membulat */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: all 0.3s ease; /* Animasi halus saat interaksi */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+    margin-left: 350px;
+}
+
+.saveButton:hover {
+    background-color: #2d6d6f; /* Warna lebih gelap saat hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Bayangan lebih besar */
+    transform: translateY(-2px); /* Efek mengangkat tombol */
+}
+
+.saveButton:active {
+    background-color: #1f4f51; /* Warna lebih gelap saat tombol ditekan */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan lebih kecil */
+    transform: translateY(0); /* Kembalikan posisi tombol */
+}
