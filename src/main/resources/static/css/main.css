@@ -550,3 +550,8 @@ label[for="judulTa"]{
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan lebih kecil */
     transform: translateY(0); /* Kembalikan posisi tombol */
 }
+
+#saveKomponenStatus {
+    color: red;
+    margin-left: 60px;
+}

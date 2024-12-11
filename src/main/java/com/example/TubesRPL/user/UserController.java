@@ -197,7 +197,7 @@ public class UserController {
     //KOORDINATOR----------------------------------------------
     //Bentuk BAP --> page html 
     // Komponen Nilai
-    @GetMapping("/home/komponen-nilai")
+    @GetMapping("/komponen-nilai")
     public String komponenNilai (HttpSession session, Model model){
         //Menampilkan nama dan peran
         String nama = (String)session.getAttribute("nama");
