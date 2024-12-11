@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.TubesRPL.sidang.Sidang;
 import com.example.TubesRPL.sidang.SidangRepository;
@@ -215,65 +216,6 @@ public class UserController {
         }
         return response;
     }
-    // @PostMapping("/home/addSidang")
-    // public String tambahSidangPost(
-    //     @RequestParam String nik,
-    //     @RequestParam String jenisTA,
-    //     @RequestParam String topik,
-    //     @RequestParam String judul,
-    //     @RequestParam String tempat,
-    //     @RequestParam String tanggal,
-    //     @RequestParam String waktu,
-    //     @RequestParam(required = false) String catatan,
-    //     @RequestParam(required = false) String status,
-    //     @RequestParam(required = false) byte[] bap,
-    //     @RequestParam(required = false) byte[] ttdKetuaPenguji,
-    //     @RequestParam(required = false) byte[] ttdTimPenguji,
-    //     @RequestParam(required = false) byte[] ttdPembimbing1,
-    //     @RequestParam(required = false) byte[] ttdPembimbing2,
-    //     @RequestParam(required = false) byte[] ttdMahasiswa,
-    //     @RequestParam(required = false) byte[] ttdKoordinator,
-    //     @RequestParam(required = false) Long idKoordinator
-    // ) {
-    //     try {
-    //         // Cari user berdasarkan NIK mahasiswa
-    //         List<User> users = userRepo.findByNik(nik);
-    //         if (users.isEmpty()) {
-    //             throw new RuntimeException("Mahasiswa dengan NIK " + nik + " tidak ditemukan.");
-    //         }
-    //         User mahasiswa = users.get(0);
-
-    //         // Buat instance Sidang
-    //         Sidang sidang = new Sidang();
-    //         sidang.setIdMahasiswa(mahasiswa.getIdUser());
-    //         sidang.setJenisTA(jenisTA);
-    //         sidang.setTopik(topik);
-    //         sidang.setJudul(judul);
-    //         sidang.setTempat(tempat);
-    //         sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
-    //         sidang.setWaktu(LocalTime.parse(waktu));     // Format harus HH:mm
-    //         sidang.setCatatan(catatan);
-    //         sidang.setStatus(status);
-    //         sidang.setBap(bap);
-    //         sidang.setTtdKetuaPenguji(ttdKetuaPenguji);
-    //         sidang.setTtdTimPenguji(ttdTimPenguji);
-    //         sidang.setTtdPembimbing1(ttdPembimbing1);
-    //         sidang.setTtdPembimbing2(ttdPembimbing2);
-    //         sidang.setTtdMahasiswa(ttdMahasiswa);
-    //         sidang.setTtdKoordinator(ttdKoordinator);
-    //         sidang.setIdKoordinator(idKoordinator);
-
-    //         // Simpan sidang ke database
-    //         sidangRepo.save(sidang);
-
-    //         return "redirect:/home";
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return "error";
-    //     }
-    // }
-
-
 
     //MAHASISWA--- SALAH SEMUA
     // mahasiswa :
@@ -313,5 +255,19 @@ public class UserController {
         } else {
             return "redirect:/";
         }
+    }
+
+    @PostMapping("/uploadGambar")
+    public String uploadGambar(@RequestParam("ttd") MultipartFile file, HttpSession session) throws Exception {
+        if (file.isEmpty()) {
+            return "redirect:/home?error=FileKosong";
+        }
+        byte[] fileBytes = file.getBytes();
+        System.out.println("SINGA" + fileBytes);  // Log panjang byte array
+        
+        long idUser = (long) session.getAttribute("idUser");
+        userRepo.saveTandaTangan(file.getBytes(), idUser);
+
+        return "redirect:/home?success=TandaTanganTersimpan";
     }
 }

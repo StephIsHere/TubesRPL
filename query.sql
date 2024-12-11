@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS "sidangDosen" CASCADE;
 DROP TABLE IF EXISTS "sidang" CASCADE;
 DROP TABLE IF EXISTS "komponenNilai" CASCADE;
 DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS "gambarTTD" CASCADE;
 
 CREATE TABLE "user" (
     "idUser" SERIAL PRIMARY KEY,
@@ -64,6 +65,14 @@ CREATE TABLE "komponenNilaiSidang" (
 	PRIMARY KEY ("idSidang", "idKomponen"),
 	FOREIGN KEY ("idSidang") REFERENCES "sidang"("idSidang") ON DELETE CASCADE,
     FOREIGN KEY ("idKomponen") REFERENCES "komponenNilai"("idKomponen") ON DELETE CASCADE
+);
+
+CREATE TABLE "gambarTTD" (
+    "idGambar" SERIAL PRIMARY KEY,
+    "ttd" BYTEA,
+    "idUser" INT NOT NULL,
+    FOREIGN KEY ("idUser") REFERENCES "user"("idUser"),
+
 );
 
 INSERT INTO "user" ("email", "password", "nama", "peran", "nik", "status")

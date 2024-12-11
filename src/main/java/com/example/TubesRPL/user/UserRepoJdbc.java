@@ -1,11 +1,13 @@
 package com.example.TubesRPL.user;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -86,5 +88,11 @@ public class UserRepoJdbc implements UserRepository {
     public List<User> findByID (Long idUser){
         String sql = "SELECT * FROM \"user\"  WHERE \"idUser\" = ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, idUser);
+    }
+
+    @Override
+    public void saveTandaTangan(byte[] ttd, Long idUser) {
+        String sql = "INSERT INTO \"gambarTTD\" (\"ttd\", \"idUser\") VALUES (?, ?)";
+        jdbcTemplate.update(sql, ttd, idUser);
     }
 }

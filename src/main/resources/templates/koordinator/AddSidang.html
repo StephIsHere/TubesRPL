@@ -35,8 +35,10 @@
             <span th:text="${namaKoor}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="Sign">
-            <input type="file">
-            <button type="submit">Upload Tanda Tangan</button>
+            <form action="/uploadGambar" method="post" enctype="multipart/form-data">
+                <input type="file" name="ttd" required>
+                <button type="submit">Upload Tanda Tangan</button>
+            </form>            
         </div>
         <div class="Logout">
             <a href="/">
@@ -118,7 +120,7 @@
 
                     <!-- button -->
                     <form action="/sidang/AddSidang" method="post">
-                        <button type="submit">Save</button>
+                        <button id="addSidangButton" type="submit">Save</button>
                     </form>
                 </form>
             </div>

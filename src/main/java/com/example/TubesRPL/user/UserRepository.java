@@ -12,4 +12,5 @@ public interface UserRepository {
     void setUserInactive(Long idUser);
     List<User> findByNik(String nik);
     List<User> findByID (Long idUser);
+    void saveTandaTangan(byte[] ttd, Long idUser);
 }
