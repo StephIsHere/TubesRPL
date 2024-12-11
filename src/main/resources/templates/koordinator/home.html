@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
-    <script src="../js/Overlay.js" defer></script>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script th:src="@{/js/Overlay.js}" defer></script>
     <style>
         #linkMainPage {
             background-color: #479097;
@@ -18,27 +17,25 @@
     <header>
         <div id="leftHeader">
             <span id="judul">Sidang Tugas Akhir</span>
-            <a id="linkMainPage" href="/home">Sidang</a>
-            <a id="linkKomponenNilai" href="/home/komponen-nilai">Komponen nilai</a>
+            <a id="linkMainPage" th:href="@{/home}">Sidang</a>
+            <a id="linkKomponenNilai" th:href="@{/home/komponen-nilai}">Komponen nilai</a>
         </div>
         <div id="rightHeader">
-            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span> -->
         </div>
         <div class="userProfile">
-            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
+            <img th:src="@{/assets/userWhite.png}" alt="" onclick="showElement()">
         </div>
     </header>
     <div id="OverlayIconUser">
         <div class="UserIcon">
-            <img th:src="@{../assets/userWhite.png}">
-            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>  -->
+            <img th:src="@{/assets/userWhite.png}">
         </div>
         <div class="Sign">
             <input type="file">
             <button type="submit">Upload Tanda Tangan</button>
         </div>
         <div class="Logout">
-            <a href="/">
+            <a th:href="@{/}">
                 <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
             </a>
         </div>
@@ -50,9 +47,8 @@
                 <button id="filterButton">Filter</button>
                 <button id="sortButton">Sort</button>
                 
-                <a href="/home/addSidang"><button id="addSidangButton">+</button></a>
+                <a th:href="@{/home/addSidang}"><button id="addSidangButton">+</button></a>
             </div>
-            <!-- -->
             <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
             <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
             <div th:each="sidang : ${sidangs}">
@@ -83,7 +79,7 @@
                             <span style="grid-area: tanggal" class="label_tanggal" th:text="${#temporals.format(sidang.tanggal, 'dd-MM-yyyy')}">Tanggal</span>
                             
                             <strong style="grid-area: labelWaktu">Waktu:</strong>
-                            <span style="grid-area: waktu"class="label_waktu" th:text="${#temporals.format(sidang.waktu, 'HH:mm')}">Waktu</span>
+                            <span style="grid-area: waktu" class="label_waktu" th:text="${#temporals.format(sidang.waktu, 'HH:mm')}">Waktu</span>
                             
                             <span style="grid-area: kosong"></span>
                         </div>
@@ -137,6 +133,5 @@
             el.textContent = namaPenguji2;
         });
     </script>    
-    
 </body>
 </html>
