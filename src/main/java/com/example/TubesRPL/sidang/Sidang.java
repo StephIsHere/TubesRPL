@@ -27,12 +27,6 @@ public class Sidang {
     private byte[] ttdKoordinator;
     private Long idKoordinator;
     private Long idMahasiswa;
-    private Long idPembimbing1;
-    private Long idPembimbing2;
-    private Long idPenguji1;
-    private Long idPenguji2;
-
-
     public Sidang() {}
 
     
