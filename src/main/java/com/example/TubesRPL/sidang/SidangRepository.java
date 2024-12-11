@@ -9,4 +9,6 @@ public interface SidangRepository {
     List<Sidang> findSidang(int idSidang);
     void addSidang(Sidang sidang);
     List<Sidang> findAll();
+    List<Sidang> findSidangByJudul(String judul);
+    List<Sidang> findAllSidangWithPenulis();
 }

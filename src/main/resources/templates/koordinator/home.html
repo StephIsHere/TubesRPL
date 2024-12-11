@@ -43,7 +43,9 @@
     <main onclick="hideElement()">
         <div class="mainContainer">
             <div id="functionBar">
-                <input id="searchBar" type="text" placeholder="search...">
+                <form th:action="@{/sidang/searchSidang}" method="POST">
+                    <input id="searchBar" type="text" placeholder="search..." name="judul">
+                </form>
                 <button id="filterButton">Filter</button>
                 <button id="sortButton">Sort</button>
                 
@@ -64,7 +66,7 @@
                             <span style="grid-area: isiNIKmahasiswa" class="label_nikMahasiswa" th:text="${sidang.idMahasiswa}"></span>
 
                             <strong style="grid-area: labelNamaMahasiswa">Nama mahasiswa:</strong>
-                            <span style="grid-area: isiNamaMahasiswa" class="label_namaMahasiswa">Loading...</span>
+                            <span style="grid-area: isiNamaMahasiswa" class="label_namaMahasiswa" th:text="${sidang.namaPenulis}"></span>
 
                             <strong style="grid-area: labelTopik">Topik:</strong>
                             <span style="grid-area: topik" class="label_topik" th:text="${sidang.topik}"></span>
@@ -88,50 +90,5 @@
             </div>            
         </div>
     </main>
-    <script th:inline="javascript" defer>
-        const mahasiswaMap = /*[[${allUser}]]*/ [];
-        const mahasiswaById = {};
-    
-        // Buat map id -> nama pengguna
-        mahasiswaMap.forEach(user => {
-            mahasiswaById[user.idUser] = user.nama;
-        });
-    
-        // Update elemen dengan class `label_nikMahasiswa`
-        document.querySelectorAll('.label_nikMahasiswa').forEach(el => {
-            const idMahasiswa = el.textContent.trim();
-            const namaMahasiswa = mahasiswaById[idMahasiswa] || 'Nama Tidak Ditemukan';
-            const namaElement = el.closest('div').querySelector('.label_namaMahasiswa');
-            if (namaElement) {
-                namaElement.textContent = namaMahasiswa;
-            }
-        });
-    
-        // Update elemen nama pembimbing
-        document.querySelectorAll('.label_namaPembimbing1').forEach(el => {
-            const idPembimbing1 = el.textContent.trim();
-            const namaPembimbing1 = mahasiswaById[idPembimbing1] || 'Nama Tidak Ditemukan';
-            el.textContent = namaPembimbing1;
-        });
-    
-        document.querySelectorAll('.label_namaPembimbing2').forEach(el => {
-            const idPembimbing2 = el.textContent.trim();
-            const namaPembimbing2 = mahasiswaById[idPembimbing2] || 'Nama Tidak Ditemukan';
-            el.textContent = namaPembimbing2;
-        });
-    
-        // Update elemen nama penguji
-        document.querySelectorAll('.label_namaPenguji1').forEach(el => {
-            const idPenguji1 = el.textContent.trim();
-            const namaPenguji1 = mahasiswaById[idPenguji1] || 'Nama Tidak Ditemukan';
-            el.textContent = namaPenguji1;
-        });
-    
-        document.querySelectorAll('.label_namaPenguji2').forEach(el => {
-            const idPenguji2 = el.textContent.trim();
-            const namaPenguji2 = mahasiswaById[idPenguji2] || 'Nama Tidak Ditemukan';
-            el.textContent = namaPenguji2;
-        });
-    </script>    
 </body>
 </html>

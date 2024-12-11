@@ -21,6 +21,20 @@ public class SidangRepoJdbc implements SidangRepository {
     }
 
     @Override
+    public List<Sidang> findSidangByJudul(String judul) {
+        String sql = "SELECT * FROM sidang WHERE LOWER(judul) LIKE LOWER(?)";
+        return jdbcTemplate.query(sql, sidangRowMapper, "%" + judul + "%");
+    }
+
+    @Override
+    public List<Sidang> findAllSidangWithPenulis() {
+        String sql = "SELECT s.*, u.nama AS penulis " +
+                     "FROM sidang s " +
+                     "JOIN users u ON s.idMahasiswa = u.idUser";
+        return jdbcTemplate.query(sql, sidangRowMapper);
+    }
+
+    @Override
     public void addSidang(Sidang sidang) {
         String sql = "INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, status, idKoordinator, idMahasiswa) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -37,7 +51,6 @@ public class SidangRepoJdbc implements SidangRepository {
         sidang.getIdMahasiswa()
         );
     }
-     
 
     @Override
     public List<Sidang> findAll() {
@@ -50,6 +63,7 @@ public class SidangRepoJdbc implements SidangRepository {
         public Sidang mapRow(ResultSet rs, int rowNum) throws SQLException {
             Sidang sidang = new Sidang();
             sidang.setIdSidang(rs.getInt("idSidang"));
+            sidang.setNamaPenulis(rs.getString("penulis")); // Mengambil nilai nama dari hasil join
             sidang.setJenisTA(rs.getString("jenisTA"));
             sidang.setTopik(rs.getString("topik"));
             sidang.setJudul(rs.getString("judul"));
@@ -66,7 +80,6 @@ public class SidangRepoJdbc implements SidangRepository {
             sidang.setTtdKoordinator(rs.getBytes("ttdKoordinator"));
             sidang.setIdKoordinator(rs.getLong("idKoordinator"));
             sidang.setIdMahasiswa(rs.getLong("idMahasiswa"));
-
             return sidang;
         }
     };
