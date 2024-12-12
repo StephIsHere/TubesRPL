@@ -569,3 +569,23 @@ label[for="judulTa"]{
     color: red;
     margin-left: 60px;
 }
+
+.headerSidang {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.headerSidang.status-proses {
+    background-color: green;
+    color: white;
+}
+
+.headerSidang.status-selesai {
+    background-color: gray;
+    color: white;
+}
+
+.headerSidang.status-upcoming {
+    background-color: red;
+    color: white;
+}

@@ -56,7 +56,15 @@
             <div th:each="sidang : ${sidangs}">
                 <div class="sidangContainer">
                     <div class="sidang">
-                        <div class="headerSidang">
+                        <!-- <div class="headerSidang">
+                            <label class="label_jenis" th:if="${sidang.jenisTA=='1'}">Sidang Tugas Akhir 1</label>
+                            <label class="label_jenis" th:if="${sidang.jenisTA=='2'}">Sidang Tugas Akhir 2</label>
+                            <label class="label_status" th:text="${sidang.status}"></label>
+                        </div> -->
+                        <div class="headerSidang"
+                                th:classappend="${sidang.status == 'Proses' ? 'status-proses' : 
+                                                sidang.status == 'Selesai' ? 'status-selesai' : 
+                                                sidang.status == 'Upcoming' ? 'status-upcoming' : ''}">
                             <label class="label_jenis" th:if="${sidang.jenisTA=='1'}">Sidang Tugas Akhir 1</label>
                             <label class="label_jenis" th:if="${sidang.jenisTA=='2'}">Sidang Tugas Akhir 2</label>
                             <label class="label_status" th:text="${sidang.status}"></label>
