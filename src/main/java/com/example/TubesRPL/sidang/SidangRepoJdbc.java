@@ -41,9 +41,15 @@ public class SidangRepoJdbc implements SidangRepository {
     }
 
     @Override
-    public List<Sidang> findAllSidangByID(Long idmahasiswa) {
+    public List<Sidang> findAllSidangByIDmahasiswa(Long idmahasiswa) {
         String sql = "SELECT * FROM sidang WHERE idMahasiswa = ?";
         return jdbcTemplate.query(sql, sidangRowMapper, idmahasiswa);
+    }
+
+    @Override
+    public List<Sidang> findAllSidangByIDdosen(Long idDosen) {
+        String sql = "SELECT * FROM sidang WHERE idPembimbing1 = ? OR idPembimbing2 = ? OR idPenguji1 = ? OR idPenguji2 = ?";
+        return jdbcTemplate.query(sql, sidangRowMapper, idDosen, idDosen, idDosen, idDosen);
     }
 
     @Override
