@@ -107,11 +107,11 @@
             </div>
         </div>
     </main>
-    <form action="home/save" method="post">
+    <form th:action="@{/home/save}" th:method="post">
         <div id="detailAttAdmin">
             <div class="form-groupAdmin">
                 <label for="">Id:</label>
-                <input type="Long" name="id" id="id" value="">
+                <input type="Long" name="idUser" id="id" value="">
             </div>
             <div class="form-groupAdmin">
                 <label for="">Nama:</label>
@@ -128,10 +128,10 @@
             <div class="form-groupAdmin">
                 <label for="role">Role:</label>
                 <select name="role" id="role">
-                    <option value="admin">Admin</option>
-                    <option value="koord">Koordinator</option>
-                    <option value="dosen">Dosen</option>
-                    <option value="mahasiswa">Mahasiswa</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Koordinator">Koordinator</option>
+                    <option value="Dosen">Dosen</option>
+                    <option value="Mahasiswa">Mahasiswa</option>
                 </select>
             </div>
             <div class="form-groupAdmin">
@@ -198,7 +198,7 @@
             const nik = button.getAttribute('data-nik');
         
             // Set data ke dalam form overlay
-            document.querySelector('#detailAttAdmin input[name="id"]').value = userId;
+            document.querySelector('#detailAttAdmin input[name="idUser"]').value = userId;
             document.querySelector('#detailAttAdmin input[name="nama"]').value = nama;
             document.querySelector('#detailAttAdmin input[name="email"]').value = email;
             document.querySelector('#detailAttAdmin input[name="password"]').value = password;
@@ -214,6 +214,12 @@
                 editOverlay.style.visibility ='hidden';
             }
         }
+        document.getElementsByClassName('cancelEdit').addEventListener('click', function(){
+            const editOverlay = getElementById('detailAttAdmin');
+            if(editOverlay.style.visibility=='visible'){
+                editOverlay.style.visibility = 'hidden';
+            }
+        })
     </script>
 </body>
 
