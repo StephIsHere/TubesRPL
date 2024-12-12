@@ -123,8 +123,8 @@
                 </div>
             </a>-->
         
-            <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
-            <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
+            <!--<p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
+            <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>-->
             <div th:each="sidang : ${sidangs}">
                 <div class="sidangContainer">
                     <div class="sidang">
