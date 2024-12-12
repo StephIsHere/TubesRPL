@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,29 +159,25 @@ public class UserController {
 
         return "redirect:/home";
     }
-    @GetMapping("/home/edit/{userId}")
-    public String showAdminDetail(@PathVariable Long userId, Model model, HttpSession session) {
-    if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Admin")) {
-        // Menggunakan List untuk menangani hasil query
-        List<User> users = userRepo.findById(userId);
+    @PostMapping("/home/save")
+    public String editUser(@RequestParam Long idUser,
+                           @RequestParam String nama,
+                           @RequestParam String email,
+                           @RequestParam String password,
+                           @RequestParam String role,
+                           @RequestParam String nik) {
+        User user = new User();
+        user.setNama(nama);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPeran(role);
+        user.setNik(nik);
+        user.setStatus(true);
+        user.setIdUser(idUser);
+        userRepo.updateUser(user);
 
-        if (users.isEmpty()) {
-            throw new RuntimeException("User not found");
-        }
-
-        // Ambil user pertama dari list
-        User user = users.get(0);
-        model.addAttribute("user", user);
-        return "admin/adminDetail";
-    } else {
-        return "redirect:/";
-    }
-    }
-    @PostMapping("/home/update")
-    public String updateUser(@ModelAttribute User user) {
-        userRepo.save(user);
         return "redirect:/home";
-}
+    }
 
 
     //ADA OVERLAY --> APAKAH ANDA YAKIN INGIN MENONAKTIFKAN "nama"

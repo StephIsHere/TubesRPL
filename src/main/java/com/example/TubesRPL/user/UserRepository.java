@@ -12,6 +12,5 @@ public interface UserRepository {
     void setUserInactive(Long idUser);
     List<User> findByNik(String nik);
     List<User> findByID (Long idUser);
-    void save(User user);
-    List<User> findById(Long id);
+    void updateUser(User user);
 }
