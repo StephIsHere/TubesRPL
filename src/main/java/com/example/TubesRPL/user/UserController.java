@@ -70,6 +70,7 @@ public class UserController {
             // Simpan nama dan peran untuk html
             String nama = (String)session.getAttribute("nama");
             String peran = (String)session.getAttribute("peran");
+            Long idMahasiswa = (Long)session.getAttribute("idUser");
             
             model.addAttribute("nama", nama);
             model.addAttribute("peran", peran);
@@ -103,6 +104,9 @@ public class UserController {
             } else if (session.getAttribute("peran").equals("Dosen")) {
                 return "dosen/home";
             } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+                List<Sidang> sidangs = sidangRepo.findAllSidangByID(idMahasiswa); 
+                System.out.println("makan" + sidangs);
+                model.addAttribute("sidangs", sidangs);
                 return "mahasiswa/mahasiswaMain";
             } else {
                 return "redirect:/";

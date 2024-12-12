@@ -10,5 +10,6 @@ public interface SidangRepository {
     void addSidang(Sidang sidang);
     List<Sidang> findAll();
     List<Sidang> findSidangByJudul(String judul);
+    List<Sidang> findAllSidangByID(Long nik);
     List<Sidang> findAllSidangWithPenulis();
 }
