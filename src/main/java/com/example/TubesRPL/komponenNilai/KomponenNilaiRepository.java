@@ -1,6 +1,7 @@
 package com.example.TubesRPL.komponenNilai;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,23 @@ public interface KomponenNilaiRepository {
         double tataTulisLaporanPembimbing,
         double kelengkapanMateriPembimbing,
         double prosesBimbingan,
-        double penguasaanMateriPembimbing,
-        int idKoordinator
+        double penguasaanMateriPembimbing
+    ) throws SQLException;
+    public boolean checkKomponen();
+    public List<KomponenNilai> getAll();
+    public void editKomponen(
+        double bobotNilaiKetuaTimPenguji,
+        double bobotNilaiAnggotaTimPenguji,
+        double bobotNilaiPembimbing,
+        double bobotNilaiKoordinator,
+        double tataTulisLaporanPenguji,
+        double kelengkapanMateriPenguji,
+        double pencapaianTujuanPenguji,
+        double penguasaanMateriPenguji,
+        double presentasiPenguji,
+        double tataTulisLaporanPembimbing,
+        double kelengkapanMateriPembimbing,
+        double prosesBimbingan,
+        double penguasaanMateriPembimbing
     ) throws SQLException;
 }

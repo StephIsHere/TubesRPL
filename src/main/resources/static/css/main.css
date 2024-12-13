@@ -17,6 +17,15 @@ header {
     overflow: hidden;
 }
 
+#textEdit {
+    margin-left: 60px;
+    font-weight: bold;
+}
+
+hr#linePemisahKomponen {
+    width: 88%;
+}
+
 div#rightHeader {
     white-space: wrap;
     margin-left: 15px;
@@ -69,7 +78,7 @@ main {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .mainContainer, .card {
@@ -188,7 +197,7 @@ input.inputSidang {
     margin-top: 20px;
 }
 
-form#komponenNilai {
+form#komponenNilai, div#komponenNilaiDiv {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -242,7 +251,7 @@ select#role{
     margin: 0 5px;
 }
 
-button[form="komponenNilai"], button#buttonAddSidang{
+button[form="komponenNilai"], button#buttonAddSidang, button#editKomponenButton{
     background-color: #E3F1F0;
     border: 1px solid #388087;
     align-content: center;
@@ -257,7 +266,7 @@ button#buttonAddSidang:hover{
     color: white;
 }
 
-button[form="komponenNilai"]:hover{
+button[form="komponenNilai"]:hover, button#editKomponenButton:hover{
     background-color: #d7e6e5;
     cursor: pointer;
 }
@@ -569,6 +578,13 @@ label[for="judulTa"]{
     color: red;
     margin-left: 60px;
 }
+
+#saveKomponenBerhasil {
+    color: green;
+    margin-left: 60px;
+}
+
+
 
 .headerSidang {
     padding: 10px;

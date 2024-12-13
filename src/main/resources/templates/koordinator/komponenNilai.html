@@ -45,27 +45,29 @@
     <main onclick="hideElement()">
         <div class="card">
             <div id="judulKompNilai">Komponen Nilai</div>
-            <form id="komponenNilai" method="post" action="saveKomponen">
+
+
+            <div id="komponenNilaiDiv">
                 <div class="item2">
                     <div class="bagianNilai">Bobot Nilai</div>
                     <div class="form-group">
                         <label>Ketua Tim Penguji</label>
-                        <input type="number" required name="bobotNilaiKetuaTimPenguji">
+                        <span th:text="${bobotNilaiKetuaTimPengujiT}"></span>
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Anggota Tim Penguji</label>
-                        <input type="number" required name="bobotNilaiAnggotaTimPenguji">
+                        <span th:text="${bobotNilaiAnggotaTimPengujiT}"></span>
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Pembimbing</label>
-                        <input type="number" required name="bobotNilaiPembimbing">
+                        <span th:text="${bobotNilaiPembimbingT}"></span>
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Koordinator</label>
-                        <input type="number" required name="bobotNilaiKoordinator">
+                        <span th:text="${bobotNilaiKoordinatorT}"></span>
                         <span class="percent">%</span>
                     </div>
                 </div>
@@ -73,27 +75,108 @@
                     <div class="bagianNilai">Bobot Nilai Penguji</div>
                     <div class="form-group">
                         <label>Tata tulis Laporan</label>
-                        <input type="number" required name="tataTulisLaporanPenguji">
+                        <span th:text="${tataTulisLaporanPengujiT}"></span>
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Kelengkapan Materi</label>
-                        <input type="number" required name="kelengkapanMateriPenguji">
+                        <span th:text="${kelengkapanMateriPengujiT}"></span>
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Pencapaian Tujuan</label>
-                        <input type="number" required name="pencapaianTujuanPenguji">
+                        <span th:text="${pencapaianTujuanPengujiT}"></span>
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Penguasaan Materi</label>
-                        <input type="number" required name="penguasaanMateriPenguji">
+                        <span th:text="${penguasaanMateriPengujiT}"></span>
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Presentasi</label>
-                        <input type="number" required name="presentasiPenguji">
+                        <span th:text="${presentasiPengujiT}"></span>
+                        <span class="percent">%</span>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="bagianNilai">Nilai Pembimbing</div>
+                    <div class="form-group">
+                        <label>Tata tulis Laporan</label>
+                        <span th:text="${tataTulisLaporanPembimbingT}"></span>
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Kelengkapan Materi</label>
+                        <span th:text="${kelengkapanMateriPembimbingT}"></span>
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Proses Bimbingan</label>
+                        <span th:text="${prosesBimbinganT}"></span>
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Penguasaan Materi</label>
+                        <span th:text="${penguasaanMateriPembimbingT}"></span>
+                        <span class="percent">%</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr id="linePemisahKomponen">
+            <br>
+            <div id="textEdit">Edit:</div>
+            
+            <form id="komponenNilai" method="post" action="saveKomponen">
+                <div class="item2">
+                    <div class="bagianNilai">Bobot Nilai</div>
+                    <div class="form-group">
+                        <label>Ketua Tim Penguji</label>
+                        <input type="number" required name="bobotNilaiKetuaTimPenguji" th:value="${bobotNilaiKetuaTimPenguji}">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Anggota Tim Penguji</label>
+                        <input type="number" required name="bobotNilaiAnggotaTimPenguji" th:value="${bobotNilaiAnggotaTimPenguji}">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Pembimbing</label>
+                        <input type="number" required name="bobotNilaiPembimbing" th:value="${bobotNilaiPembimbing}">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Koordinator</label>
+                        <input type="number" required name="bobotNilaiKoordinator" th:value="${bobotNilaiKoordinator}">
+                        <span class="percent">%</span>
+                    </div>
+                </div>
+                <div class="item1">
+                    <div class="bagianNilai">Bobot Nilai Penguji</div>
+                    <div class="form-group">
+                        <label>Tata tulis Laporan</label>
+                        <input type="number" required name="tataTulisLaporanPenguji" th:value="${tataTulisLaporanPenguji}">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Kelengkapan Materi</label>
+                        <input type="number" required name="kelengkapanMateriPenguji" th:value="${kelengkapanMateriPenguji}">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Pencapaian Tujuan</label>
+                        <input type="number" required name="pencapaianTujuanPenguji" th:value="${pencapaianTujuanPenguji}">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Penguasaan Materi</label>
+                        <input type="number" required name="penguasaanMateriPenguji" th:value="${penguasaanMateriPenguji}">
+                        <span class="percent">%</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Presentasi</label>
+                        <input type="number" required name="presentasiPenguji" th:value="${presentasiPenguji}">
                         <span class="percent">%</span>
                     </div>
                 </div>
@@ -102,28 +185,29 @@
                     <div class="bagianNilai">Nilai Pembimbing</div>
                     <div class="form-group">
                         <label>Tata tulis Laporan</label>
-                        <input type="number" required name="tataTulisLaporanPembimbing">
+                        <input type="number" required name="tataTulisLaporanPembimbing" th:value="${tataTulisLaporanPembimbing}">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Kelengkapan Materi</label>
-                        <input type="number" required name="kelengkapanMateriPembimbing">
+                        <input type="number" required name="kelengkapanMateriPembimbing" th:value="${kelengkapanMateriPembimbing}">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Proses Bimbingan</label>
-                        <input type="number" required name="prosesBimbingan">
+                        <input type="number" required name="prosesBimbingan" th:value="${prosesBimbingan}">
                         <span class="percent">%</span>
                     </div>
                     <div class="form-group">
                         <label>Penguasaan Materi</label>
-                        <input type="number" required name="penguasaanMateriPembimbing"> 
+                        <input type="number" required name="penguasaanMateriPembimbing" th:value="${penguasaanMateriPembimbing}"> 
                         <span class="percent">%</span>
                     </div>
-                </div>
+                </div>  
             </form>
+            <div id="saveKomponenBerhasil" th:text="${statusB}"></div>
             <div id="saveKomponenStatus" th:text="${status}"></div>
-            <button type="submit" form="komponenNilai">Save</button>
+            <button id="komponenFormButton" type="submit" form="komponenNilai">Save</button>
         </div>
     </main>
 </body>

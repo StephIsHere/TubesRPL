@@ -10,7 +10,4 @@ public class KomponenNilai {
     private int idKomponen;
     private String namaKomponen;
     private double bobotKomponen;
-    private int tahunAkademik;
-    private String tipe;
-    private int idKoordinator;
 }

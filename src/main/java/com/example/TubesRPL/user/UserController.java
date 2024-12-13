@@ -234,19 +234,19 @@ public class UserController {
     //KOORDINATOR----------------------------------------------
     //Bentuk BAP --> page html 
     // Komponen Nilai
-    @GetMapping("/komponen-nilai")
-    public String komponenNilai (HttpSession session, Model model){
-        //Menampilkan nama dan peran
-        String nama = (String)session.getAttribute("nama");
-        String peran = (String)session.getAttribute("peran");
-        model.addAttribute("nama", nama);
-        model.addAttribute("peran", peran);
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Koordinator")) {
-            return "koordinator/komponenNilai";
-        } else {
-            return "redirect:/";
-        }
-    }
+    // @GetMapping("/komponen-nilai")
+    // public String komponenNilai (HttpSession session, Model model){
+    //     //Menampilkan nama dan peran
+    //     String nama = (String)session.getAttribute("nama");
+    //     String peran = (String)session.getAttribute("peran");
+    //     model.addAttribute("nama", nama);
+    //     model.addAttribute("peran", peran);
+    //     if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Koordinator")) {
+    //         return "koordinator/komponenNilai";
+    //     } else {
+    //         return "redirect:/";
+    //     }
+    // }
 
     //Tambah Sidang
     @GetMapping ("/home/addSidang")
