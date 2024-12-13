@@ -98,7 +98,6 @@ public class SidangRepoJdbc implements SidangRepository {
         sidang.setNamaPenguji1(penguji1);
         sidang.setNamaPenguji2(penguji2);
         sidang.setNamaKetuaPenguji(ketuaPenguji);
-        
         return sidang;
     }    
 
@@ -132,6 +131,7 @@ public class SidangRepoJdbc implements SidangRepository {
             Sidang sidang = new Sidang();
             sidang.setIdSidang(rs.getInt("idSidang"));
             sidang.setJenisTA(rs.getString("jenisTA"));
+            sidang.setNamaPenulis(rs.getString("penulis"));
             sidang.setTopik(rs.getString("topik"));
             sidang.setJudul(rs.getString("judul"));
             sidang.setTempat(rs.getString("tempat"));
@@ -150,4 +150,10 @@ public class SidangRepoJdbc implements SidangRepository {
             return sidang;
         }
     };
+
+    @Override
+    public List<Sidang> findAllSidangByID(Long idMahasiswa) {
+        String sql = "SELECT * FROM sidang WHERE idMahasiswa = ?";
+        return jdbcTemplate.query(sql, sidangRowMapper, idMahasiswa);
+    }
 }
