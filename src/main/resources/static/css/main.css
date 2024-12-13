@@ -576,16 +576,16 @@ label[for="judulTa"]{
 }
 
 .headerSidang.status-proses {
-    background-color: #EBEBEB;
+    background-color: #FFFEA6;
     color: black;
 }
 
 .headerSidang.status-selesai {
-    background-color: #D5FFA3;
+    background-color: #EBEBEB;
     color: black;
 }
 
 .headerSidang.status-upcoming {
-    background-color: #FFFEA6;
+    background-color: #D5FFA3;
     color: black;
 }
