@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.RowMapper;
@@ -39,6 +40,67 @@ public class SidangRepoJdbc implements SidangRepository {
                      "JOIN users u ON s.idMahasiswa = u.idUser";
         return jdbcTemplate.query(sql, sidangRowMapper);
     }
+
+    @Override
+    public Sidang addPengujiandPembimbing(String judul) {
+        // Query untuk setiap peran
+        String searchPenguji1 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Penguji 1'";
+        String searchPenguji2 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Penguji 2'";
+        String searchPembimbing1 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Pembimbing 1'";
+        String searchPembimbing2 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Pembimbing 2'";
+        String searchKetuaPenguji = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Ketua Penguji'";
+    
+        // Ambil hasil query untuk setiap peran
+        String pembimbing1 = jdbcTemplate.query(searchPembimbing1, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String pembimbing2 = jdbcTemplate.query(searchPembimbing2, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String penguji1 = jdbcTemplate.query(searchPenguji1, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String penguji2 = jdbcTemplate.query(searchPenguji2, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String ketuaPenguji = jdbcTemplate.query(searchKetuaPenguji, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        // Update objek Sidang
+        Sidang sidang = findSidangByJudul(judul).getFirst();
+        sidang.setNamaPembimbing1(pembimbing1);
+        sidang.setNamaPembimbing2(pembimbing2);
+        sidang.setNamaPenguji1(penguji1);
+        sidang.setNamaPenguji2(penguji2);
+        sidang.setNamaKetuaPenguji(ketuaPenguji);
+        
+        return sidang;
+    }    
 
     @Override
     public void addSidang(Sidang sidang) {
