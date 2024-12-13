@@ -89,7 +89,7 @@ public class SidangController {
 
     @PostMapping("/submitSidang")
     public String submitSidang(@RequestParam String judul, Model model, HttpSession session){
-        Sidang sidang = this.sidangRepo.findSidangByJudul(judul).get(0);
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
         model.addAttribute("sidang", sidang);
         model.addAttribute("nama", session.getAttribute("nama"));
         model.addAttribute("peran", session.getAttribute("peran"));
