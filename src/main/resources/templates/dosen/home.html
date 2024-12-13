@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="/css/profileOverlay.css"> 
+
     <script th:src="@{/js/Overlay.js}" defer></script>
     <style>
         #linkMainPage {
@@ -27,18 +29,16 @@
         </div>
     </header>
     <div id="OverlayIconUser">
-        <div class="UserIcon">
-            <img th:src="@{/assets/userWhite.png}">
-        </div>
-        <div class="Sign">
-            <input type="file">
-            <button type="submit">Upload Tanda Tangan</button>
-        </div>
-        <div class="Logout">
-            <a th:href="@{/}">
-                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
-            </a>
-        </div>
+        <form action="uploadTtd" method="post" enctype="multipart/form-data">
+            <p>Upload tanda tangan</p>
+            <img th:if="${ttd != null}" th:src="'data:image/png;base64,' + ${ttd}" alt="tanda tangan">
+            <input id="ttd" type="file" accept="image/png" name="ttd" required>
+            <button type="submit">Submit</button>
+        </form>
+        <hr>
+        <form action="logout" method="post">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
     <main onclick="hideElement()">
         <div class="mainContainer">

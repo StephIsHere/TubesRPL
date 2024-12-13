@@ -2,6 +2,7 @@ package com.example.TubesRPL.user;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +99,29 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override 
     public List<User> findByID (Long idUser){
-        String sql = "SELECT * FROM \"user\"  WHERE \"idUser\" = ?";
+        String sql = "SELECT * FROM users  WHERE idUser = ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, idUser);
+    }
+
+    @Override
+    public boolean saveTtd (Long idUser, byte[] ttd) {
+        String sql = "INSERT INTO gambarTTD (ttd, idUser) VALUES (?, ?)";
+        try {
+            int rowsAffected = jdbcTemplate.update(sql, ttd, idUser);
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public List<TandaTangan> getTtdByUserId(Long idUser) {
+        String sql = "SELECT ttd FROM gambarTTD WHERE idUser = ? ORDER BY idgambar DESC LIMIT 1";
+        return jdbcTemplate.query(sql, this::mapRowToTtd, idUser);
+    }
+    private TandaTangan mapRowToTtd (ResultSet resultSet, int rowNum) throws SQLException {
+        return new TandaTangan(
+            resultSet.getBytes("ttd")
+        );
     }
 }

@@ -1,5 +1,7 @@
 package com.example.TubesRPL.user;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.TubesRPL.sidang.Sidang;
 import com.example.TubesRPL.sidang.SidangRepository;
 import org.springframework.ui.Model;
@@ -70,6 +74,16 @@ public class UserController {
             String nama = (String)session.getAttribute("nama");
             String peran = (String)session.getAttribute("peran");
             Long idMahasiswa = (Long)session.getAttribute("idUser");
+
+            //nampilin ttd
+            List<TandaTangan> ttdList = userRepo.getTtdByUserId(idMahasiswa);
+            if (!ttdList.isEmpty()) {
+                byte[] ttdBytes = ttdList.get(0).getTtd();
+                String base64Image = Base64.getEncoder().encodeToString(ttdBytes);
+                model.addAttribute("ttd", base64Image);
+            } else {
+                model.addAttribute("ttd", null);
+            }
             
             model.addAttribute("nama", nama);
             model.addAttribute("peran", peran);
@@ -355,5 +369,30 @@ public class UserController {
         } else {
             return "redirect:/";
         }
+    }
+
+    //submit ttd
+    @PostMapping("uploadTtd")
+    public String uploadttd (HttpSession session, @RequestParam("ttd") MultipartFile file) throws IOException {
+        if (session.getAttribute("idUser") == null){
+            return "redirect:/";
+        }
+        if (file.isEmpty()) {
+            return "redirect:/";
+        }
+        Long idUser = (Long) session.getAttribute("idUser");
+        byte[] ttd = file.getBytes();
+        boolean success = userRepo.saveTtd(idUser, ttd);
+        if (success) {
+            return "redirect:/home";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("logout")
+    public String logout (HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 }
