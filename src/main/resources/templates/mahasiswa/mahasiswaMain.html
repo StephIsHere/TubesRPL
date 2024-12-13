@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidang Tugas Akhir</title>
-    <link rel="stylesheet" href="/css/mahasiswa/mahasiswaMain.css"> 
+    <link rel="stylesheet" th:href="@{/css/mahasiswa/mahasiswamain.css}">
     <script src="../js/Overlay.js" defer></script>
 </head>
 <body>
@@ -35,125 +35,63 @@
         </div>
     </div>
     <main onclick="hideElement()">
-        <div id="controls">
-        </div>
-        <div class="card-container">
-            <!--
-            <a href="/home/sidangTA1">
-                <div class="card">
-                    <div class="green_box"></div>
-                    <table>
-                        <tr>
-                            <th>Sidang 1</th>
-                            <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                            <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                            <th></th>
-                            <th>(Finished)</th>
-                        </tr>
-                        <tr>
-                            <td class="bold">Topik </td>
-                            <td colspan="2">: Implementasi IoT</td>
-                            <td class="bold">Pembimbing 1</td>
-                            <td>: Raymond Chandra</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Tempat</td>
-                            <td>: 10.03.00.23</td>
-                            <td></td>
-                            <td class="bold">Pembimbing 2</td>
-                            <td>: Meow</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Nilai</td>
-                            <td>: -</td>
-                            <td></td>
-                            <td class="bold">Penguji 1</td>
-                            <td>: Gede Karya</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="bold">Penguji 2</td>
-                            <td>: Keenan</td>
-                        </tr>
-                    </table>
-                </div>
-            </a>
-
-            <a href="/home/sidang2">
-                <div class="card">
-                    <div class="yellow_box"></div>
-                    <table>
-                        <tr>
-                            <th>Sidang 2</th>
-                            <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                            <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                            <th></th>
-                            <th>(Upcoming)</th>
-                        </tr>
-                        <tr>
-                            <td class="bold">Topik </td>
-                            <td colspan="2">: Implementasi IoT</td>
-                            <td class="bold">Pembimbing 1</td>
-                            <td>: Raymond Chandra</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Tempat</td>
-                            <td>: 10.03.00.23</td>
-                            <td></td>
-                            <td class="bold">Pembimbing 2</td>
-                            <td>: Meow</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Nilai</td>
-                            <td>: -</td>
-                            <td></td>
-                            <td class="bold">Penguji 1</td>
-                            <td>: Gede Karya</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="bold">Penguji 2</td>
-                            <td>: Keenan</td>
-                        </tr>
-                    </table>
-                </div>
-            </a>-->
-        
-            <!--<p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
-            <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>-->
+        <div class="mainContainer">
+            <div id="functionBar">
+                <form th:action="@{/home/searchSidang}" method="POST">
+                    <input id="searchBar" type="text" placeholder="search..." name="judul">
+                </form>  
+            </div>
+            <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
+            <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
             <div th:each="sidang : ${sidangs}">
                 <div class="sidangContainer">
-                    <div class="sidang">
-                        <div class="headerSidang">
-                            <label class="label_jenis" th:if="${sidang.jenisTA=='1'}">Sidang Tugas Akhir 1</label>
-                            <label class="label_jenis" th:if="${sidang.jenisTA=='2'}">Sidang Tugas Akhir 2</label>
-                            <label class="label_status" th:text="${sidang.status}"></label>
+                    <form th:action="@{/sidang/submitSidang}" method="post">
+                        <div class="sidang">
+                            <div class="headerSidang"
+                                    th:classappend="${sidang.status == 'Proses' ? 'status-proses' : 
+                                                        sidang.status == 'Selesai' ? 'status-selesai' : 
+                                                        sidang.status == 'Upcoming' ? 'status-upcoming' : ''}">
+                                <label class="label_jenis" th:if="${sidang.jenisTA=='1'}">Sidang Tugas Akhir 1</label>
+                                <label class="label_jenis" th:if="${sidang.jenisTA=='2'}">Sidang Tugas Akhir 2</label>
+                                <label class="label_status" th:text="${sidang.status}"></label>
+                                <button type="submit" class="submit-button">Detail</button>
+                            </div>
+                            <div class="komponen-sidang-box">
+                                <input type="hidden" name="idMahasiswa" th:value="${sidang.idMahasiswa}" />
+                                <input type="hidden" name="namaPenulis" th:value="${sidang.namaPenulis}" />
+                                <input type="hidden" name="topik" th:value="${sidang.topik}" />
+                                <input type="hidden" name="judul" th:value="${sidang.judul}" />
+                                <input type="hidden" name="tempat" th:value="${sidang.tempat}" />
+                                <input type="hidden" name="tanggal" th:value="${#temporals.format(sidang.tanggal, 'yyyy-MM-dd')}" />
+                                <input type="hidden" name="waktu" th:value="${#temporals.format(sidang.waktu, 'HH:mm')}" />
+                
+                                <strong style="grid-area: labelNIKmahasiswa">NIK mahasiswa:</strong>
+                                <span style="grid-area: isiNIKmahasiswa" class="label_nikMahasiswa" th:text="${sidang.idMahasiswa}"></span>
+                
+                                <strong style="grid-area: labelNamaMahasiswa">Nama mahasiswa:</strong>
+                                <span style="grid-area: isiNamaMahasiswa" class="label_namaMahasiswa" th:text="${sidang.namaPenulis}"></span>
+                
+                                <strong style="grid-area: labelTopik">Topik:</strong>
+                                <span style="grid-area: topik" class="label_topik" th:text="${sidang.topik}"></span>
+                
+                                <strong style="grid-area: labelJudul">Judul:</strong>
+                                <span style="grid-area: judul" class="label_judul" th:text="${sidang.judul}"></span>
+                
+                                <strong style="grid-area: labelTempat">Lokasi:</strong>
+                                <span style="grid-area: tempat" class="label_tempat" th:text="${sidang.tempat}"></span>
+                
+                                <strong style="grid-area: labelTanggal">Tanggal:</strong>
+                                <span style="grid-area: tanggal" class="label_tanggal" th:text="${#temporals.format(sidang.tanggal, 'dd-MM-yyyy')}">Tanggal</span>
+                
+                                <strong style="grid-area: labelWaktu">Waktu:</strong>
+                                <span style="grid-area: waktu" class="label_waktu" th:text="${#temporals.format(sidang.waktu, 'HH:mm')}">Waktu</span>
+                
+                                <span style="grid-area: kosong"></span>
+                            </div>
                         </div>
-                        <div class="komponen-sidang-box">
-                            <strong style="grid-area: labelTopik">Topik:</strong>
-                            <span style="grid-area: topik" class="label_topik" th:text="${sidang.topik}"></span>
-
-                            <strong style="grid-area: labelJudul">Judul:</strong>
-                            <span style="grid-area: judul" class="label_judul" th:text="${sidang.judul}"></span>
-
-                            <strong style="grid-area: labelTempat">Lokasi:</strong>
-                            <span style="grid-area: tempat" class="label_tempat" th:text="${sidang.tempat}"></span>
-
-                            <strong style="grid-area: labelTanggal">Tanggal:</strong>
-                            <span style="grid-area: tanggal" class="label_tanggal" th:text="${#temporals.format(sidang.tanggal, 'dd-MM-yyyy')}">Tanggal</span>
-                            
-                            <strong style="grid-area: labelWaktu">Waktu:</strong>
-                            <span style="grid-area: waktu" class="label_waktu" th:text="${#temporals.format(sidang.waktu, 'HH:mm')}">Waktu</span>
-                            
-                            <span style="grid-area: kosong"></span>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
+            </div>            
         </div>
     </main>
 </body>

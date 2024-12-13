@@ -13,4 +13,5 @@ public interface SidangRepository {
     List<Sidang> findAllSidangByID(Long nik);
     List<Sidang> findAllSidangWithPenulis();
     Sidang addPengujiandPembimbing(String judul);
+    List<BobotNilai> findBobot();
 }

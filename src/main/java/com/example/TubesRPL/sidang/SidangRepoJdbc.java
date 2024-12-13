@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,13 +25,16 @@ public class SidangRepoJdbc implements SidangRepository {
     
     @Override
     public List<Sidang> findSidangByJudul(String judul) {
+        // Membuat SQL query yang tidak sensitif terhadap case
         String sql = "SELECT s.*, u.nama AS penulis " +
                      "FROM sidang s " +
                      "JOIN users u ON s.idMahasiswa = u.idUser " +
                      "WHERE LOWER(s.judul) LIKE LOWER(?)";
-        return jdbcTemplate.query(sql, sidangRowMapper, "%" + judul + "%");
-    }    
-
+        // Menggunakan jdbcTemplate untuk menjalankan query, dengan wildcard untuk pencarian sebagian kata
+        return jdbcTemplate.query(sql, sidangRowMapper, "%" + judul.trim() + "%");
+    }
+    
+    
     @Override
     public List<Sidang> findAllSidangWithPenulis() {
         String sql = "SELECT s.*, u.nama AS penulis " +
@@ -153,7 +155,27 @@ public class SidangRepoJdbc implements SidangRepository {
 
     @Override
     public List<Sidang> findAllSidangByID(Long idMahasiswa) {
-        String sql = "SELECT * FROM sidang WHERE idMahasiswa = ?";
+        String sql = "SELECT s.*, u.nama AS penulis " +
+                     "FROM sidang s " +
+                     "JOIN users u ON s.idMahasiswa = u.idUser " +
+                     "WHERE s.idMahasiswa = ?";
         return jdbcTemplate.query(sql, sidangRowMapper, idMahasiswa);
     }
+    
+
+    @Override
+    public List<BobotNilai> findBobot(){
+        String sql = "SELECT * FROM komponennilai";
+        return jdbcTemplate.query(sql, bobotMapper);
+    }
+
+    private final RowMapper<BobotNilai> bobotMapper = new RowMapper<BobotNilai>() {
+        @Override
+        public BobotNilai mapRow(ResultSet rs, int rowNum) throws SQLException {
+            BobotNilai bobotNilai = new BobotNilai();
+            bobotNilai.setNamaKomponen(rs.getString("namakomponen"));
+            bobotNilai.setBobotKomponen(rs.getDouble("bobotkomponen"));
+            return bobotNilai;
+        }
+    };
 }
