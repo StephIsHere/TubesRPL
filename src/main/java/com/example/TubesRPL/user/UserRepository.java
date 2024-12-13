@@ -13,4 +13,6 @@ public interface UserRepository {
     List<User> findByNik(String nik);
     List<User> findByID (Long idUser);
     void updateUser(User user);
+    boolean saveTtd (Long idUser, byte[] ttd);
+    List<TandaTangan> getTtdByUserId (Long userId);
 }

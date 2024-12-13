@@ -83,14 +83,18 @@ public class SidangController {
     @PostMapping("/searchSidang")
     public String searchSidang(@RequestParam String judul, Model model, HttpSession session){
         List<Sidang> listSidang = this.sidangRepo.findSidangByJudul(judul);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
         model.addAttribute("sidangs", listSidang);
         return "koordinator/home";
     }
 
     @PostMapping("/submitSidang")
     public String submitSidang(@RequestParam String judul, Model model, HttpSession session){
-        Sidang sidang = this.sidangRepo.findSidangByJudul(judul).get(0);
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        List<BobotNilai> bobotNilai = this.sidangRepo.findBobot();
         model.addAttribute("sidang", sidang);
+        model.addAttribute("bobotList", bobotNilai);
         model.addAttribute("nama", session.getAttribute("nama"));
         model.addAttribute("peran", session.getAttribute("peran"));
         return "koordinator/DetailSidang";

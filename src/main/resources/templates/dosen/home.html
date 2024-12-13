@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidang Tugas Akhir</title>
-    <link rel="stylesheet" href="@{/css/main.css}">
-    <link rel="stylesheet" href="/css/dosen/home.css">
-    <script src="../js/Overlay.js" defer></script>
-</head>
-<body>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="/css/profileOverlay.css"> 
 
+    <script th:src="@{/js/Overlay.js}" defer></script>
+    <style>
+        #linkMainPage {
+            background-color: #479097;
+            border: 2px solid #479097 !important;
+            border-bottom: 2px solid #E3F1F0 !important;
+        }
+    </style>
+    <title></title>
+</head>
+<body> 
     <header>
         <div id="leftHeader">
             <span id="judul">Sidang Tugas Akhir</span>
@@ -18,183 +25,79 @@
             <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
-            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()">
+            <img th:src="@{/assets/userWhite.png}" alt="" onclick="showElement()">
         </div>
     </header>
     <div id="OverlayIconUser">
-        <div class="UserIcon">
-            <img th:src="@{../assets/userWhite.png}">
-            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
-        </div>
-        <div class="Sign">
-            <input type="file">
-            <button type="submit">Upload Tanda Tangan</button>
-        </div>
-        <div class="Logout">
-            <a href="/">
-                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
-            </a>
-        </div>
+        <form action="uploadTtd" method="post" enctype="multipart/form-data">
+            <p>Upload tanda tangan</p>
+            <img th:if="${ttd != null}" th:src="'data:image/png;base64,' + ${ttd}" alt="tanda tangan">
+            <input id="ttd" type="file" accept="image/png" name="ttd" required>
+            <button type="submit">Submit</button>
+        </form>
+        <hr>
+        <form action="logout" method="post">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
     <main onclick="hideElement()">
-        <div id="functionBar">
-            <div>
-                <form action="/home" method="get">
-                    <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="Search...">
-                    <button id="view" type="submit">Search</button>
-                </form>
+        <div class="mainContainer">
+            <div id="functionBar">
+                <form th:action="@{/home/searchSidang}" method="POST">
+                    <input id="searchBar" type="text" placeholder="search..." name="judul">
+                </form>  
             </div>
-            <div>
-                <form action="/home" method="get">
-                    <select name="filter" id="filterButton" onchange="this.form.submit()">
-                        <option id="filterButton" value="">Filter</option>
-                        <option id="filterButton" value="Admin">Admin</option>
-                        <option id="filterButton" value="Koordinator">Koordinator</option>
-                        <option id="filterButton" value="Dosen">Dosen</option>
-                        <option id="filterButton" value="Mahasiswa">Mahasiswa</option>
-                    </select>
-                </form>
-            </div>
-            <div>
-                <form action="/home" method="get">
-                    <select id="sortButton" name="sort" onchange="this.form.submit()">
-                        <option id="sortButton" value="" disabled selected>Sort</option>
-                        <option id="sortButton" value="true">Naik</option>
-                        <option id="sortButton" value="false">Turun</option>
-                    </select>
-                </form>
-            </div>
-            <a href="/home/add">
-                <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
-            </a>
-        </div>
-        <div class="card-container">
-            <a href="">
-                <div class="card">
-                    <div class="green_box"></div>
-                    <table>
-                        <tr>
-                            <th>Sidang 1</th>
-                            <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                            <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                            <th></th>
-                            <th>(Finished)</th>
-                        </tr>
-                        <tr>
-                            <td class="bold">Topik </td>
-                            <td colspan="2">: Implementasi IoT</td>
-                            <td class="bold">Pembimbing 1</td>
-                            <td>: Raymond Chandra</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Tempat</td>
-                            <td>: 10.03.00.23</td>
-                            <td></td>
-                            <td class="bold">Pembimbing 2</td>
-                            <td>: Meow</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Nilai</td>
-                            <td>: -</td>
-                            <td></td>
-                            <td class="bold">Penguji 1</td>
-                            <td>: Gede Karya</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="bold">Penguji 2</td>
-                            <td>: Keenan</td>
-                        </tr>
-                    </table>
+            <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
+            <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
+            <div th:each="sidang : ${sidangs}">
+                <div class="sidangContainer">
+                    <form th:action="@{/sidang/submitSidang}" method="post">
+                        <div class="sidang">
+                            <div class="headerSidang"
+                                    th:classappend="${sidang.status == 'Proses' ? 'status-proses' : 
+                                                        sidang.status == 'Selesai' ? 'status-selesai' : 
+                                                        sidang.status == 'Upcoming' ? 'status-upcoming' : ''}">
+                                <label class="label_jenis" th:if="${sidang.jenisTA=='1'}">Sidang Tugas Akhir 1</label>
+                                <label class="label_jenis" th:if="${sidang.jenisTA=='2'}">Sidang Tugas Akhir 2</label>
+                                <label class="label_status" th:text="${sidang.status}"></label>
+                                <button type="submit" class="submit-button">Detail</button>
+                            </div>
+                            <div class="komponen-sidang-box">
+                                <input type="hidden" name="idMahasiswa" th:value="${sidang.idMahasiswa}" />
+                                <input type="hidden" name="namaPenulis" th:value="${sidang.namaPenulis}" />
+                                <input type="hidden" name="topik" th:value="${sidang.topik}" />
+                                <input type="hidden" name="judul" th:value="${sidang.judul}" />
+                                <input type="hidden" name="tempat" th:value="${sidang.tempat}" />
+                                <input type="hidden" name="tanggal" th:value="${#temporals.format(sidang.tanggal, 'yyyy-MM-dd')}" />
+                                <input type="hidden" name="waktu" th:value="${#temporals.format(sidang.waktu, 'HH:mm')}" />
+                
+                                <strong style="grid-area: labelNIKmahasiswa">NIK mahasiswa:</strong>
+                                <span style="grid-area: isiNIKmahasiswa" class="label_nikMahasiswa" th:text="${sidang.idMahasiswa}"></span>
+                
+                                <strong style="grid-area: labelNamaMahasiswa">Nama mahasiswa:</strong>
+                                <span style="grid-area: isiNamaMahasiswa" class="label_namaMahasiswa" th:text="${sidang.namaPenulis}"></span>
+                
+                                <strong style="grid-area: labelTopik">Topik:</strong>
+                                <span style="grid-area: topik" class="label_topik" th:text="${sidang.topik}"></span>
+                
+                                <strong style="grid-area: labelJudul">Judul:</strong>
+                                <span style="grid-area: judul" class="label_judul" th:text="${sidang.judul}"></span>
+                
+                                <strong style="grid-area: labelTempat">Lokasi:</strong>
+                                <span style="grid-area: tempat" class="label_tempat" th:text="${sidang.tempat}"></span>
+                
+                                <strong style="grid-area: labelTanggal">Tanggal:</strong>
+                                <span style="grid-area: tanggal" class="label_tanggal" th:text="${#temporals.format(sidang.tanggal, 'dd-MM-yyyy')}">Tanggal</span>
+                
+                                <strong style="grid-area: labelWaktu">Waktu:</strong>
+                                <span style="grid-area: waktu" class="label_waktu" th:text="${#temporals.format(sidang.waktu, 'HH:mm')}">Waktu</span>
+                
+                                <span style="grid-area: kosong"></span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </a>
-
-            <a href="">
-                <div class="card">
-                    <div class="yellow_box"></div>
-                    <table>
-                        <tr>
-                            <th>Sidang 2</th>
-                            <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                            <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                            <th></th>
-                            <th>(Upcoming)</th>
-                        </tr>
-                        <tr>
-                            <td class="bold">Topik </td>
-                            <td colspan="2">: Mesin Otomatisasi Pencarian</td>
-                            <td class="bold">Pembimbing 1</td>
-                            <td>: Raymond Chandra</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Tempat</td>
-                            <td>: 10.03.00.23</td>
-                            <td></td>
-                            <td class="bold">Pembimbing 2</td>
-                            <td>: Meow</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Nilai</td>
-                            <td>: -</td>
-                            <td></td>
-                            <td class="bold">Penguji 1</td>
-                            <td>: Gede Karya</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="bold">Penguji 2</td>
-                            <td>: Keenan</td>
-                        </tr>
-                    </table>
-                </div>
-            </a>
-            
-            <a href="">
-                <div class="card">
-                    <div class="gray_box"></div>
-                    <table>
-                        <tr>
-                            <th>Sidang 3</th>
-                            <th>Tanggal: <span class="no_bold">14/10/2024</span></th>
-                            <th class="jam">Jam: <span class="no_bold">13:00-15:00</span></th>
-                            <th></th>
-                            <th>(Finished)</th>
-                        </tr>
-                        <tr>
-                            <td class="bold">Topik </td>
-                            <td colspan="2">: Jaringan Keamanan Internet</td>
-                            <td class="bold">Pembimbing 1</td>
-                            <td>: Raymond Chandra</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Tempat</td>
-                            <td>: 10.03.00.23</td>
-                            <td></td>
-                            <td class="bold">Pembimbing 2</td>
-                            <td>: Meow</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Nilai</td>
-                            <td>: -</td>
-                            <td></td>
-                            <td class="bold">Penguji 1</td>
-                            <td>: Gede Karya</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="bold">Penguji 2</td>
-                            <td>: Keenan</td>
-                        </tr>
-                    </table>
-                </div>
-            </a>
-
+            </div>            
         </div>
     </main>
 </body>

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidang Tugas Akhir</title>
     <link rel="stylesheet" href="/css/mahasiswa/detailSidangUpcoming.css">
+    <link rel="stylesheet" href="/css/profileOverlay.css"> 
+
     <script src="../js/Overlay.js" defer></script> 
     <style>
         #judulSidang{
@@ -25,19 +27,16 @@
         </div>
     </header>
     <div id="OverlayIconUser">
-        <div class="UserIcon">
-            <img th:src="@{../assets/userWhite.png}">
-            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
-        </div>
-        <div class="Sign">
-            <input type="file">
-            <button type="submit">Upload Tanda Tangan</button>
-        </div>
-        <div class="Logout">
-            <a href="/">
-                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
-            </a>
-        </div>
+        <form action="uploadTtd" method="post" enctype="multipart/form-data">
+            <p>Upload tanda tangan</p>
+            <img th:if="${ttd != null}" th:src="'data:image/png;base64,' + ${ttd}" alt="tanda tangan">
+            <input id="ttd" type="file" accept="image/png" name="ttd" required>
+            <button type="submit">Submit</button>
+        </form>
+        <hr>
+        <form action="logout" method="post">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
     <main onclick="hideElement()">
         <div class="card-container">
@@ -56,16 +55,19 @@
                         <td class="bold">Mahasiswa</td><td>: <span th:text="${sidang.namaPenulis}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Pembimbing 1</td><td>: -</td>
+                        <td class="bold">Ketua Penguji</td><td>: <span th:text="${sidang.namaKetuaPenguji}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Pembimbing 2</td><td>: -</td>
+                        <td class="bold">Pembimbing 1</td><td>: <span th:text="${sidang.namaPembimbing1}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Penguji 1</td><td>: -</td>
+                        <td class="bold">Pembimbing 2</td><td>: <span th:text="${sidang.namaPembimbing2}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Penguji 2</td><td>: -</td>
+                        <td class="bold">Penguji 1</td><td>: <span th:text="${sidang.namaPenguji1}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguji 2</td><td>: <span th:text="${sidang.namaPenguji2}"></span></td>
                     </tr>
                     <tr>
                         <td class="bold">Tanggal</td><td>: <span th:text="${sidang.tanggal}"></span></td>
@@ -82,41 +84,19 @@
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Penguji</td>
                     </tr>
-                    <tr>
-                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Pencapaian Tujuan</td><td>: 25%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Presentasi</td><td>: 10%</td>
+                    <tr th:each="bobot : ${bobotList}">
+                        <td class="bold" th:text="${bobot.namaKomponen}"></td>
+                        <td th:text="${bobot.bobotKomponen} + '%'"></td>
                     </tr>
                 </table>
-
+                
                 <table class="table2">
                     <tr>
                         <td class="bold judul" colspan="2">Persentase Nilai</td>
                     </tr>
-                    <tr>
-                        <td class="bold">Ketua Tim Penguji</td><td>: 35%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Anggota Tim Penguji</td><td>: 35%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Pembimbing</td><td>: 20%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Koordinator</td><td>: 10%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Nilai Akhir</td><td class="bold">: 100%</td>
+                    <tr th:each="bobot : ${bobotList}">
+                        <td class="bold" th:text="${bobot.namaKomponen}"></td>
+                        <td th:text="${bobot.bobotKomponen} + '%'"></td>
                     </tr>
                 </table>
 
@@ -124,17 +104,10 @@
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Pembimbing</td>
                     </tr>
-                    <tr>
-                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Proses bimbingan</td><td>: 25%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+
+                    <tr th:each="bobot : ${bobotList}">
+                        <td class="bold" th:text="${bobot.namaKomponen}"></td>
+                        <td th:text="${bobot.bobotKomponen} + '%'"></td>
                     </tr>
                 </table>
             </div>

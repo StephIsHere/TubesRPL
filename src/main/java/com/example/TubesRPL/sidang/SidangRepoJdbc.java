@@ -25,13 +25,16 @@ public class SidangRepoJdbc implements SidangRepository {
     
     @Override
     public List<Sidang> findSidangByJudul(String judul) {
+        // Membuat SQL query yang tidak sensitif terhadap case
         String sql = "SELECT s.*, u.nama AS penulis " +
                      "FROM sidang s " +
                      "JOIN users u ON s.idMahasiswa = u.idUser " +
                      "WHERE LOWER(s.judul) LIKE LOWER(?)";
-        return jdbcTemplate.query(sql, sidangRowMapper, "%" + judul + "%");
-    }    
-
+        // Menggunakan jdbcTemplate untuk menjalankan query, dengan wildcard untuk pencarian sebagian kata
+        return jdbcTemplate.query(sql, sidangRowMapper, "%" + judul.trim() + "%");
+    }
+    
+    
     @Override
     public List<Sidang> findAllSidangWithPenulis() {
         String sql = "SELECT s.*, u.nama AS penulis " +
@@ -41,10 +44,64 @@ public class SidangRepoJdbc implements SidangRepository {
     }
 
     @Override
-    public List<Sidang> findAllSidangByID(Long idmahasiswa) {
-        String sql = "SELECT * FROM sidang WHERE idMahasiswa = ?";
-        return jdbcTemplate.query(sql, sidangRowMapper, idmahasiswa);
-    }
+    public Sidang addPengujiandPembimbing(String judul) {
+        // Query untuk setiap peran
+        String searchPenguji1 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Penguji 1'";
+        String searchPenguji2 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Penguji 2'";
+        String searchPembimbing1 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Pembimbing 1'";
+        String searchPembimbing2 = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Pembimbing 2'";
+        String searchKetuaPenguji = "select users.nama from sidangdosen \n" +
+                "join users on sidangdosen.iduser = users.iduser\n" +
+                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
+                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Ketua Penguji'";
+    
+        // Ambil hasil query untuk setiap peran
+        String pembimbing1 = jdbcTemplate.query(searchPembimbing1, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String pembimbing2 = jdbcTemplate.query(searchPembimbing2, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String penguji1 = jdbcTemplate.query(searchPenguji1, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String penguji2 = jdbcTemplate.query(searchPenguji2, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        String ketuaPenguji = jdbcTemplate.query(searchKetuaPenguji, 
+            new Object[]{judul}, 
+            (rs, rowNum) -> rs.getString("nama")
+        ).stream().findFirst().orElse(null);
+    
+        // Update objek Sidang
+        Sidang sidang = findSidangByJudul(judul).getFirst();
+        sidang.setNamaPembimbing1(pembimbing1);
+        sidang.setNamaPembimbing2(pembimbing2);
+        sidang.setNamaPenguji1(penguji1);
+        sidang.setNamaPenguji2(penguji2);
+        sidang.setNamaKetuaPenguji(ketuaPenguji);
+        return sidang;
+    }    
 
     @Override
     public void addSidang(Sidang sidang) {
@@ -76,6 +133,7 @@ public class SidangRepoJdbc implements SidangRepository {
             Sidang sidang = new Sidang();
             sidang.setIdSidang(rs.getInt("idSidang"));
             sidang.setJenisTA(rs.getString("jenisTA"));
+            sidang.setNamaPenulis(rs.getString("penulis"));
             sidang.setTopik(rs.getString("topik"));
             sidang.setJudul(rs.getString("judul"));
             sidang.setTempat(rs.getString("tempat"));
@@ -92,6 +150,32 @@ public class SidangRepoJdbc implements SidangRepository {
             sidang.setIdKoordinator(rs.getLong("idKoordinator"));
             sidang.setIdMahasiswa(rs.getLong("idMahasiswa"));
             return sidang;
+        }
+    };
+
+    @Override
+    public List<Sidang> findAllSidangByID(Long idMahasiswa) {
+        String sql = "SELECT s.*, u.nama AS penulis " +
+                     "FROM sidang s " +
+                     "JOIN users u ON s.idMahasiswa = u.idUser " +
+                     "WHERE s.idMahasiswa = ?";
+        return jdbcTemplate.query(sql, sidangRowMapper, idMahasiswa);
+    }
+    
+
+    @Override
+    public List<BobotNilai> findBobot(){
+        String sql = "SELECT * FROM komponennilai";
+        return jdbcTemplate.query(sql, bobotMapper);
+    }
+
+    private final RowMapper<BobotNilai> bobotMapper = new RowMapper<BobotNilai>() {
+        @Override
+        public BobotNilai mapRow(ResultSet rs, int rowNum) throws SQLException {
+            BobotNilai bobotNilai = new BobotNilai();
+            bobotNilai.setNamaKomponen(rs.getString("namakomponen"));
+            bobotNilai.setBobotKomponen(rs.getDouble("bobotkomponen"));
+            return bobotNilai;
         }
     };
 }
