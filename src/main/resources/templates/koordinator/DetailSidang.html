@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidang Tugas Akhir</title>
+    <link rel="stylesheet" href="/css/mahasiswa/detailSidangUpcoming.css">
+    <script src="../js/Overlay.js" defer></script> 
+</head>
+<body>
+    <header>
+        <div id="leftHeader">
+            <span id="judul">Sidang Tugas Akhir</span>
+        </div>
+        <div id="rightHeader">
+            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span> -->
+        </div>
+        <div class="userProfile">
+            <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()" >
+        </div>
+    </header>
+    <div id="OverlayIconUser">
+        <div class="UserIcon">
+            <img th:src="@{../assets/userWhite.png}">
+            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span> -->
+        </div>
+        <div class="Sign">
+            <input type="file">
+            <button type="submit">Upload Tanda Tangan</button>
+        </div>
+        <div class="Logout">
+            <a href="/">
+                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
+            </a>
+        </div>
+    </div>
+    <main onclick="hideElement()">
+        <div class="card-container">
+            <div class="card">
+                <a href="/home" id="backtomain"><img src="../assets/arrow.png" alt="back_to_main"></a>
+                <div class="yellow_box"></div>
+                <span class="judulCard bold">Sidang 2</span>
+                <table class="table1">
+                    <tr>
+                        <td colspan="2" class="bold judul">Informasi Sidang</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Topik</td><td>: Implementasi IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Mahasiswa</td><td>: Steven Febrian</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pembimbing 1</td><td>: Raymond Chandra</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pembimbing 2</td><td>: -</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguji 1</td><td>: Gede Karya</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguji 2</td><td>: Keenan</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tanggal</td><td>: 14/10/2024</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Jam</td><td>: 13:00-15:00</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tempat</td><td>: 10.03.00.23</td>
+                    </tr>
+                </table>
+
+                <table class="table3">
+                    <tr>
+                        <td class="bold judul" colspan="2">Bobot Penilaian Penguji</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pencapaian Tujuan</td><td>: 25%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Presentasi</td><td>: 10%</td>
+                    </tr>
+                </table>
+
+                <table class="table2">
+                    <tr>
+                        <td class="bold judul" colspan="2">Persentase Nilai</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Ketua Tim Penguji</td><td>: 35%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Anggota Tim Penguji</td><td>: 35%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Pembimbing</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Koordinator</td><td>: 10%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Nilai Akhir</td><td class="bold">: 100%</td>
+                    </tr>
+                </table>
+
+                <table class="table4">
+                    <tr>
+                        <td class="bold judul" colspan="2">Bobot Penilaian Pembimbing</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Proses bimbingan</td><td>: 25%</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

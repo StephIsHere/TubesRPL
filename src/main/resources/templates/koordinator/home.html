@@ -46,9 +46,7 @@
             <div id="functionBar">
                 <form th:action="@{/sidang/searchSidang}" method="POST">
                     <input id="searchBar" type="text" placeholder="search..." name="judul">
-                </form>
-                <!-- <button id="filterButton">Filter</button>
-                <button id="sortButton">Sort</button> -->    
+                </form>  
                 <a th:href="@{/home/addSidang}"><button id="addSidangButton">+</button></a>
             </div>
             <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
