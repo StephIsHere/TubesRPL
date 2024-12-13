@@ -589,3 +589,27 @@ label[for="judulTa"]{
     background-color: #D5FFA3;
     color: black;
 }
+
+.submit-button {
+    background-color: #007BFF; /* Warna biru */
+    color: white; /* Teks putih */
+    border: none; /* Hilangkan border */
+    border-radius: 4px; /* Sudut melengkung */
+    padding: 4px 8px; /* Padding yang sesuai */
+    font-size: 16px; /* Ukuran font */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animasi */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Warna biru gelap saat hover */
+}
+
+.submit-button:active {
+    transform: scale(0.95); /* Efek klik */
+}
+
+.submit-button:focus {
+    outline: none; /* Hilangkan outline */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Tambahkan shadow saat fokus */
+}

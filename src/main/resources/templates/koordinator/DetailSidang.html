@@ -85,41 +85,19 @@
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Penguji</td>
                     </tr>
-                    <tr>
-                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Pencapaian Tujuan</td><td>: 25%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Presentasi</td><td>: 10%</td>
+                    <tr th:each="bobot : ${bobotList}">
+                        <td class="bold" th:text="${bobot.namaKomponen}"></td>
+                        <td th:text="${bobot.bobotKomponen} + '%'"></td>
                     </tr>
                 </table>
-
+                
                 <table class="table2">
                     <tr>
                         <td class="bold judul" colspan="2">Persentase Nilai</td>
                     </tr>
-                    <tr>
-                        <td class="bold">Ketua Tim Penguji</td><td>: 35%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Anggota Tim Penguji</td><td>: 35%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Pembimbing</td><td>: 20%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Koordinator</td><td>: 10%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Nilai Akhir</td><td class="bold">: 100%</td>
+                    <tr th:each="bobot : ${bobotList}">
+                        <td class="bold" th:text="${bobot.namaKomponen}"></td>
+                        <td th:text="${bobot.bobotKomponen} + '%'"></td>
                     </tr>
                 </table>
 
@@ -127,17 +105,10 @@
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Pembimbing</td>
                     </tr>
-                    <tr>
-                        <td class="bold">Tata Tulis Laporan</td><td>: 15%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Kelengkapan Materi</td><td>: 20%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Proses bimbingan</td><td>: 25%</td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Penguasaan Materi</td><td>: 30%</td>
+
+                    <tr th:each="bobot : ${bobotList}">
+                        <td class="bold" th:text="${bobot.namaKomponen}"></td>
+                        <td th:text="${bobot.bobotKomponen} + '%'"></td>
                     </tr>
                 </table>
             </div>

@@ -101,10 +101,18 @@ public class UserController {
                 return "koordinator/home";
 
             } else if (session.getAttribute("peran").equals("Dosen")) {
+                List<Sidang> sidangs = sidangRepo.findAllSidangWithPenulis(); 
+                List<User> userList = userRepo.findAll();
+
+                model.addAttribute("allUser", userList);
+                model.addAttribute("sidangs", sidangs);
                 return "dosen/home";
             } else if (session.getAttribute("peran").equals("Mahasiswa")) {
                 List<Sidang> sidangs = sidangRepo.findAllSidangByID(idMahasiswa); 
-                System.out.println("makan" + sidangs);
+                List<User> userList = userRepo.findAll();
+
+                model.addAttribute("allUser", userList);
+                model.addAttribute("sidangs", sidangs);
                 model.addAttribute("sidangs", sidangs);
                 return "mahasiswa/mahasiswaMain";
             } else {
@@ -192,6 +200,22 @@ public class UserController {
         }
     }
 
+    @PostMapping("/home/searchSidang")
+    public String searchUser(@RequestParam String judul, Model model, HttpSession session) {
+        List<Sidang> listSidang = this.sidangRepo.findSidangByJudul(judul);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
+        model.addAttribute("sidangs", listSidang);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
+        if (session.getAttribute("nama").equals("Dosen")) {
+            return"dosen/home";
+        } else if (session.getAttribute("nama").equals("Mahasiswa")) {
+            return "mahasiswa/mahasiswaMain";
+        } else {
+            return"/";
+        }
+    }
 
     //KOORDINATOR----------------------------------------------
     //Bentuk BAP --> page html 

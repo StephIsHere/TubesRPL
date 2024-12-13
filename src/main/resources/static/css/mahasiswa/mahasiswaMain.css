@@ -1,161 +1,397 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
 }
 
 header {
     color: white;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #388087;
-    width: 100%;
+    width: 100vw;
     height: 50px;
     padding: 0 20px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-header a {
-    color: white;
+div#rightHeader {
+    white-space: wrap;
+    margin-left: 15px;
+}
+
+div#leftHeader {
+    display: flex;
+    align-items: center;
+}
+
+div#leftHeader > a {
+    box-sizing: border-box;
+    border: #388087 solid 2px;
+    padding: 0 20px;
+    align-content: center;
+    height: 50px;
     text-decoration: none;
-    margin-left: 20px;
-    padding: 5px 10px;
+    color: white;
 }
 
-header a.active {
-    background-color: #E3F1F0;
-    color: #388087;
-    border-radius: 5px;
+div#leftHeader > a:hover {
+    border-color: #479097;
+    background-color: #479097;
+    cursor: pointer;
 }
 
-#rightHeader {
-    position: absolute;
-    right: 55px;
+#judul {
+    margin-right: 100px;
+    font-weight: bold;
+}
+
+@media (max-width: 800px) {
+    #judul {
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 570px) {
+    #judul {
+        display: none;
+    }
 }
 
 main {
-    padding: 20px;
-}
-
-#controls {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
     display: flex;
-    justify-content: center ;
-    margin-bottom: 20px;
-
+    justify-content: center;
+    align-items: flex-start;
 }
 
-#controls input {
-    margin-right: 10px;
-    padding: 10px;
-    padding-right: 230px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.hidden {
+    display: none;
 }
 
-#controls button {
-    padding: 10px 20px;
-    background-color:white;
-    color: black;
-    border: none;
-    border-radius: 5px;
+.mainContainer, .card {
+    width: 1000px;
+    margin: 20px;
+}
+
+#functionBar{
+    display: flex;
+    justify-content: space-between;
+}
+
+#searchBar, #filterButton, #sortButton, #addSidangButton, #view {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 2px;
+    padding: 0 10px;
+    border: 1px solid #acacac;
+    border-radius: 12px;
+    height: 30px;
+    width: 70px;
+    font-size: 12px;
+}
+
+#filterButton:hover, #sortButton:hover, #addSidangButton:hover, #view:hover {
+    background-color: #eaf7f5;
     cursor: pointer;
-    margin: 3px;
 }
 
-#controls button:hover {
+#searchBar{
+    align-content: center;
+    width:400px;
+    outline: none;
+    margin-right: 30px;
+}
+
+#addSidangButton {
+    width: 100px;
+    margin-left: 20px;
+}
+
+.sidang, .addSidang {
+    border: 1px solid #acacac;
+    border-radius: 12px;
+    margin: 20px 2px;
+}
+
+.addSidang {
+    width: 800px;
+}
+
+.sidang {
+    height: 210px;
+}
+
+.headerSidang{
+    box-sizing: border-box;
+    align-content: center;
+    text-indent: 10px;
+    background-color: #D5FFA3;
+    height: 35px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.headerAddSidang {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-indent: 10px;
+    background-color: #E3F1F0;
+    height: 50px;
+    border-radius: 12px 12px 0 0;
+}
+
+form > input {
+    height: 100%;
+    width: 50%;
+    min-width: 50px;
+}
+
+label.labelAddSidang {
+    display: inline-block;
+    width: 300px;
+    margin: 10px;
+    margin-left: 0;
+}
+
+.formContainer {
+    padding: 10px 30px;
+    width: 930px;
+
+}
+.formContainer form input{
+    width: 400px;
+}
+
+br {
+    margin: 10px;
+}
+
+input.inputSidang {
+    border: 1px solid #acacac;
+    border-radius: 5px;
+    height: 25px;
+    text-indent: 4px;
+    outline: none;
+}
+
+.card {
+    border: 1px solid #acacac;
+    border-radius: 12px;
+    margin: 0px;
+    margin-top: 20px;
+}
+
+form#komponenNilai {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px 50px;
+}
+ 
+.item1, .item2, .item3 {
+    height: auto;
+    margin: 10px;
+}
+
+div#judulKompNilai {
+    margin: 0;
+    background-color: #E3F1F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-radius: 11px 11px 0 0;
+
+}
+
+input[type="number"] {
+    text-indent: 3px;
+    width: 40px;
+    border: 1px solid #acacac;
+    border-radius: 5px;
+    height: 20px;
+    outline: none;
+}
+
+.form-group {
+    display: flex;
+    align-items: end;
+    margin: 15px 0;
+    padding: 0;
+    justify-content: space-between;
+}
+
+label {
+    width: 200px;
+}
+
+select#role{
+    width: 168px;
+    height: 22px;
+}
+
+.percent{
+    margin: 0 5px;
+}
+
+button[form="komponenNilai"], button#buttonAddSidang{
+    background-color: #E3F1F0;
+    border: 1px solid #388087;
+    align-content: center;
+    height: 35px;
+    float: right;
+    width: 230px;
+    margin: 20px 81px 50px;
+    border-radius: 8px;
+}
+button#buttonAddSidang:hover{
     background-color: #388087;
     color: white;
 }
 
-.card-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 700px;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
+button[form="komponenNilai"]:hover{
+    background-color: #d7e6e5;
+    cursor: pointer;
 }
 
-.card {
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 635px;
-}
-
-table{
-    padding: 10px;
-    width: 635px;
-}
-
-table, th, td, tr{
-    font-size: 13px;
-    z-index: 2;
-    position: relative;
-}
-
-th{
-    padding-bottom: 15px;
-    width: 80px;
-}
-td{
-    padding-right: 30px;
-}
-
-
-.green_box{
-    background-color: #D5FFA3;
-    display: flex;
-    width: 635px;
-    height: 37px;
-    position: absolute;
-    z-index: 1;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.yellow_box{
-    background-color: #FFFEA6;
-    display: flex;
-    width: 635px;
-    height: 37px;
-    position: absolute;
-    z-index: 1;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.gray_box{
-    background-color: #EBEBEB;
-    display: flex;
-    width: 635px;
-    height: 37px;
-    position: absolute;
-    z-index: 1;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.bold{
+div.bagianNilai {
     font-weight: bold;
 }
 
-.no_bold{
-    font-weight: normal;
+button[form="adminPage"]{
+    width: 50px;
+    height: 40px;
+    background-color: white;
+    border: 0px;
+    justify-content: center;
+}
+button[form="adminPage"]:hover{
+    background-color: #d7e6e5;
+    cursor: pointer;
+}
+label[form="adminPage"]{
+    flex: 1;
+}
+button[form="adminPageDel"]{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 0px;
+}
+label[form="adminPageDel"]{
+    flex: 0.95;
+}
+.headAdmin{
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    background-color: #E3F1F0;
+    margin: 0px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    padding: 10px;
+}
+.headAdmin label{
+    flex: 1;
+}
+.footerAdmin{
+    text-align: right;
+}
+.footerAdmin button{
+    width: 151px;
+    height: 50px;
+    border-radius: 12px;
+    border: 0.1px;
+    margin-right: 20px;
+    margin-top: 120px;
+}
+.footerAdmin button:hover{
+    cursor: pointer;
+    background-color: #d7e6e5;
+}
+.detailAdmin{
+    border: 1px solid black;
+    height: 300px;
+    border-radius: 9px;
+    margin: 0px;
+    padding: 0px;
+}
+.detailAdmin .form-group{
+    padding: 10px;
+    margin: 0px;
+    background-color: #E3F1F0;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+.detailAdmin .form-group button{
+    background-color: #E3F1F0;
+}
+.detailAdmin .form-group label{
+    padding: 10px;
+}
+#detailAttAdmin{
+    padding: 20px 60px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 400px;
+    height: 300px;
+    visibility: hidden;
+    position: absolute;
+    top: 40%;
+    right: 34%;
+    background-color: white;
+}
+#detailAttAdmin .form-groupAdmin{
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+.form-groupAdmin button{
+    border-radius: 15px;
+    border: 0px;
+    color: white;
+    background-color: #388087;
+    width: 70px;
+    height: 40px;
+    margin-left: 300px;
+    margin-top: 30px;
+}
+.form-groupAdmin button:hover{
+    cursor: pointer;
+    background-color: #acacac;
+}
+button[form="adminTambahPeserta"]{
+    width: 50px;
+    height: 40px;
+    background-color: #E3F1F0;
+    border: 0px;
+    justify-content: center;
+}
+button[form="adminTambahPeserta"]:hover{
+    background-color: #d7e6e5;
+    cursor: pointer;
 }
 
-.jam{
-    padding-left: 13px;
+.container_header_form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
-a{
-    z-index: 3;
-    text-decoration: none;
-    color: black;
+
+.label_nama, .label_role{
+    width: 50px;
+}
+#rightHeader {
+    position: absolute;
+    right: 55px;
 }
 .userProfile img{
     height: 30px;
@@ -239,42 +475,147 @@ button.img-delete {
     height: 30px;
     width: 70px;
 }
-
-/* CSS Sidang Container */
-.sidang {
-    border: 1px solid #acacac;
-    border-radius: 12px;
-    margin: 20px 2px;
-    height: 210px;
-}
-.headerSidang{
-    box-sizing: border-box;
-    align-content: center;
-    text-indent: 10px;
-    background-color: #D5FFA3;
-    height: 35px;
-    border-radius: 12px 12px 0 0;
+#deleteOverlay{
+    border: 1px solid black;
+    background-color: white;
+    position: absolute;
+    border-radius: 15px;
+    width: 350px;
+    height: 150px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 10px;
-    font-weight: bold;
+    text-align: center;
+    top: 40%;
+    right: 40%;
+    visibility: hidden;
 }
-label{
-    width: 200px;
-    cursor: default;
+#deleteOverlay button{
+    width: 60px;
+    height: 40px;
+    border: 0px;
+    border-radius: 15px;
+    color: white;
+
+}
+#confirmDeleteButton{
+    background-color: #388087;
+}
+#denyDeleteButton{
+    background-color: red;
+}
+#deleteOverlay button:hover{
+    cursor: pointer;
+}
+textArea{
+    resize: none;
+    border-radius: 5px;
+    border-color: #acacac;
+    width: 393px;
+    height: 70px;
+    font-family: Arial;
+    padding: 5px;
+    margin-top: -5px;
+}
+textarea#topikTA{
+    margin-top: 5px;
+}
+label[for="judulTa"]{
+    margin-bottom: 0px;
 }
 
 .komponen-sidang-box{
     display: grid;
     margin: 10px;
     grid-template-columns: 200px 350px 250px 100px;
-    grid-template-areas:
+    grid-template-areas: 
         'labelNIKmahasiswa isiNIKmahasiswa labelPembimbing1 pembimbing1'
         'labelNamaMahasiswa isiNamaMahasiswa labelPembimbing2 pembimbing2'
         'labelTopik topik labelPenguji1 penguji1'
         'labelJudul judul labelPenguji2 penguji2'
         'labelTempat tempat kosong kosong'
         'labelTanggal tanggal kosong kosong'
-        'labelWaktu waktu kosong kosong';
+        'labelWaktu waktu kosong kosong'
+    ;
     gap: 5px;
+}
+
+.saveButton {
+    background-color: #388087; /* Warna dasar tombol */
+    color: #ffffff; /* Teks putih agar kontras */
+    font-size: 16px; /* Ukuran teks */
+    padding: 10px 20px; /* Ruang dalam tombol */
+    border: none; /* Hilangkan border */
+    border-radius: 8px; /* Sudut membulat */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: all 0.3s ease; /* Animasi halus saat interaksi */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+    margin-left: 350px;
+}
+
+.saveButton:hover {
+    background-color: #2d6d6f; /* Warna lebih gelap saat hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Bayangan lebih besar */
+    transform: translateY(-2px); /* Efek mengangkat tombol */
+}
+
+.saveButton:active {
+    background-color: #1f4f51; /* Warna lebih gelap saat tombol ditekan */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan lebih kecil */
+    transform: translateY(0); /* Kembalikan posisi tombol */
+}
+
+#saveKomponenStatus {
+    color: red;
+    margin-left: 60px;
+}
+
+.headerSidang {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.headerSidang.status-proses {
+    background-color: #FFFEA6;
+    color: black;
+}
+
+.headerSidang.status-selesai {
+    background-color: #EBEBEB;
+    color: black;
+}
+
+.headerSidang.status-upcoming {
+    background-color: #D5FFA3;
+    color: black;
+}
+
+.submit-button {
+    background-color: #007BFF; /* Warna biru */
+    color: white; /* Teks putih */
+    border: none; /* Hilangkan border */
+    border-radius: 4px; /* Sudut melengkung */
+    padding: 4px 8px; /* Padding yang sesuai */
+    font-size: 16px; /* Ukuran font */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animasi */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Warna biru gelap saat hover */
+}
+
+.submit-button:active {
+    transform: scale(0.95); /* Efek klik */
+}
+
+.submit-button:focus {
+    outline: none; /* Hilangkan outline */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Tambahkan shadow saat fokus */
+}
+
+/* Menonaktifkan tombol ketika status 'Selesai' */
+.status-selesai .submit-button {
+    pointer-events: none; /* Menghindari interaksi dengan tombol */
+    opacity: 0.5; /* Memberikan efek visual bahwa tombol tidak aktif */
 }
