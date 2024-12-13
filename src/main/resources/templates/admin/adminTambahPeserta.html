@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Peserta</title>
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/profileOverlay.css"> 
+
     <script src="../js/admin/tambahPeserta.js" defer></script>
     <script src="../js/Overlay.js" defer></script>
 </head>
@@ -23,19 +25,9 @@
         </div>
     </header>
     <div id="OverlayIconUser">
-        <div class="UserIcon">
-            <img th:src="@{../assets/userWhite.png}">
-            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
-        </div>
-        <div class="Sign">
-            <input type="file">
-            <button type="submit">Upload Tanda Tangan</button>
-        </div>
-        <div class="Logout">
-            <a href="/">
-                <button type="button" onclick="window.location.href='../templates/index.html'">Logout</button>
-            </a>
-        </div>
+        <form action="logout" method="post">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
     <main onclick="hideElement()">
         <div class="mainContainer">
