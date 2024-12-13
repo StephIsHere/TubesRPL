@@ -131,7 +131,6 @@ public class SidangRepoJdbc implements SidangRepository {
         public Sidang mapRow(ResultSet rs, int rowNum) throws SQLException {
             Sidang sidang = new Sidang();
             sidang.setIdSidang(rs.getInt("idSidang"));
-            sidang.setNamaPenulis(rs.getString("penulis"));
             sidang.setJenisTA(rs.getString("jenisTA"));
             sidang.setTopik(rs.getString("topik"));
             sidang.setJudul(rs.getString("judul"));
