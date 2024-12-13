@@ -6,6 +6,11 @@
     <title>Sidang Tugas Akhir</title>
     <link rel="stylesheet" href="/css/mahasiswa/detailSidangUpcoming.css">
     <script src="../js/Overlay.js" defer></script> 
+    <style>
+        #judulSidang{
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,7 +18,7 @@
             <span id="judul">Sidang Tugas Akhir</span>
         </div>
         <div id="rightHeader">
-            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span> -->
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="userProfile">
             <img th:src="@{../assets/userWhite.png}" alt="" onclick="showElement()" >
@@ -22,7 +27,7 @@
     <div id="OverlayIconUser">
         <div class="UserIcon">
             <img th:src="@{../assets/userWhite.png}">
-            <!-- <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span> -->
+            <span th:text="${nama}">Nama</span>, <span th:text="${peran}">Peran</span>
         </div>
         <div class="Sign">
             <input type="file">
@@ -37,39 +42,39 @@
     <main onclick="hideElement()">
         <div class="card-container">
             <div class="card">
-                <a href="/home" id="backtomain"><img src="../assets/arrow.png" alt="back_to_main"></a>
+                <a th:href="@{/home}" id="backtomain"><img src="../assets/arrow.png" alt="back_to_main"></a>
                 <div class="yellow_box"></div>
-                <span class="judulCard bold">Sidang 2</span>
+                <span class="judulCard bold" th:text="${sidang.jenisTA}" ></span>
                 <table class="table1">
                     <tr>
-                        <td colspan="2" class="bold judul">Informasi Sidang</td>
+                        <td id="judulSidang" colspan="2" class="bold judul" th:text="${sidang.judul}"></td>
                     </tr>
                     <tr>
-                        <td class="bold">Topik</td><td>: Implementasi IoT</td>
+                        <td class="bold">Topik</td><td>: <span th:text="${sidang.topik}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Mahasiswa</td><td>: Steven Febrian</td>
+                        <td class="bold">Mahasiswa</td><td>: <span th:text="${sidang.namaPenulis}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Pembimbing 1</td><td>: Raymond Chandra</td>
+                        <td class="bold">Pembimbing 1</td><td>: -</td>
                     </tr>
                     <tr>
                         <td class="bold">Pembimbing 2</td><td>: -</td>
                     </tr>
                     <tr>
-                        <td class="bold">Penguji 1</td><td>: Gede Karya</td>
+                        <td class="bold">Penguji 1</td><td>: -</td>
                     </tr>
                     <tr>
-                        <td class="bold">Penguji 2</td><td>: Keenan</td>
+                        <td class="bold">Penguji 2</td><td>: -</td>
                     </tr>
                     <tr>
-                        <td class="bold">Tanggal</td><td>: 14/10/2024</td>
+                        <td class="bold">Tanggal</td><td>: <span th:text="${sidang.tanggal}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Jam</td><td>: 13:00-15:00</td>
+                        <td class="bold">Jam</td><td>: <span th:text="${sidang.waktu}"></span></td>
                     </tr>
                     <tr>
-                        <td class="bold">Tempat</td><td>: 10.03.00.23</td>
+                        <td class="bold">Tempat</td><td>: <span th:text="${sidang.tempat}"></span></td>
                     </tr>
                 </table>
 

@@ -99,3 +99,7 @@ CREATE TABLE gambarTTD (
     idUser INT NOT NULL,
     FOREIGN KEY (idUser) REFERENCES users(idUser)
 );
+
+
+
+

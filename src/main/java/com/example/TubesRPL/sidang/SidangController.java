@@ -86,4 +86,13 @@ public class SidangController {
         model.addAttribute("sidangs", listSidang);
         return "koordinator/home";
     }
+
+    @PostMapping("/submitSidang")
+    public String submitSidang(@RequestParam String judul, Model model, HttpSession session){
+        Sidang sidang = this.sidangRepo.findSidangByJudul(judul).get(0);
+        model.addAttribute("sidang", sidang);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
+        return "koordinator/DetailSidang";
+    }
 }
