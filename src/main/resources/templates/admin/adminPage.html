@@ -31,15 +31,15 @@
         <div class="mainContainer">
             <div id="functionBar">
                 <div>
-                    <form action="/home" method="get">
-                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="Search...">
-                        <button id="view" type="submit">Search</button>
+                    <form id= "formSearch" action="/home" method="get">
+                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="Pencarian nama anggota sidang...">
+                        <button id="view" type="submit">Cari</button>
                     </form>
                 </div>
                 <div>
                     <form action="/home" method="get">
                         <select name="filter" id="filterButton" onchange="this.form.submit()">
-                            <option id="filterButton" value="">Filter</option>
+                            <option id="filterButton" value="" disabled selected>Filter</option>
                             <option id="filterButton" value="Admin">Admin</option>
                             <option id="filterButton" value="Koordinator">Koordinator</option>
                             <option id="filterButton" value="Dosen">Dosen</option>
@@ -57,7 +57,7 @@
                     </form>
                 </div>
                 <a href="/home/add">
-                    <button id="addSidangButton" style="display: inline-block; height: 100%;">+</button>
+                    <button id="addSidangButton" style="display: inline-block; height: 100%;">+ Tambah Anggota</button>
                 </a>
             </div>
             <div class="card">
