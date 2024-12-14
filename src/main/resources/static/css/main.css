@@ -497,7 +497,7 @@ button.img-delete {
     text-align: center;
     top: 40%;
     right: 40%;
-    visibility: hidden;
+    visibility:hidden;
 }
 #deleteOverlay button{
     width: 60px;
@@ -628,4 +628,16 @@ label[for="judulTa"]{
 .submit-button:focus {
     outline: none; /* Hilangkan outline */
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Tambahkan shadow saat fokus */
+}
+
+.inactive{
+    background-color: red;
+    color: white;
+}
+.inactive .label_nama, 
+.inactive .label_role {
+    color: white;                /* Warna teks anak elemen */
+}
+.inactive .img-edit, .inactive .img-delete{
+    background-color: red;
 }
