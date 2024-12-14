@@ -22,8 +22,7 @@ CREATE TABLE komponenNilai (
     namaKomponen VARCHAR(100) NOT NULL,
     bobotKomponen DECIMAL(5,2) NOT NULL,
     -- tahunAkademik INT NOT NULL, diilangin sementara gr2 cuma ada di sini, sidang dll ga ada jd ga kepake
-    tipe VARCHAR(50), -- type = bobotPenguji, bobotPembimbing, main(nilai presentasi dll)
-    idKoordinator INT NOT NULL,
+    tipe VARCHAR(50) -- type = bobotPenguji, bobotPembimbing, main(nilai presentasi dll)
     FOREIGN KEY (idKoordinator) REFERENCES users(idUser)
 );
 

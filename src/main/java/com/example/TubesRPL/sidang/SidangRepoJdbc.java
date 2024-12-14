@@ -94,7 +94,7 @@ public class SidangRepoJdbc implements SidangRepository {
         ).stream().findFirst().orElse(null);
     
         // Update objek Sidang
-        Sidang sidang = findSidangByJudul(judul).getFirst();
+        Sidang sidang = findSidangByJudul(judul).get(0);
         sidang.setNamaPembimbing1(pembimbing1);
         sidang.setNamaPembimbing2(pembimbing2);
         sidang.setNamaPenguji1(penguji1);
