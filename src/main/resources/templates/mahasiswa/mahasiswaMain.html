@@ -43,7 +43,7 @@
             <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
             <div th:each="sidang : ${sidangs}">
                 <div class="sidangContainer">
-                    <form th:action="@{/sidang/submitSidang}" method="post">
+                    <form th:action="@{/sidang/detailSidang}" method="post">
                         <div class="sidang">
                             <div class="headerSidang"
                                     th:classappend="${sidang.status == 'Proses' ? 'status-proses' : 

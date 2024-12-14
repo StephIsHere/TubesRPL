@@ -97,20 +97,6 @@ VALUES
 ('eugene@unpar', 'eugene', 'Eugene', 'Mahasiswa', '88', true),
 ('bombom@unpar', 'bombom', 'Bombom', 'Mahasiswa', '90', true);
 
--- Insert Komponen Nilai
-INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe, idKoordinator)
-VALUES 
-('Presentasi', 20.00, 'main', 3),
-('Penguasaan Materi', 25.00, 'main', 3),
-('Metodologi', 15.00, 'main', 3),
-('Sistematika Penulisan', 10.00, 'main', 3),
-('Substansi Materi', 20.00, 'main', 3),
-('Kemampuan Menjawab', 15.00, 'main', 3),
-('Bobot Penguji 1', 25.00, 'bobotPenguji', 3),
-('Bobot Penguji 2', 25.00, 'bobotPenguji', 3),
-('Bobot Pembimbing 1', 25.00, 'bobotPembimbing', 3),
-('Bobot Pembimbing 2', 25.00, 'bobotPembimbing', 3);
-
 -- Insert Sidang
 INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator, idKoordinator, idMahasiswa)
 VALUES
@@ -221,12 +207,7 @@ VALUES
 (1, 2, 90),  -- Penguasaan Materi
 (1, 3, 88),  -- Metodologi
 (1, 4, 87),  -- Sistematika Penulisan
-(1, 5, 92),  -- Substansi Materi
-(1, 6, 89),  -- Kemampuan Menjawab
-(1, 7, 88),  -- Bobot Penguji 1
-(1, 8, 87),  -- Bobot Penguji 2
-(1, 9, 90),  -- Bobot Pembimbing 1
-(1, 10, 91); -- Bobot Pembimbing 2
+(1, 5, 92);  -- Substansi Materi
 
 -- Insert Gambar TTD
 INSERT INTO gambarTTD (ttd, idUser)

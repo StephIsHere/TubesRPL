@@ -62,10 +62,6 @@ public class SidangRepoJdbc implements SidangRepository {
                 "join users on sidangdosen.iduser = users.iduser\n" +
                 "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
                 "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Pembimbing 2'";
-        String searchKetuaPenguji = "select users.nama from sidangdosen \n" +
-                "join users on sidangdosen.iduser = users.iduser\n" +
-                "join sidang on sidang.idsidang = sidangdosen.idsidang \n" +
-                "where sidang.judul LIKE ? AND sidangdosen.peran LIKE 'Ketua Penguji'";
     
         // Ambil hasil query untuk setiap peran
         String pembimbing1 = jdbcTemplate.query(searchPembimbing1, 
@@ -87,11 +83,7 @@ public class SidangRepoJdbc implements SidangRepository {
             new Object[]{judul}, 
             (rs, rowNum) -> rs.getString("nama")
         ).stream().findFirst().orElse(null);
-    
-        String ketuaPenguji = jdbcTemplate.query(searchKetuaPenguji, 
-            new Object[]{judul}, 
-            (rs, rowNum) -> rs.getString("nama")
-        ).stream().findFirst().orElse(null);
+
     
         // Update objek Sidang
         Sidang sidang = findSidangByJudul(judul).get(0);
@@ -99,7 +91,7 @@ public class SidangRepoJdbc implements SidangRepository {
         sidang.setNamaPembimbing2(pembimbing2);
         sidang.setNamaPenguji1(penguji1);
         sidang.setNamaPenguji2(penguji2);
-        sidang.setNamaKetuaPenguji(ketuaPenguji);
+        sidang.setNamaKetuaPenguji(penguji1);
         return sidang;
     }    
 
@@ -161,21 +153,11 @@ public class SidangRepoJdbc implements SidangRepository {
                      "WHERE s.idMahasiswa = ?";
         return jdbcTemplate.query(sql, sidangRowMapper, idMahasiswa);
     }
-    
 
     @Override
-    public List<BobotNilai> findBobot(){
-        String sql = "SELECT * FROM komponennilai";
-        return jdbcTemplate.query(sql, bobotMapper);
-    }
-
-    private final RowMapper<BobotNilai> bobotMapper = new RowMapper<BobotNilai>() {
-        @Override
-        public BobotNilai mapRow(ResultSet rs, int rowNum) throws SQLException {
-            BobotNilai bobotNilai = new BobotNilai();
-            bobotNilai.setNamaKomponen(rs.getString("namakomponen"));
-            bobotNilai.setBobotKomponen(rs.getDouble("bobotkomponen"));
-            return bobotNilai;
-        }
-    };
+    public boolean addCatatanSidang(Sidang sidang, String catatan) { 
+        String sql = "UPDATE sidang SET catatan = ? WHERE judul = ?"; 
+        int rowsAffected = jdbcTemplate.update(sql, catatan, sidang.getJudul()); 
+        return rowsAffected > 0; 
+    }  
 }

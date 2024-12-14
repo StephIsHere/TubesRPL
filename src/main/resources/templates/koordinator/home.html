@@ -53,12 +53,12 @@
             <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
             <div th:each="sidang : ${sidangs}">
                 <div class="sidangContainer">
-                    <form th:action="@{/sidang/submitSidang}" method="post">
+                    <form th:action="@{/sidang/detailSidang}" method="post">
                         <div class="sidang">
                             <div class="headerSidang"
-                                    th:classappend="${sidang.status == 'Proses' ? 'status-proses' : 
+                                    th:classappend="${sidang.status == 'Berlangsung' ? 'status-proses' : 
                                                         sidang.status == 'Selesai' ? 'status-selesai' : 
-                                                        sidang.status == 'Upcoming' ? 'status-upcoming' : ''}">
+                                                        sidang.status == 'Belum Dimulai' ? 'status-upcoming' : ''}">
                                 <label class="label_jenis" th:if="${sidang.jenisTA=='1'}">Sidang Tugas Akhir 1</label>
                                 <label class="label_jenis" th:if="${sidang.jenisTA=='2'}">Sidang Tugas Akhir 2</label>
                                 <label class="label_status" th:text="${sidang.status}"></label>
@@ -93,8 +93,6 @@
                 
                                 <strong style="grid-area: labelWaktu">Waktu:</strong>
                                 <span style="grid-area: waktu" class="label_waktu" th:text="${#temporals.format(sidang.waktu, 'HH:mm')}">Waktu</span>
-                
-                                <span style="grid-area: kosong"></span>
                             </div>
                         </div>
                     </form>
