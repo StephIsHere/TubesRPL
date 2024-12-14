@@ -26,9 +26,9 @@ function showSuccessOverlay() {
     overlay.className = "overlay";
 
     overlay.innerHTML = `
-            <div class="messageBox">
+            <div class="messageBox" style="border : 1px solid black; border-radius: 15px; width: 400px; height:120px; display:flex;flex-direction:column; justify-content:center; align-items:center; position:absolute; top:40%; right:37%;">
                 <p>User successfully added!</p>
-                <button onclick="confirmSuccess()">OK</button>
+                <button onclick="confirmSuccess()" style="background-color:#388087; border-radius:15px; width:80px; height:40px; border:0px; color:white;">OK</button>
             </div>
         `;
     document.body.appendChild(overlay);

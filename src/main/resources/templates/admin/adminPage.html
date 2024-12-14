@@ -64,12 +64,12 @@
                 <div class="formContainer">
                     <div class="container_header_form">
                         <h3>Nama</h3>
-                        <h3>Role</h3>
-                        <h3>Edit</h3>
-                        <h3>Delete</h3>
+                        <h3>Peran</h3>
+                        <h3>Sunting</h3>
+                        <h3>Hapus</h3>
                     </div>
                     <div th:each="user : ${users}">
-                        <div class="form-group" th:classappend="${user.status} == false ? ' inactive' : ''">
+                        <div class="form-group" th:classappend="${user.status} == false ? ' inactive' : ''" th:data-id="${user.idUser}">
                             <label class="label_nama" th:text="${user.nama}">Nama</label>
                             <span class="label_role" th:text="${user.peran}">Peran</span>
                             <!-- <a th:href="@{/home/edit(userId=${user.idUser})}">
@@ -89,7 +89,7 @@
                                 <img th:src="@{/assets/delete.svg}" alt="Delete">
                             </button>
                         </div>
-                        <hr>
+                        <hr style="width: 900px;">
                     </div>
                     <div th:if="${#lists.isEmpty(users)}">
                         <p>No users found.</p>
@@ -134,7 +134,7 @@
         </div>
     </form>
     
-    <div id="deleteOverlay" class="overlay hidden">
+    <div id="deleteOverlay">
         <div class="messageBox">
             <p>Are you sure you want to delete this user?</p>
             <button id="confirmDeleteButton">Yes</button>
@@ -162,6 +162,7 @@
         function showDeleteOverlay(userId) {
             selectedUserId = userId;
             const overlay = document.getElementById('deleteOverlay');
+            
             overlay.style.visibility='visible';
         }
 
