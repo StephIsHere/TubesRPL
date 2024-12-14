@@ -98,9 +98,9 @@ main {
     padding: 0 10px;
     border: 1px solid #acacac;
     border-radius: 12px;
-    height: 30px;
+    height: 36.5px;
     width: 70px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #filterButton:hover, #sortButton:hover, #addSidangButton:hover, #view:hover {
@@ -110,14 +110,30 @@ main {
 
 #searchBar{
     align-content: center;
-    width:400px;
+    width:350px;
     outline: none;
-    margin-right: 30px;
+    margin-right: 0px;
+    height: 35px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+select#sortButton {
+    width: 150px;
+}
+select#filterButton {
+    width: 150px;
+}
+
+button#view {
+    left: 500px;
+    height: 36.5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin: 0px;
 }
 
 #addSidangButton {
-    width: 100px;
-    margin-left: 20px;
+    width: 200px;
 }
 
 .sidang, .addSidang {
@@ -128,6 +144,9 @@ main {
 
 .addSidang {
     width: 800px;
+}
+#tambahAnggota{
+    font-size: 14px;
 }
 
 .sidang {
@@ -171,11 +190,15 @@ label.labelAddSidang {
 
 .formContainer {
     padding: 10px 30px;
-    width: 930px;
+    width: 900px;
 
 }
 .formContainer form input{
     width: 400px;
+}
+#formSearch{
+    display: flex;
+    gap: 0px;
 }
 
 br {
@@ -243,8 +266,10 @@ label {
 }
 
 select#role{
-    width: 168px;
+    width: 172px;
     height: 22px;
+    border-radius: 5px;
+    border: 2px solid black;
 }
 
 .percent{
@@ -640,4 +665,16 @@ label[for="judulTa"]{
 }
 .inactive .img-edit, .inactive .img-delete{
     background-color: red;
+}
+
+label.label_nama {
+    margin-left: 20px;
+}
+h3{
+    margin-left: 20px;
+}
+
+#detailAttAdmin input {
+    border-radius: 5px;
+    padding-left: 5px;
 }
