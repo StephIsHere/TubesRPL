@@ -124,10 +124,44 @@
                         resize: none;
                         line-height: 1.5;
                         font-family: Arial, sans-serif;
-                    " readonly>
+                    " readonly></textarea>
+                </div>   
 
-                    </textarea>
-                </div>                                   
+                <!-- WARNING !!
+                 ini di hardcode dulu css nya disini buat ngetest
+                 -->
+                 <form action="submitCatatanSidang" method="post" class="catatan_sidang">
+                    <label for="catatan" style="font-weight: bold; margin-right: 10px;">Catatan Sidang:</label>
+                    <input type="hidden" th:value="${sidang.judul}" name="judul" style="display: inline-block;">                    
+                    <textarea 
+                        id="catatan" 
+                        name="catatan" 
+                        rows="5" 
+                        style="
+                            width: 100%; 
+                            border: 1px solid #ccc; 
+                            border-radius: 5px; 
+                            padding: 10px; 
+                            box-sizing: border-box;
+                            resize: none;
+                            line-height: 1.5;
+                            font-family: Arial, sans-serif;
+                        "
+                    ></textarea>
+                    <td id="judulSidang" colspan="2" class="bold judul" th:text="${sidang.judul}"></td>
+                    <button type="submit" style="
+                        margin-top: 10px;
+                        padding: 10px 15px;
+                        background-color: #007BFF;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        font-family: Arial, sans-serif;
+                        cursor: pointer;
+                    ">
+                        Submit
+                    </button>
+                </form>                            
             </div>
         </div>
     </main>

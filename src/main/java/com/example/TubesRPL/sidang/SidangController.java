@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+
+import com.example.TubesRPL.komponenNilai.KomponenNilai;
+import com.example.TubesRPL.komponenNilai.KomponenNilaiRepoJdbc;
 import com.example.TubesRPL.user.User;
 import com.example.TubesRPL.user.UserRepository;
 
@@ -22,6 +25,9 @@ public class SidangController {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private KomponenNilaiRepoJdbc nilaiRepo;
 
     @PostMapping("/AddSidang")
     public String tambahSidangPost(
@@ -42,17 +48,17 @@ public class SidangController {
         List<User> mahasiswaList = userRepo.findByNik(nik);
         User mahasiswa = mahasiswaList.get(0);
 
-        List<User> pembimbing1 = userRepo.findByNik(nikPembimbingUtama);
-        User pembimbingUtama = pembimbing1.get(0);
+        // List<User> pembimbing1 = userRepo.findByNik(nikPembimbingUtama);
+        // User pembimbingUtama = pembimbing1.get(0);
 
-        List<User> pembimbing2 = userRepo.findByNik(nikPembimbingPendamping);
-        User pembimbingPendamping = pembimbing2.get(0);
+        // List<User> pembimbing2 = userRepo.findByNik(nikPembimbingPendamping);
+        // User pembimbingPendamping = pembimbing2.get(0);
 
-        List<User> penguji1 = userRepo.findByNik(nikPembimbingUtama);
-        User ketuaPenguji = penguji1.get(0);
+        // List<User> penguji1 = userRepo.findByNik(nikPembimbingUtama);
+        // User ketuaPenguji = penguji1.get(0);
 
-        List<User> penguji2 = userRepo.findByNik(nikPembimbingPendamping);
-        User anggotaPenguji = penguji2.get(0);
+        // List<User> penguji2 = userRepo.findByNik(nikPembimbingPendamping);
+        // User anggotaPenguji = penguji2.get(0);
 
         // Buat instance Sidang
         Sidang sidang = new Sidang();
@@ -89,14 +95,29 @@ public class SidangController {
         return "koordinator/home";
     }
 
-    @PostMapping("/submitSidang")
+    @PostMapping("/detailSidang")
     public String submitSidang(@RequestParam String judul, Model model, HttpSession session){
         Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
-        List<BobotNilai> bobotNilai = this.sidangRepo.findBobot();
+        List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
         model.addAttribute("sidang", sidang);
-        model.addAttribute("bobotList", bobotNilai);
+        model.addAttribute("listNilai", listNilai);
         model.addAttribute("nama", session.getAttribute("nama"));
         model.addAttribute("peran", session.getAttribute("peran"));
-        return "koordinator/DetailSidang";
+        if (session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Dosen")) {
+            return "dosen/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+            return "mahasiswa/DetailSidang";
+        }
+        return"/";
+    }
+
+    // perlu perbaikan buat ngasih tau kalo dia salah ato engga pake variabel res
+    @PostMapping("/submitCatatanSidang")
+    public String submitCatatan(@RequestParam String catatan,@RequestParam String judul, Model model, HttpSession session){
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        boolean res = this.sidangRepo.addCatatanSidang(sidang, catatan);
+        return "redirect:/home";
     }
 }

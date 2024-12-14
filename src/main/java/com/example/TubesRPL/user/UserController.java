@@ -118,6 +118,19 @@ public class UserController {
                 List<Sidang> sidangs = sidangRepo.findAllSidangWithPenulis(); 
                 List<User> userList = userRepo.findAll();
 
+                 for (int i = 0; i < sidangs.size(); i++) {
+                    Sidang temp = sidangs.get(i);
+                    String judul = temp.getJudul();
+                    temp = this.sidangRepo.addPengujiandPembimbing(judul);
+                    if ((temp.getNamaPembimbing1() != null && temp.getNamaPembimbing1().equals(session.getAttribute("nama"))) ||
+                        (temp.getNamaPembimbing2() != null && temp.getNamaPembimbing2().equals(session.getAttribute("nama"))) ||
+                        (temp.getNamaPenguji1() != null && temp.getNamaPenguji1().equals(session.getAttribute("nama"))) ||
+                        (temp.getNamaPenguji2() != null && temp.getNamaPenguji2().equals(session.getAttribute("nama")))) {
+                        sidangs.remove(i);
+                    }
+                          
+                 }
+
                 model.addAttribute("allUser", userList);
                 model.addAttribute("sidangs", sidangs);
                 return "dosen/home";
@@ -271,6 +284,7 @@ public class UserController {
         }
         return response;
     }
+    
     // @PostMapping("/home/addSidang")
     // public String tambahSidangPost(
     //     @RequestParam String nik,
@@ -350,22 +364,6 @@ public class UserController {
 
         if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Mahasiswa")) {
             return "mahasiswa/mahasiswaSidangBerlangsung";
-        } else {
-            return "redirect:/";
-        }
-    }
-    @GetMapping("/home/sidang2")
-    public String showSidang2 (HttpSession session){
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Mahasiswa")) {
-            return "mahasiswa/mahasiswaDetailSidangUpcoming";
-        } else {
-            return "redirect:/";
-        }
-    }
-    @GetMapping("/home/sidang3")
-    public String showSidang3 (HttpSession session){
-        if (session.getAttribute("idUser") != null && session.getAttribute("peran").equals("Mahasiswa")) {
-            return "mahasiswa/mahasiswaDetailSidangFinished";
         } else {
             return "redirect:/";
         }
