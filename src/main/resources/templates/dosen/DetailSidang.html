@@ -12,6 +12,16 @@
         #judulSidang{
             padding-left: 20px;
         }
+        label {
+            display: inline-block;
+            width: 160px;
+        }
+        input {
+            width: 40px;
+        }
+        form {
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +109,7 @@
                     <tr th:each="nilai, iterStat : ${listNilai}" th:if="${iterStat.index > 3 && iterStat.index < 9}">
                         <td class="bold" th:text="${nilai.namaKomponen}"></td>
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
-                    </tr>     
+                    </tr>
                 </table>
 
                 <table class="table4">
@@ -112,19 +122,93 @@
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
                     </tr>  
                 </table>
-
-                <form id="generateBAP" th:action="@{/sidang/generateBAP}" method="post" th:if="${sidang.status == 'Selesai'}">
+                
+                <form th:action="@{/sidang/submitNilaiPenguji1}" method="post" th:if="${sidang.namaPenguji1 == nama && sidang.status == 'Berlangsung'}">
                     <input type="hidden" name="judul" th:value="${sidang.judul}">
-                    <button type="submit">Generate BAP</button>
+                    <p>Nilai peng1:</p>
+                    <div>
+                        <label for="nilaiTataTulisLaporan">Tata Tulis Laporan</label>
+                        <input id="nilaiTataTulisLaporan" name="ttl" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiKelengkapanMateri">Kelengkapan Materi</label>
+                        <input id="nilaiKelengkapanMateri" name="km" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiPencapaianTujuan">Pencapaian Tujuan</label>
+                        <input id="nilaiPencapaianTujuan" name="pt" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiPresentasi">Presentasi</label>
+                        <input id="nilaiPresentasi" name="p" type="number" required>
+                    </div>
+                        <label for="nilaiPenguasaanMateri">Penguasaan Materi</label>
+                        <input id="nilaiPenguasaanMateri" name="pm" type="number" required>
+                    <div>  
+                    <button type="submit">Save</button>
                 </form>
 
-                <form id="setujuBAP" th:action="@{/sidang/setujuBAP}" method="post" th:if="${sidang.status == 'Selesai'}">
+                <form th:action="@{/sidang/submitNilaiPenguji2}" method="post" th:if="${sidang.namaPenguji2 == nama && sidang.status == 'Berlangsung'}">
                     <input type="hidden" name="judul" th:value="${sidang.judul}">
-                    <button type="submit">Setuju</button>
+                    <p>Nilai peng2:</p>
+                    <div>
+                        <label for="nilaiTataTulisLaporan">Tata Tulis Laporan</label>
+                        <input id="nilaiTataTulisLaporan" name="ttl" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiKelengkapanMateri">Kelengkapan Materi</label>
+                        <input id="nilaiKelengkapanMateri" name="km" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiPencapaianTujuan">Pencapaian Tujuan</label>
+                        <input id="nilaiPencapaianTujuan" name="pt" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiPresentasi">Presentasi</label>
+                        <input id="nilaiPresentasi" name="p" type="number" required>
+                    </div>
+                        <label for="nilaiPenguasaanMateri">Penguasaan Materi</label>
+                        <input id="nilaiPenguasaanMateri" name="pm" type="number" required>
+                    <div>  
+                    <button type="submit">Save</button>
                 </form>
+
+                <form action="submitNilaiPembimbing" method="post" th:if="${sidang.namaPembimbing1 == nama && sidang.status == 'Berlangsung'}">
+                    <p>Nilai pem1:</p>
+                    <input type="hidden" name="judul" th:value="${sidang.judul}">
+                    <div>
+                        <label for="nilaiTataTulisLaporan">Tata Tulis Laporan</label>
+                        <input id="nilaiTataTulisLaporan" name="ttl" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiKelengkapanMateri">Kelengkapan Materi</label>
+                        <input id="nilaiKelengkapanMateri" name="km" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiProsesBimbingan">Proses Bimbingan</label>
+                        <input id="nilaiProsesBimbingan" name="pb" type="number" required>
+                    </div>
+                    <div>
+                        <label for="nilaiPenguasaanMateri">Penguasaan Materi</label>
+                        <input id="nilaiPenguasaanMateri" name="pm" type="number" required>
+                    <button type="submit">Save</button>
+                </form>
+
+                <div>
+                    <form id="generateBAP" th:action="@{/sidang/generateBAP}" method="post" th:if="${sidang.status == 'Selesai'}">
+                        <input type="hidden" name="judul" th:value="${sidang.judul}">
+                        <button type="submit">Generate BAP</button>
+                    </form>
+    
+                    <form id="setujuBAP" th:action="@{/sidang/setujuBAP}" method="post" th:if="${sidang.status == 'Selesai'}">
+                        <input type="hidden" name="judul" th:value="${sidang.judul}">
+                        <button type="submit">Setuju</button>
+                    </form>
+                </div>
+
 
                 <!-- Div buat input si catatan-->
-                <div class="catatan_container" th:if="${(sidang.namaPembimbing1 == nama || sidang.namaPembimbing2 == nama) and sidang.status != 'Selesai'}">
+                <div class="catatan_container" th:if="${(sidang.namaPembimbing1 == nama || sidang.namaPembimbing2 == nama) && sidang.status == 'Berlangsung'}">
                     <form action="submitCatatanSidang" method="post" class="catatan_sidang">
                         <label class="labelcatatan" for="catatan">Catatan Sidang:</label>
                         <input type="hidden" th:value="${sidang.judul}" name="judul" style="display: inline-block;">                    
@@ -136,7 +220,7 @@
                 </div>
                 
                 <!-- Div buat nampilin aja, gabisa buat input -->
-                <div class="catatan_container" th:if="${(sidang.namaPenguji1 == nama || sidang.namaPenguji2 == nama) || ((sidang.namaPembimbing1 == nama || sidang.namaPembimbing2 == nama) and sidang.status == 'Selesai')}">
+                <div class="catatan_container" th:if="${(sidang.namaPenguji1 == nama || sidang.namaPenguji2 == nama) || ((sidang.namaPembimbing1 == nama || sidang.namaPembimbing2 == nama) && sidang.status == 'Selesai')}">
                     <h4>Catatan Sidang : </h4>
                     <div class="kotak_catatan">
                         <p th:text="${sidang.catatan}">Catatan Sidang</p>
