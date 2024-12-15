@@ -70,7 +70,7 @@ public class SidangController {
         sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
         sidang.setWaktu(LocalTime.parse(waktu)); // Format harus HH:mm
         sidang.setCatatan(null);  
-        sidang.setStatus("Upcoming");  
+        sidang.setStatus("Belum Dimulai"); 
         sidang.setTtdPembimbing1(null);
         sidang.setTtdPembimbing2(null);
         sidang.setTtdKetuaPenguji(null);
@@ -82,6 +82,8 @@ public class SidangController {
 
         // Simpan sidang ke database
         sidangRepo.addSidang(sidang);
+        sidangRepo.addSidangDosen(sidang, nikPembimbingUtama, nikPembimbingPendamping, nikKetuaPenguji, nikAnggotaPenguji);
+
 
         return "redirect:/home";
     }

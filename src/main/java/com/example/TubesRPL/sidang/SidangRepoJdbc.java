@@ -111,6 +111,19 @@ public class SidangRepoJdbc implements SidangRepository {
         sidang.getIdKoordinator(),
         sidang.getIdMahasiswa()
         );
+
+    }
+    
+    @Override
+    public void addSidangDosen (Sidang sidang, String nikPembimbing1, String nikPembimbing2, String nikPenguji1, String nikPenguji2){
+        String sql2 = "INSERT INTO sidangDosen (idSidang, idUser, peran) VALUES (?, ?, ?)";
+    
+        // Contoh data yang diambil dari sidang (disesuaikan kebutuhan aplikasi)
+        jdbcTemplate.update(sql2,
+            sidang.getIdSidang(), 
+            nikPembimbing1,
+            "Pembimbing 1"     
+        );
     }
 
     @Override
