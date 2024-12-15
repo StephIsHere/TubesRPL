@@ -94,7 +94,7 @@ main {
     justify-content: space-between;
 }
 
-#searchBar, #filterButton, #sortButton, #addSidangButton, #view {
+#searchBar, #searchBarAdmin, #filterButton, #sortButton, #addSidangButton, #view {
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0 2px;
@@ -112,6 +112,13 @@ main {
 }
 
 #searchBar{
+    align-content: center;
+    width:350px;
+    outline: none;
+    margin-right: 0px;
+    height: 35px;
+}
+#searchBarAdmin{
     align-content: center;
     width:350px;
     outline: none;
