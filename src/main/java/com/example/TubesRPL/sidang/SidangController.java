@@ -70,7 +70,7 @@ public class SidangController {
         sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
         sidang.setWaktu(LocalTime.parse(waktu)); // Format harus HH:mm
         sidang.setCatatan(null);  
-        sidang.setStatus("Belum Dimulai");
+        sidang.setStatus("Belum Dimulai"); 
         sidang.setTtdPembimbing1(null);
         sidang.setTtdPembimbing2(null);
         sidang.setTtdKetuaPenguji(null);
@@ -82,6 +82,26 @@ public class SidangController {
 
         // Simpan sidang ke database
         sidangRepo.addSidang(sidang);
+
+        List<User> pembimbingUt = userRepo.findByNik(nikPembimbingUtama);
+        long idPemUt = pembimbingUt.get(0).getIdUser();
+
+        List<User> pembimbingPen = userRepo.findByNik(nikPembimbingPendamping);
+        long idPemPen = pembimbingPen.get(0).getIdUser();
+
+        List<User> ketPeng = userRepo.findByNik(nikKetuaPenguji);
+        long idketPeng = ketPeng.get(0).getIdUser();
+
+        List<User> angPeng = userRepo.findByNik(nikAnggotaPenguji);
+        long idAngPeng = angPeng.get(0).getIdUser();
+
+        
+        List<Sidang> sidang2= sidangRepo.findSidangByJudul(judul);
+        int idSidang = sidang2.get(0).getIdSidang();
+        System.out.println("harimau" + idSidang);
+
+        sidangRepo.addSidangDosen(idSidang, idPemUt, idPemPen, idketPeng, idAngPeng);
+
 
         return "redirect:/home";
     }

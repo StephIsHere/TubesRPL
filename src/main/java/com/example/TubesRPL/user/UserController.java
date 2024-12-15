@@ -321,40 +321,35 @@ public class UserController {
             }
             User mahasiswa = users.get(0);
 
-            // Buat instance Sidang
-            Sidang sidang = new Sidang();
-            sidang.setJenisTA(jenisSidang);
-            sidang.setNamaPenulis(namaMahasiswa);
-            sidang.setNamaPembimbing1(namaPembimbingUtama);
-            sidang.setNamaPembimbing2(namaPembimbingPendamping);
-            sidang.setNamaPenguji1(namaKetuaPenguji);
-            sidang.setNamaPenguji2(namaAnggotaPenguji);
-            sidang.setNamaKetuaPenguji(namaKetuaPenguji);
-            sidang.setTopik(topik);
-            sidang.setJudul(judul);
-            sidang.setTempat(tempat);
-            sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
-            sidang.setWaktu(LocalTime.parse(waktu));     // Format harus HH:mm
-            sidang.setCatatan(catatan);
-            sidang.setStatus(status);
-            sidang.setTtdKetuaPenguji(ttdKetuaPenguji);
-            sidang.setTtdTimPenguji(ttdTimPenguji);
-            sidang.setTtdPembimbing1(ttdPembimbing1);
-            sidang.setTtdPembimbing2(ttdPembimbing2);
-            sidang.setTtdMahasiswa(ttdMahasiswa);
-            sidang.setTtdKoordinator(ttdKoordinator);
-            sidang.setIdKoordinator(idKoordinator);
-            sidang.setIdMahasiswa(mahasiswa.getIdUser());
+    //         // Buat instance Sidang
+    //         Sidang sidang = new Sidang();
+    //         sidang.setIdMahasiswa(mahasiswa.getIdUser());
+    //         sidang.setJenisTA(jenisTA);
+    //         sidang.setTopik(topik);
+    //         sidang.setJudul(judul);
+    //         sidang.setTempat(tempat);
+    //         sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
+    //         sidang.setWaktu(LocalTime.parse(waktu));     // Format harus HH:mm
+    //         sidang.setCatatan(catatan);
+    //         sidang.setStatus(status);
+    //         sidang.setBap(bap);
+    //         sidang.setTtdKetuaPenguji(ttdKetuaPenguji);
+    //         sidang.setTtdTimPenguji(ttdTimPenguji);
+    //         sidang.setTtdPembimbing1(ttdPembimbing1);
+    //         sidang.setTtdPembimbing2(ttdPembimbing2);
+    //         sidang.setTtdMahasiswa(ttdMahasiswa);
+    //         sidang.setTtdKoordinator(ttdKoordinator);
+    //         sidang.setIdKoordinator(idKoordinator);
 
-            // Simpan sidang ke database
-            sidangRepo.addSidang(sidang);
+    //         // Simpan sidang ke database
+    //         sidangRepo.save(sidang);
 
-            return "redirect:/home";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
-    }
+    //         return "redirect:/home";
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return "error";
+    //     }
+    // }
 
 
 
