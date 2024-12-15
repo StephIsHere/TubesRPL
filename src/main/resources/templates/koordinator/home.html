@@ -48,7 +48,7 @@
                     <input id="searchBar" type="text" placeholder="Cari berdasarkan judul Tugas Akhir..." name="judul">
                     <button id="view2" type="submit">Cari</button>
                 </form>  
-                <a th:href="@{/home/addSidang}"><button id="addSidangButton">+</button></a>
+                <a th:href="@{/home/addSidang}"><button id="addSidangButton">+ Tambah Sidang</button></a>
             </div>
             <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
             <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
