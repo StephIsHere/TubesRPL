@@ -187,4 +187,82 @@ public class SidangController {
         }
         return"redirect:/";
     }
+
+    @PostMapping("/submitNilaiPenguji1")
+    public String submitNilaiPenguji1(@RequestParam String judul, @RequestParam int ttl, @RequestParam int km, @RequestParam int pt, @RequestParam int p, @RequestParam int pm, HttpSession session, Model model) {
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
+
+        boolean exist = sidangRepo.checkNilaiPenguji1(sidang.getIdSidang());
+        if (!exist) {
+            sidangRepo.saveNilaiPenguji1(sidang.getIdSidang(), ttl, km, pt, p, pm);
+        }
+        sidangRepo.saveNilaiMain(sidang.getIdSidang());
+
+        model.addAttribute("sidang", sidang);
+        model.addAttribute("listNilai", listNilai);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
+        if (session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Dosen")) {
+            return "dosen/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+            return "mahasiswa/DetailSidang";
+        }
+        return"redirect:/";
+
+    }
+
+    @PostMapping("/submitNilaiPenguji2")
+    public String submitNilaiPenguji2(@RequestParam String judul, @RequestParam int ttl, @RequestParam int km, @RequestParam int pt, @RequestParam int p, @RequestParam int pm, HttpSession session, Model model) {
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
+
+        boolean exist = sidangRepo.checkNilaiPenguji2(sidang.getIdSidang());
+        if (!exist) {
+            sidangRepo.saveNilaiPenguji2(sidang.getIdSidang(), ttl, km, pt, p, pm);
+        }
+        sidangRepo.saveNilaiMain(sidang.getIdSidang());
+
+        model.addAttribute("sidang", sidang);
+        model.addAttribute("listNilai", listNilai);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
+        if (session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Dosen")) {
+            return "dosen/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+            return "mahasiswa/DetailSidang";
+        }
+        return"redirect:/";
+
+    }
+
+    @PostMapping("/submitNilaiPembimbing")
+    public String submitNilaiPembimbing(@RequestParam String judul, @RequestParam int ttl, @RequestParam int km, @RequestParam int pb, @RequestParam int pm, HttpSession session, Model model) {
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
+
+        boolean exist = sidangRepo.checkNilaiPembimbing(sidang.getIdSidang());
+        if (!exist) {
+            sidangRepo.saveNilaiPembimbing(sidang.getIdSidang(), ttl, km, pb, pm);
+        }
+        sidangRepo.saveNilaiMain(sidang.getIdSidang());
+        
+        model.addAttribute("sidang", sidang);
+        model.addAttribute("listNilai", listNilai);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
+        if (session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Dosen")) {
+            return "dosen/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+            return "mahasiswa/DetailSidang";
+        }
+        return"redirect:/";
+
+    }
 }

@@ -395,7 +395,7 @@ public class UserController {
     }
 
     //submit ttd
-    @PostMapping("uploadTtd")
+    @PostMapping({"uploadTtd", "sidang/uploadTtd"})
     public String uploadttd (HttpSession session, @RequestParam("ttd") MultipartFile file) throws IOException {
         if (session.getAttribute("idUser") == null){
             return "redirect:/";

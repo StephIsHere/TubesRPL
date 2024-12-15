@@ -16,4 +16,11 @@ public interface SidangRepository {
     Sidang addPengujiandPembimbing(String judul);
     boolean addCatatanSidang(Sidang sidang, String catatan);
     List<Sidang> findAllSidangWithIdUser(long iduser);
+    void saveNilaiPenguji1(int idSidang, int ttl, int km, int pt, int p, int pm);
+    void saveNilaiPenguji2(int idSidang, int ttl, int km, int pt, int p, int pm);
+    void saveNilaiPembimbing(int idSidang, int ttl, int km, int pb, int pm);
+    boolean checkNilaiPenguji1(int idSidang);
+    boolean checkNilaiPenguji2(int idSidang);
+    boolean checkNilaiPembimbing(int idSidang);
+    void saveNilaiMain(int idSidang);
 }

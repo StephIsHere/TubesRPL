@@ -59,7 +59,7 @@ CREATE TABLE sidangDosen (
 CREATE TABLE komponenNilaiSidang (
 	idSidang INT NOT NULL,
     idKomponen INT NOT NULL,
-    nilai INT NOT NULL,
+    nilai DECIMAL(5,2) NOT NULL,
     PRIMARY KEY (idSidang, idKomponen),
     FOREIGN KEY (idSidang) REFERENCES sidang(idSidang) ON DELETE CASCADE,
     FOREIGN KEY (idKomponen) REFERENCES komponenNilai(idKomponen) ON DELETE CASCADE
@@ -116,7 +116,12 @@ VALUES
 ('Tata Tulis Laporan', 0.25, 'pembimbing'),
 ('Kelengkapan Materi', 0.25, 'pembimbing'),
 ('Proses Bimbingan', 0.40, 'pembimbing'),
-('Penguasaan Materi', 0.10, 'pembimbing');
+('Penguasaan Materi', 0.10, 'pembimbing'),
+('Tata Tulis Laporan', 0.20, 'penguji2'),
+('Kelengkapan Materi', 0.10, 'penguji2'),
+('Pencapaian Tujuan', 0.30, 'penguji2'),
+('Presentasi', 0.25, 'penguji2'),
+('Penguasaan Materi', 0.15, 'penguji2');
 
 INSERT INTO sidangDosen (idSidang, idUser, peran)
 VALUES
@@ -149,33 +154,3 @@ VALUES
 (6, 5, 'Penguji 2'),
 (6, 8, 'Pembimbing 1'),
 (6, 6, 'Pembimbing 2');
-
-INSERT INTO komponenNilaiSidang (idSidang, idKomponen, nilai)
-VALUES
-(1, 1, 85),
-(1, 2, 100),
-(1, 3, 90),
-(1, 4, 85),
-(1, 5, 85),
-(1, 6, 60),
-(1, 7, 70),
-(1, 8, 56),
-(1, 9, 99),
-(1, 10, 100),
-(1, 11, 66),
-(1, 12, 77),
-(1, 13, 88),
-
-(2, 1, 30),
-(2, 2, 50),
-(2, 3, 40),
-(2, 4, 30),
-(2, 5, 30),
-(2, 6, 60),
-(2, 7, 70),
-(2, 8, 56),
-(2, 9, 78),
-(2, 10, 60),
-(2, 11, 66),
-(2, 12, 77),
-(2, 13, 46);

@@ -40,7 +40,12 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
             "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Tata Tulis Laporan', ?, 'pembimbing'); "+
             "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Kelengkapan Materi', ?, 'pembimbing'); "+
             "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Proses Bimbingan', ?, 'pembimbing'); "+
-            "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Penguasaan Materi', ?, 'pembimbing'); ";
+            "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Penguasaan Materi', ?, 'pembimbing'); "+
+            "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Tata Tulis Laporan', ?, 'penguji2'); "+
+            "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Kelengkapan Materi', ?, 'penguji2'); "+
+            "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Pencapaian Tujuan', ?, 'penguji2'); "+
+            "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Penguasaan Materi', ?, 'penguji2'); "+
+            "INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe) VALUES ('Presentasi', ?, 'penguji2'); ";
             jdbcTemplate.update(
                 sql, bobotNilaiKetuaTimPenguji, 
                 bobotNilaiAnggotaTimPenguji, 
@@ -54,7 +59,12 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
                 tataTulisLaporanPembimbing,
                 kelengkapanMateriPembimbing,
                 prosesBimbingan,
-                penguasaanMateriPembimbing);
+                penguasaanMateriPembimbing,
+                tataTulisLaporanPenguji,
+                kelengkapanMateriPenguji,
+                pencapaianTujuanPenguji,
+                penguasaanMateriPenguji,
+                presentasiPenguji);
     }
 
     @Override
@@ -66,7 +76,7 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
 
     @Override
     public List<KomponenNilai> getAll() {
-        String sql = "SELECT idKomponen, namaKomponen, bobotKomponen FROM komponenNilai";
+        String sql = "SELECT idKomponen, namaKomponen, bobotKomponen FROM komponenNilai LIMIT 13";
         return jdbcTemplate.query(sql, this::mapRowToKomponenNilai);
     }
     private KomponenNilai mapRowToKomponenNilai (ResultSet resultSet, int rowNum) throws SQLException{
@@ -76,6 +86,12 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
             resultSet.getDouble("bobotKomponen")
         );
 
+    }
+
+    @Override
+    public double getBobot(int idKomponen) {
+        String sql = "SELECT bobotKomponen FROM komponenNilai WHERE idKomponen = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{idKomponen}, Double.class);
     }
 
     @Override
@@ -106,7 +122,12 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
                     "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 10; " +
                     "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 11; " +
                     "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 12; " +
-                    "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 13;";
+                    "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 13;" +
+                    "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 14; " +
+                    "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 15; " +
+                    "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 16; " +
+                    "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 17; " +
+                    "UPDATE komponenNilai SET bobotKomponen = ? WHERE idKomponen = 18;";
 
         jdbcTemplate.update(
             sql, 
@@ -122,7 +143,12 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
             tataTulisLaporanPembimbing, 
             kelengkapanMateriPembimbing, 
             prosesBimbingan, 
-            penguasaanMateriPembimbing
+            penguasaanMateriPembimbing,
+            tataTulisLaporanPenguji, 
+            kelengkapanMateriPenguji, 
+            pencapaianTujuanPenguji, 
+            penguasaanMateriPenguji, 
+            presentasiPenguji
         );
     }
 }

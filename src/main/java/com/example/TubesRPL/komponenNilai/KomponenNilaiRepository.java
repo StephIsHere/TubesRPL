@@ -39,4 +39,5 @@ public interface KomponenNilaiRepository {
         double prosesBimbingan,
         double penguasaanMateriPembimbing
     ) throws SQLException;
+    public double getBobot(int idKomponen);
 }
