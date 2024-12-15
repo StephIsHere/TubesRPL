@@ -348,8 +348,22 @@ public class UserController {
 
             // Simpan sidang ke database
             sidangRepo.addSidang(sidang);
-            sidangRepo.addSidangDosen(sidang, nikPembimbingUtama, nikPembimbingPendamping, nikKetuaPenguji, nikAnggotaPenguji);
-            
+            List<User> pembimbingUt = userRepo.findByNik(nikPembimbingUtama);
+            long idPemUt = pembimbingUt.get(0).getIdUser();
+
+            List<User> pembimbingPen = userRepo.findByNik(nikPembimbingPendamping);
+            long idPemPen = pembimbingPen.get(0).getIdUser();
+
+            List<User> ketPeng = userRepo.findByNik(nikKetuaPenguji);
+            long idketPeng = ketPeng.get(0).getIdUser();
+
+            List<User> angPeng = userRepo.findByNik(nikAnggotaPenguji);
+            long idAngPeng = angPeng.get(0).getIdUser();
+
+            List<Sidang> sidang2= sidangRepo.findSidangByJudul(judul);
+            int idSidang = sidang2.get(0).getIdSidang();
+
+            sidangRepo.addSidangDosen(idSidang, idPemUt, idPemPen, idketPeng, idAngPeng);
             return "redirect:/home";
         } catch (Exception e) {
             e.printStackTrace();

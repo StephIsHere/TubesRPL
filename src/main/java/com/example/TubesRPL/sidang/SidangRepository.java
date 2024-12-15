@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface SidangRepository {
     List<Sidang> findSidang(int idSidang);
     void addSidang(Sidang sidang);
-    void addSidangDosen (Sidang sidang, String nikPembimbing1, String nikPembimbing2, String nikPenguji1, String nikPenguji2);
+    void addSidangDosen (int idSidang, Long nikPembimbing1, Long nikPembimbing2, Long nikPenguji1, Long nikPenguji2);
     List<Sidang> findAll();
     List<Sidang> findSidangByJudul(String judul);
     List<Sidang> findAllSidangByID(Long nik);
