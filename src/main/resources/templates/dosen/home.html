@@ -45,6 +45,7 @@
             <div id="functionBar">
                 <form th:action="@{/home/searchSidang}" method="POST">
                     <input id="searchBar" type="text" placeholder="search..." name="judul">
+                    <button id="view2" type="submit">Cari</button>
                 </form>  
             </div>
             <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
