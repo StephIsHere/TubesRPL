@@ -2,7 +2,7 @@ function generate(event) {
     let nama = document.getElementById("nama").value.toLowerCase();
     let email = document.getElementById("email");
     let password = document.getElementById("password");
-    let peran = document.getElementById("role");
+    let peran = document.getElementById("role2");
 
     email.value = nama + "@unpar";
 
