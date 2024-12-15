@@ -94,7 +94,6 @@ td{
 
 
 .yellow_box{
-    background-color: #FFFEA6;
     display: flex;
     width: 635px;
     height: 37px;
@@ -226,6 +225,7 @@ button.img-delete {
     border-radius: 5px;
     font-family: Arial, sans-serif;
     cursor: pointer;
+    margin-left: 120px;
 }
 
 .catatanSidangStatic{
@@ -251,19 +251,97 @@ button.img-delete {
     font-family: Arial, sans-serif;
 }
 
-.catatan_sidang label{
-    margin-left: 20px;
+.status-proses {
+    background-color: #FFFEA6;
+    color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 30px;
 }
 
-.catatan_sidang{
-    margin-top: 20px;
-    margin-right: 20px;
+.status-selesai {
+    background-color: #EBEBEB;
+    color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 30px;
 }
 
-.labelcatatan{
-    padding-left: 0px;
+.status-upcoming {
+    background-color: #D5FFA3;
+    color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 30px;
+}
+
+.catatan_container{
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.kotak_catatan {
+    border: 2px solid #4CAF50; /* Border hijau */
+    border-radius: 8px; /* Sudut melengkung */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+    font-family: 'Arial', sans-serif; /* Font yang bersih */
+}
+
+.kotak_catatan p {
+    font-size: 16px;
+    color: #333; /* Warna teks */
+    line-height: 1.6;
+    margin: 0;
+}
+
+.catatan_sidang {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.labelcatatan {
+    font-size: 16px;
+    color: #333;
     font-weight: bold;
-    margin-left: 0px;
-    margin-right: 20px;
-    padding-right: 20px;
+    margin-bottom: 5px;
+}
+
+.catatanSidangform {
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    resize: none; /* Menonaktifkan resize */
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.catatanSidangform:focus {
+    border-color: #388E3C; /* Mengubah border saat fokus */
+    box-shadow: 0 0 8px rgba(56, 142, 60, 0.5); /* Menambahkan efek fokus */
+}
+
+.catatanButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.catatanButton:hover {
+    background-color: #388E3C; /* Mengubah warna tombol saat hover */
+    transform: translateY(-2px); /* Efek tombol sedikit terangkat saat hover */
+}
+
+.catatanButton:active {
+    transform: translateY(1px); /* Efek tombol sedikit tertekan saat di-click */
 }

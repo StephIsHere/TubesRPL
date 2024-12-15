@@ -43,7 +43,9 @@
             <div class="card">
                 <a th:href="@{/home}" id="backtomain"><img src="../assets/arrow.png" alt="back_to_main"></a>
                 <div class="yellow_box"></div>
-                <span class="judulCard bold" th:text="${sidang.judul}" ></span>
+                <span th:classappend="${sidang.status == 'Berlangsung' ? 'status-proses' : 
+                sidang.status == 'Selesai' ? 'status-selesai' : 
+                sidang.status == 'Belum Dimulai' ? 'status-upcoming' : ''}" class="judulCard bold" th:text="${sidang.judul}" ></span>
                 <table class="table1">
                     <tr>
                         <td id="judulSidang" colspan="2" class="bold judul" th:text="${sidang.judul}"></td>
@@ -110,10 +112,13 @@
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
                     </tr>  
                 </table>
-                <div class="catatan_sidang">
-                    <label for="catatan" style="font-weight: bold;">Catatan Sidang:</label>
-                    <textarea class="catatanSidangStatic" th:text="${sidang.catatan}" id="catatan" name="catatan" rows="5"readonly></textarea>
-                </div>                                 
+
+                <div class="catatan_container">
+                    <h4>Catatan Sidang : </h4>
+                    <div class="kotak_catatan">
+                        <p th:text="${sidang.catatan}">Catatan Sidang</p>
+                    </div>
+                </div>                           
             </div>
         </div>
     </main>
