@@ -32,7 +32,7 @@
             <div id="functionBar">
                 <div>
                     <form id= "formSearch" action="/home" method="get">
-                        <input id="searchBar" th:value="${query}" type="text" name="name" placeholder="Pencarian nama anggota sidang...">
+                        <input id="searchBarAdmin" th:value="${query}" type="text" name="name" placeholder="Pencarian nama anggota sidang...">
                         <button id="view" type="submit">Cari</button>
                     </form>
                 </div>
@@ -50,7 +50,7 @@
                 <div>
                     <form action="/home" method="get">
                         <select id="sortButton" name="sort" onchange="this.form.submit()">
-                            <option id="sortButton" value="" disabled selected>Sort</option>
+                            <option id="sortButton" value="" disabled selected>Urutkan</option>
                             <option id="sortButton" value="true">Naik</option>
                             <option id="sortButton" value="false">Turun</option>
                         </select>
@@ -129,16 +129,16 @@
                 <input type="text" name="nik" id="nik" value="">
             </div>
             <div class="form-groupAdmin">
-                <button type="submit">Save</button>
+                <button type="submit">Simpan</button>
             </div>
         </div>
     </form>
     
     <div id="deleteOverlay">
         <div class="messageBox">
-            <p>Are you sure you want to delete this user?</p>
-            <button id="confirmDeleteButton">Yes</button>
-            <button onclick="hideDeleteOverlay()" id="denyDeleteButton">No</button>
+            <p>Apakah Anda yakin menghapus anggota ini?</p>
+            <button id="confirmDeleteButton">Hapus</button>
+            <button onclick="hideDeleteOverlay()" id="denyDeleteButton">Batal</button>
         </div>
     </div>
     <script>

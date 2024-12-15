@@ -95,11 +95,87 @@ VALUES
 
 INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, status, ttdKetuaPenguji, ttdTimPenguji, ttdPembimbing1, ttdPembimbing2, ttdMahasiswa, ttdKoordinator, idKoordinator, idMahasiswa)
 VALUES
-(1, 'Mesin Cerdas', 'Implementasi AI pada Perangkat Lunak', 'Gedung Informatika Lt. 2', '2024-12-15', '08:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 1);
+(1, 'Mesin Cerdas', 'Implementasi AI pada Perangkat Lunak', 'Gedung Informatika Lt. 2', '2024-12-12', '08:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 10),
+(2, 'Sistem Informasi', 'Sistem Informasi Pegawai Kafe', 'Gedung Informatika Lt. 3', '2024-12-12', '10:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 11),
+(1, 'Cybersec', 'Pemecahan Enkripsi', 'PPAG lt 6', '2024-12-17', '11:00:00', 'catatan', 'Belum Dimulai',  null, null, null, null, null, null, 1, 12),
+(2, 'Deep Learning', 'Chatbot AI', 'PPAG lt 3', '2024-12-18', '09:00:00', 'catatan', 'Belum Dimulai',  null, null, null, null, null, null, 1, 13),
+(1, 'Rekayasa Perangkat Lunak', 'Aplikasi Sidang TA', 'Gedung Informatika 9 Lt. 2', '2024-12-15', '7:00:00', 'catatan', 'Berlangsung',  null, null, null, null, null, null, 1, 14),
+(2, 'Devops', 'Rekayasa Development Git', 'PPAG lt 12', '2024-12-15', '8:00:00', 'catatan', 'Berlangsung',  null, null, null, null, null, null, 1, 15);
 
-CREATE TABLE gambarTTD (
-    idGambar SERIAL PRIMARY KEY,
-    ttd BYTEA,
-    idUser INT NOT NULL,
-    FOREIGN KEY (idUser) REFERENCES users(idUser)
-);
+INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe)
+VALUES
+('Ketua Tim Penguji', 0.10, 'bobot nilai'),
+('Anggota Tim Penguji', 0.35, 'bobot nilai'),
+('Pembimbing', 0.25, 'bobot nilai'),
+('Koordinator', 0.30, 'bobot nilai'),
+('Tata Tulis Laporan', 0.20, 'penguji'),
+('Kelengkapan Materi', 0.10, 'penguji'),
+('Pencapaian Tujuan', 0.30, 'penguji'),
+('Presentasi', 0.25, 'penguji'),
+('Penguasaan Materi', 0.15, 'penguji'),
+('Tata Tulis Laporan', 0.25, 'pembimbing'),
+('Kelengkapan Materi', 0.25, 'pembimbing'),
+('Proses Bimbingan', 0.40, 'pembimbing'),
+('Penguasaan Materi', 0.10, 'pembimbing');
+
+INSERT INTO sidangDosen (idSidang, idUser, peran)
+VALUES
+(1, 5, 'Penguji 1'),
+(1, 6, 'Penguji 2'),
+(1, 7, 'Pembimbing 1'),
+(1, 8, 'Pembimbing 2'),
+
+(2, 8, 'Penguji 1'),
+(2, 7, 'Penguji 2'),
+(2, 9, 'Pembimbing 1'),
+(2, 5, 'Pembimbing 2'),
+
+(3, 6, 'Penguji 1'),
+(3, 8, 'Penguji 2'),
+(3, 9, 'Pembimbing 1'),
+(3, 7, 'Pembimbing 2'),
+
+(4, 7, 'Penguji 1'),
+(4, 6, 'Penguji 2'),
+(4, 5, 'Pembimbing 1'),
+(4, 8, 'Pembimbing 2'),
+
+(5, 9, 'Penguji 1'),
+(5, 6, 'Penguji 2'),
+(5, 7, 'Pembimbing 1'),
+(5, 5, 'Pembimbing 2'),
+
+(6, 9, 'Penguji 1'),
+(6, 5, 'Penguji 2'),
+(6, 8, 'Pembimbing 1'),
+(6, 6, 'Pembimbing 2');
+
+INSERT INTO komponenNilaiSidang (idSidang, idKomponen, nilai)
+VALUES
+(1, 1, 85),
+(1, 2, 100),
+(1, 3, 90),
+(1, 4, 85),
+(1, 5, 85),
+(1, 6, 60),
+(1, 7, 70),
+(1, 8, 56),
+(1, 9, 99),
+(1, 10, 100),
+(1, 11, 66),
+(1, 12, 77),
+(1, 13, 88),
+
+(2, 1, 30),
+(2, 2, 50),
+(2, 3, 40),
+(2, 4, 30),
+(2, 5, 30),
+(2, 6, 60),
+(2, 7, 70),
+(2, 8, 56),
+(2, 9, 78),
+(2, 10, 60),
+(2, 11, 66),
+(2, 12, 77),
+(2, 13, 46);
