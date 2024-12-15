@@ -113,6 +113,16 @@
                     </tr>  
                 </table>
 
+                <form id="generateBAP" th:action="@{/sidang/generateBAP}" method="post" th:if="${sidang.status == 'Selesai'}">
+                    <input type="hidden" name="judul" th:value="${sidang.judul}">
+                    <button type="submit">Generate BAP</button>
+                </form>
+
+                <form id="setujuBAP" th:action="@{/sidang/setujuBAP}" method="post" th:if="${sidang.status == 'Selesai'}">
+                    <input type="hidden" name="judul" th:value="${sidang.judul}">
+                    <button type="submit">Setuju</button>
+                </form>
+
                 <div class="catatan_container">
                     <h4>Catatan Sidang : </h4>
                     <div class="kotak_catatan">

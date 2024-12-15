@@ -1,7 +1,10 @@
 package com.example.TubesRPL.sidang;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +31,9 @@ public class SidangController {
 
     @Autowired
     private KomponenNilaiRepoJdbc nilaiRepo;
+
+    @Autowired
+    private GenerateBAP bap;
 
     @PostMapping("/AddSidang")
     public String tambahSidangPost(
@@ -146,5 +152,39 @@ public class SidangController {
         Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
         boolean res = this.sidangRepo.addCatatanSidang(sidang, catatan);
         return "redirect:/home";
+    }
+
+    @PostMapping("/generateBAP")
+    public String generateBAP(@RequestParam String judul, Model model, HttpSession session) {
+        System.out.println(judul);
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        System.out.println(sidang);
+        bap.generate(sidang.getIdSidang());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/sidang/bap.pdf";
+    }
+
+
+    //tempel ttd ke pdf DISINI KERJAINNYA PEN
+    @PostMapping("/setujuBAP")
+    public String setujuBAP(@RequestParam String judul, Model model, HttpSession session) {
+        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
+        model.addAttribute("sidang", sidang);
+        model.addAttribute("listNilai", listNilai);
+        model.addAttribute("nama", session.getAttribute("nama"));
+        model.addAttribute("peran", session.getAttribute("peran"));
+        if (session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Dosen")) {
+            return "dosen/DetailSidang";
+        } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+            return "mahasiswa/DetailSidang";
+        }
+        return"redirect:/";
     }
 }
