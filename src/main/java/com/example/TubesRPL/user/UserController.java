@@ -1,6 +1,8 @@
 package com.example.TubesRPL.user;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -282,65 +284,92 @@ public class UserController {
         return response;
     }
     
-    // @PostMapping("/home/addSidang")
-    // public String tambahSidangPost(
-    //     @RequestParam String nik,
-    //     @RequestParam String jenisTA,
-    //     @RequestParam String topik,
-    //     @RequestParam String judul,
-    //     @RequestParam String tempat,
-    //     @RequestParam String tanggal,
-    //     @RequestParam String waktu,
-    //     @RequestParam(required = false) String catatan,
-    //     @RequestParam(required = false) String status,
-    //     @RequestParam(required = false) byte[] bap,
-    //     @RequestParam(required = false) byte[] ttdKetuaPenguji,
-    //     @RequestParam(required = false) byte[] ttdTimPenguji,
-    //     @RequestParam(required = false) byte[] ttdPembimbing1,
-    //     @RequestParam(required = false) byte[] ttdPembimbing2,
-    //     @RequestParam(required = false) byte[] ttdMahasiswa,
-    //     @RequestParam(required = false) byte[] ttdKoordinator,
-    //     @RequestParam(required = false) Long idKoordinator
-    // ) {
-    //     try {
-    //         // Cari user berdasarkan NIK mahasiswa
-    //         List<User> users = userRepo.findByNik(nik);
-    //         if (users.isEmpty()) {
-    //             throw new RuntimeException("Mahasiswa dengan NIK " + nik + " tidak ditemukan.");
-    //         }
-    //         User mahasiswa = users.get(0);
+    @PostMapping("/home/addSidang")
+    public String tambahSidangPost(
+        @RequestParam String nik, //nik mahasiswa
+        @RequestParam String namaMahasiswa,
+        @RequestParam String jenisSidang,
+        @RequestParam String topik,
+        @RequestParam String judul,
+        @RequestParam String tempat,
+        @RequestParam String tanggal,
+        @RequestParam String waktu,
+        @RequestParam String nikPembimbingUtama,
+        @RequestParam String namaPembimbingUtama,
+        @RequestParam String nikPembimbingPendamping,
+        @RequestParam String namaPembimbingPendamping,
+        @RequestParam String nikKetuaPenguji,
+        @RequestParam String namaKetuaPenguji,
+        @RequestParam String nikAnggotaPenguji,
+        @RequestParam String namaAnggotaPenguji,
+        @RequestParam(required = false) String catatan,
+        @RequestParam(required = false) String status,
+        @RequestParam(required = false) byte[] bap,
+        @RequestParam(required = false) byte[] ttdKetuaPenguji,
+        @RequestParam(required = false) byte[] ttdTimPenguji,
+        @RequestParam(required = false) byte[] ttdPembimbing1,
+        @RequestParam(required = false) byte[] ttdPembimbing2,
+        @RequestParam(required = false) byte[] ttdMahasiswa,
+        @RequestParam(required = false) byte[] ttdKoordinator,
+        @RequestParam(required = false) Long idKoordinator
+    ) {
+        try {
+            // Cari user berdasarkan NIK mahasiswa
+            List<User> users = userRepo.findByNik(nik);
+            if (users.isEmpty()) {
+                throw new RuntimeException("Mahasiswa dengan NIK " + nik + " tidak ditemukan.");
+            }
+            User mahasiswa = users.get(0);
 
-    //         // Buat instance Sidang
-    //         Sidang sidang = new Sidang();
-    //         sidang.setIdMahasiswa(mahasiswa.getIdUser());
-    //         sidang.setJenisTA(jenisTA);
-    //         sidang.setTopik(topik);
-    //         sidang.setJudul(judul);
-    //         sidang.setTempat(tempat);
-    //         sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
-    //         sidang.setWaktu(LocalTime.parse(waktu));     // Format harus HH:mm
-    //         sidang.setCatatan(catatan);
-    //         sidang.setStatus(status);
-    //         sidang.setBap(bap);
-    //         sidang.setTtdKetuaPenguji(ttdKetuaPenguji);
-    //         sidang.setTtdTimPenguji(ttdTimPenguji);
-    //         sidang.setTtdPembimbing1(ttdPembimbing1);
-    //         sidang.setTtdPembimbing2(ttdPembimbing2);
-    //         sidang.setTtdMahasiswa(ttdMahasiswa);
-    //         sidang.setTtdKoordinator(ttdKoordinator);
-    //         sidang.setIdKoordinator(idKoordinator);
+            // Buat instance Sidang
+            Sidang sidang = new Sidang();
+            sidang.setJenisTA(jenisSidang);
+            sidang.setNamaPenulis(namaMahasiswa);
+            sidang.setNamaPembimbing1(namaPembimbingUtama);
+            sidang.setNamaPembimbing2(namaPembimbingPendamping);
+            sidang.setNamaPenguji1(namaKetuaPenguji);
+            sidang.setNamaPenguji2(namaAnggotaPenguji);
+            sidang.setNamaKetuaPenguji(namaKetuaPenguji);
+            sidang.setTopik(topik);
+            sidang.setJudul(judul);
+            sidang.setTempat(tempat);
+            sidang.setTanggal(LocalDate.parse(tanggal)); // Format harus yyyy-MM-dd
+            sidang.setWaktu(LocalTime.parse(waktu));     // Format harus HH:mm
+            sidang.setCatatan(catatan);
+            sidang.setStatus("Belum Dimulai");
+            sidang.setTtdKetuaPenguji(ttdKetuaPenguji);
+            sidang.setTtdTimPenguji(ttdTimPenguji);
+            sidang.setTtdPembimbing1(ttdPembimbing1);
+            sidang.setTtdPembimbing2(ttdPembimbing2);
+            sidang.setTtdMahasiswa(ttdMahasiswa);
+            sidang.setTtdKoordinator(ttdKoordinator);
+            sidang.setIdKoordinator(idKoordinator);
+            sidang.setIdMahasiswa(mahasiswa.getIdUser());
 
-    //         // Simpan sidang ke database
-    //         sidangRepo.save(sidang);
+            // Simpan sidang ke database
+            sidangRepo.addSidang(sidang);
+            List<User> pembimbingUt = userRepo.findByNik(nikPembimbingUtama);
+            long idPemUt = pembimbingUt.get(0).getIdUser();
 
-    //         return "redirect:/home";
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return "error";
-    //     }
-    // }
+            List<User> pembimbingPen = userRepo.findByNik(nikPembimbingPendamping);
+            long idPemPen = pembimbingPen.get(0).getIdUser();
 
+            List<User> ketPeng = userRepo.findByNik(nikKetuaPenguji);
+            long idketPeng = ketPeng.get(0).getIdUser();
 
+            List<User> angPeng = userRepo.findByNik(nikAnggotaPenguji);
+            long idAngPeng = angPeng.get(0).getIdUser();
+
+            List<Sidang> sidang2= sidangRepo.findSidangByJudul(judul);
+            int idSidang = sidang2.get(0).getIdSidang();
+
+            sidangRepo.addSidangDosen(idSidang, idPemUt, idPemPen, idketPeng, idAngPeng);
+            return "redirect:/home";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
 
     //MAHASISWA--- SALAH SEMUA
     // mahasiswa :
