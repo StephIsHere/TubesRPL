@@ -265,6 +265,10 @@ input[type="number"] {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.form-group input {
+    padding: 10px;
+    border-radius: 5px;
+}
 
 label {
     width: 200px;
@@ -276,7 +280,12 @@ select#role{
     border-radius: 5px;
     border: 2px solid black;
 }
-
+select#role2{
+    width: 423px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
 .percent{
     margin: 0 5px;
 }
@@ -681,4 +690,8 @@ h3{
 #detailAttAdmin input {
     border-radius: 5px;
     padding-left: 5px;
+}
+
+#judulTambahPeserta{
+    padding-top: 10px;
 }
