@@ -267,3 +267,21 @@ button.img-delete {
     margin-right: 20px;
     padding-right: 20px;
 }
+
+.judulCard.status-proses {
+    background-color: #FFFEA6;
+    color: black;
+    padding-bottom: 10px;
+}
+
+.judulCard.status-selesai {
+    background-color: #EBEBEB;
+    color: black;
+    padding-bottom: 10px;
+}
+
+.judulCard.status-upcoming {
+    background-color: #D5FFA3;
+    color: black;
+    padding-bottom: 10px;
+}

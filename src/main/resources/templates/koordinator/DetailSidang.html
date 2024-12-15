@@ -42,8 +42,10 @@
         <div class="card-container">
             <div class="card">
                 <a th:href="@{/home}" id="backtomain"><img src="../assets/arrow.png" alt="back_to_main"></a>
-                <div class="yellow_box"></div>
-                <span class="judulCard bold" th:text="${sidang.judul}" ></span>
+                <span class="judulCard bold" th:text="${sidang.judul}" 
+                th:classappend="${sidang.status == 'Berlangsung' ? 'status-proses' : 
+                sidang.status == 'Selesai' ? 'status-selesai' : 
+                sidang.status == 'Belum Dimulai' ? 'status-upcoming' : ''}"></span>
                 <table class="table1">
                     <tr>
                         <td id="judulSidang" colspan="2" class="bold judul" th:text="${sidang.judul}"></td>
