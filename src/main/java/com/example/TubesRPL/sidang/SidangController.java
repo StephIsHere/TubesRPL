@@ -92,7 +92,14 @@ public class SidangController {
         model.addAttribute("nama", session.getAttribute("nama"));
         model.addAttribute("peran", session.getAttribute("peran"));
         model.addAttribute("sidangs", listSidang);
-        return "koordinator/home";
+        if (session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/home";
+        } else if (session.getAttribute("peran").equals("Dosen")) {
+            return "dosen/home";
+        } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+            return "mahasiswa/home";
+        }
+        return"redirect:/";
     }
 
     @PostMapping("/detailSidang")
@@ -110,7 +117,7 @@ public class SidangController {
         } else if (session.getAttribute("peran").equals("Mahasiswa")) {
             return "mahasiswa/DetailSidang";
         }
-        return"/";
+        return"redirect:/";
     }
 
     // perlu perbaikan buat ngasih tau kalo dia salah ato engga pake variabel res

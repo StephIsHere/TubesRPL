@@ -233,15 +233,12 @@ public class UserController {
         model.addAttribute("nama", session.getAttribute("nama"));
         model.addAttribute("peran", session.getAttribute("peran"));
         model.addAttribute("sidangs", listSidang);
-        model.addAttribute("nama", session.getAttribute("nama"));
-        model.addAttribute("peran", session.getAttribute("peran"));
-        if (session.getAttribute("nama").equals("Dosen")) {
-            return"dosen/home";
-        } else if (session.getAttribute("nama").equals("Mahasiswa")) {
-            return "mahasiswa/mahasiswaMain";
-        } else {
-            return"/";
+        if (session.getAttribute("peran").equals("Koordinator")) {
+            return "koordinator/home";
+        } else if (session.getAttribute("peran").equals("Dosen")) {
+            return "dosen/home";
         }
+        return"redirect:/home";
     }
 
     //KOORDINATOR----------------------------------------------
