@@ -107,7 +107,6 @@ public class UserController {
                 return "admin/adminPage";
 
             } else if (session.getAttribute("peran").equals("Koordinator")) {
-                // Ambil data sidang dari repository
                 List<Sidang> sidangs = sidangRepo.findAllSidangWithPenulis(); 
                 List<User> userList = userRepo.findAll();
 
@@ -117,22 +116,14 @@ public class UserController {
                 return "koordinator/home";
 
             } else if (session.getAttribute("peran").equals("Dosen")) {
-                List<Sidang> sidangs = sidangRepo.findAllSidangWithPenulis(); 
+                String namaDosen = (String )session.getAttribute("nama");
+                long idDosen = userRepo.findUserByName(namaDosen).getFirst().getIdUser();
+                List<Sidang> sidangs = sidangRepo.findAllSidangWithIdUser(idDosen); 
+                System.out.println(sidangs + "sdfiohshfhusd");
                 List<User> userList = userRepo.findAll();
 
-                 for (int i = 0; i < sidangs.size(); i++) {
-                    Sidang temp = sidangs.get(i);
-                    String judul = temp.getJudul();
-                    temp = this.sidangRepo.addPengujiandPembimbing(judul);
-                    if ((temp.getNamaPembimbing1() != null && temp.getNamaPembimbing1().equals(session.getAttribute("nama"))) ||
-                        (temp.getNamaPembimbing2() != null && temp.getNamaPembimbing2().equals(session.getAttribute("nama"))) ||
-                        (temp.getNamaPenguji1() != null && temp.getNamaPenguji1().equals(session.getAttribute("nama"))) ||
-                        (temp.getNamaPenguji2() != null && temp.getNamaPenguji2().equals(session.getAttribute("nama")))) {
-                        sidangs.remove(i);
-                    }
-                          
-                 }
-
+                System.out.println(idDosen);
+                
                 model.addAttribute("allUser", userList);
                 model.addAttribute("sidangs", sidangs);
                 return "dosen/home";

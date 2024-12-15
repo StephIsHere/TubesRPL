@@ -15,4 +15,5 @@ public interface SidangRepository {
     List<Sidang> findAllSidangWithPenulis();
     Sidang addPengujiandPembimbing(String judul);
     boolean addCatatanSidang(Sidang sidang, String catatan);
+    List<Sidang> findAllSidangWithIdUser(long iduser);
 }
