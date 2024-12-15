@@ -43,10 +43,10 @@
     <main onclick="hideElement()">
         <div class="mainContainer">
             <div id="functionBar">
-                <form th:action="@{/home/searchSidang}" method="POST">
-                    <input id="searchBar" type="text" placeholder="search..." name="judul">
-                    <button id="view2" type="submit">Cari</button>
-                </form>  
+                <form id="formSearch" th:action="@{/home/searchSidang}" method="POST">
+                    <input id="searchBar" type="text" placeholder="Cari berdasarkan judul Tugas Akhir..." name="judul">
+                    <button id="view" type="submit">Cari</button>
+                </form> 
             </div>
             <p th:if="${sidangs == null}">Data sidangs tidak ditemukan</p>
             <p th:if="${sidangs != null}">Jumlah data sidang: <span th:text="${#lists.size(sidangs)}"></span></p>
