@@ -66,6 +66,14 @@ public class UserController {
         }
     }
 
+    @GetMapping("/sidang/bap.pdf")
+    public String bap(HttpSession session) {
+        if(session.getAttribute("idUser") == null) {
+            return "redirect:/";
+        }
+        return "redirect:/Sidang_FilledTemplate.pdf";
+    }
+
     // Home page
     @GetMapping("/home")
     public String showHome(@RequestParam(defaultValue = "") String name,

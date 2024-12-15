@@ -34,7 +34,7 @@ CREATE TABLE sidang (
     tanggal DATE,
     waktu TIME,
     catatan VARCHAR(10000),
-    status VARCHAR(50),
+    status VARCHAR(50) CHECK (status IN ('Belum Dimulai', 'Berlangsung', 'Selesai')),
     ttdKetuaPenguji BYTEA,
     ttdTimPenguji BYTEA,
     ttdPembimbing1 BYTEA,
@@ -65,6 +65,12 @@ CREATE TABLE komponenNilaiSidang (
     FOREIGN KEY (idKomponen) REFERENCES komponenNilai(idKomponen) ON DELETE CASCADE
 );
 
+CREATE TABLE gambarTTD (
+    idGambar SERIAL PRIMARY KEY,
+    ttd BYTEA,
+    idUser INT NOT NULL,
+    FOREIGN KEY (idUser) REFERENCES users(idUser)
+);
 
 INSERT INTO users (email, password, nama, peran, nik, status)
 VALUES 
