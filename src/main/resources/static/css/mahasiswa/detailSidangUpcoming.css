@@ -216,3 +216,54 @@ button.img-delete {
     height: 30px;
     width: 70px;
 }
+
+.catatanButton{
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+}
+
+.catatanSidangStatic{
+    width: 100%; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 10px; 
+    box-sizing: border-box;
+    resize: none;
+    line-height: 1.5;
+    font-family: Arial, sans-serif;
+    margin-left: 20px;
+}
+
+.catatanSidangform{
+    width: 100%; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 10px; 
+    box-sizing: border-box;
+    resize: none;
+    line-height: 1.5;
+    font-family: Arial, sans-serif;
+}
+
+.catatan_sidang label{
+    margin-left: 20px;
+}
+
+.catatan_sidang{
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.labelcatatan{
+    padding-left: 0px;
+    font-weight: bold;
+    margin-left: 0px;
+    margin-right: 20px;
+    padding-right: 20px;
+}

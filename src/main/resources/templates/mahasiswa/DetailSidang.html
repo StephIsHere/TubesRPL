@@ -34,7 +34,7 @@
             <button type="submit">Submit</button>
         </form>
         <hr>
-        <form action="logout" method="post">
+        <form th:action="@{/logout}" method="post">
             <button id="logoutButton" type="submit" value="logout">Log out</button>
         </form>
     </div>
@@ -111,22 +111,9 @@
                     </tr>  
                 </table>
 
-                <p><a href="">BAP.pdf</a></p>
-
                 <div class="catatan_sidang">
                     <label for="catatan" style="font-weight: bold;">Catatan Sidang:</label>
-                    <textarea th:text="${sidang.catatan}" id="catatan" name="catatan" rows="5" style="
-                        width: 100%; 
-                        border: 1px solid #ccc; 
-                        border-radius: 5px; 
-                        padding: 10px; 
-                        box-sizing: border-box;
-                        resize: none;
-                        line-height: 1.5;
-                        font-family: Arial, sans-serif;
-                    " readonly>
-
-                    </textarea>
+                    <textarea class="catatanSidangStatic" th:text="${sidang.catatan}" id="catatan" name="catatan" rows="5"readonly></textarea>
                 </div>                                 
             </div>
         </div>
