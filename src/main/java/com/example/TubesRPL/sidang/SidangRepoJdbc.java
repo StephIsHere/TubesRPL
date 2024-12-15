@@ -166,6 +166,21 @@ public class SidangRepoJdbc implements SidangRepository {
     }
 
     @Override
+    public List<Sidang> findAllSidangWithIdUser(long iduser) {
+        String sql = "SELECT s.idSidang, s.jenisTA, m.nama AS penulis, s.topik, s.judul, s.tempat, " +
+                    "s.tanggal, s.waktu, s.catatan, s.status, s.ttdKetuaPenguji, s.ttdTimPenguji, " +
+                    "s.ttdPembimbing1, s.ttdPembimbing2, s.ttdMahasiswa, s.ttdKoordinator, " +
+                    "s.idKoordinator, s.idMahasiswa " +
+                    "FROM sidangdosen sd " +
+                    "JOIN users ON sd.iduser = users.iduser " +
+                    "JOIN sidang s ON sd.idsidang = s.idsidang " +
+                    "JOIN users m ON m.iduser = s.idmahasiswa " +
+                    "WHERE users.iduser = ?";
+        return jdbcTemplate.query(sql, sidangRowMapper, iduser);
+    }
+
+
+    @Override
     public boolean addCatatanSidang(Sidang sidang, String catatan) { 
         String sql = "UPDATE sidang SET catatan = ? WHERE judul = ?"; 
         int rowsAffected = jdbcTemplate.update(sql, catatan, sidang.getJudul()); 
