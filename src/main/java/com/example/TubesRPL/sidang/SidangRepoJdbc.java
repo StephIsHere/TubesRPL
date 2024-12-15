@@ -111,6 +111,17 @@ public class SidangRepoJdbc implements SidangRepository {
         sidang.getIdKoordinator(),
         sidang.getIdMahasiswa()
         );
+
+    }
+    
+    @Override
+    public void addSidangDosen (int idSidang, Long nikPembimbing1, Long nikPembimbing2, Long nikPenguji1, Long nikPenguji2){
+        String sql = "INSERT INTO sidangDosen (idSidang, idUser, peran) VALUES (?, ?, ?)";
+        
+        jdbcTemplate.update(sql, idSidang, nikPembimbing1, "Pembimbing 1");
+        jdbcTemplate.update(sql, idSidang, nikPembimbing2, "Pembimbing 2");
+        jdbcTemplate.update(sql, idSidang, nikPenguji1, "Penguji 1");
+        jdbcTemplate.update(sql, idSidang, nikPenguji2, "Penguji 2");
     }
 
     @Override
@@ -153,6 +164,21 @@ public class SidangRepoJdbc implements SidangRepository {
                      "WHERE s.idMahasiswa = ?";
         return jdbcTemplate.query(sql, sidangRowMapper, idMahasiswa);
     }
+
+    @Override
+    public List<Sidang> findAllSidangWithIdUser(long iduser) {
+        String sql = "SELECT s.idSidang, s.jenisTA, m.nama AS penulis, s.topik, s.judul, s.tempat, " +
+                    "s.tanggal, s.waktu, s.catatan, s.status, s.ttdKetuaPenguji, s.ttdTimPenguji, " +
+                    "s.ttdPembimbing1, s.ttdPembimbing2, s.ttdMahasiswa, s.ttdKoordinator, " +
+                    "s.idKoordinator, s.idMahasiswa " +
+                    "FROM sidangdosen sd " +
+                    "JOIN users ON sd.iduser = users.iduser " +
+                    "JOIN sidang s ON sd.idsidang = s.idsidang " +
+                    "JOIN users m ON m.iduser = s.idmahasiswa " +
+                    "WHERE users.iduser = ?";
+        return jdbcTemplate.query(sql, sidangRowMapper, iduser);
+    }
+
 
     @Override
     public boolean addCatatanSidang(Sidang sidang, String catatan) { 
