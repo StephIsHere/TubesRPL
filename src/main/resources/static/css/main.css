@@ -492,6 +492,7 @@ button.img-delete {
     border-radius: 15px;
     margin-top: 10px;
     visibility: hidden;
+    z-index: 10;
 }
 #OverlayIconUser button:hover{
     cursor: pointer;
