@@ -12,6 +12,12 @@ public class Sidang {
     
     private int idSidang;
     private String jenisTA;
+    private String namaPenulis;
+    private String namaPembimbing1;
+    private String namaPembimbing2; 
+    private String namaPenguji1; 
+    private String namaPenguji2; 
+    private String namaKetuaPenguji; 
     private String topik;
     private String judul;
     private String tempat;
@@ -27,6 +33,5 @@ public class Sidang {
     private byte[] ttdKoordinator;
     private Long idKoordinator;
     private Long idMahasiswa;
-
-    public Sidang() {}
+    public Sidang() {}   
 }

@@ -9,7 +9,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -29,6 +29,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.postgresql:postgresql")
+
+	implementation ("org.apache.poi:poi:5.2.3")      
+    implementation ("org.apache.poi:poi-ooxml:5.2.3")
+	implementation(files("libs/aspose-words-23.10-jdk17.jar"))
+
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")

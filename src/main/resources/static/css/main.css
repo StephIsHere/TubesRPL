@@ -17,6 +17,18 @@ header {
     overflow: hidden;
 }
 
+#textEdit {
+    margin-left: 60px;
+    font-weight: bold;
+}
+
+hr#linePemisahKomponen {
+    width: 88%;
+}
+hr{
+    margin: 0px;
+}
+
 div#rightHeader {
     white-space: wrap;
     margin-left: 15px;
@@ -69,7 +81,7 @@ main {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .mainContainer, .card {
@@ -82,33 +94,65 @@ main {
     justify-content: space-between;
 }
 
-#searchBar, #filterButton, #sortButton, #addSidangButton, #view {
+#searchBar, #searchBarAdmin, #filterButton, #sortButton, #addSidangButton, #view, #view2 {
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0 2px;
     padding: 0 10px;
     border: 1px solid #acacac;
     border-radius: 12px;
-    height: 30px;
+    height: 35px;
     width: 70px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
-#filterButton:hover, #sortButton:hover, #addSidangButton:hover, #view:hover {
+#filterButton:hover, #sortButton:hover, #addSidangButton:hover, #view:hover, #view2:hover {
     background-color: #eaf7f5;
     cursor: pointer;
 }
 
 #searchBar{
     align-content: center;
-    width:400px;
+    width:350px;
     outline: none;
-    margin-right: 30px;
+    margin-right: 0px;
+    height: 35px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+#searchBarAdmin{
+    align-content: center;
+    width:350px;
+    outline: none;
+    margin-right: 0px;
+    height: 35px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+select#sortButton {
+    width: 150px;
+}
+select#filterButton {
+    width: 150px;
+}
+
+button#view {
+    left: 500px;
+    height: 36.5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin: 0px;
+}
+button#view2 {
+    left: 500px;
+    height: 35px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin: 0px;
 }
 
 #addSidangButton {
-    width: 100px;
-    margin-left: 20px;
+    width: 200px;
 }
 
 .sidang, .addSidang {
@@ -120,9 +164,12 @@ main {
 .addSidang {
     width: 800px;
 }
+#tambahAnggota{
+    font-size: 14px;
+}
 
 .sidang {
-    height: 200px;
+    height: 210px;
 }
 
 .headerSidang{
@@ -132,6 +179,8 @@ main {
     background-color: #D5FFA3;
     height: 35px;
     border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
 }
 
 .headerAddSidang {
@@ -160,7 +209,15 @@ label.labelAddSidang {
 
 .formContainer {
     padding: 10px 30px;
-    width: 800px;
+    width: 900px;
+
+}
+.formContainer form input{
+    width: 400px;
+}
+#formSearch{
+    display: flex;
+    gap: 0px;
 }
 
 br {
@@ -182,7 +239,7 @@ input.inputSidang {
     margin-top: 20px;
 }
 
-form#komponenNilai {
+form#komponenNilai, div#komponenNilaiDiv {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -217,26 +274,39 @@ input[type="number"] {
 
 .form-group {
     display: flex;
-    align-items: end;
-    margin: 15px 0;
-    padding: 0;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
     justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.form-group input {
+    padding: 10px;
+    border-radius: 5px;
 }
 
 label {
-    width: 160px;
+    width: 200px;
 }
 
 select#role{
-    width: 168px;
+    width: 172px;
     height: 22px;
+    border-radius: 5px;
+    border: 2px solid black;
 }
-
+select#role2{
+    width: 423px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
 .percent{
     margin: 0 5px;
 }
 
-button[form="komponenNilai"], button#buttonAddSidang{
+button[form="komponenNilai"], button#buttonAddSidang, button#editKomponenButton{
     background-color: #E3F1F0;
     border: 1px solid #388087;
     align-content: center;
@@ -251,7 +321,7 @@ button#buttonAddSidang:hover{
     color: white;
 }
 
-button[form="komponenNilai"]:hover{
+button[form="komponenNilai"]:hover, button#editKomponenButton:hover{
     background-color: #d7e6e5;
     cursor: pointer;
 }
@@ -331,13 +401,36 @@ label[form="adminPageDel"]{
 .detailAdmin .form-group label{
     padding: 10px;
 }
-.detailAttAdmin{
+#detailAttAdmin{
     padding: 20px 60px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 400px;
+    height: 300px;
+    visibility: hidden;
+    position: absolute;
+    top: 40%;
+    right: 34%;
+    background-color: white;
 }
-.detailAttAdmin .form-groupAdmin{
+#detailAttAdmin .form-groupAdmin{
     display: flex;
     align-items: center;
     margin: 15px 0;
+}
+.form-groupAdmin button{
+    border-radius: 15px;
+    border: 0px;
+    color: white;
+    background-color: #388087;
+    width: 70px;
+    height: 40px;
+    margin-left: 300px;
+    margin-top: 30px;
+}
+.form-groupAdmin button:hover{
+    cursor: pointer;
+    background-color: #acacac;
 }
 button[form="adminTambahPeserta"]{
     width: 50px;
@@ -399,6 +492,7 @@ button.img-delete {
     border-radius: 15px;
     margin-top: 10px;
     visibility: hidden;
+    z-index: 10;
 }
 #OverlayIconUser button:hover{
     cursor: pointer;
@@ -458,8 +552,8 @@ button.img-delete {
     align-items: center;
     text-align: center;
     top: 40%;
-    right: 42%;
-    visibility: hidden;
+    right: 40%;
+    visibility:hidden;
 }
 #deleteOverlay button{
     width: 60px;
@@ -493,4 +587,136 @@ textarea#topikTA{
 }
 label[for="judulTa"]{
     margin-bottom: 0px;
+}
+
+.komponen-sidang-box{
+    display: grid;
+    margin: 10px;
+    grid-template-columns: 200px 350px 250px 100px;
+    grid-template-areas: 
+        'labelNIKmahasiswa isiNIKmahasiswa labelPembimbing1 pembimbing1'
+        'labelNamaMahasiswa isiNamaMahasiswa labelPembimbing2 pembimbing2'
+        'labelTopik topik labelPenguji1 penguji1'
+        'labelJudul judul labelPenguji2 penguji2'
+        'labelTempat tempat kosong kosong'
+        'labelTanggal tanggal kosong kosong'
+        'labelWaktu waktu kosong kosong'
+    ;
+    gap: 5px;
+}
+
+.saveButton {
+    background-color: #388087; /* Warna dasar tombol */
+    color: #ffffff; /* Teks putih agar kontras */
+    font-size: 16px; /* Ukuran teks */
+    padding: 10px 20px; /* Ruang dalam tombol */
+    border: none; /* Hilangkan border */
+    border-radius: 8px; /* Sudut membulat */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: all 0.3s ease; /* Animasi halus saat interaksi */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+    margin-left: 350px;
+}
+
+.saveButton:hover {
+    background-color: #2d6d6f; /* Warna lebih gelap saat hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Bayangan lebih besar */
+    transform: translateY(-2px); /* Efek mengangkat tombol */
+}
+
+.saveButton:active {
+    background-color: #1f4f51; /* Warna lebih gelap saat tombol ditekan */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan lebih kecil */
+    transform: translateY(0); /* Kembalikan posisi tombol */
+}
+
+#saveKomponenStatus {
+    color: red;
+    margin-left: 60px;
+}
+
+#saveKomponenBerhasil {
+    color: green;
+    margin-left: 60px;
+}
+
+
+.headerSidang {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.headerSidang.status-proses {
+    background-color: #FFFEA6;
+    color: black;
+}
+
+.headerSidang.status-selesai {
+    background-color: #EBEBEB;
+    color: black;
+}
+
+.headerSidang.status-upcoming {
+    background-color: #D5FFA3;
+    color: black;
+}
+
+.submit-button {
+    background-color: #007BFF; /* Warna biru */
+    color: white; /* Teks putih */
+    border: none; /* Hilangkan border */
+    border-radius: 4px; /* Sudut melengkung */
+    padding: 4px 8px; /* Padding yang sesuai */
+    font-size: 16px; /* Ukuran font */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animasi */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Warna biru gelap saat hover */
+}
+
+.submit-button:active {
+    transform: scale(0.95); /* Efek klik */
+}
+
+.submit-button:focus {
+    outline: none; /* Hilangkan outline */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Tambahkan shadow saat fokus */
+}
+
+.inactive{
+    background-color: red;
+    color: white;
+}
+.inactive .label_nama, 
+.inactive .label_role {
+    color: white;                /* Warna teks anak elemen */
+}
+.inactive .img-edit, .inactive .img-delete{
+    background-color: red;
+}
+
+label.label_nama {
+    margin-left: 20px;
+}
+h3{
+    margin-left: 20px;
+}
+
+#detailAttAdmin input {
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+#judulTambahPeserta{
+    padding-top: 10px;
+}
+.checkbox {
+    margin-left: 120px;
+}
+#linePemisahKomponenKoor {
+    width: 90%;
+    margin-left: 50px;
+    margin-bottom: 30px;
 }

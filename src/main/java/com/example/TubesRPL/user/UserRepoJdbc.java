@@ -16,32 +16,46 @@ public class UserRepoJdbc implements UserRepository {
     // Mencari user berdasarkan email dan passsword
     @Override
     public List<User> findUser(String email, String password) {
-        String sql = "SELECT * FROM \"user\" WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, email, password);
     }
 
     @Override
     public List<User> findUserByName(String name) {
-        String sql = "SELECT * FROM \"user\" WHERE LOWER(nama) LIKE ?";
+        String sql = "SELECT * FROM users WHERE LOWER(nama) LIKE ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, "%" + name.toLowerCase() + "%");
     }
 
     @Override
     public List<User> findByNik(String nik){
-        String sql = "SELECT * FROM \"user\" WHERE nik LIKE ?";
+        String sql = "SELECT * FROM users WHERE nik LIKE ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, "%" + nik + "%");
     }
 
     @Override
     public List<User> findUserByRole(String role) {
-        String sql = "SELECT * FROM \"user\" WHERE peran LIKE ?";
+        String sql = "SELECT * FROM users WHERE peran LIKE ?";
         return jdbcTemplate.query(sql, this::mapRowToUser, role);
     }
 
+    @Override
+    public void updateUser(User user) {
+        String sql = "UPDATE users SET nama = ?, email = ?, password = ?, peran = ?, nik = ?, status = ? WHERE idUser = ?";
+        
+        // Memastikan status di-set ke true, jika ingin tetap aktif
+        jdbcTemplate.update(sql, 
+            user.getNama(), 
+            user.getEmail(), 
+            user.getPassword(), 
+            user.getPeran(), 
+            user.getNik(), 
+            user.getStatus(), // pastikan status disertakan jika perlu
+            user.getIdUser());
+    }
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO \"user\" (nama, email, password, peran, nik, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (nama, email, password, peran, nik, status) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
                 user.getNama(),
                 user.getEmail(),
@@ -53,19 +67,19 @@ public class UserRepoJdbc implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        String sql = "SELECT * FROM \"user\" ORDER BY nama ASC"; // Ordering by name for better readability
+        String sql = "SELECT * FROM users ORDER BY nama ASC"; // Ordering by name for better readability
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
     @Override
     public List<User> findAllDesc() {
-        String sql = "SELECT * FROM \"user\" ORDER BY nama DESC";
+        String sql = "SELECT * FROM users ORDER BY nama DESC";
         return jdbcTemplate.query(sql, this::mapRowToUser);
     }
 
     @Override
     public void setUserInactive(Long idUser) {
-        String sql = "UPDATE \"user\" SET status = false WHERE \"idUser\" = ?";
+        String sql = "UPDATE users SET status = false WHERE idUser = ?";
         jdbcTemplate.update(sql, idUser);
     }
 
@@ -79,6 +93,34 @@ public class UserRepoJdbc implements UserRepository {
                 resultSet.getString("peran"),
                 resultSet.getString("nik"),
                 resultSet.getBoolean("status")
+        );
+    }
+
+    @Override 
+    public List<User> findByID (Long idUser){
+        String sql = "SELECT * FROM users  WHERE idUser = ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, idUser);
+    }
+
+    @Override
+    public boolean saveTtd (Long idUser, byte[] ttd) {
+        String sql = "INSERT INTO gambarTTD (ttd, idUser) VALUES (?, ?)";
+        try {
+            int rowsAffected = jdbcTemplate.update(sql, ttd, idUser);
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public List<TandaTangan> getTtdByUserId(Long idUser) {
+        String sql = "SELECT ttd FROM gambarTTD WHERE idUser = ? ORDER BY idgambar DESC LIMIT 1";
+        return jdbcTemplate.query(sql, this::mapRowToTtd, idUser);
+    }
+    private TandaTangan mapRowToTtd (ResultSet resultSet, int rowNum) throws SQLException {
+        return new TandaTangan(
+            resultSet.getBytes("ttd")
         );
     }
 }

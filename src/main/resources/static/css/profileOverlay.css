@@ -1,0 +1,42 @@
+#OverlayIconUser {
+    height: auto!important;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+#OverlayIconUser > form {
+    width: 80%;
+}
+
+#OverlayIconUser > form > button{
+    height: 30px;
+}
+
+
+#OverlayIconUser > form > button#logoutButton{
+    color: white;
+    height: 35px;
+    background-color: rgb(235, 65, 65);
+}
+
+#OverlayIconUser > form > *{
+    margin: 10px 0;
+    width: 100%;
+    display: block;
+}
+
+#OverlayIconUser > form > button {
+    background-color: #E3F1F0;
+    border: none;
+    border-radius: 6px;
+}
+
+hr {
+    width: 80%;
+}
+
+#OverlayIconUser > form > img {
+    max-height: 400px;
+    height: auto;
+}

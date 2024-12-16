@@ -2,7 +2,7 @@ function generate(event) {
     let nama = document.getElementById("nama").value.toLowerCase();
     let email = document.getElementById("email");
     let password = document.getElementById("password");
-    let peran = document.getElementById("role");
+    let peran = document.getElementById("role2");
 
     email.value = nama + "@unpar";
 
@@ -26,9 +26,9 @@ function showSuccessOverlay() {
     overlay.className = "overlay";
 
     overlay.innerHTML = `
-            <div class="messageBox">
-                <p>User successfully added!</p>
-                <button onclick="confirmSuccess()">OK</button>
+            <div class="messageBox" style="border : 1px solid black; border-radius: 15px; width: 400px; height:120px; display:flex;flex-direction:column; justify-content:center; align-items:center; position:absolute; top:40%; right:37%; background-color:white">
+                <p>Anggota berhasil ditambahkan!</p>
+                <button onclick="confirmSuccess()" style="background-color:#388087; border-radius:15px; width:80px; height:40px; border:0px; color:white;">OK</button>
             </div>
         `;
     document.body.appendChild(overlay);
