@@ -714,3 +714,8 @@ h3{
 .checkbox {
     margin-left: 120px;
 }
+#linePemisahKomponenKoor {
+    width: 90%;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
