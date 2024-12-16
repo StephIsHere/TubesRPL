@@ -125,7 +125,7 @@ public class UserController {
 
             } else if (session.getAttribute("peran").equals("Dosen")) {
                 String namaDosen = (String )session.getAttribute("nama");
-                long idDosen = userRepo.findUserByName(namaDosen).getFirst().getIdUser();
+                long idDosen = userRepo.findUserByName(namaDosen).get(0).getIdUser();
                 List<Sidang> sidangs = sidangRepo.findAllSidangWithIdUser(idDosen); 
                 System.out.println(sidangs + "sdfiohshfhusd");
                 List<User> userList = userRepo.findAll();
