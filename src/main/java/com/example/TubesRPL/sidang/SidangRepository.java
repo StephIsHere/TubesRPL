@@ -23,4 +23,6 @@ public interface SidangRepository {
     boolean checkNilaiPenguji2(int idSidang);
     boolean checkNilaiPembimbing(int idSidang);
     void saveNilaiMain(int idSidang);
+    byte[] getUserSignature(Long idUser);
+    void saveSignatureToSidang(int idSidang, byte[] ttd, String role);
 }

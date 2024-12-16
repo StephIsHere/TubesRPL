@@ -1,6 +1,7 @@
 package com.example.TubesRPL.sidang;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,14 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
+import com.aspose.words.ImageData;
 import com.example.TubesRPL.komponenNilai.KomponenNilai;
 import com.example.TubesRPL.komponenNilai.KomponenNilaiRepoJdbc;
 import com.example.TubesRPL.user.User;
 import com.example.TubesRPL.user.UserRepository;
+
+import com.aspose.pdf.Document;
+import com.aspose.pdf.Page;
+import com.aspose.pdf.Image;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -169,23 +178,87 @@ public class SidangController {
     }
 
 
-    //tempel ttd ke pdf DISINI KERJAINNYA PEN
-    @PostMapping("/setujuBAP")
-    public String setujuBAP(@RequestParam String judul, Model model, HttpSession session) {
-        Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
-        List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
-        model.addAttribute("sidang", sidang);
-        model.addAttribute("listNilai", listNilai);
-        model.addAttribute("nama", session.getAttribute("nama"));
-        model.addAttribute("peran", session.getAttribute("peran"));
-        if (session.getAttribute("peran").equals("Koordinator")) {
-            return "koordinator/DetailSidang";
-        } else if (session.getAttribute("peran").equals("Dosen")) {
-            return "dosen/DetailSidang";
-        } else if (session.getAttribute("peran").equals("Mahasiswa")) {
-            return "mahasiswa/DetailSidang";
+    // //tempel ttd ke pdf DISINI KERJAINNYA PEN
+    // @PostMapping("/setujuBAP")
+    // public String setujuBAP(@RequestParam String judul, Model model, HttpSession session) {
+    //     Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+    //     List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
+    //     model.addAttribute("sidang", sidang);
+    //     model.addAttribute("listNilai", listNilai);
+    //     model.addAttribute("nama", session.getAttribute("nama"));
+    //     model.addAttribute("peran", session.getAttribute("peran"));
+    //     if (session.getAttribute("peran").equals("Koordinator")) {
+    //         return "koordinator/DetailSidang";
+    //     } else if (session.getAttribute("peran").equals("Dosen")) {
+    //         return "dosen/DetailSidang";
+    //     } else if (session.getAttribute("peran").equals("Mahasiswa")) {
+    //         return "mahasiswa/DetailSidang";
+    //     }
+    //     return"redirect:/";
+    // }
+
+    public void addSignatureToPdf(byte[] ttd, String inputPdfPath, String outputPdfPath) throws Exception {
+        // 1. Buka file PDF input
+        Document doc = new Document(inputPdfPath); // Menggunakan class Document dari Aspose.PDF
+    
+        // 2. Tentukan posisi tanda tangan (koordinat X dan Y dalam titik)
+        float x = 450; // Koordinat X
+        float y = 50;  // Koordinat Y
+    
+        // 3. Ambil halaman pertama (atau halaman yang sesuai di file PDF)
+        Page page = doc.getPages().get(1); // Menggunakan halaman pertama
+    
+        // 4. Tambahkan gambar tanda tangan pada halaman
+        if (ttd != null) {
+            ByteArrayInputStream ttdStream = new ByteArrayInputStream(ttd);
+    
+            // Menambahkan gambar ke halaman PDF pada posisi tertentu
+            Image signatureImage = new Image();
+            signatureImage.setImageStream(ttdStream); // Menyediakan gambar dari stream
+            signatureImage.setLeft(x); // Koordinat X
+            signatureImage.setTop(y);  // Koordinat Y
+            signatureImage.setWidth(100); // Lebar tanda tangan
+            signatureImage.setHeight(50); // Tinggi tanda tangan
+    
+            page.getParagraphs().add(signatureImage); // Menambahkan gambar ke halaman
         }
-        return"redirect:/";
+    
+        // 5. Simpan hasilnya ke file PDF baru
+        doc.save(outputPdfPath);
+    }
+
+    @PostMapping("/setujuBAP")
+    public String setujuBAP(@RequestParam String judul, HttpSession session) {
+        try {
+            // 1. Dapatkan informasi user dan role
+            Long idUser = (Long) session.getAttribute("idUser");
+            String role = (String) session.getAttribute("peran");
+
+            // 2. Dapatkan ID Sidang berdasarkan judul
+            Sidang sidang = sidangRepo.addPengujiandPembimbing(judul);
+            int idSidang = sidang.getIdSidang();
+            System.out.println(idSidang + "SEMUT2"); //uda benar
+
+            // 3. Ambil tanda tangan user dari gambarTTD
+            byte[] ttd = sidangRepo.getUserSignature(idUser);
+            System.out.println("semut3");
+
+            // 4. Simpan tanda tangan ke tabel sidang sesuai role user
+            sidangRepo.saveSignatureToSidang(idSidang, ttd, role);
+            System.out.println("mehhh"); //sudah bisa
+
+            // 5. Tempelkan tanda tangan ke file PDF menggunakan Aspose.Words
+            String inputDocPath = "src/main/resources/static/Sidang_FilledTemplate.pdf";
+            String outputPdfPath = "src/main/resources/static/Sidang_Signed_" + idSidang + ".pdf";
+            addSignatureToPdf(ttd, inputDocPath, outputPdfPath);
+
+            System.out.println("yow");
+
+            return "redirect:/download/Sidang_Signed_" + idSidang + ".pdf";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     @PostMapping("/submitNilaiPenguji1")

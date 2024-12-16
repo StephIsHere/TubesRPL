@@ -9,7 +9,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(19)
 	}
 }
 
@@ -21,6 +21,9 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven {
+        url = uri("https://repository.aspose.com/repo/")
+    }
 }
 
 dependencies {
@@ -40,6 +43,8 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	implementation ("com.aspose:aspose-pdf:23.6")
 }
 
 tasks.withType<Test> {

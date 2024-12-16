@@ -269,5 +269,40 @@ public class SidangRepoJdbc implements SidangRepository {
         String sql = "SELECT nilai FROM komponenNilaiSidang WHERE idKomponen = ? AND idSidang = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{idKomponen, idSidang}, Integer.class);
     }
+ 
+    @Override
+    public byte[] getUserSignature(Long idUser) {
+        String sql = "SELECT ttd FROM gambarTTD WHERE idUser = ?";
+        System.out.println("miau2");
+        byte[] hasil = jdbcTemplate.queryForObject(sql, new Object[]{idUser}, (rs, rowNum) -> rs.getBytes("ttd"));
+        System.out.println("raw" + hasil);
+        return hasil;
+    }
+    
 
+    @Override
+    public void saveSignatureToSidang(int idSidang, byte[] ttd, String role) {
+        String column = getTtdColumnByRole(role);
+        String sql = "UPDATE sidang SET " + column + " = ? WHERE idSidang = ?";
+        jdbcTemplate.update(sql, ttd, idSidang);
+    }
+    
+    private String getTtdColumnByRole(String role) {
+        switch (role) {
+            case "Ketua Penguji":
+                return "ttdKetuaPenguji";
+            case "Tim Penguji":
+                return "ttdTimPenguji";
+            case "Pembimbing 1":
+                return "ttdPembimbing1";
+            case "Pembimbing 2":
+                return "ttdPembimbing2";
+            case "Mahasiswa":
+                return "ttdMahasiswa";
+            case "Koordinator":
+                return "ttdKoordinator";
+            default:
+                throw new IllegalArgumentException("Role tidak valid: " + role);
+        }
+    }
 }
