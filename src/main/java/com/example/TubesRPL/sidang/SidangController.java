@@ -50,7 +50,8 @@ public class SidangController {
         @RequestParam String nikPembimbingPendamping,
         @RequestParam String nikKetuaPenguji,
         @RequestParam String nikAnggotaPenguji,
-        HttpSession session
+        HttpSession session,
+        Model model
     ) {
         // Cari mahasiswa berdasarkan NIK
         List<User> mahasiswaList = userRepo.findByNik(nik);
@@ -110,13 +111,24 @@ public class SidangController {
 
         sidangRepo.addSidangDosen(idSidang, idPemUt, idPemPen, idketPeng, idAngPeng);
 
-
         return "redirect:/home";
     }
 
     @PostMapping("/searchSidang")
     public String searchSidang(@RequestParam String judul, Model model, HttpSession session){
         List<Sidang> listSidang = this.sidangRepo.findSidangByJudul(judul);
+        
+        //nampilin ttd
+        Long idUser = (Long)session.getAttribute("idUser");
+        List<TandaTangan> ttdList = userRepo.getTtdByUserId(idUser);
+        if (!ttdList.isEmpty()) {
+            byte[] ttdBytes = ttdList.get(0).getTtd();
+            String base64Image = Base64.getEncoder().encodeToString(ttdBytes);
+            model.addAttribute("ttd", base64Image);
+        } else {
+            model.addAttribute("ttd", null);
+        }
+
         model.addAttribute("nama", session.getAttribute("nama"));
         model.addAttribute("peran", session.getAttribute("peran"));
         model.addAttribute("sidangs", listSidang);
