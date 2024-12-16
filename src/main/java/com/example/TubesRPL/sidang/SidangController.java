@@ -170,7 +170,8 @@ public class SidangController {
         System.out.println(judul);
         Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
         System.out.println(sidang);
-        bap.generate(sidang.getIdSidang());
+        
+        
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -226,6 +227,11 @@ public class SidangController {
     
         // 5. Simpan hasilnya ke file PDF baru
         doc.save(outputPdfPath);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @PostMapping("/setujuBAP")
@@ -250,7 +256,7 @@ public class SidangController {
 
             // 5. Tempelkan tanda tangan ke file PDF menggunakan Aspose.Words
             String inputDocPath = "src/main/resources/static/Sidang_FilledTemplate.pdf";
-            String outputPdfPath = "src/main/resources/templates/Sidang_Signed_" + idSidang + ".pdf";
+            String outputPdfPath = "src/main/resources/static/Sidang_Signed_" + idSidang + ".pdf";
             addSignatureToPdf(ttd, inputDocPath, outputPdfPath);
 
             System.out.println("yow"); //sudah bisa
