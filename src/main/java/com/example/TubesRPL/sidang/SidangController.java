@@ -24,8 +24,10 @@ import com.example.TubesRPL.user.User;
 import com.example.TubesRPL.user.UserRepository;
 
 import com.aspose.pdf.Document;
-import com.aspose.pdf.Page;
 import com.aspose.pdf.Image;
+import com.aspose.pdf.ImageStamp;
+
+import java.io.ByteArrayInputStream;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -206,21 +208,20 @@ public class SidangController {
         float y = 50;  // Koordinat Y
     
         // 3. Ambil halaman pertama (atau halaman yang sesuai di file PDF)
-        Page page = doc.getPages().get(1); // Menggunakan halaman pertama
+        com.aspose.pdf.Page page = doc.getPages().get_Item(1); // Menggunakan halaman pertama
     
         // 4. Tambahkan gambar tanda tangan pada halaman
         if (ttd != null) {
             ByteArrayInputStream ttdStream = new ByteArrayInputStream(ttd);
     
             // Menambahkan gambar ke halaman PDF pada posisi tertentu
-            Image signatureImage = new Image();
-            signatureImage.setImageStream(ttdStream); // Menyediakan gambar dari stream
-            signatureImage.setLeft(x); // Koordinat X
-            signatureImage.setTop(y);  // Koordinat Y
-            signatureImage.setWidth(100); // Lebar tanda tangan
-            signatureImage.setHeight(50); // Tinggi tanda tangan
+            ImageStamp imageStamp = new ImageStamp(ttdStream);
+            imageStamp.setXIndent(450); // Koordinat X
+            imageStamp.setYIndent(50);  // Koordinat Y
+            imageStamp.setWidth(100);   // Lebar tanda tangan
+            imageStamp.setHeight(50);   // Tinggi tanda tangan
     
-            page.getParagraphs().add(signatureImage); // Menambahkan gambar ke halaman
+            page.addStamp(imageStamp);; // Menambahkan gambar ke halaman
         }
     
         // 5. Simpan hasilnya ke file PDF baru
@@ -249,12 +250,12 @@ public class SidangController {
 
             // 5. Tempelkan tanda tangan ke file PDF menggunakan Aspose.Words
             String inputDocPath = "src/main/resources/static/Sidang_FilledTemplate.pdf";
-            String outputPdfPath = "src/main/resources/static/Sidang_Signed_" + idSidang + ".pdf";
+            String outputPdfPath = "src/main/resources/templates/Sidang_Signed_" + idSidang + ".pdf";
             addSignatureToPdf(ttd, inputDocPath, outputPdfPath);
 
-            System.out.println("yow");
+            System.out.println("yow"); //sudah bisa
 
-            return "redirect:/download/Sidang_Signed_" + idSidang + ".pdf";
+            return "redirect:/Sidang_Signed_" + idSidang + ".pdf";
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
