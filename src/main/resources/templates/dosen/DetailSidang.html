@@ -106,7 +106,7 @@
                     <tr>
                         <td class="bold judul" colspan="2">Nilai</td>
                     </tr>
-                    <tr th:each="nilaiA, iterStatA : ${nilaiAsli}" th:if="${iterStatA.index < 4}">
+                    <tr th:each="nilaiA, iterStatA : ${nilaiAsli}" th:if="${iterStatA.index < 4 || iterStatA.index == 18}">
                         <td class="bold" th:text="${nilaiA.namaKomponen}"></td>
                         <td th:text="${nilaiA.nilai}"></td>
                     </tr>                    
