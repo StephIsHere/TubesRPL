@@ -151,4 +151,16 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
             presentasiPenguji
         );
     }
+
+    @Override
+    public List<Nilai> getNilaiPerSidang (int idSidang) {
+        String sql = "SELECT namaKomponen, nilai FROM komponenNilaiSidang  n JOIN komponenNilai k on k.idKomponen = n.idKomponen WHERE idSidang = ? ORDER BY n.idKomponen";
+        return jdbcTemplate.query(sql, this::mapRowToNilai, idSidang);
+    }
+    private Nilai mapRowToNilai(ResultSet resultSet, int rowNum) throws SQLException {
+        return new Nilai (
+            resultSet.getString("namaKomponen"),
+            resultSet.getDouble("nilai")
+        );
+    }
 }

@@ -15,6 +15,7 @@ import java.util.*;
 
 import com.example.TubesRPL.komponenNilai.KomponenNilai;
 import com.example.TubesRPL.komponenNilai.KomponenNilaiRepoJdbc;
+import com.example.TubesRPL.komponenNilai.Nilai;
 import com.example.TubesRPL.user.User;
 import com.example.TubesRPL.user.UserRepository;
 
@@ -132,6 +133,10 @@ public class SidangController {
     public String submitSidang(@RequestParam String judul, Model model, HttpSession session){
         Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
         List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
+        List<Nilai> nilaiSidang = nilaiRepo.getNilaiPerSidang(sidang.getIdSidang());
+        System.out.println(nilaiSidang);
+        System.out.println("aaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaa\naaaaaaaaaaaaa\naaaaaaaaaaaaaa\naaaaaaaaaaaa");
+        model.addAttribute("nilaiAsli", nilaiSidang);
         model.addAttribute("sidang", sidang);
         model.addAttribute("listNilai", listNilai);
         model.addAttribute("nama", session.getAttribute("nama"));
