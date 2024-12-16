@@ -16,6 +16,7 @@ import java.util.*;
 import com.example.TubesRPL.komponenNilai.KomponenNilai;
 import com.example.TubesRPL.komponenNilai.KomponenNilaiRepoJdbc;
 import com.example.TubesRPL.komponenNilai.Nilai;
+import com.example.TubesRPL.user.TandaTangan;
 import com.example.TubesRPL.user.User;
 import com.example.TubesRPL.user.UserRepository;
 
@@ -134,8 +135,16 @@ public class SidangController {
         Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
         List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
         List<Nilai> nilaiSidang = nilaiRepo.getNilaiPerSidang(sidang.getIdSidang());
-        System.out.println(nilaiSidang);
-        System.out.println("aaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaa\naaaaaaaaaaaaa\naaaaaaaaaaaaaa\naaaaaaaaaaaa");
+        //nampilin ttd
+        Long idUser = (Long)session.getAttribute("idUser");
+        List<TandaTangan> ttdList = userRepo.getTtdByUserId(idUser);
+        if (!ttdList.isEmpty()) {
+            byte[] ttdBytes = ttdList.get(0).getTtd();
+            String base64Image = Base64.getEncoder().encodeToString(ttdBytes);
+            model.addAttribute("ttd", base64Image);
+        } else {
+            model.addAttribute("ttd", null);
+        }
         model.addAttribute("nilaiAsli", nilaiSidang);
         model.addAttribute("sidang", sidang);
         model.addAttribute("listNilai", listNilai);
