@@ -76,7 +76,7 @@ public class KomponenNilaiRepoJdbc implements KomponenNilaiRepository{
 
     @Override
     public List<KomponenNilai> getAll() {
-        String sql = "SELECT idKomponen, namaKomponen, bobotKomponen FROM komponenNilai LIMIT 13";
+        String sql = "SELECT idKomponen, namaKomponen, bobotKomponen FROM komponenNilai ORDER BY idKomponen LIMIT 13";
         return jdbcTemplate.query(sql, this::mapRowToKomponenNilai);
     }
     private KomponenNilai mapRowToKomponenNilai (ResultSet resultSet, int rowNum) throws SQLException{

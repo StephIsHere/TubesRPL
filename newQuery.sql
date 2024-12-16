@@ -122,6 +122,7 @@ VALUES
 ('Pencapaian Tujuan', 0.30, 'penguji2'),
 ('Presentasi', 0.25, 'penguji2'),
 ('Penguasaan Materi', 0.15, 'penguji2');
+('Nilai Akhir', 1, 'nilaiAkhir');
 
 INSERT INTO sidangDosen (idSidang, idUser, peran)
 VALUES
@@ -174,4 +175,5 @@ VALUES
 (1, 15, 80),
 (1, 16, 80),
 (1, 17, 80),
-(1, 18, 80);
+(1, 18, 80),
+(1, 19, 80);
