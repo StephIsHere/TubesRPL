@@ -97,10 +97,10 @@ INSERT INTO sidang (jenisTA, topik, judul, tempat, tanggal, waktu, catatan, stat
 VALUES
 (1, 'Mesin Cerdas', 'Implementasi AI pada Perangkat Lunak', 'Gedung Informatika Lt. 2', '2024-12-12', '08:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 10),
 (2, 'Sistem Informasi', 'Sistem Informasi Pegawai Kafe', 'Gedung Informatika Lt. 3', '2024-12-12', '10:00:00', 'catatan', 'Selesai',  null, null, null, null, null, null, 1, 11),
-(1, 'Cybersec', 'Pemecahan Enkripsi', 'PPAG lt 6', '2024-12-17', '11:00:00', 'catatan', 'Belum Dimulai',  null, null, null, null, null, null, 1, 12),
-(2, 'Deep Learning', 'Chatbot AI', 'PPAG lt 3', '2024-12-18', '09:00:00', 'catatan', 'Belum Dimulai',  null, null, null, null, null, null, 1, 13),
-(1, 'Rekayasa Perangkat Lunak', 'Aplikasi Sidang TA', 'Gedung Informatika 9 Lt. 2', '2024-12-15', '7:00:00', 'catatan', 'Berlangsung',  null, null, null, null, null, null, 1, 14),
-(2, 'Devops', 'Rekayasa Development Git', 'PPAG lt 12', '2024-12-15', '8:00:00', 'catatan', 'Berlangsung',  null, null, null, null, null, null, 1, 15);
+(1, 'Cybersec', 'Pemecahan Enkripsi', 'PPAG lt 6', '2024-12-17', '11:00:00', null, 'Belum Dimulai',  null, null, null, null, null, null, 1, 12),
+(2, 'Deep Learning', 'Chatbot AI', 'PPAG lt 3', '2024-12-18', '09:00:00', null, 'Belum Dimulai',  null, null, null, null, null, null, 1, 13),
+(1, 'Rekayasa Perangkat Lunak', 'Aplikasi Sidang TA', 'Gedung Informatika 9 Lt. 2', '2024-12-15', '7:00:00', null, 'Berlangsung',  null, null, null, null, null, null, 1, 14),
+(2, 'Devops', 'Rekayasa Development Git', 'PPAG lt 12', '2024-12-15', '8:00:00', null, 'Berlangsung',  null, null, null, null, null, null, 1, 15);
 
 INSERT INTO komponenNilai (namaKomponen, bobotKomponen, tipe)
 VALUES
@@ -121,7 +121,7 @@ VALUES
 ('Kelengkapan Materi', 0.10, 'penguji2'),
 ('Pencapaian Tujuan', 0.30, 'penguji2'),
 ('Presentasi', 0.25, 'penguji2'),
-('Penguasaan Materi', 0.15, 'penguji2');
+('Penguasaan Materi', 0.15, 'penguji2'),
 ('Nilai Akhir', 1, 'nilaiAkhir');
 
 INSERT INTO sidangDosen (idSidang, idUser, peran)
