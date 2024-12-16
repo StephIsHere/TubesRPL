@@ -272,20 +272,21 @@ public class SidangController {
     public String setujuBAP(@RequestParam String judul, HttpSession session) {
         try {
             Long idUser = (Long) session.getAttribute("idUser");
+            String roleE = (String) session.getAttribute("peran");
 
             Sidang sidang = sidangRepo.addPengujiandPembimbing(judul);
             int idSidang = sidang.getIdSidang();
 
-             //Ambil peran dari tabel sidangDosen
-            String role = sidangRepo.getRoleBySidangAndUser(idSidang, idUser);
-            System.out.println("Peran: " + role); // Debugging
+            if (roleE.equals("Dosen")) {
+                roleE = sidangRepo.getRoleBySidangAndUser(idSidang, idUser);
+            }
 
             // Ambil tanda tangan user
             byte[] ttd = sidangRepo.getUserSignature(idUser);
 
-            System.out.println("garpu" + role);
+            System.out.println("garpu" + roleE);
             // Simpan tanda tangan di tabel sidang sesuai role
-            sidangRepo.saveSignatureToSidang(idSidang, ttd, role);
+            sidangRepo.saveSignatureToSidang(idSidang, ttd, roleE);
 
             // Ambil semua tanda tangan yang ada di tabel sidang
             Map<String, byte[]> signatures = sidangRepo.getSignaturesBySidangId(idSidang);
