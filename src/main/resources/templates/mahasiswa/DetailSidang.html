@@ -13,7 +13,7 @@
             padding-left: 20px;
         }
     </style>
-</head>
+</head> 
 <body>
     <header>
         <div id="leftHeader">
@@ -82,7 +82,7 @@
                     </tr>
                 </table>
 
-                <table class="table3">
+                <table class="table3" th:if="${sidang.status != 'Selesai'}">
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Penguji</td>
                     </tr>
@@ -91,25 +91,51 @@
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
                     </tr>                    
                 </table>
+                <table class="table3" th:if="${sidang.status == 'Selesai'}">
+                    <tr>
+                        <td class="bold judul" colspan="2">Nilai</td>
+                    </tr>
+                    <tr th:each="nilaiA, iterStatA : ${nilaiAsli}" th:if="${iterStatA.index < 4 || iterStatA.index == 18}">
+                        <td class="bold" th:text="${nilaiA.namaKomponen}"></td>
+                        <td th:text="${nilaiA.nilai}"></td>
+                    </tr>                    
+                </table>
                 
-                <table class="table2">
+                <table class="table2" th:if="${sidang.status != 'Selesai'}">
                     <tr>
                         <td class="bold judul" colspan="2">Persentase Nilai</td>
                     </tr>
                     <tr th:each="nilai, iterStat : ${listNilai}" th:if="${iterStat.index > 3 && iterStat.index < 9}">
                         <td class="bold" th:text="${nilai.namaKomponen}"></td>
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
-                    </tr>     
+                    </tr>
+                </table>
+                <table class="table2" th:if="${sidang.status == 'Selesai'}">
+                    <tr>
+                        <td class="bold judul" colspan="2">Nilai Ketua Penguji</td>
+                    </tr>
+                    <tr th:each="nilaiA, iterStat : ${nilaiAsli}" th:if="${iterStat.index > 3 && iterStat.index < 9}">
+                        <td class="bold" th:text="${nilaiA.namaKomponen}"></td>
+                        <td th:text="${nilaiA.nilai}"></td>
+                    </tr>
                 </table>
 
-                <table class="table4">
+                <table class="table4" th:if="${sidang.status != 'Selesai'}">
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Pembimbing</td>
                     </tr>
-
                     <tr th:each="nilai, iterStat : ${listNilai}" th:if="${iterStat.index > 8}">
                         <td class="bold" th:text="${nilai.namaKomponen}"></td>
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
+                    </tr>  
+                </table>
+                <table class="table4" th:if="${sidang.status == 'Selesai'}">
+                    <tr>
+                        <td class="bold judul" colspan="2">Nilai Pembimbing</td>
+                    </tr>
+                    <tr th:each="nilaiA, iterStat : ${nilaiAsli}" th:if="${iterStat.index > 8 && iterStat.index < 13}">
+                        <td class="bold" th:text="${nilaiA.namaKomponen}"></td>
+                        <td th:text="${nilaiA.nilai}"></td>
                     </tr>  
                 </table>
 
@@ -123,12 +149,13 @@
                     <button type="submit">Setuju</button>
                 </form>
 
-                <div class="catatan_container">
+                <!-- Div buat nampilin aja, gabisa buat input -->
+                <div class="catatan_container" th:if="${((sidang.namaPenguji1 == nama || sidang.namaPenguji2 == nama) || (sidang.namaPembimbing1 == nama || sidang.namaPembimbing2 == nama)) && sidang.status == 'Selesai'}">
                     <h4>Catatan Sidang : </h4>
                     <div class="kotak_catatan">
                         <p th:text="${sidang.catatan}">Catatan Sidang</p>
                     </div>
-                </div>                                   
+                </div>                                  
             </div>
         </div>
     </main>

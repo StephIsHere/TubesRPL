@@ -251,7 +251,8 @@ public class SidangRepoJdbc implements SidangRepository {
             String sql = "INSERT INTO komponenNilaiSidang (idSidang, idKomponen, nilai) "+  "VALUES (?, 1, ?), "+
             "(?, 2, ?), "+
             "(?, 3, ?), "+
-            "(?, 4, ?); ";
+            "(?, 4, ?), "+
+            "(?, 19, ?); ";
 
             double nilaiPeng1 = getNilaiPerKomponen(idSidang, 5)*kompNilaiRepo.getBobot(5) + getNilaiPerKomponen(idSidang, 6)*kompNilaiRepo.getBobot(6) + getNilaiPerKomponen(idSidang, 7)*kompNilaiRepo.getBobot(7) + getNilaiPerKomponen(idSidang, 8)*kompNilaiRepo.getBobot(8) + getNilaiPerKomponen(idSidang, 9)*kompNilaiRepo.getBobot(9);
 
@@ -261,13 +262,20 @@ public class SidangRepoJdbc implements SidangRepository {
 
             double nilaiKoord = 100.0;
 
-            jdbcTemplate.update(sql, idSidang, nilaiPeng1, idSidang, nilaiPeng2, idSidang, nilaiPem, idSidang, nilaiKoord);
+            double nilaiAkhir = nilaiPeng1*kompNilaiRepo.getBobot(1) + nilaiPeng2*kompNilaiRepo.getBobot(2) + nilaiPem*kompNilaiRepo.getBobot(3) + nilaiKoord*kompNilaiRepo.getBobot(4);
+
+            jdbcTemplate.update(sql, idSidang, nilaiPeng1, idSidang, nilaiPeng2, idSidang, nilaiPem, idSidang, nilaiKoord, idSidang, nilaiAkhir);
         }
     }
 
     public int getNilaiPerKomponen (int idSidang, int idKomponen) {
         String sql = "SELECT nilai FROM komponenNilaiSidang WHERE idKomponen = ? AND idSidang = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{idKomponen, idSidang}, Integer.class);
+    }
+
+    public void updateStatusSidang (int idSidang, String status) {
+        String sql = "UPDATE sidang SET status = ? WHERE idSidang = ?";
+        jdbcTemplate.update(sql, status, idSidang);
     }
 
 }

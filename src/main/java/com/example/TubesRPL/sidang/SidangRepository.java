@@ -23,4 +23,5 @@ public interface SidangRepository {
     boolean checkNilaiPenguji2(int idSidang);
     boolean checkNilaiPembimbing(int idSidang);
     void saveNilaiMain(int idSidang);
+    void updateStatusSidang (int idSidang, String status);
 }
