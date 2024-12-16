@@ -6,7 +6,6 @@
     <title>Sidang Tugas Akhir</title>
     <link rel="stylesheet" href="/css/mahasiswa/detailSidangUpcoming.css">
     <link rel="stylesheet" href="/css/profileOverlay.css"> 
-
     <script src="../js/Overlay.js" defer></script> 
     <style>
         #judulSidang{
@@ -92,7 +91,7 @@
                     </tr>
                 </table>
 
-                <table class="table3">
+                <table class="table3" th:if="${sidang.status != 'Selesai'}">
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Penguji</td>
                     </tr>
@@ -101,8 +100,17 @@
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
                     </tr>                    
                 </table>
+                <table class="table3" th:if="${sidang.status == 'Selesai'}">
+                    <tr>
+                        <td class="bold judul" colspan="2">Nilai</td>
+                    </tr>
+                    <tr th:each="nilaiA, iterStatA : ${nilaiAsli}" th:if="${iterStatA.index < 4 || iterStatA.index == 18}">
+                        <td class="bold" th:text="${nilaiA.namaKomponen}"></td>
+                        <td th:text="${nilaiA.nilai}"></td>
+                    </tr>                    
+                </table>
                 
-                <table class="table2">
+                <table class="table2" th:if="${sidang.status != 'Selesai'}">
                     <tr>
                         <td class="bold judul" colspan="2">Persentase Nilai</td>
                     </tr>
@@ -111,15 +119,32 @@
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
                     </tr>
                 </table>
+                <table class="table2" th:if="${sidang.status == 'Selesai'}">
+                    <tr>
+                        <td class="bold judul" colspan="2">Nilai Ketua Penguji</td>
+                    </tr>
+                    <tr th:each="nilaiA, iterStat : ${nilaiAsli}" th:if="${iterStat.index > 3 && iterStat.index < 9}">
+                        <td class="bold" th:text="${nilaiA.namaKomponen}"></td>
+                        <td th:text="${nilaiA.nilai}"></td>
+                    </tr>
+                </table>
 
-                <table class="table4">
+                <table class="table4" th:if="${sidang.status != 'Selesai'}">
                     <tr>
                         <td class="bold judul" colspan="2">Bobot Penilaian Pembimbing</td>
                     </tr>
-
                     <tr th:each="nilai, iterStat : ${listNilai}" th:if="${iterStat.index > 8}">
                         <td class="bold" th:text="${nilai.namaKomponen}"></td>
                         <td th:text="${nilai.bobotKomponen * 100} + '%'"></td>
+                    </tr>  
+                </table>
+                <table class="table4" th:if="${sidang.status == 'Selesai'}">
+                    <tr>
+                        <td class="bold judul" colspan="2">Nilai Pembimbing</td>
+                    </tr>
+                    <tr th:each="nilaiA, iterStat : ${nilaiAsli}" th:if="${iterStat.index > 8 && iterStat.index < 13}">
+                        <td class="bold" th:text="${nilaiA.namaKomponen}"></td>
+                        <td th:text="${nilaiA.nilai}"></td>
                     </tr>  
                 </table>
                 

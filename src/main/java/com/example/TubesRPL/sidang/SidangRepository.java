@@ -28,4 +28,5 @@ public interface SidangRepository {
     void saveSignatureToSidang(int idSidang, byte[] ttd, String role);
     Map<String, byte[]> getSignaturesBySidangId(int idSidang);
     String getRoleBySidangAndUser(int idSidang, Long idUser);
+    void updateStatusSidang (int idSidang, String status);
 }

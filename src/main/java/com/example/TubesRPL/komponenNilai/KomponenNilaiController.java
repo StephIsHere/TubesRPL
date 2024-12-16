@@ -1,6 +1,7 @@
 package com.example.TubesRPL.komponenNilai;
 
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.TubesRPL.user.TandaTangan;
+import com.example.TubesRPL.user.UserRepository;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class KomponenNilaiController {
     @Autowired
     KomponenNilaiService service;
+
+    @Autowired
+    private UserRepository userRepo;
     
     @PostMapping("saveKomponen")
     public String saveKomponen(
@@ -81,6 +88,16 @@ public class KomponenNilaiController {
         boolean isKomponenAvailable = service.checkKomponen();
         String nama = (String)session.getAttribute("nama");
         String peran = (String)session.getAttribute("peran");
+        //nampilin ttd
+        Long idUser = (Long)session.getAttribute("idUser");
+        List<TandaTangan> ttdList = userRepo.getTtdByUserId(idUser);
+        if (!ttdList.isEmpty()) {
+            byte[] ttdBytes = ttdList.get(0).getTtd();
+            String base64Image = Base64.getEncoder().encodeToString(ttdBytes);
+            model.addAttribute("ttd", base64Image);
+        } else {
+            model.addAttribute("ttd", null);
+        }
         model.addAttribute("nama", nama);
         model.addAttribute("peran", peran);
 

@@ -20,6 +20,8 @@ import java.util.*;
 import com.aspose.words.ImageData;
 import com.example.TubesRPL.komponenNilai.KomponenNilai;
 import com.example.TubesRPL.komponenNilai.KomponenNilaiRepoJdbc;
+import com.example.TubesRPL.komponenNilai.Nilai;
+import com.example.TubesRPL.user.TandaTangan;
 import com.example.TubesRPL.user.User;
 import com.example.TubesRPL.user.UserRepository;
 
@@ -59,7 +61,8 @@ public class SidangController {
         @RequestParam String nikPembimbingPendamping,
         @RequestParam String nikKetuaPenguji,
         @RequestParam String nikAnggotaPenguji,
-        HttpSession session
+        HttpSession session,
+        Model model
     ) {
         // Cari mahasiswa berdasarkan NIK
         List<User> mahasiswaList = userRepo.findByNik(nik);
@@ -119,13 +122,24 @@ public class SidangController {
 
         sidangRepo.addSidangDosen(idSidang, idPemUt, idPemPen, idketPeng, idAngPeng);
 
-
         return "redirect:/home";
     }
 
     @PostMapping("/searchSidang")
     public String searchSidang(@RequestParam String judul, Model model, HttpSession session){
         List<Sidang> listSidang = this.sidangRepo.findSidangByJudul(judul);
+        
+        //nampilin ttd
+        Long idUser = (Long)session.getAttribute("idUser");
+        List<TandaTangan> ttdList = userRepo.getTtdByUserId(idUser);
+        if (!ttdList.isEmpty()) {
+            byte[] ttdBytes = ttdList.get(0).getTtd();
+            String base64Image = Base64.getEncoder().encodeToString(ttdBytes);
+            model.addAttribute("ttd", base64Image);
+        } else {
+            model.addAttribute("ttd", null);
+        }
+
         model.addAttribute("nama", session.getAttribute("nama"));
         model.addAttribute("peran", session.getAttribute("peran"));
         model.addAttribute("sidangs", listSidang);
@@ -139,10 +153,39 @@ public class SidangController {
         return"redirect:/";
     }
 
+    private void changeStatusSidang(Sidang sidang) {
+        LocalTime waktuMulai = sidang.getWaktu();
+        LocalTime waktuSelesai = waktuMulai.plusHours(3);
+        LocalTime currentTime = LocalTime.now();
+
+        if (currentTime.isBefore(waktuMulai)) {
+            sidangRepo.updateStatusSidang(sidang.getIdSidang(), "Belum Dimulai");
+        } else if (currentTime.isAfter(waktuSelesai)) {
+            sidangRepo.updateStatusSidang(sidang.getIdSidang(), "Selesai");
+        } else {
+            sidangRepo.updateStatusSidang(sidang.getIdSidang(), "Berlangsung");
+        }
+    }
+
+
+    //ganti status juga
     @PostMapping("/detailSidang")
     public String submitSidang(@RequestParam String judul, Model model, HttpSession session){
         Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        changeStatusSidang(sidang);
         List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
+        List<Nilai> nilaiSidang = nilaiRepo.getNilaiPerSidang(sidang.getIdSidang());
+        //nampilin ttd
+        Long idUser = (Long)session.getAttribute("idUser");
+        List<TandaTangan> ttdList = userRepo.getTtdByUserId(idUser);
+        if (!ttdList.isEmpty()) {
+            byte[] ttdBytes = ttdList.get(0).getTtd();
+            String base64Image = Base64.getEncoder().encodeToString(ttdBytes);
+            model.addAttribute("ttd", base64Image);
+        } else {
+            model.addAttribute("ttd", null);
+        }
+        model.addAttribute("nilaiAsli", nilaiSidang);
         model.addAttribute("sidang", sidang);
         model.addAttribute("listNilai", listNilai);
         model.addAttribute("nama", session.getAttribute("nama"));
