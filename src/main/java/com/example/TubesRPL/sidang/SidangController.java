@@ -200,66 +200,100 @@ public class SidangController {
     //     return"redirect:/";
     // }
 
-    public void addSignatureToPdf(byte[] ttd, String inputPdfPath, String outputPdfPath) throws Exception {
-        // 1. Buka file PDF input
-        Document doc = new Document(inputPdfPath); // Menggunakan class Document dari Aspose.PDF
+    // public void addSignatureToPdf(byte[] ttd, String inputPdfPath, String outputPdfPath) throws Exception {
+    //     // 1. Buka file PDF input
+    //     Document doc = new Document(inputPdfPath); // Menggunakan class Document dari Aspose.PDF
     
-        // 2. Tentukan posisi tanda tangan (koordinat X dan Y dalam titik)
-        float x = 450; // Koordinat X
-        float y = 50;  // Koordinat Y
+    //     // 2. Tentukan posisi tanda tangan (koordinat X dan Y dalam titik)
+    //     float x = 450; // Koordinat X
+    //     float y = 50;  // Koordinat Y
     
-        // 3. Ambil halaman pertama (atau halaman yang sesuai di file PDF)
-        com.aspose.pdf.Page page = doc.getPages().get_Item(1); // Menggunakan halaman pertama
+    //     // 3. Ambil halaman pertama (atau halaman yang sesuai di file PDF)
+    //     com.aspose.pdf.Page page = doc.getPages().get_Item(1); // Menggunakan halaman pertama
     
-        // 4. Tambahkan gambar tanda tangan pada halaman
-        if (ttd != null) {
-            ByteArrayInputStream ttdStream = new ByteArrayInputStream(ttd);
+    //     // 4. Tambahkan gambar tanda tangan pada halaman
+    //     if (ttd != null) {
+    //         ByteArrayInputStream ttdStream = new ByteArrayInputStream(ttd);
     
-            // Menambahkan gambar ke halaman PDF pada posisi tertentu
-            ImageStamp imageStamp = new ImageStamp(ttdStream);
-            imageStamp.setXIndent(450); // Koordinat X
-            imageStamp.setYIndent(50);  // Koordinat Y
-            imageStamp.setWidth(100);   // Lebar tanda tangan
-            imageStamp.setHeight(50);   // Tinggi tanda tangan
+    //         // Menambahkan gambar ke halaman PDF pada posisi tertentu
+    //         ImageStamp imageStamp = new ImageStamp(ttdStream);
+    //         imageStamp.setXIndent(450); // Koordinat X
+    //         imageStamp.setYIndent(50);  // Koordinat Y
+    //         imageStamp.setWidth(100);   // Lebar tanda tangan
+    //         imageStamp.setHeight(50);   // Tinggi tanda tangan
     
-            page.addStamp(imageStamp);; // Menambahkan gambar ke halaman
-        }
+    //         page.addStamp(imageStamp);; // Menambahkan gambar ke halaman
+    //     }
     
-        // 5. Simpan hasilnya ke file PDF baru
-        doc.save(outputPdfPath);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    //     // 5. Simpan hasilnya ke file PDF baru
+    //     doc.save(outputPdfPath);
+    //     try {
+    //         Thread.sleep(1000);
+    //     } catch (InterruptedException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+
+    // @PostMapping("/setujuBAP")
+    // public String setujuBAP(@RequestParam String judul, HttpSession session) {
+    //     try {
+    //         // 1. Dapatkan informasi user dan role
+    //         Long idUser = (Long) session.getAttribute("idUser");
+    //         String role = (String) session.getAttribute("peran");
+
+    //         // 2. Dapatkan ID Sidang berdasarkan judul
+    //         Sidang sidang = sidangRepo.addPengujiandPembimbing(judul);
+    //         int idSidang = sidang.getIdSidang();
+    //         System.out.println(idSidang + "SEMUT2"); //uda benar
+
+    //         // 3. Ambil tanda tangan user dari gambarTTD
+    //         byte[] ttd = sidangRepo.getUserSignature(idUser);
+    //         System.out.println("semut3");
+
+    //         // 4. Simpan tanda tangan ke tabel sidang sesuai role user
+    //         sidangRepo.saveSignatureToSidang(idSidang, ttd, role);
+    //         System.out.println("mehhh"); //sudah bisa
+
+    //         // 5. Tempelkan tanda tangan ke file PDF menggunakan Aspose.Words
+    //         String inputDocPath = "src/main/resources/static/Sidang_FilledTemplate.pdf";
+    //         String outputPdfPath = "src/main/resources/static/Sidang_Signed_" + idSidang + ".pdf";
+    //         addSignatureToPdf(ttd, inputDocPath, outputPdfPath);
+
+    //         System.out.println("yow"); //sudah bisa
+
+    //         return "redirect:/Sidang_Signed_" + idSidang + ".pdf";
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return "error";
+    //     }
+    // }
 
     @PostMapping("/setujuBAP")
     public String setujuBAP(@RequestParam String judul, HttpSession session) {
         try {
-            // 1. Dapatkan informasi user dan role
             Long idUser = (Long) session.getAttribute("idUser");
-            String role = (String) session.getAttribute("peran");
 
-            // 2. Dapatkan ID Sidang berdasarkan judul
             Sidang sidang = sidangRepo.addPengujiandPembimbing(judul);
             int idSidang = sidang.getIdSidang();
-            System.out.println(idSidang + "SEMUT2"); //uda benar
 
-            // 3. Ambil tanda tangan user dari gambarTTD
+             //Ambil peran dari tabel sidangDosen
+            String role = sidangRepo.getRoleBySidangAndUser(idSidang, idUser);
+            System.out.println("Peran: " + role); // Debugging
+
+            // Ambil tanda tangan user
             byte[] ttd = sidangRepo.getUserSignature(idUser);
-            System.out.println("semut3");
 
-            // 4. Simpan tanda tangan ke tabel sidang sesuai role user
+            System.out.println("garpu" + role);
+            // Simpan tanda tangan di tabel sidang sesuai role
             sidangRepo.saveSignatureToSidang(idSidang, ttd, role);
-            System.out.println("mehhh"); //sudah bisa
 
-            // 5. Tempelkan tanda tangan ke file PDF menggunakan Aspose.Words
+            // Ambil semua tanda tangan yang ada di tabel sidang
+            Map<String, byte[]> signatures = sidangRepo.getSignaturesBySidangId(idSidang);
+
+            // Tempelkan tanda tangan ke file PDF
             String inputDocPath = "src/main/resources/static/Sidang_FilledTemplate.pdf";
             String outputPdfPath = "src/main/resources/static/Sidang_Signed_" + idSidang + ".pdf";
-            addSignatureToPdf(ttd, inputDocPath, outputPdfPath);
-
-            System.out.println("yow"); //sudah bisa
+            addSignaturesToPdf(signatures, inputDocPath, outputPdfPath);
 
             return "redirect:/Sidang_Signed_" + idSidang + ".pdf";
         } catch (Exception e) {
@@ -267,6 +301,44 @@ public class SidangController {
             return "error";
         }
     }
+
+    public void addSignaturesToPdf(Map<String, byte[]> signatures, String inputPdfPath, String outputPdfPath) throws Exception {
+        // Buka file PDF input
+        Document doc = new Document(inputPdfPath);
+        com.aspose.pdf.Page page = doc.getPages().get_Item(1); // Halaman pertama
+    
+        // Posisi tanda tangan (atur posisi X dan Y untuk setiap tanda tangan)
+        Map<String, float[]> positions = new HashMap<>();
+        positions.put("ttdKetuaPenguji", new float[]{90, 50});
+        positions.put("ttdTimPenguji", new float[]{180, 50});
+        positions.put("ttdPembimbing1", new float[]{275, 50});
+        positions.put("ttdMahasiswa", new float[]{350, 50});
+        positions.put("ttdKoordinator", new float[]{450, 50});
+
+        // imageStamp.setXIndent(450); // Koordinat X
+    //         imageStamp.setYIndent(50);  // Koordinat Y
+    //         imageStamp.setWidth(100);   // Lebar tanda tangan
+    //         imageStamp.setHeight(50);   // Tinggi tanda tangan
+    
+        // Tambahkan tanda tangan yang tidak null
+        for (Map.Entry<String, byte[]> entry : signatures.entrySet()) {
+            if (entry.getValue() != null) { // Jika tanda tangan sudah ada
+                ByteArrayInputStream ttdStream = new ByteArrayInputStream(entry.getValue());
+                ImageStamp imageStamp = new ImageStamp(ttdStream);
+                float[] pos = positions.get(entry.getKey());
+                imageStamp.setXIndent(pos[0]); // X
+                imageStamp.setYIndent(pos[1]); // Y
+                imageStamp.setWidth(100);
+                imageStamp.setHeight(50);
+                page.addStamp(imageStamp); // Tempelkan tanda tangan
+            }
+        }
+    
+        // Simpan hasil ke file PDF baru
+        doc.save(outputPdfPath);
+        Thread.sleep(1000);
+    }
+    
 
     @PostMapping("/submitNilaiPenguji1")
     public String submitNilaiPenguji1(@RequestParam String judul, @RequestParam int ttl, @RequestParam int km, @RequestParam int pt, @RequestParam int p, @RequestParam int pm, HttpSession session, Model model) {

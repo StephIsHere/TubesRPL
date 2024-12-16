@@ -2,7 +2,9 @@ package com.example.TubesRPL.sidang;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -271,6 +273,12 @@ public class SidangRepoJdbc implements SidangRepository {
     }
  
     @Override
+    public String getRoleBySidangAndUser(int idSidang, Long idUser) {
+        String sql = "SELECT peran FROM sidangDosen WHERE idSidang = ? AND idUser = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{idSidang, idUser}, String.class);
+    }    
+
+    @Override
     public byte[] getUserSignature(Long idUser) {
         String sql = "SELECT ttd FROM gambarTTD WHERE idUser = ?";
         System.out.println("miau2");
@@ -279,13 +287,34 @@ public class SidangRepoJdbc implements SidangRepository {
         return hasil;
     }
     
-
     @Override
     public void saveSignatureToSidang(int idSidang, byte[] ttd, String role) {
-        String column = getTtdColumnByRole(role);
-        String sql = "UPDATE sidang SET " + column + " = ? WHERE idSidang = ?";
+        String sql = "";
+        switch (role) {
+            case "Pembimbing 1":
+                sql = "UPDATE sidang SET ttdPembimbing1 = ? WHERE idSidang = ?";
+                break;
+            case "Pembimbing 2":
+                sql = "UPDATE sidang SET ttdPembimbing2 = ? WHERE idSidang = ?";
+                break;
+            case "Penguji 1":
+                sql = "UPDATE sidang SET ttdKetuaPenguji = ? WHERE idSidang = ?";
+                break;
+            case "Penguji 2":
+                sql = "UPDATE sidang SET ttdTimPenguji = ? WHERE idSidang = ?";
+                break;
+            case "Mahasiswa":
+                sql = "UPDATE sidang SET ttdMahasiswa = ? WHERE idSidang = ?";
+                break;
+            case "Koordinator":
+                sql = "UPDATE sidang SET ttdKoordinator = ? WHERE idSidang = ?";
+                break;
+            default:
+                throw new IllegalArgumentException("Role tidak valid");
+        }
         jdbcTemplate.update(sql, ttd, idSidang);
     }
+    
     
     private String getTtdColumnByRole(String role) {
         switch (role) {
@@ -304,5 +333,20 @@ public class SidangRepoJdbc implements SidangRepository {
             default:
                 throw new IllegalArgumentException("Role tidak valid: " + role);
         }
+    }
+
+    @Override
+    public Map<String, byte[]> getSignaturesBySidangId(int idSidang) {
+        String sql = "SELECT ttdPembimbing1, ttdPembimbing2, ttdKetuaPenguji, ttdTimPenguji, ttdMahasiswa, ttdKoordinator FROM sidang WHERE idSidang = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{idSidang}, (rs, rowNum) -> {
+            Map<String, byte[]> signatures = new HashMap<>();
+            signatures.put("ttdPembimbing1", rs.getBytes("ttdPembimbing1"));
+            signatures.put("ttdPembimbing2", rs.getBytes("ttdPembimbing2"));
+            signatures.put("ttdKetuaPenguji", rs.getBytes("ttdKetuaPenguji"));
+            signatures.put("ttdTimPenguji", rs.getBytes("ttdTimPenguji"));
+            signatures.put("ttdMahasiswa", rs.getBytes("ttdMahasiswa"));
+            signatures.put("ttdKoordinator", rs.getBytes("ttdKoordinator"));
+            return signatures;
+        });
     }
 }

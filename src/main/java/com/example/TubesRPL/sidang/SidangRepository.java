@@ -1,6 +1,7 @@
 package com.example.TubesRPL.sidang;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +26,6 @@ public interface SidangRepository {
     void saveNilaiMain(int idSidang);
     byte[] getUserSignature(Long idUser);
     void saveSignatureToSidang(int idSidang, byte[] ttd, String role);
+    Map<String, byte[]> getSignaturesBySidangId(int idSidang);
+    String getRoleBySidangAndUser(int idSidang, Long idUser);
 }
