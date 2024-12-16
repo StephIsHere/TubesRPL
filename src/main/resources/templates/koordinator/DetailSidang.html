@@ -149,7 +149,8 @@
                     <button type="submit">Setuju</button>
                 </form>
 
-                <div class="catatan_container">
+                <!-- Div buat nampilin aja, gabisa buat input -->
+                <div class="catatan_container" th:if="${((sidang.namaPenguji1 == nama || sidang.namaPenguji2 == nama) || (sidang.namaPembimbing1 == nama || sidang.namaPembimbing2 == nama)) && sidang.status == 'Selesai'}">
                     <h4>Catatan Sidang : </h4>
                     <div class="kotak_catatan">
                         <p th:text="${sidang.catatan}">Catatan Sidang</p>

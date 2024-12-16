@@ -273,4 +273,9 @@ public class SidangRepoJdbc implements SidangRepository {
         return jdbcTemplate.queryForObject(sql, new Object[]{idKomponen, idSidang}, Integer.class);
     }
 
+    public void updateStatusSidang (int idSidang, String status) {
+        String sql = "UPDATE sidang SET status = ? WHERE idSidang = ?";
+        jdbcTemplate.update(sql, status, idSidang);
+    }
+
 }

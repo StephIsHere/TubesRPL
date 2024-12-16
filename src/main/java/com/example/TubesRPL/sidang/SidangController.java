@@ -142,9 +142,26 @@ public class SidangController {
         return"redirect:/";
     }
 
+    private void changeStatusSidang(Sidang sidang) {
+        LocalTime waktuMulai = sidang.getWaktu();
+        LocalTime waktuSelesai = waktuMulai.plusHours(3);
+        LocalTime currentTime = LocalTime.now();
+
+        if (currentTime.isBefore(waktuMulai)) {
+            sidangRepo.updateStatusSidang(sidang.getIdSidang(), "Belum Dimulai");
+        } else if (currentTime.isAfter(waktuSelesai)) {
+            sidangRepo.updateStatusSidang(sidang.getIdSidang(), "Selesai");
+        } else {
+            sidangRepo.updateStatusSidang(sidang.getIdSidang(), "Berlangsung");
+        }
+    }
+
+
+    //ganti status juga
     @PostMapping("/detailSidang")
     public String submitSidang(@RequestParam String judul, Model model, HttpSession session){
         Sidang sidang = this.sidangRepo.addPengujiandPembimbing(judul);
+        changeStatusSidang(sidang);
         List<KomponenNilai> listNilai = this.nilaiRepo.getAll();
         List<Nilai> nilaiSidang = nilaiRepo.getNilaiPerSidang(sidang.getIdSidang());
         //nampilin ttd
